@@ -90,3 +90,39 @@ mixin footer
             | Зроблено з
             include ../../mokups/exports/heart.svg
             | від Kost
+
+
+mixin our-articles
+  +b.SECTION.our-articles.content.content__inner
+    h2 інші статті
+    .swiper-container.swiper-container--two
+      .swiper-wrapper
+        .swiper-slide
+          +b.article-card
+            +picture('img/hel1.webp', 'img/hel1.jpg', 'Article', 'article-card__img')
+            +picture('img/hel2.webp', 'img/hel2.jpg', 'Article', 'article-card__img article-card__img_hover')
+            +e.content
+              h3 Lorem Ipsum - це текст-"риба", що використовується в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
+              a(href="#") чатати
+        .swiper-slide
+          +b.article-card
+            +picture('img/hel3.webp', 'img/hel3.jpg', 'Article', 'article-card__img')
+            +picture('img/hel2.webp', 'img/hel2.jpg', 'Article', 'article-card__img article-card__img_hover')
+            +e.content
+              h3 в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
+              a(href="#") чатати
+        .swiper-slide
+          +b.article-card
+            +picture('img/hel5.webp', 'img/hel5.jpg', 'Article', 'article-card__img')
+            +picture('img/hel1.webp', 'img/hel1.jpg', 'Article', 'article-card__img article-card__img_hover')
+            +e.content
+              h3 Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
+              a(href="#") чатати
+        .swiper-slide
+          +b.article-card
+            +picture('img/hel4.webp', 'img/hel4.jpg', 'Article', 'article-card__img')
+            +picture('img/hel3.webp', 'img/hel3.jpg', 'Article', 'article-card__img article-card__img_hover')
+            +e.content
+              h3 в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
+              a(href="#") чатати
+      .swiper-pagination

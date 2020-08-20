@@ -4,12 +4,14 @@
 .header
   height: calc(#{$w-c})
   background-color: $black-text
+  margin-top: 20px
   position: relative
   display: flex
   align-items: stretch
   font-size: 16px
+  z-index: 20
   &_mb
-    margin-bottom: calc((-1) * #{$w-c})
+    margin-bottom: calc((-1) * (#{$w-c} + 20px))
   &__item
     display: flex
     align-items: center

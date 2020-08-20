@@ -1,0 +1,19 @@
+@import '../mixins'
+
+.gallery
+  display: flex
+  &__item
+    width: calc(50% - 10px)
+    position: relative
+    &:nth-child(2n+1)
+      margin-right: 20px
+    picture
+      top: 0
+      left: 0
+      position: absolute
+    &:before
+      content: ''
+      display: inline-block
+      width: 0
+      height: 0
+      padding-top: 93%

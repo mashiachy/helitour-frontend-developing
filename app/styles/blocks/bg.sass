@@ -1,0 +1,41 @@
+@import '../mixins'
+
+.bg
+  padding-top: calc(#{$w-c} + 20px)
+  box-sizing: border-box
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  background-color: $back-light
+  position: relative
+  &__image
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    z-index: 1
+    &:after
+      content: ''
+      position: absolute
+      top: 0
+      right: 0
+      bottom: 0
+      left: 0
+      background: rgba(0,0,0,0.6)
+    img
+      position: absolute
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%)
+  h1, p
+    z-index: 3
+    text-align: center
+    max-width: 50%
+  h1
+    &:not(:last-child)
+      margin-bottom: 24px
+  p
+    &:not(:last-child)
+      margin-bottom: 18px

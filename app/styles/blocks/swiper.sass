@@ -1,0 +1,57 @@
+@import 'swiper/swiper-bundle.min.css'
+@import '../mixins'
+
+.swiper
+  &-container
+    width: 100%
+    &:not(:last-child)
+      margin-bottom: 60px
+  &-wrapper
+    padding-bottom: 60px
+  &-slide
+    display: flex
+    align-items: center
+    justify-content: center
+  &-pagination
+    line-height: 12px
+    bottom: 0 !important
+  &-pagination-bullet
+    box-sizing: border-box
+    border-radius: 50%
+    width: 12px
+    height: 12px
+    border: 2px solid #ffffff
+    background-color: #ffffff
+    transition: all .25s ease-out
+    position: relative
+    opacity: 1
+    &:after
+      content: ''
+      position: absolute
+      top: calc(50% - 2px)
+      left: calc(50% - 2px)
+      width: 4px
+      height: 4px
+      border-radius: 50%
+      background-color: $black-text
+      transition: all .25s ease-out
+    &-active
+      border: 2px solid $black-text
+      &:after
+        background-color: #ffffff
+
+.swiper-container--one .swiper
+  &-slide
+    .image-slide
+      position: relative
+      &:before
+        content: ''
+        display: inline-block
+        width: 0
+        height: 0
+        padding-top: 53%
+      img
+        position: absolute
+        top: 50%
+        left: 50%
+        transform: translate(-50%, -50%)

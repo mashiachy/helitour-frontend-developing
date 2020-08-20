@@ -129,7 +129,7 @@ gulp.task('new-page', done => {
     `    title Helitour | ${name}\n` +
     //'    link(href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet")' +
     `    link(href="css/${name}.css" rel="stylesheet")\n` +
-    `    script(defer src="js/${name}.js"\n`+
+    `    script(defer src="js/${name}.js")\n`+
     '  body\n\n\n',
     console.log);
   createFile(`app/styles/${name}.sass`,
