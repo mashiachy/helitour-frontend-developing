@@ -1,0 +1,49 @@
+@import '../mixins'
+
+.page-navigation
+  width: calc(#{$w-cg} * 4 - 20px)
+  border: 1px solid $gray
+  box-sizing: border-box
+  display: flex
+  align-items: center
+  font-weight: bold
+  &:before
+    content: ''
+    display: inline-block
+    height: 0
+    width: 0
+    padding-top: 12%
+  &__link
+    transition: color .25s ease-out
+    display: block
+    position: relative
+    padding: 0 4px
+    color: inherit
+    text-decoration: none
+    &_square
+      width: 12%
+      display: flex
+      align-items: center
+      &:before
+        content: ''
+        display: inline-block
+        height: 0
+        width: 0
+        padding-top: 100%
+      &:not(:last-child)
+        border-right: 1px solid $gray
+        margin-right: auto
+      &:not(:first-child)
+        border-left: 1px solid $gray
+        margin-left: auto
+    svg
+      width: 6px
+      height: 8px
+      @include centerMargin
+      polyline
+        stroke: $black-text
+    &:hover, &_current
+      color: $accent-text
+      svg
+        polyline
+          stroke: $accent-text

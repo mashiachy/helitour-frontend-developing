@@ -8,6 +8,8 @@ const
   purgecss = require('gulp-purgecss'),
   sassGlob = require('gulp-sass-glob'),
   autoprefixer = require('gulp-autoprefixer'),
+  postcss = require('gulp-postcss'),
+  postcssImport = require('postcss-import'),
   pug = require('gulp-pug'),
   beauty = require('gulp-html-beautify'),
   uglify = require('gulp-uglify-es').default,
@@ -39,7 +41,10 @@ gulp.task('sass',  () => {
         'mixins.sass',
       ],
     }))
-    .pipe(sass({outputStyle: 'compressed'}))
+    .pipe(sass({
+      outputStyle: 'compressed',
+    }))
+    .pipe(postcss([postcssImport()]))
     .pipe(concat(`${name}.css`))
     .pipe(gulpif(production, purgecss({
       content: [`dist/${name}.html`],
@@ -124,7 +129,7 @@ gulp.task('new-page', done => {
     `    title Helitour | ${name}\n` +
     //'    link(href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet")' +
     `    link(href="css/${name}.css" rel="stylesheet")\n` +
-    `    script(defer src="js/${name}.js")`+
+    `    script(defer src="js/${name}.js"\n`+
     '  body\n\n\n',
     console.log);
   createFile(`app/styles/${name}.sass`,

@@ -1,0 +1,13 @@
+include ../../node_modules/bemto.pug/bemto
+
+mixin lazy-picture(webp, jpg, alt, cls)
+  picture(class=cls data-lazy data-l-pict)
+    source(data-l-srcset=webp type='image/webp')
+    source(data-l-srcset=jpg type='image/jpeg')
+    img(data-l-src=jpg alt=alt)
+
+mixin picture(webp, jpg, alt, cls)
+  picture(class=cls)
+    source(srcset=webp type='image/webp')
+    source(srcset=jpg type='image/jpeg')
+    img(src=jpg alt=alt)

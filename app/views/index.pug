@@ -9,6 +9,133 @@ html(lang="us")
     meta(name="robots" content="noindex, nofollow")
     title Helitour | index
     link(href="css/index.css" rel="stylesheet")
-    script(defer src="js/index.js")  body
-
-
+    script(defer src="js/index.js")
+  body
+    main
+      +b.SECTION.bg
+        h1 Статти
+      +b.SECTION.articles.content.content__inner
+        +e.content
+          +b.article-card
+            +picture('img/hel1.webp', 'img/hel1.jpg', 'Article', 'article-card__img')
+            +picture('img/hel2.webp', 'img/hel2.jpg', 'Article', 'article-card__img article-card__img_hover')
+            +e.content
+              h3 Lorem Ipsum - це текст-"риба", що використовується в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
+              a(href="#") чатати
+          +b.article-card
+            +picture('img/hel3.webp', 'img/hel3.jpg', 'Article', 'article-card__img')
+            +picture('img/hel2.webp', 'img/hel2.jpg', 'Article', 'article-card__img article-card__img_hover')
+            +e.content
+              h3 в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
+              a(href="#") чатати
+          +b.article-card
+            +picture('img/hel5.webp', 'img/hel5.jpg', 'Article', 'article-card__img')
+            +picture('img/hel1.webp', 'img/hel1.jpg', 'Article', 'article-card__img article-card__img_hover')
+            +e.content
+              h3 Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
+              a(href="#") чатати
+          +b.article-card
+            +picture('img/hel4.webp', 'img/hel4.jpg', 'Article', 'article-card__img')
+            +picture('img/hel3.webp', 'img/hel3.jpg', 'Article', 'article-card__img article-card__img_hover')
+            +e.content
+              h3 в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
+              a(href="#") чатати
+          +b.article-card
+            +picture('img/hel1.webp', 'img/hel1.jpg', 'Article', 'article-card__img')
+            +picture('img/hel2.webp', 'img/hel2.jpg', 'Article', 'article-card__img article-card__img_hover')
+            +e.content
+              h3 Lorem Ipsum - це текст-"риба", що використовується в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
+              a(href="#") чатати
+          +b.article-card
+            +picture('img/hel3.webp', 'img/hel3.jpg', 'Article', 'article-card__img')
+            +picture('img/hel2.webp', 'img/hel2.jpg', 'Article', 'article-card__img article-card__img_hover')
+            +e.content
+              h3 в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
+              a(href="#") чатати
+          +b.article-card
+            +picture('img/hel5.webp', 'img/hel5.jpg', 'Article', 'article-card__img')
+            +picture('img/hel1.webp', 'img/hel1.jpg', 'Article', 'article-card__img article-card__img_hover')
+            +e.content
+              h3 Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
+              a(href="#") чатати
+          +b.article-card
+            +picture('img/hel4.webp', 'img/hel4.jpg', 'Article', 'article-card__img')
+            +picture('img/hel3.webp', 'img/hel3.jpg', 'Article', 'article-card__img article-card__img_hover')
+            +e.content
+              h3 в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
+              a(href="#") чатати
+        +b.page-navigation
+          +e.A(href="#").link_square
+            svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.44 25")
+              polyline(points="14.44 2 2 12.5 14.44 23" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" fill-rule="evenodd")
+          +e.A(href="#").link_current 1
+          +e.A(href="#").link 2
+          +e.A(href="#").link 3
+          +e.A(href="#").link 4
+          +e.A(href="#").link 5
+          +e.A(href="#").link 6
+          +e.A(href="#").link 7
+          +e.A(href="#").link ...
+          +e.A(href="#").link 30
+          +e.A(href="#").link_square
+            svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16.44 25")
+              polyline(points="2 2 14.44 12.5 2 23" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" fill-rule="evenodd")
+    +b.FOOTER.footer
+      +e.content.content
+        +e.block
+          +b.contact-block
+            h4 Телефон
+            a(href="tel:+380 67 370–3687").contact +380 67 370–3687
+          +b.contact-block
+            h4 Адрес
+            p.contact
+              | м. Київ, 02000,
+              br
+              | міні аеродром "Гідропарк"
+          +b.contact-block
+            h4 E-mail
+            a(href="mailto:info@helitour.com.ua").contact info@helitour.com.ua
+        +e.NAV.block.footer-nav__
+          +e.UL.main-ul
+            li
+              h4 Наші вертольоти
+            each i in ['Robinson R44 Raven II', 'Eurocopter EC120', 'Bell 407']
+              li
+                a(href="#")=i
+            li.spacer
+            li
+              a(href="#") Карта сайту
+          +e.UL.main-ul
+            li
+              h4 Послуги
+            each i in ['Оренда вертольота в Києві', 'Вертоліт на весілля', 'Полiт на вертольотi для двоих', 'Хелiскiiнг', 'Чартернi рейси']
+              li
+                a(href="#")=i
+            li.spacer
+            li © 2020. Helitour. Всі права захищені.
+          +e.UL.main-ul
+            li
+              h4 Екскурсії
+            each i in ['Оглядовий політ над Києвом', 'Політ в Межигір\'я', 'Вертолітний тур «Церква над водi»', 'Прип\'ять i Чорнобиль']
+              li
+                a(href="#")=i
+        +e.block
+          +b.footer-col__
+            h4 Ми в соцмережах
+            .societies
+              +b.A(href="#" alt='Facebook').society_white
+                include ../../mokups/exports/facebook.svg
+              +b.A(href="#" alt='Youtube').society_white
+                include ../../mokups/exports/youtube.svg
+              +b.A(href="#" alt='Telegram').society_white
+                include ../../mokups/exports/telegram.svg
+              +b.A(href="#" alt='Instagram').society_white
+                include ../../mokups/exports/instagram.svg
+              +b.A(href="#" alt='Twitter').society_white
+                include ../../mokups/exports/twitter.svg
+            p Ви можете оплатити послуги гелікоптера за безготівковим розраху
+            .spacer
+            p.kost
+              | Зроблено з
+              include ../../mokups/exports/heart.svg
+              | від Kost

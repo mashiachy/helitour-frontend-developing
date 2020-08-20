@@ -1,0 +1,60 @@
+@import '../mixins'
+
+.footer
+  font-size: 14px
+  color: #ffffff
+  padding: 100px 0
+  background-color: $black-text
+  background-image: url("../img/footer-back.webp")
+  background-size: 100% auto
+  background-position: center bottom
+  background-repeat: no-repeat
+  h4
+    opacity: 0.6
+    margin-bottom: 24px
+  a
+    text-decoration: none
+    color: inherit
+  ul
+    margin: 0
+    padding: 0
+  .contact
+    font-size: 20px
+    line-height: 28px
+  &__content
+    display: flex
+    justify-content: space-between
+    align-items: stretch
+  &__block
+    &:nth-child(3n+1), &:nth-child(3n+3)
+      width: calc(#{$w-cg} * 3 - 20px)
+    &:nth-child(3n+2)
+      width: calc(#{$w-cg} * 6 - 20px)
+  .contact-block
+    &:not(:last-child)
+      margin-bottom: 40px
+  .spacer
+    margin-bottom: auto !important
+  .footer-nav
+    display: flex
+    justify-content: space-between
+    &__main-ul
+      height: 100%
+      display: flex
+      flex-direction: column
+      li
+        display: block
+        list-style: none
+        &:not(:last-child)
+          margin-bottom: 10px
+  .footer-col
+    display: flex
+    flex-direction: column
+    align-items: stretch
+    max-width: 280px
+    height: 100%
+    margin-left: auto
+    .societies
+      display: flex
+      justify-content: space-between
+      margin-bottom: 50px

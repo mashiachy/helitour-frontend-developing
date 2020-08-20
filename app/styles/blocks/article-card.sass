@@ -1,0 +1,69 @@
+@import '../mixins'
+
+.article-card
+  width: 100%
+  background-color: $back-dark
+  position: relative
+  color: #ffffff
+  overflow: hidden
+  &:before
+    content: ''
+    display: inline-block
+    height: 0
+    width: 0
+    padding-top: 71%
+  &:after
+    content: ''
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    z-index: 12
+    background: linear-gradient(155deg, rgba(2,0,36,0.8) 0%, rgba(255,255,255,0) 100%);
+  &__content
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    padding: 11% 9% 7%
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    h3, p, a
+      z-index: 13
+    h3, a
+      font-weight: bold
+    h3
+      max-width: 55%
+    a
+      width: fit-content
+      position: relative
+      color: inherit
+      text-transform: uppercase
+      text-decoration: none
+      padding-bottom: 9px
+      &:after
+        content: ''
+        position: absolute
+        left: 0
+        bottom: 0
+        height: 2px
+        width: 100%
+        background-color: #ffffff
+  &__img
+    position: absolute
+    width: 100%
+    height: 100%
+    top: 0
+    left: 0
+    overflow: hidden
+    *
+      min-width: 100%
+      min-height: 100%
+    &_hover
+      transform: translateX(-100%)
+      transition: all .25s ease-out
+  &:hover &__img_hover
+    transform: translateX(0)

@@ -1,2 +1,35 @@
 @import "mixins"
 
+.bg
+  padding: 270px 0 196px
+  margin-bottom: -100px
+  display: flex
+  flex-direction: column
+  align-items: center
+  background-color: $back-light
+  background-image: url("../img/stroke.svg")
+  background-size: 32px 32px
+  h1, p
+    text-align: center
+    max-width: 50%
+  h1
+    &:not(:last-child)
+      margin-bottom: 24px
+  p
+    &:not(:last-child)
+      margin-bottom: 18px
+
+.articles
+  margin-bottom: 140px
+  &__content
+    display: flex
+    flex-wrap: wrap
+    align-items: stretch
+    margin-bottom: 30px
+    .article-card
+      width: calc(50% - 10px)
+      margin-bottom: 20px
+      &:nth-child(2n+1)
+        margin-right: $gap
+  .page-navigation
+    @include centerMargin

@@ -1,28 +1,90 @@
+@import 'normalize.css'
 @import 'mixins'
 
 @font-face
   font-family: 'Gilroy'
-  src: local('Gilroy Regular'), local('Gilroy-Regular'),
-    url('./fonts/Gilroy-Regular.woff2') format('woff2'),
-    url('./fonts/Gilroy-Regular.woff') format('woff'),
-    url('./fonts/Gilroy-Regular.ttf') format('truetype')
+  src: local('Gilroy Regular'), local('Gilroy-Regular')
+  src: url('./fonts/Gilroy-Regular.woff2') format('woff2')
+  src: url('./fonts/Gilroy-Regular.woff') format('woff')
+  src: url('./fonts/Gilroy-Regular.ttf') format('truetype')
   font-weight: 400
   font-style: normal
 
 @font-face
   font-family: 'Gilroy'
-  src: local('Gilroy Medium'), local('Gilroy-Medium'),
-    url('./fonts/Gilroy-Medium.woff2') format('woff2'),
-    url('./fonts/Gilroy-Medium.woff') format('woff'),
-    url('./fonts/Gilroy-Medium.ttf') format('truetype')
+  src: local('Gilroy Medium'), local('Gilroy-Medium')
+  src: url('./fonts/Gilroy-Medium.woff2') format('woff2')
+  src: url('./fonts/Gilroy-Medium.woff') format('woff')
+  src: url('./fonts/Gilroy-Medium.ttf') format('truetype')
   font-weight: 500
   font-style: normal
 
 @font-face
   font-family: 'Gilroy'
-  src: local('Gilroy Bold'), local('Gilroy-Bold'),
-  url('./fonts/Gilroy-Bold.woff2') format('woff2'),
-  url('./fonts/Gilroy-Bold.woff') format('woff'),
-  url('./fonts/Gilroy-Bold.ttf') format('truetype')
+  src: local('Gilroy Bold'), local('Gilroy-Bold')
+  src: url('./fonts/Gilroy-Bold.woff2') format('woff2')
+  src: url('./fonts/Gilroy-Bold.woff') format('woff')
+  src: url('./fonts/Gilroy-Bold.ttf') format('truetype')
   font-weight: 700
   font-style: normal
+
+
+
+body
+  font-family: Gilroy
+  font-weight: 400
+  font-style: normal
+  font-size: 16px
+  line-height: 20px
+  color: $black-text
+
+h1, h2, h3, h4
+  margin: 0
+  padding: 0
+
+h1, h2, h3
+  text-transform: uppercase
+
+p
+  padding: 0
+  margin: 0
+
+h1
+  font-size: 50px
+  line-height: 64px
+
+h3
+  font-size: 18px
+  line-height: 24px
+
+h4
+  font-size: 14px
+  line-height: 20px
+  font-weight: normal
+
+.content
+  max-width: 1540px
+  margin-left: 10%
+  margin-right: 10%
+  &__inner
+    box-sizing: border-box
+    padding-left: calc(#{$w-c})
+    padding-right: calc(#{$w-c})
+
+@keyframes rotate
+  0%
+    transform: rotateY(0deg)
+  50%
+    transform: rotateY(360deg)
+  100%
+    transform: rotateY(0deg)
+
+.kost
+  svg
+    display: inline-block
+    height: 18px
+    margin: 0 4px -4px
+    width: auto
+    cursor: pointer
+    &:hover
+      animation: rotate 1.5s ease-in-out infinite
