@@ -1,5 +1,6 @@
 @import '../mixins'
 
+
 .footer
   font-size: 14px
   color: #ffffff
@@ -14,6 +15,8 @@
     margin-bottom: 24px
   a
     text-decoration: none
+    text-transform: none
+    font-weight: normal
     color: inherit
   ul
     margin: 0
@@ -38,6 +41,7 @@
   .footer-nav
     display: flex
     justify-content: space-between
+    gap: 20px
     &__main-ul
       height: 100%
       display: flex
@@ -53,7 +57,10 @@
     align-items: stretch
     max-width: 280px
     height: 100%
-    margin-left: auto
+    &_right
+      margin-left: auto
+    &_left
+      margin-right: auto
     .societies
       display: flex
       justify-content: space-between
