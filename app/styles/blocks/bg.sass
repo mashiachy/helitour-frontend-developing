@@ -1,7 +1,6 @@
 @import '../mixins'
 
 .bg
-  padding-top: calc(#{$w-c} + 20px)
   box-sizing: border-box
   display: flex
   flex-direction: column
@@ -9,6 +8,11 @@
   justify-content: center
   background-color: $back-light
   position: relative
+  &:not(:last-child)
+    margin-bottom: 100px
+  &_stroke
+    background-image: url("../img/stroke.svg")
+    background-size: 32px 32px
   &__image
     position: absolute
     top: 0
@@ -39,3 +43,6 @@
   p
     &:not(:last-child)
       margin-bottom: 18px
+  &_with-header
+    height: 530px
+    padding-top: calc(#{$w-c} + 20px)

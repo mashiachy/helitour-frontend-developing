@@ -1,0 +1,32 @@
+@import 'mixins'
+
+main
+  margin-bottom: 0 !important
+
+.error-page
+  min-height: 100vh
+  padding-bottom: 40px
+  h2:not(:last-child)
+    margin-bottom:  40px
+  .svg
+    position: relative
+    &:not(:last-child)
+      margin-bottom: 24px
+    svg
+      width: calc(#{$w-cg} * 5 - 20px)
+      height: auto
+    .marker
+      position: absolute
+      left: calc(50% - 33px)
+      bottom: 50%
+      width: 66px
+      height: 88px
+      box-sizing: border-box
+      padding-top: 22px
+      background-image: url('../img/pin.svg')
+      background-size: 66px 88px
+      span
+        display: block
+        color: #ffffff
+        width: 100%
+        text-align: center

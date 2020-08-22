@@ -1,0 +1,19 @@
+[data-question]
+  transition: max-height .5s ease-out
+  max-height: 1000px
+  overflow: hidden
+  [data-question-anchor]
+    cursor: pointer
+    display: flex
+    justify-content: center
+    align-items: center
+    &:after
+      content: ''
+      width: 8px
+      height: 5px
+      margin-left: 12px
+      background: url('../img/arrow.svg')
+      transition: transform .25s ease-out
+  [data-question-anchor-active]
+    &:after
+      transform: rotate(-180deg)

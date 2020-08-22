@@ -1,0 +1,23 @@
+include mixins
+
+doctype html
+html(lang="us")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    meta(name="robots" content="noindex, nofollow")
+    title Helitour | 404
+    link(href="css/404.css" rel="stylesheet")
+    script(defer src="js/404.js")
+  body
+    +header('_mb')
+    main
+      +b.SECTION.bg_stroke._with-header.error-page
+        h2 Сторінка не знайдена
+        div.svg
+          include ../../mokups/exports/404.svg
+          div.marker
+            span.bold ой
+        +b.A(href="#").button Повернутись на головну
+    +footer
