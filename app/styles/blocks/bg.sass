@@ -10,7 +10,7 @@
   position: relative
   &:not(:last-child)
     margin-bottom: 100px
-    @include phone
+    @include tablet
       margin-bottom: 40px
   &_stroke
     background-image: url("../img/stroke.svg")
@@ -48,8 +48,8 @@
     &:not(:last-child)
       margin-bottom: 18px
   &_with-header
-    height: 530px
-    padding-top: calc(#{$w-c} + 20px)
-    @include phone
-      height: 180px
-      padding-top: calc(#{$w-c-phone} + #{$gap-phone})
+    min-height: 530px
+    padding-top: calc(#{$w-c} + 40px)
+    @include tablet
+      min-height: 180px
+      padding-top: calc(#{$w-c-phone} + #{$gap-phone} * 2)

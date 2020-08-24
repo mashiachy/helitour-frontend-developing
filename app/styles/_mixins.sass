@@ -6,6 +6,14 @@
   @media screen and (max-width: 768px)
     @content
 
+@mixin tablet
+  @media screen and (max-width: 1279px)
+    @content
+
+@mixin sm-tablet
+  @media screen and (max-width: 991px)
+    @content
+
 $black-text: #212121
 $accent-text: #0facd0
 $accent-light: #e2f5f9

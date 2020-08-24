@@ -55,7 +55,7 @@ mixin footer
             li
               a(href="#")=i
           li.spacer
-          li
+          li.desktop
             a(href="#") Карта сайту
         +e.UL.main-ul
           li
@@ -64,7 +64,7 @@ mixin footer
             li
               a(href="#")=i
           li.spacer
-          li © 2020. Helitour. Всі права захищені.
+          li.desktop © 2020. Helitour. Всі права захищені.
         +e.UL.main-ul
           li
             h4 Екскурсії
@@ -74,7 +74,7 @@ mixin footer
       +e.block
         +b.footer-col_right
           h4 Ми в соцмережах
-          .row
+          .row.societies
             +b.A(href="#" alt='Facebook').society_white
               include ../../mokups/exports/facebook.svg
             +b.A(href="#" alt='Youtube').society_white
@@ -90,6 +90,7 @@ mixin footer
           .row.phone.short
             a(href="#") Карта сайту
             a(href="#") Оферта
+          p.tablet © 2020. Helitour. Всі права захищені.
           p.kost
             | Зроблено з
             include ../../mokups/exports/heart.svg

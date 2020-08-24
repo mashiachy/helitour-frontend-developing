@@ -10,16 +10,16 @@
   align-items: stretch
   font-size: 16px
   z-index: 20
-  @include phone
+  @include tablet
     height: calc(#{$w-c-phone})
     margin-top: $gap-phone
   .spacer
     display: none
-    @include phone
+    @include tablet
       display: block
   &_mb
     margin-bottom: calc((-1) * (#{$w-c} + 20px))
-    @include phone
+    @include tablet
       margin-bottom: calc((-1) * (#{$w-c-phone} + #{$gap-phone}))
   &__item
     display: flex
@@ -30,11 +30,11 @@
       justify-content: space-between
       flex-grow: 1
       padding: 0 50px
-      @include phone
+      @include tablet
         display: none
     &_square
       width: calc(#{$w-c})
-      @include phone
+      @include tablet
         width: calc(#{$w-c-phone})
     &_rect, &_ext-rect
       padding-left: 12px
@@ -64,7 +64,7 @@
       height: 36px
       fill: $black-text
       transition: all .25s ease-out
-      @include phone
+      @include tablet
         width: 18px
         height: 18px
     &:hover
@@ -78,7 +78,7 @@
     transform: translate(-50%, -50%)
     display: block
     height: 60%
-    @include phone
+    @include tablet
       height: 30px
     svg
       height: 100%
