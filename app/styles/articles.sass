@@ -3,18 +3,31 @@
 .bg
   padding-bottom: 100px
   margin-bottom: -100px !important
+  @include phone
+    padding-bottom: 20px
+    margin-bottom: -20px !important
 
 .articles
-  margin-bottom: 140px
   &__content
     display: flex
     flex-wrap: wrap
     align-items: stretch
     margin-bottom: 30px
+    @include sm-phone
+      flex-direction: column
     .article-card
       width: calc(50% - 10px)
-      margin-bottom: 20px
+      margin-bottom: $gap
       &:nth-child(2n+1)
         margin-right: $gap
+      @include phone
+        margin-bottom: $gap-phone
+        &:nth-child(2n+1)
+          margin-right: $gap-phone
+      @include sm-phone
+        width: 100%
+        margin-bottom: calc(#{$gap-phone})
+        &:nth-child(2n+1)
+          margin-right: 0
   .page-navigation
     @include centerMargin

@@ -37,6 +37,9 @@ body
   font-size: 16px
   line-height: 30px
   color: $black-text
+  @include phone
+    font-size: 12px
+    line-height: 16px
 
 h1, h2, h3, h4
   margin: 0
@@ -52,6 +55,9 @@ p
 h1
   font-size: 50px
   line-height: 64px
+  @include phone
+    font-size: 28px
+    line-height: 36px
 
 h2
   font-size: 36px
@@ -60,11 +66,17 @@ h2
 h3
   font-size: 18px
   line-height: 24px
+  @include phone
+    font-size: 13px
+    line-height: 18px
 
 h4
   font-size: 14px
   line-height: 20px
   font-weight: normal
+  @include phone
+    font-size: 12px
+    line-height: 15px
 
 a
   text-decoration: none
@@ -83,15 +95,23 @@ picture
   img
     min-width: 100%
     min-height: 100%
+    width: 100%
+    height: auto
 
 .content
   max-width: 1540px
   margin-left: 10%
   margin-right: 10%
+  @include phone
+    margin-left: 10px
+    margin-right: 10px
   &__inner
     box-sizing: border-box
     padding-left: calc(#{$w-c})
     padding-right: calc(#{$w-c})
+    @include phone
+      padding-left: 15px
+      padding-right: 15px
   &__text
     padding-left: calc(#{$w-cg} + 20px)
     padding-right: calc(#{$w-cg} + 20px)
@@ -101,6 +121,8 @@ picture
 
 main:not(:last-child)
   margin-bottom: 130px
+  @include phone
+    margin-bottom: 50px
 
 @keyframes rotate
   0%
@@ -119,3 +141,10 @@ main:not(:last-child)
     cursor: pointer
     &:hover
       animation: rotate 1.5s ease-in-out infinite
+
+.spacer
+  margin: auto
+
+.phone
+  @media screen and (min-width: 769px)
+    display: none

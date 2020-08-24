@@ -7,12 +7,15 @@
   padding: 100px 0
   background-color: $black-text
   background-image: url("../img/footer-back.webp")
-  background-size: 100% auto
+  background-size: auto 460px
   background-position: center bottom
   background-repeat: no-repeat
+  @include phone
+    padding: 60px 0
+    text-align: center
   h4
     opacity: 0.6
-    margin-bottom: 24px
+    margin-bottom: 13px
   a
     text-decoration: none
     text-transform: none
@@ -24,24 +27,39 @@
   .contact
     font-size: 20px
     line-height: 28px
+    @include phone
+      font-size: 16px
+      line-height: 20px
   &__content
     display: flex
     justify-content: space-between
     align-items: stretch
+    @include phone
+      flex-direction: column
+      align-items: center
+      justify-content: flex-start
   &__block
     &:nth-child(3n+1), &:nth-child(3n+3)
       width: calc(#{$w-cg} * 3 - 20px)
     &:nth-child(3n+2)
       width: calc(#{$w-cg} * 6 - 20px)
+    @include phone
+      width: auto !important
+      &:not(:last-child)
+        margin-bottom: 30px
   .contact-block
     &:not(:last-child)
       margin-bottom: 40px
+      @include phone
+        margin-bottom: 30px
   .spacer
     margin-bottom: auto !important
   .footer-nav
     display: flex
     justify-content: space-between
     gap: 20px
+    @include phone
+      display: none
     &__main-ul
       height: 100%
       display: flex
@@ -57,11 +75,31 @@
     align-items: stretch
     max-width: 280px
     height: 100%
+    @include phone
+      max-width: unset
+      height: unset
+      align-items: center
+      p:not(:last-child)
+        margin-bottom: 30px
+      p
+        font-size: 12px
+        line-height: 16px
     &_right
       margin-left: auto
     &_left
       margin-right: auto
-    .societies
+    .row
       display: flex
       justify-content: space-between
       margin-bottom: 50px
+      width: 100%
+      @include phone
+        margin-bottom: 30px
+        justify-content: center
+        a:not(:last-child)
+          margin-right: #{$gap-phone}
+        &.short
+          width: 200px
+      a
+        font-size: 16px
+        line-height: 20px

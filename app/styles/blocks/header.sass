@@ -4,14 +4,23 @@
 .header
   height: calc(#{$w-c})
   background-color: $black-text
-  margin-top: 20px
+  margin-top: $gap
   position: relative
   display: flex
   align-items: stretch
   font-size: 16px
   z-index: 20
+  @include phone
+    height: calc(#{$w-c-phone})
+    margin-top: $gap-phone
+  .spacer
+    display: none
+    @include phone
+      display: block
   &_mb
     margin-bottom: calc((-1) * (#{$w-c} + 20px))
+    @include phone
+      margin-bottom: calc((-1) * (#{$w-c-phone} + #{$gap-phone}))
   &__item
     display: flex
     align-items: center
@@ -21,12 +30,23 @@
       justify-content: space-between
       flex-grow: 1
       padding: 0 50px
+      @include phone
+        display: none
     &_square
       width: calc(#{$w-c})
+      @include phone
+        width: calc(#{$w-c-phone})
+    &_rect, &_ext-rect
+      padding-left: 12px
+      padding-right: 12px
     &_rect
-      width: calc(#{$w-cg} + 20px)
+      min-width: calc(#{$w-cg} + 20px)
+      @include sm-phone
+        display: none
     &_ext-rect
-      width: calc(2 * #{$w-c})
+      min-width: calc(2 * #{$w-c})
+      @include sm-phone
+        display: none
     &_gray
       background-color: $gray
       color: $black-text
@@ -44,6 +64,9 @@
       height: 36px
       fill: $black-text
       transition: all .25s ease-out
+      @include phone
+        width: 18px
+        height: 18px
     &:hover
       svg
         fill: $accent-text
@@ -55,5 +78,7 @@
     transform: translate(-50%, -50%)
     display: block
     height: 60%
+    @include phone
+      height: 30px
     svg
       height: 100%

@@ -23,6 +23,7 @@ mixin header(modifier)
         a(href="#") Eng
         a(href="#") Рус
       a(href="tel:+380673703687") +380 67 370–3687
+    .spacer
     +e.A(href="#").item_ext-rect._accent Забронювати
     +e.A(href="#").item_square._accent-svg
       include ../../mokups/exports/helicopter.svg
@@ -73,7 +74,7 @@ mixin footer
       +e.block
         +b.footer-col_right
           h4 Ми в соцмережах
-          .societies
+          .row
             +b.A(href="#" alt='Facebook').society_white
               include ../../mokups/exports/facebook.svg
             +b.A(href="#" alt='Youtube').society_white
@@ -86,6 +87,9 @@ mixin footer
               include ../../mokups/exports/twitter.svg
           p Ви можете оплатити послуги гелікоптера за безготівковим розраху
           .spacer
+          .row.phone.short
+            a(href="#") Карта сайту
+            a(href="#") Оферта
           p.kost
             | Зроблено з
             include ../../mokups/exports/heart.svg
