@@ -12,8 +12,12 @@ main
     position: relative
     &:not(:last-child)
       margin-bottom: 24px
+    width: calc(#{$w-cg} * 5 - 20px)
+    height: auto
+    @include phone
+      width: 80%
+      max-width: 600px
     svg
-      width: calc(#{$w-cg} * 5 - 20px)
       height: auto
     .marker
       position: absolute
@@ -25,6 +29,12 @@ main
       padding-top: 22px
       background-image: url('../img/pin.svg')
       background-size: 66px 88px
+      @include phone
+        padding-top: 11px
+        left: calc(50% - 21px)
+        width: 42px
+        height: 56px
+        background-size: 42px 56px
       span
         display: block
         color: #ffffff
