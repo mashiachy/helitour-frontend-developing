@@ -4,6 +4,8 @@
   height: 800px
   color: #ffffff
   margin-bottom: 84px
+  @include tablet
+    height: 480px
   @include phone
     height: 300px
 
@@ -14,7 +16,7 @@
     margin-bottom: 100px
     position: relative
     box-sizing: border-box
-    @include phone
+    @include tablet
       padding-bottom: 60px
       margin-bottom: 60px
     &:after
@@ -39,5 +41,5 @@
       line-height: 30px
   article:not(:last-child), .swiper-container:not(:last-child), .gallery:not(:last-child)
     margin-bottom: 50px
-    @include phone
+    @include tablet
       margin-bottom: 30px

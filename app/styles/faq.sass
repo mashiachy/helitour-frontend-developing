@@ -5,6 +5,12 @@
     position: relative
     padding-top: 40px
     padding-bottom: 40px
+    @include tablet
+      padding-top: 30px
+      padding-bottom: 30px
+    @include phone
+      padding-top: 20px
+      padding-bottom: 20px
     &:before, &:last-child:after
       content: ''
       position: absolute

@@ -11418,7 +11418,7 @@ const swiperTwo = new Swiper('.swiper-container--two', {
       slidesPerView: 2,
       spaceBetween: 10,
     },
-    768: {
+    1280: {
       slidesPerView: 2,
       spaceBetween: 20,
     }
