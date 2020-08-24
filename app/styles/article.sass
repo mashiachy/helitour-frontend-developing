@@ -4,6 +4,9 @@
   height: 800px
   color: #ffffff
   margin-bottom: 84px
+  @include phone
+    height: 300px
+
 
 .blog-article
   &:not(:last-child)
@@ -11,24 +14,30 @@
     margin-bottom: 100px
     position: relative
     box-sizing: border-box
+    @include phone
+      padding-bottom: 60px
+      margin-bottom: 60px
     &:after
       content: ''
       position: absolute
-      left: 0
+      left: 15px
       bottom: 0
-      width: 100%
+      width: calc(100% - 30px)
       height: 1px
       background-color: $gray
   article
-    &:not(:last-child)
-      margin-bottom: 50px
     p
       &:not(:last-child)
         margin-bottom: 30px
+        @include phone
+          margin-bottom: 22px
   &__big-text
     font-size: 25px
     line-height: 36px
-  .swiper-container:not(:last-child)
+    @include phone
+      font-size: 18px
+      line-height: 30px
+  article:not(:last-child), .swiper-container:not(:last-child), .gallery:not(:last-child)
     margin-bottom: 50px
-  .gallery:not(:last-child)
-    margin-bottom: 50px
+    @include phone
+      margin-bottom: 30px

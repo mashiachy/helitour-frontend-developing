@@ -10,6 +10,8 @@
   position: relative
   &:not(:last-child)
     margin-bottom: 100px
+    @include phone
+      margin-bottom: 40px
   &_stroke
     background-image: url("../img/stroke.svg")
     background-size: 32px 32px
@@ -33,11 +35,13 @@
       top: 50%
       left: 50%
       transform: translate(-50%, -50%)
-  h1, p
+  h1, h2, p
     z-index: 3
     text-align: center
     max-width: 50%
-  h1
+    @include phone
+      max-width: calc(100% - 20px)
+  h1, h2
     &:not(:last-child)
       margin-bottom: 24px
   p

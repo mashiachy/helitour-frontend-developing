@@ -38,8 +38,8 @@ body
   line-height: 30px
   color: $black-text
   @include phone
-    font-size: 12px
-    line-height: 16px
+    font-size: 14px
+    line-height: 22px
 
 h1, h2, h3, h4
   margin: 0
@@ -62,6 +62,9 @@ h1
 h2
   font-size: 36px
   line-height: 48px
+  @include phone
+    font-size: 20px
+    line-height: 28px
 
 h3
   font-size: 18px
@@ -95,8 +98,6 @@ picture
   img
     min-width: 100%
     min-height: 100%
-    width: 100%
-    height: auto
 
 .content
   max-width: 1540px
@@ -115,6 +116,9 @@ picture
   &__text
     padding-left: calc(#{$w-cg} + 20px)
     padding-right: calc(#{$w-cg} + 20px)
+    @include phone
+      padding-left: 0
+      padding-right: 0
 
 .bold
   font-weight: bold
@@ -147,4 +151,4 @@ main:not(:last-child)
 
 .phone
   @media screen and (min-width: 769px)
-    display: none
+    display: none !important

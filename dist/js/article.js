@@ -11411,8 +11411,18 @@ const swiperOne = new Swiper('.swiper-container--one', {
 });
 
 const swiperTwo = new Swiper('.swiper-container--two', {
-  slidesPerView: 2,
-  spaceBetween: 20,
+  slidesPerView: 1,
+  spaceBetween: 10,
+  breakpoints: {
+    568: {
+      slidesPerView: 2,
+      spaceBetween: 10,
+    },
+    768: {
+      slidesPerView: 2,
+      spaceBetween: 20,
+    }
+  },
   pagination: {
     el: '.swiper-pagination',
     clickable: true,
