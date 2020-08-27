@@ -15,7 +15,7 @@
     margin-top: $gap-phone
   .spacer
     display: none
-    @include tablet
+    @include sm-phone
       display: block
   &_mb
     margin-bottom: calc((-1) * (#{$w-c} + 20px))
@@ -26,11 +26,14 @@
     align-items: center
     justify-content: center
     color: #ffffff
+    transition: color .25s ease-out
     &_extended
       justify-content: space-between
       flex-grow: 1
       padding: 0 50px
       @include tablet
+        padding: 0 25px
+      @include sm-phone
         display: none
     &_square
       width: calc(#{$w-c})
@@ -41,19 +44,19 @@
       padding-right: 12px
     &_rect
       min-width: calc(#{$w-cg} + 20px)
-      @include sm-phone
-        display: none
     &_ext-rect
       min-width: calc(2 * #{$w-c})
-      @include sm-phone
+    &_rect, &_ext-rect
+      @include tablet
         display: none
     &_gray
       background-color: $gray
       color: $black-text
     &_accent
       background-color: $accent-text
+      color: $black-text
       &:hover, a:hover
-        color: $black-text
+        color: #ffffff
     &_accent-svg
       background-color: $accent-light
     &_light-gray
@@ -70,6 +73,15 @@
     &:hover
       svg
         fill: $accent-text
+  &__link-tree
+    display: flex
+    align-items: stretch
+  &__link-tree:hover &__item
+    color: $accent-text
+    &_accent
+      color: #ffffff
+    svg
+      fill: $accent-text
   &__center-link
     position: absolute
     z-index: 5

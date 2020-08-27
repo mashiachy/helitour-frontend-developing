@@ -2,12 +2,24 @@
 
 .gallery
   display: flex
+  flex-wrap: wrap
+  margin-bottom: -20px
+  @include tablet
+    margin-bottom: -10px
   &__item
     width: calc(50% - 10px)
     position: relative
+    margin-bottom: 20px
+    @include tablet
+      margin-bottom: 10px
     &:nth-child(2n+1)
       margin-right: 20px
-    picture
+      @include tablet
+        margin-right: 10px
+    @include sm-phone
+      width: 100% !important
+      margin-right: 0 !important
+    img
       top: 0
       left: 0
       position: absolute
@@ -16,4 +28,13 @@
       display: inline-block
       width: 0
       height: 0
-      padding-top: 93%
+      padding-top: 100%
+  &_3 &__item
+    width: calc((100% - 40px) / 3)
+    margin-right: 0
+    &:not(:nth-child(3n+3))
+      margin-right: 20px
+    @include tablet
+      width: calc((100% - 20px) / 3)
+      &:not(:nth-child(3n+3))
+        margin-right: 10px

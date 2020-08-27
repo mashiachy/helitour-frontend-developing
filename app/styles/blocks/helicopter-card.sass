@@ -1,0 +1,95 @@
+@import '../mixins'
+
+.helicopter-card
+  display: block
+  text-decoration: none
+  text-transform: none
+  font-weight: normal
+  width: 100%
+  background-color: $back-dark
+  position: relative
+  overflow: hidden
+  &, &:hover
+    color: #ffffff
+  &:before
+    content: ''
+    display: inline-block
+    height: 0
+    width: 0
+    padding-top: 71%
+  &:after
+    content: ''
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    z-index: 12
+    background: linear-gradient(155deg, rgba(2,0,36,0.8) 0%, rgba(255,255,255,0) 100%);
+  &__content
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    padding: 11% 9% 7%
+    display: flex
+    flex-direction: column
+    align-items: center
+    @include phone
+      padding: 20px 20px 14px
+    *
+      z-index: 13
+  &__name
+    font-weight: bold
+    max-width: #{'max(80%, 290px)'}
+    max-height: calc(100% - 70px)
+    overflow: hidden
+    text-align: center
+    transition: text-decoration .25s ease-out
+    text-decoration: underline transparent solid
+    font-size: 22px
+    line-height: 28px
+    @include phone
+      max-height: calc(100% - 60px)
+  &:hover &__name
+    text-decoration: underline $accent-text solid
+  &__content &__name
+    margin: auto 0
+  &__img
+    position: absolute
+    left: 0
+    top: 0
+    right: 0
+    bottom: 0
+    overflow: hidden
+    transition: transform .25s ease-out
+    img
+      position: absolute
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%)
+    &:after
+      content: ''
+      position: absolute
+      top: 0
+      right: 0
+      bottom: 0
+      left: 0
+      background-color: rgba(23, 23, 23, 0)
+      transition: background-color .25s ease-out
+  &:hover &__img
+    transform: scale(1.25)
+    &:after
+      background-color: rgba(23, 23, 23, 0.4)
+  &__info
+    display: flex
+    flex-direction: column
+    align-items: center
+    &:before
+      content: ''
+      width: 28.75px
+      height: 25px
+      margin-bottom: 15px
+      background-image: url('../img/group.svg')
+      background-size: 28.75px 25px

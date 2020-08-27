@@ -6,29 +6,3 @@
   @include tablet
     padding-bottom: 40px
     margin-bottom: -20px !important
-
-.articles
-  &__content
-    display: flex
-    flex-wrap: wrap
-    align-items: stretch
-    margin-bottom: 30px
-    @include sm-phone
-      flex-direction: column
-    .article-card
-      width: calc(50% - 10px)
-      margin-bottom: $gap
-      &:nth-child(2n+1)
-        margin-right: $gap
-      @include tablet
-        width: calc(50% - #{$gap-phone} / 2)
-        margin-bottom: $gap-phone
-        &:nth-child(2n+1)
-          margin-right: $gap-phone
-      @include sm-phone
-        width: 100%
-        margin-bottom: calc(#{$gap-phone})
-        &:nth-child(2n+1)
-          margin-right: 0
-  .page-navigation
-    @include centerMargin
