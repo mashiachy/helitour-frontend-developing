@@ -11398,9 +11398,58 @@ var swiper_cjs_18 = swiper_cjs.EffectFlip;
 var swiper_cjs_19 = swiper_cjs.EffectCoverflow;
 var swiper_cjs_20 = swiper_cjs.Thumbs;
 
+/*! npm.im/supports-webp 2.0.1 */
+
+var index = new Promise(function (resolve) {
+	var image = new Image();
+	image.onerror = function () { return resolve(false); };
+	image.onload = function () { return resolve(image.width === 1); };
+	image.src = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAwA0JaQAA3AA/vuUAAA=';
+}).catch(function () { return false; });
+
+var supportsWebp_commonJs = index;
+
+supportsWebp_commonJs.then(result => {
+  if (result) {
+    document.querySelectorAll('[data-back-webp], [data-back-jpg]').forEach(el => {
+      if (el.hasAttribute('data-back-webp'))
+        el.style.backgroundImage = `url(${el.getAttribute('data-back-webp')})`;
+      else
+        el.style.backgroundImage = `url(${el.getAttribute('data-back-jpg')})`;
+    });
+  } else {
+    document.querySelectorAll('[data-back-jpg]').forEach(el => {
+      if (el.hasAttribute('data-back-jpg'))
+        el.style.backgroundImage = `url(${el.getAttribute('data-back-jpg')})`;
+    });
+  }
+});
+
+Swiper.use(swiper_cjs_20);
+Swiper.use(swiper_cjs_5);
 Swiper.use(swiper_cjs_6);
 
-const swiperOne = new Swiper('.swiper-container--one', {
+const len = document.querySelector('.thumb-slider .swiper-container .swiper-wrapper').children.length;
+const thumbSlider = new Swiper('.thumb-slider .swiper-container', {
+  slidesPerView: len > 5 ? 5 : len,
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev',
+  },
+});
+
+const helicopterSlider = new Swiper('.main-slider', {
+  slidesPerView: 1,
+  thumbs: {
+    swiper: thumbSlider,
+  },
+});
+
+const excursionsSlider = new Swiper('.our-excursions .swiper-container', {
+  slidesPerView: 3,
+  spaceBetween: 20,
+  loop: true,
+  loopAdditionalSlides: 1,
   pagination: {
     el: '.swiper-pagination',
     clickable: true,
@@ -11410,24 +11459,4 @@ const swiperOne = new Swiper('.swiper-container--one', {
   },
 });
 
-const swiperTwo = new Swiper('.swiper-container--two', {
-  slidesPerView: 1,
-  spaceBetween: 10,
-  breakpoints: {
-    568: {
-      slidesPerView: 2,
-      spaceBetween: 10,
-    },
-    1280: {
-      slidesPerView: 2,
-      spaceBetween: 20,
-    }
-  },
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true,
-    renderBullet: (index, className) => {
-      return `<span class=${className}></span>`;
-    },
-  },
-});
+//# sourceMappingURL=helitour.js.map

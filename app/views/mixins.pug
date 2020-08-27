@@ -107,29 +107,75 @@ mixin our-articles
         .swiper-slide
           +b.article-card
             +picture('img/hel1.webp', 'img/hel1.jpg', 'Article', 'article-card__img')
-            +picture('img/hel2.webp', 'img/hel2.jpg', 'Article', 'article-card__img article-card__img_hover')
             +e.content
               h3 Lorem Ipsum - це текст-"риба", що використовується в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
               a(href="#") чатати
         .swiper-slide
           +b.article-card
             +picture('img/hel3.webp', 'img/hel3.jpg', 'Article', 'article-card__img')
-            +picture('img/hel2.webp', 'img/hel2.jpg', 'Article', 'article-card__img article-card__img_hover')
             +e.content
               h3 в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
               a(href="#") чатати
         .swiper-slide
           +b.article-card
             +picture('img/hel5.webp', 'img/hel5.jpg', 'Article', 'article-card__img')
-            +picture('img/hel1.webp', 'img/hel1.jpg', 'Article', 'article-card__img article-card__img_hover')
             +e.content
               h3 Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
               a(href="#") чатати
         .swiper-slide
           +b.article-card
             +picture('img/hel4.webp', 'img/hel4.jpg', 'Article', 'article-card__img')
-            +picture('img/hel3.webp', 'img/hel3.jpg', 'Article', 'article-card__img article-card__img_hover')
             +e.content
               h3 в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
               a(href="#") чатати
       .swiper-pagination
+
+mixin our-instagram
+  +b.SECTION.our-instagram
+    h2 Наш інсТаграм
+    .content.content__inner
+      +b.gallery_3.our-instagram__gallery
+        +picture('img/inst1.webp', 'img/inst1.jpg', 'Instagram photo', 'gallery__item')
+        +picture('img/inst2.webp', 'img/inst2.jpg', 'Instagram photo', 'gallery__item')
+        +picture('img/inst3.webp', 'img/inst3.jpg', 'Instagram photo', 'gallery__item')
+    +b.A.button.our-instagram__button(href="#") пІДПИСАТИСЬ
+
+mixin our-excursions
+  +b.SECTION.our-excursions
+    h2 еКСКУРСІЇ
+    .content.content__inner
+      .swiper-container
+        .swiper-wrapper
+          +b.excursion-card.swiper-slide
+            +picture('img/exc1.webp', 'img/exc1.jpg', 'Excursion', 'excursion-card__img')
+            +e.content
+              h3 Оглядовий політ над Києвом
+              +e.SPAN(data-after='гр').info 18
+              +e.footer
+                a(href="#") чатати
+                +e.SPAN(data-after='грн').price 5 680
+          +b.excursion-card.swiper-slide
+            +picture('img/exc2.webp', 'img/exc2.jpg', 'Excursion', 'excursion-card__img')
+            +e.content
+              h3 Політ над Київом та Межигір’ям
+              +e.SPAN(data-after='гр').info 18
+              +e.footer
+                a(href="#") чатати
+                +e.SPAN(data-after='грн').price 2 333
+          +b.excursion-card.swiper-slide
+            +picture('img/exc3.webp', 'img/exc3.jpg', 'Excursion', 'excursion-card__img')
+            +e.content
+              h3 Вертолітний тур «Церква на воді»
+              +e.SPAN(data-after='гр').info 18
+              +e.footer
+                a(href="#") чатати
+                +e.SPAN(data-after='грн').price 5 680
+          +b.excursion-card.swiper-slide
+            +picture('img/exc4.webp', 'img/exc4.jpg', 'Excursion', 'excursion-card__img')
+            +e.content
+              h3 Політ над Київом та Межигір’ям
+              +e.SPAN(data-after='гр').info 18
+              +e.footer
+                a(href="#") чатати
+                +e.SPAN(data-after='грн').price 2 333
+        .swiper-pagination

@@ -1,0 +1,62 @@
+include mixins
+
+doctype html
+html(lang="us")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    meta(name="robots" content="noindex, nofollow")
+    title Helitour | helitour
+    link(href="css/helitour.css" rel="stylesheet")
+    script(defer src="js/helitour.js")
+  body
+    +header('_mb')
+    main
+      +b.SECTION.helicopter
+        +b.helicopter-slider.helicopter__slider
+          .swiper-container.main-slider
+            .swiper-wrapper
+              .swiper-slide(data-back-webp="img/slide1.webp" data-back-jpg="img/slide1.jpg")
+              iframe.swiper-slide(width="100%" src="https://www.youtube.com/embed/OXuIqaeg0SI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen)
+              .swiper-slide(data-back-webp="img/slide3.webp" data-back-jpg="img/slide3.jpg")
+              .swiper-slide(data-back-webp="img/slide1.webp" data-back-jpg="img/slide1.jpg")
+              .swiper-slide(data-back-webp="img/slide2.webp" data-back-jpg="img/slide2.jpg")
+              .swiper-slide(data-back-webp="img/slide3.webp" data-back-jpg="img/slide3.jpg")
+          .thumb-slider
+            .swiper-container
+              .swiper-wrapper
+                .swiper-slide(data-back-webp="img/slide1.webp" data-back-jpg="img/slide1.jpg")
+                .swiper-slide(data-back-webp="img/youtube-preview.webp" data-back-jpg="img/youtube-preview.jpg")
+                .swiper-slide(data-back-webp="img/slide3.webp" data-back-jpg="img/slide3.jpg")
+                .swiper-slide(data-back-webp="img/slide1.webp" data-back-jpg="img/slide1.jpg")
+                .swiper-slide(data-back-webp="img/slide2.webp" data-back-jpg="img/slide2.jpg")
+                .swiper-slide(data-back-webp="img/slide3.webp" data-back-jpg="img/slide3.jpg")
+            .swiper-button-prev
+            .swiper-button-next
+        +b.helicopter-content.helicopter__content
+          +e.H1.name Robinson R44
+          +e.P.text Robinson R44 – легкий багатоцільовий чотиримісний комерційний гелікоптер виробництва компанії «Robinson Helicopter», США. Гелікоптер був розроблений в 1980-і роки. Здійснив перший політ 31 березня 1990 року і в грудні 1992 року пройшов сертифікацію.
+          +e.TABLE.specification
+            tr
+              th Дальність польоту:
+              td 560 км
+            tr
+              th Крейсерська швидкість:
+              td 180 км/год
+            tr
+              th Місткість:
+              td 3 пасажири + пілот
+            tr
+              th Максимальна швидкість:
+              td 240 км/год
+            tr
+              th Довжина:
+              td 9 м
+            tr
+              th Масса:
+              td 657,7 кг
+          +b.A(href="#").button Замовити
+      +our-excursions
+      +our-instagram
+    +footer
