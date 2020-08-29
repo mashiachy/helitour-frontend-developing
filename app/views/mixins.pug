@@ -134,10 +134,12 @@ mixin our-instagram
   +b.SECTION.our-instagram
     h2 Наш інсТаграм
     .content.content__inner
-      +b.gallery_3.our-instagram__gallery
-        +picture('img/inst1.webp', 'img/inst1.jpg', 'Instagram photo', 'gallery__item')
-        +picture('img/inst2.webp', 'img/inst2.jpg', 'Instagram photo', 'gallery__item')
-        +picture('img/inst3.webp', 'img/inst3.jpg', 'Instagram photo', 'gallery__item')
+      +e.gallery.swiper-container
+        .swiper-wrapper
+          .swiper-slide(data-back-webp='img/inst1.webp' data-back-jpg='img/inst1.jpg')
+          .swiper-slide(data-back-webp='img/inst2.webp' data-back-jpg='img/inst2.jpg')
+          .swiper-slide(data-back-webp='img/inst3.webp' data-back-jpg='img/inst3.jpg')
+        .swiper-pagination
     +b.A.button.our-instagram__button(href="#") пІДПИСАТИСЬ
 
 mixin our-excursions
@@ -152,7 +154,7 @@ mixin our-excursions
               h3 Оглядовий політ над Києвом
               +e.SPAN(data-after='гр').info 18
               +e.footer
-                a(href="#") чатати
+                a(href="#") забронювати
                 +e.SPAN(data-after='грн').price 5 680
           +b.excursion-card.swiper-slide
             +picture('img/exc2.webp', 'img/exc2.jpg', 'Excursion', 'excursion-card__img')
@@ -160,7 +162,7 @@ mixin our-excursions
               h3 Політ над Київом та Межигір’ям
               +e.SPAN(data-after='гр').info 18
               +e.footer
-                a(href="#") чатати
+                a(href="#") забронювати
                 +e.SPAN(data-after='грн').price 2 333
           +b.excursion-card.swiper-slide
             +picture('img/exc3.webp', 'img/exc3.jpg', 'Excursion', 'excursion-card__img')
@@ -168,7 +170,7 @@ mixin our-excursions
               h3 Вертолітний тур «Церква на воді»
               +e.SPAN(data-after='гр').info 18
               +e.footer
-                a(href="#") чатати
+                a(href="#") забронювати
                 +e.SPAN(data-after='грн').price 5 680
           +b.excursion-card.swiper-slide
             +picture('img/exc4.webp', 'img/exc4.jpg', 'Excursion', 'excursion-card__img')
@@ -176,6 +178,6 @@ mixin our-excursions
               h3 Політ над Київом та Межигір’ям
               +e.SPAN(data-after='гр').info 18
               +e.footer
-                a(href="#") чатати
+                a(href="#") забронювати
                 +e.SPAN(data-after='грн').price 2 333
         .swiper-pagination

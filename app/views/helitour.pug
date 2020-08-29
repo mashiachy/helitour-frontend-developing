@@ -23,6 +23,7 @@ html(lang="us")
               .swiper-slide(data-back-webp="img/slide1.webp" data-back-jpg="img/slide1.jpg")
               .swiper-slide(data-back-webp="img/slide2.webp" data-back-jpg="img/slide2.jpg")
               .swiper-slide(data-back-webp="img/slide3.webp" data-back-jpg="img/slide3.jpg")
+            .swiper-pagination
           .thumb-slider
             .swiper-container
               .swiper-wrapper
@@ -34,7 +35,7 @@ html(lang="us")
                 .swiper-slide(data-back-webp="img/slide3.webp" data-back-jpg="img/slide3.jpg")
             .swiper-button-prev
             .swiper-button-next
-        +b.helicopter-content.helicopter__content
+        +b.helicopter-content.helicopter__content.content.content__inner
           +e.H1.name Robinson R44
           +e.P.text Robinson R44 – легкий багатоцільовий чотиримісний комерційний гелікоптер виробництва компанії «Robinson Helicopter», США. Гелікоптер був розроблений в 1980-і роки. Здійснив перший політ 31 березня 1990 року і в грудні 1992 року пройшов сертифікацію.
           +e.TABLE.specification
@@ -56,7 +57,6 @@ html(lang="us")
             tr
               th Масса:
               td 657,7 кг
-          +b.A(href="#").button Замовити
       +our-excursions
       +our-instagram
     +footer

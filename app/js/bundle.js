@@ -11398,36 +11398,81 @@ var swiper_cjs_18 = swiper_cjs.EffectFlip;
 var swiper_cjs_19 = swiper_cjs.EffectCoverflow;
 var swiper_cjs_20 = swiper_cjs.Thumbs;
 
+/*! npm.im/supports-webp 2.0.1 */
+
+var index = new Promise(function (resolve) {
+	var image = new Image();
+	image.onerror = function () { return resolve(false); };
+	image.onload = function () { return resolve(image.width === 1); };
+	image.src = 'data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoBAAEAAwA0JaQAA3AA/vuUAAA=';
+}).catch(function () { return false; });
+
+var supportsWebp_commonJs = index;
+
+const instagramSlider = () => {
+  const instagramSlider = new Swiper('.our-instagram .swiper-container', {
+    loop: true,
+    loopAdditionalSlides: 1,
+    centeredSlides: true,
+    slidesPerView: 1,
+    spaceBetween: 10,
+    breakpoints: {
+      460: {
+        slidesPerView: 2,
+        spaceBetween: 10,
+      },
+      577: {
+        slidesPerView: 3,
+        spaceBetween: 10,
+      },
+      1280: {
+        slidesPerView: 3,
+        spaceBetween: 20,
+      },
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+      renderBullet: (index, className) => {
+        return `<span class=${className}></span>`;
+      },
+    },
+  });
+  const instagramSliderElement = document.querySelector('.our-instagram .swiper-container');
+  const length = 1 + Math.max(...Array.from(instagramSliderElement.querySelectorAll('.swiper-wrapper .swiper-slide'))
+    .map(el => Number.parseInt(el.getAttribute('data-swiper-slide-index'))));
+  const paginationElement = instagramSliderElement.querySelector('.swiper-pagination');
+  const paginationVisible = () => {
+    if (length <= 3 && window.innerWidth >= 578) {
+      paginationElement.style.display = 'none';
+    } else {
+      paginationElement.style.display = 'block';
+    }
+  };
+  paginationVisible();
+  window.addEventListener('resize', paginationVisible);
+};
+
+const webp = () => {
+  supportsWebp_commonJs.then(result => {
+    if (result) {
+      document.querySelectorAll('[data-back-webp], [data-back-jpg]').forEach(el => {
+        if (el.hasAttribute('data-back-webp'))
+          el.style.backgroundImage = `url(${el.getAttribute('data-back-webp')})`;
+        else
+          el.style.backgroundImage = `url(${el.getAttribute('data-back-jpg')})`;
+      });
+    } else {
+      document.querySelectorAll('[data-back-jpg]').forEach(el => {
+        if (el.hasAttribute('data-back-jpg'))
+          el.style.backgroundImage = `url(${el.getAttribute('data-back-jpg')})`;
+      });
+    }
+  });
+};
+
 Swiper.use(swiper_cjs_6);
 
-const swiperOne = new Swiper('.swiper-container--one', {
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true,
-    renderBullet: (index, className) => {
-      return `<span class=${className}></span>`;
-    },
-  },
-});
+webp();
 
-const swiperTwo = new Swiper('.swiper-container--two', {
-  slidesPerView: 1,
-  spaceBetween: 10,
-  breakpoints: {
-    568: {
-      slidesPerView: 2,
-      spaceBetween: 10,
-    },
-    1280: {
-      slidesPerView: 2,
-      spaceBetween: 20,
-    }
-  },
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true,
-    renderBullet: (index, className) => {
-      return `<span class=${className}></span>`;
-    },
-  },
-});
+instagramSlider();

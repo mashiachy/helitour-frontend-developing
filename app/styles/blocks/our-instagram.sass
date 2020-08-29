@@ -1,17 +1,27 @@
 @import '../mixins'
 
 .our-instagram
+  overflow: hidden
   h2
     text-align: center
     margin-bottom: 60px
     @include phone
       margin-bottom: 30px
   &__gallery
-    margin-bottom: 50px
-    @include tablet
-      margin-bottom: 30px
-    @include phone
+    @include sm-phone
       margin-bottom: 20px
   &__button
     min-width: 220px
     @include centerMargin
+  .swiper-slide
+    background-size: cover
+    background-position: center center
+    &:before
+      content: ''
+      display: inline-block
+      width: 0
+      height: 0
+      padding-top: 100%
+  .swiper-container
+    @include sm-phone
+      overflow: visible

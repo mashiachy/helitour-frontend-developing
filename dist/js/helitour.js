@@ -11409,21 +11409,100 @@ var index = new Promise(function (resolve) {
 
 var supportsWebp_commonJs = index;
 
-supportsWebp_commonJs.then(result => {
-  if (result) {
-    document.querySelectorAll('[data-back-webp], [data-back-jpg]').forEach(el => {
-      if (el.hasAttribute('data-back-webp'))
-        el.style.backgroundImage = `url(${el.getAttribute('data-back-webp')})`;
-      else
-        el.style.backgroundImage = `url(${el.getAttribute('data-back-jpg')})`;
-    });
-  } else {
-    document.querySelectorAll('[data-back-jpg]').forEach(el => {
-      if (el.hasAttribute('data-back-jpg'))
-        el.style.backgroundImage = `url(${el.getAttribute('data-back-jpg')})`;
-    });
-  }
-});
+const excursionsSlider = () => {
+  const excursionsSlider = new Swiper('.our-excursions .swiper-container', {
+    slidesPerView: 1,
+    spaceBetween: 10,
+    centeredSlides: true,
+    breakpoints: {
+      461: {
+        slidesPerView: 2,
+        spaceBetween: 10,
+      },
+      992: {
+        slidesPerView: 3,
+        spaceBetween: 10,
+      },
+      1280: {
+        slidesPerView: 3,
+        spaceBetween: 20,
+      },
+    },
+    loop: true,
+    loopAdditionalSlides: 1,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+      renderBullet: (index, className) => {
+        return `<span class=${className}></span>`;
+      },
+    },
+  });
+};
+
+const instagramSlider = () => {
+  const instagramSlider = new Swiper('.our-instagram .swiper-container', {
+    loop: true,
+    loopAdditionalSlides: 1,
+    centeredSlides: true,
+    slidesPerView: 1,
+    spaceBetween: 10,
+    breakpoints: {
+      460: {
+        slidesPerView: 2,
+        spaceBetween: 10,
+      },
+      577: {
+        slidesPerView: 3,
+        spaceBetween: 10,
+      },
+      1280: {
+        slidesPerView: 3,
+        spaceBetween: 20,
+      },
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+      renderBullet: (index, className) => {
+        return `<span class=${className}></span>`;
+      },
+    },
+  });
+  const instagramSliderElement = document.querySelector('.our-instagram .swiper-container');
+  const length = 1 + Math.max(...Array.from(instagramSliderElement.querySelectorAll('.swiper-wrapper .swiper-slide'))
+    .map(el => Number.parseInt(el.getAttribute('data-swiper-slide-index'))));
+  const paginationElement = instagramSliderElement.querySelector('.swiper-pagination');
+  const paginationVisible = () => {
+    if (length <= 3 && window.innerWidth >= 578) {
+      paginationElement.style.display = 'none';
+    } else {
+      paginationElement.style.display = 'block';
+    }
+  };
+  paginationVisible();
+  window.addEventListener('resize', paginationVisible);
+};
+
+const webp = () => {
+  supportsWebp_commonJs.then(result => {
+    if (result) {
+      document.querySelectorAll('[data-back-webp], [data-back-jpg]').forEach(el => {
+        if (el.hasAttribute('data-back-webp'))
+          el.style.backgroundImage = `url(${el.getAttribute('data-back-webp')})`;
+        else
+          el.style.backgroundImage = `url(${el.getAttribute('data-back-jpg')})`;
+      });
+    } else {
+      document.querySelectorAll('[data-back-jpg]').forEach(el => {
+        if (el.hasAttribute('data-back-jpg'))
+          el.style.backgroundImage = `url(${el.getAttribute('data-back-jpg')})`;
+      });
+    }
+  });
+};
+
+webp();
 
 Swiper.use(swiper_cjs_20);
 Swiper.use(swiper_cjs_5);
@@ -11443,13 +11522,6 @@ const helicopterSlider = new Swiper('.main-slider', {
   thumbs: {
     swiper: thumbSlider,
   },
-});
-
-const excursionsSlider = new Swiper('.our-excursions .swiper-container', {
-  slidesPerView: 3,
-  spaceBetween: 20,
-  loop: true,
-  loopAdditionalSlides: 1,
   pagination: {
     el: '.swiper-pagination',
     clickable: true,
@@ -11458,5 +11530,9 @@ const excursionsSlider = new Swiper('.our-excursions .swiper-container', {
     },
   },
 });
+
+excursionsSlider();
+
+instagramSlider();
 
 //# sourceMappingURL=helitour.js.map

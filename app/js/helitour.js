@@ -1,21 +1,8 @@
 import Swiper, { Thumbs, Navigation, Pagination } from 'swiper';
 import supportsWebP from 'supports-webp';
+import { instagramSlider, webp, excursionsSlider } from './base';
 
-supportsWebP.then(result => {
-  if (result) {
-    document.querySelectorAll('[data-back-webp], [data-back-jpg]').forEach(el => {
-      if (el.hasAttribute('data-back-webp'))
-        el.style.backgroundImage = `url(${el.getAttribute('data-back-webp')})`;
-      else
-        el.style.backgroundImage = `url(${el.getAttribute('data-back-jpg')})`;
-    });
-  } else {
-    document.querySelectorAll('[data-back-jpg]').forEach(el => {
-      if (el.hasAttribute('data-back-jpg'))
-        el.style.backgroundImage = `url(${el.getAttribute('data-back-jpg')})`;
-    });
-  }
-});
+webp();
 
 Swiper.use(Thumbs);
 Swiper.use(Navigation);
@@ -35,13 +22,6 @@ const helicopterSlider = new Swiper('.main-slider', {
   thumbs: {
     swiper: thumbSlider,
   },
-});
-
-const excursionsSlider = new Swiper('.our-excursions .swiper-container', {
-  slidesPerView: 3,
-  spaceBetween: 20,
-  loop: true,
-  loopAdditionalSlides: 1,
   pagination: {
     el: '.swiper-pagination',
     clickable: true,
@@ -50,3 +30,7 @@ const excursionsSlider = new Swiper('.our-excursions .swiper-container', {
     },
   },
 });
+
+excursionsSlider();
+
+instagramSlider();

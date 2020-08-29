@@ -29,8 +29,6 @@
     display: flex
     flex-direction: column
     z-index: 13
-    @include phone
-      padding: 20px 20px 14px
     h3, p, a
       z-index: 13
     h3, a
@@ -39,7 +37,7 @@
       max-width: 60%
       max-height: calc(100% - 45px)
       overflow: hidden
-      margin-bottom: 40px
+      margin-bottom: 8%
       @include phone
         max-width: unset
         max-height: calc(100% - 35px)
@@ -50,6 +48,7 @@
       text-transform: uppercase
       text-decoration: none
       padding-bottom: 9px
+      margin-right: 9px
       &:after
         content: ''
         position: absolute
@@ -61,7 +60,11 @@
   &__info
     margin-bottom: auto
     font-size: 30px
+    line-height: 30px
     vertical-align: bottom
+    @include phone
+      font-size: 20px
+      line-height: 20px
     &:before
       content: ''
       background-image: url('../img/clock.svg')
@@ -70,6 +73,10 @@
       background-size: 22px 22px
       display: inline-block
       margin-right: 10px
+      @include phone
+        width: 14px
+        height: 14px
+        background-size: 14px 14px
     &:after
       content: attr(data-after)
       font-size: 16px
@@ -78,10 +85,19 @@
     font-size: 30px
     line-height: 30px
     vertical-align: bottom
+    display: flex
+    flex-wrap: wrap
+    justify-content: flex-end
+    align-items: baseline
+    white-space: nowrap
+    @include phone
+      font-size: 20px
+      line-height: 20px
     &:after
       content: attr(data-after)
       font-size: 16px
       margin-left: 5px
+      word-break: break-word
   &__footer
     display: flex
     align-items: flex-end
