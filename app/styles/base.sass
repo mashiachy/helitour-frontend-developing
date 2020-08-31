@@ -116,7 +116,7 @@ picture
   &__text
     padding-left: calc(#{$w-cg} + 20px)
     padding-right: calc(#{$w-cg} + 20px)
-    @include phone
+    @include tablet
       padding-left: 0
       padding-right: 0
 
@@ -145,6 +145,18 @@ main:not(:last-child)
     cursor: pointer
     &:hover
       animation: rotate 1.5s ease-in-out infinite
+
+*
+  scrollbar-color: $gray-text #ffffff
+  scrollbar-width: thin
+  &::-webkit-scrollbar
+    width: 4px
+  &::-webkit-scrollbar-track
+    background: #ffffff
+    border: 0
+  &::-webkit-scrollbar-thumb
+    background: $gray-text
+    border-radius: 2px
 
 .spacer
   margin: auto

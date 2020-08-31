@@ -1,0 +1,19 @@
+@import '../mixins'
+
+.price
+  font-size: 30px
+  line-height: 30px
+  vertical-align: bottom
+  display: flex
+  flex-wrap: wrap
+  justify-content: flex-end
+  align-items: baseline
+  white-space: nowrap
+  @include phone
+    font-size: 20px
+    line-height: 20px
+  &:after
+    content: attr(data-after)
+    font-size: 16px
+    margin-left: 5px
+    word-break: break-word

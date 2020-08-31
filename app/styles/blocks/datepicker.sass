@@ -1,0 +1,43 @@
+@import '../mixins'
+
+$default-color: $black-text
+$primary-color: $accent-text
+
+@import 'node_modules/vue2-datepicker/scss/index.scss'
+
+.mx-input
+  padding: 0
+  border: none
+  box-shadow: none
+  font-size: 20px
+  line-height: 20px
+  height: auto
+  font-weight: 500
+
+.mx-input-wrapper
+  display: flex
+  padding: 30px 0
+  align-items: baseline
+
+.mx-icon-calendar, .mx-icon-clear
+  font-size: 22px
+  position: static
+  transform: none
+  vertical-align: baseline
+  margin-right: 30px
+  svg
+    fill: $black-text
+    stroke: $black-text
+
+.mx-datepicker-popup
+  left: 50px !important
+  transform: translateX(-50%)
+  font: inherit
+  margin-top: -1px
+  box-shadow: none
+
+.mx-scrollbar-wrap
+  margin-right: 0 !important
+
+.mx-scrollbar-track
+  display: none

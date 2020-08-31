@@ -18540,3 +18540,5 @@ const app = new Vue({
     });
   }
 });
+
+//# sourceMappingURL=booking.js.map

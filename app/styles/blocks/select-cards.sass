@@ -1,0 +1,51 @@
+@import '../mixins'
+
+.select-cards
+  display: flex
+  flex-wrap: wrap
+  align-items: stretch
+  margin-right: -10px
+  margin-bottom: -10px
+  input
+    position: absolute
+    width: 0
+    height: 0
+    opacity: 0
+  &__item
+    min-width: 150px
+    max-width: 300px
+    margin-right: 10px
+    margin-bottom: 10px
+    border: 1px solid $gray
+    box-sizing: border-box
+    padding: 27px 23px 23px
+    display: flex
+    flex-direction: column
+    align-items: stretch
+    text-align: center
+    cursor: pointer
+    width: calc(20% - 10px)
+    @include adaptive(1500)
+      width: calc(25% - 10px)
+    @include adaptive(1040)
+      width: calc(33.33% - 10px)
+    @include adaptive(578)
+      width: calc(50% - 10px)
+    @include adaptive(360)
+      width: calc(100% - 10px)
+  &__item-icon
+    min-height: 26px
+    background-position: center center
+    background-repeat: no-repeat
+    background-size: auto 26px
+    &:not(:last-child)
+      margin-bottom: 11px
+  &__item-title
+    text-transform: uppercase
+    font-weight: bold
+    &:not(:last-child)
+      margin-bottom: 8px
+  &__item-text
+    font-weight: normal
+    font-size: 11px
+    line-height: 15px
