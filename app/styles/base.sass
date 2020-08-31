@@ -120,6 +120,14 @@ picture
       padding-left: 0
       padding-right: 0
 
+ul
+  margin: 0
+  padding: 0
+li
+  margin: 0
+  padding: 0
+  list-style: none
+
 .bold
   font-weight: bold
 
@@ -160,6 +168,14 @@ main:not(:last-child)
 
 .spacer
   margin: auto
+
+.noscroll
+  overflow: hidden
+  height: calc(var(--vh) * 100)
+
+.sm-phone
+  @media screen and (min-width: 577px)
+    display: none !important
 
 .phone
   @media screen and (min-width: 769px)

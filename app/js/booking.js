@@ -2,6 +2,11 @@ import Vue from 'vue';
 import VueCurrencyFilter from 'vue-currency-filter';
 import DatePicker from 'vue2-datepicker';
 import axios from 'axios';
+import { webp, headerPopup, vhFix } from './base';
+
+webp();
+headerPopup();
+vhFix();
 
 Vue.use(VueCurrencyFilter, {
   thousandsSeparator: ' ',

@@ -66,6 +66,7 @@
       width: 36px
       height: 36px
       fill: $black-text
+      stroke: $black-text
       transition: all .25s ease-out
       @include tablet
         width: 18px
@@ -73,15 +74,20 @@
     &:hover
       svg
         fill: $accent-text
+        stroke: $accent-text
   &__link-tree
     display: flex
     align-items: stretch
+    text-transform: uppercase
+    font-weight: bold
+    cursor: pointer
   &__link-tree:hover &__item
     color: $accent-text
     &_accent
       color: #ffffff
     svg
       fill: $accent-text
+      stroke: $accent-text
   &__center-link
     position: absolute
     z-index: 5
@@ -90,6 +96,10 @@
     transform: translate(-50%, -50%)
     display: block
     height: 60%
+    min-width: 130px
+    background-position: center center
+    background-repeat: no-repeat
+    background-size: contain
     @include tablet
       height: 30px
     svg

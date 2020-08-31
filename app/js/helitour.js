@@ -1,8 +1,10 @@
 import Swiper, { Thumbs, Navigation, Pagination } from 'swiper';
 import supportsWebP from 'supports-webp';
-import { instagramSlider, webp, excursionsSlider } from './base';
+import { instagramSlider, excursionsSlider, webp, headerPopup, vhFix } from './base';
 
 webp();
+headerPopup();
+vhFix();
 
 Swiper.use(Thumbs);
 Swiper.use(Navigation);

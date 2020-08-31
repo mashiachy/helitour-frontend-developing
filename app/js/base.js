@@ -121,3 +121,23 @@ export const webp = () => {
     }
   });
 };
+
+export const headerPopup = () => {
+  document.querySelectorAll('.js__header-popup_controller').forEach(control => {
+    control.addEventListener('click', () => {
+      if (window.innerWidth <= 768) toggleBodyScrollable();
+      document.querySelectorAll('.js__header-popup_control').forEach(p => {
+        p.classList.toggle('header-extended_active');
+      });
+      document.querySelectorAll('.js__header-popup_controller-content').forEach(c => {
+        const content = c.innerHTML;
+        c.innerHTML = c.getAttribute('data-popup-content');
+        c.setAttribute('data-popup-content', content);
+      });
+    });
+  });
+};
+
+const toggleBodyScrollable = () => {
+  document.body.classList.toggle('noscroll');
+};

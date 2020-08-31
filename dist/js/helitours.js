@@ -11409,6 +11409,12 @@ var index = new Promise(function (resolve) {
 
 var supportsWebp_commonJs = index;
 
+const vhFix = () => {
+  const setVh = () => document.documentElement.style.setProperty('--vh', `${window.innerHeight / 100}px`);
+  setVh();
+  window.addEventListener('resize', setVh);
+};
+
 const instagramSlider = () => {
   const instagramSlider = new Swiper('.our-instagram .swiper-container', {
     loop: true,
@@ -11471,9 +11477,31 @@ const webp = () => {
   });
 };
 
-Swiper.use(swiper_cjs_6);
+const headerPopup = () => {
+  document.querySelectorAll('.js__header-popup_controller').forEach(control => {
+    control.addEventListener('click', () => {
+      if (window.innerWidth <= 768) toggleBodyScrollable();
+      document.querySelectorAll('.js__header-popup_control').forEach(p => {
+        p.classList.toggle('header-extended_active');
+      });
+      document.querySelectorAll('.js__header-popup_controller-content').forEach(c => {
+        const content = c.innerHTML;
+        c.innerHTML = c.getAttribute('data-popup-content');
+        c.setAttribute('data-popup-content', content);
+      });
+    });
+  });
+};
+
+const toggleBodyScrollable = () => {
+  document.body.classList.toggle('noscroll');
+};
 
 webp();
+headerPopup();
+vhFix();
+
+Swiper.use(swiper_cjs_6);
 
 instagramSlider();
 

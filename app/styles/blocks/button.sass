@@ -9,8 +9,8 @@
   box-sizing: border-box
   padding: 30px 30px
   min-width: 220px
-  background-color: $black-text
-  transition: color .25s ease-out
+  background-color: $accent-text
+  transition: color .25s ease-out, background-color .25s ease-out
   outline: none
   border: 0
   font-size: 14px
@@ -19,4 +19,12 @@
   font-weight: bold
   cursor: pointer
   &:hover
-    color: $accent-text
+    color: $black-text
+  &_flat
+    background-color: transparent
+    color: $black-text
+    border: 2px solid $accent-text
+    padding: 28px
+    &:hover
+      color: #ffffff
+      background-color: $accent-text

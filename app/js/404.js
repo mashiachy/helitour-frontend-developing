@@ -1,3 +1,5 @@
-import { vhFix } from './base';
+import { webp, headerPopup, vhFix } from './base';
 
+webp();
+headerPopup();
 vhFix();

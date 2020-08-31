@@ -1,0 +1,123 @@
+@import '../mixins'
+
+.header-extended
+  z-index: 18
+  position: absolute
+  top: 0
+  left: 0
+  width: 100%
+  height: auto
+  background-color: #ffffff
+  padding: 0
+  font-size: 14px
+  line-height: 22px
+  background-size: 100% auto
+  background-position: center top
+  background-repeat: no-repeat
+  opacity: 0
+  max-height: 0
+  transition: all .5s ease-in-out
+  box-shadow: 0 5px 40px rgba(37, 37, 37, 0.3)
+  @include phone
+    background-size: auto 100%
+  &_active
+    opacity: 1
+    max-height: calc(var(--vh) * 100)
+    padding: calc(#{$w-c} * 2) 0 80px
+    @include phone
+      overflow-y: scroll
+      box-sizing: border-box
+      min-height: calc(var(--vh) * 100)
+  @include tablet
+    padding: 100px 0 60px
+  &__wrapper
+    display: flex
+    align-items: flex-start
+    justify-content: space-between
+    @include sm-tablet
+      flex-wrap: wrap
+      margin-bottom: -40px
+    @include phone
+      flex-direction: column
+      flex-wrap: nowrap
+      align-items: center
+      justify-content: flex-start
+      margin-right: 0
+      margin-bottom: -28px
+  &__nav
+    max-width: calc(25% - 20px)
+    margin-right: 20px
+    @include sm-tablet
+      max-width: unset
+      margin-bottom: 40px
+      margin-right: 0
+      width: calc(50% - 10px)
+      &:nth-child(2n+1)
+        margin-right: 20px
+    @include phone
+      margin-right: 0 !important
+      width: auto
+      text-align: center
+      margin-bottom: 0
+  a
+    transition: all .1s ease-out
+    text-decoration: transparent underline
+    &:hover
+      color: $accent-text
+      text-decoration: $accent-text underline
+  &__list
+    display: flex
+    flex-direction: column
+    li
+      list-style: none
+      &:not(:last-child)
+        margin-bottom: 14px
+      a
+        text-transform: none
+        font-weight: normal
+  &__main-link
+    display: block
+    font-size: 15px
+    text-transform: uppercase
+    font-weight: bold
+    &:not(:last-child)
+      margin-bottom: 39px
+      @include sm-tablet
+        margin-bottom: 28px
+  @include phone
+    .telephone, .lang-block
+      margin-bottom: 28px
+    .lang-block
+      a:not(:last-child)
+        margin-right: 12px
+    .telephone
+      font-size: 16px
+      font-weight: 500
+    &__list
+      max-height: 0
+      transition: max-height .5s ease-in-out, opacity .5s ease-in-out, margin-bottom .5s ease-in-out
+      opacity: 0
+      margin-bottom: 0
+      pointer-events: none
+    &__nav:not(.header-extended__nav_no-shrink) &__main-link
+      transition: margin-bottom .5s ease-in-out
+      margin-left: 18px
+      &:after
+        content: ''
+        display: inline-block
+        width: 8px
+        height: 5px
+        margin-left: 12px
+        background: url('../../img/arrow.svg')
+        transition: transform .5s ease-in-out
+        transform: translateY(-3px)
+      &:hover
+        &:after
+          transform: rotate(180deg) translateY(3px)
+    &__main-link:hover + &__list
+      max-height: 1000px
+      opacity: 1
+      pointer-events: all
+      margin-bottom: 32px
+    &__nav_no-shrink &__main-link
+      margin-bottom: 28px !important

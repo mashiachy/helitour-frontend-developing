@@ -12,15 +12,16 @@ mixin picture(webp, jpg, alt, cls)
     source(srcset=jpg type='image/jpeg')
     img(src=jpg alt=alt)
 
+
 mixin header(modifier)
   +b.HEADER(class='header'+modifier+' content')
-    +e.A(href="#").link-tree
-      +e.item_square._light-gray
+    +e.link-tree.js__header-popup_controller
+      +e.SPAN.item_square._light-gray.js__header-popup_controller-content(data-popup-content='<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 11 11" style="enable-background:new 0 0 11 11;" xml:space="preserve"><style type="text/css">.st0{stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}</style><path class="st0" d="M1 1 L10 10"/><path class="st0" d="M10 1 L1 10"/></svg>')
         include ../../mokups/exports/menu.svg
-      +e.item_rect._gray Меню
+      +e.SPAN(data-popup-content='Закрити').item_rect._gray.js__header-popup_controller-content Меню
     +e.item_extended
       +b.lang-block
-        a(href="#") Укр
+        a(href="#").current Укр
         a(href="#") Eng
         a(href="#") Рус
       a(href="tel:+380673703687") +380 67 370–3687
@@ -29,8 +30,35 @@ mixin header(modifier)
       +e.item_ext-rect._accent Забронювати
       +e.item_square._accent-svg
         include ../../mokups/exports/helicopter.svg
-    +e.A(href="#").center-link
-      include ../../mokups/exports/logo.svg
+    +e.A(href='#' data-back-webp='img/logo.webp' data-back-jpg='img/logo.png').center-link
+  +b.SECTION(data-back-webp='img/header-back.webp' data-back-jpg='img/header-back.png').header-extended.js__header-popup_control
+    +e.NAV.wrapper.content.content__inner
+      +b.lang-block.sm-phone
+        a(href="#").current Укр
+        a(href="#") Eng
+        a(href="#") Рус
+      a(href="tel:+380673703687").telephone.sm-phone +380 67 370–3687
+      +e.nav
+        +e.main-link Екскурсії на гелікоптері
+        +e.UL.list
+          each i in ['Політ над Києвом', 'Київ та Межигір’я', 'Київські мости та Межигір’я', 'Вертолітний тур — Церква на воді', 'Прип’ять і Чорнобиль', 'Політ в Прип’ять для туристичних груп']
+            li
+              a(href="#")=i
+      +e.nav
+        +e.main-link Послуги
+        +e.UL.list
+          each i in ['Оренда гелікоптера', 'Вертоліт на весілля', 'Політ на вертольоті для двох', 'Хеліскіінг', 'Чартерні рейси']
+            li
+              a(href="#")=i
+      +e.nav
+        +e.main-link Наші вертольоти
+        +e.UL.list
+          each i in ['Robinson R44 Raven II', 'Eurocopter EC120', 'Bell 407', 'Agusta 109', 'R66']
+            li
+              a(href="#")=i
+      +e.nav_no-shrink
+        each i in ['Сертифікати', 'Статті', 'Питання та відповіді', 'Контакти']
+          +e.A(href='#').main-link=i
 
 mixin footer
   +b.FOOTER.footer
