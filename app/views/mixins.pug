@@ -39,19 +39,22 @@ mixin header(modifier)
         a(href="#") Рус
       a(href="tel:+380673703687").telephone.sm-phone +380 67 370–3687
       +e.nav
-        +e.main-link Екскурсії на гелікоптері
+        +e.A(href='#').main-link Екскурсії на гелікоптері
+        +e.SPAN(data-hide-content='Згонути' data-show-content='Дивитись всi').extended-control
         +e.UL.list
           each i in ['Політ над Києвом', 'Київ та Межигір’я', 'Київські мости та Межигір’я', 'Вертолітний тур — Церква на воді', 'Прип’ять і Чорнобиль', 'Політ в Прип’ять для туристичних груп']
             li
               a(href="#")=i
       +e.nav
-        +e.main-link Послуги
+        +e.A(href='#').main-link Послуги
+        +e.SPAN(data-hide-content='Згонути' data-show-content='Дивитись всi').extended-control
         +e.UL.list
           each i in ['Оренда гелікоптера', 'Вертоліт на весілля', 'Політ на вертольоті для двох', 'Хеліскіінг', 'Чартерні рейси']
             li
               a(href="#")=i
       +e.nav
-        +e.main-link Наші вертольоти
+        +e.A(href='#').main-link Наші вертольоти
+        +e.SPAN(data-hide-content='Згонути' data-show-content='Дивитись всi').extended-control
         +e.UL.list
           each i in ['Robinson R44 Raven II', 'Eurocopter EC120', 'Bell 407', 'Agusta 109', 'R66']
             li
