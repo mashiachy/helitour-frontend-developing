@@ -1,0 +1,23 @@
+@import "mixins"
+
+.certificate-faq
+  h2
+    @include baseSectionHeader
+  @include baseSectionMarginBottom
+
+.certificate-view
+  @include baseSectionMarginBottom
+  h2
+    text-align: center
+    margin-bottom: -48px
+    @include tablet
+      margin-bottom: 0
+    @include adaptive(375)
+      margin-bottom: -28px
+  picture
+    width: 100%
+    max-width: 1920px
+    height: auto
+    @include centerMargin
+    img
+      width: 100%

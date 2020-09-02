@@ -1,6 +1,9 @@
 @import '../mixins'
 
 .col-text
+  @include baseSectionMarginBottom
+  h2
+    @include baseSectionHeader
   &__text
     column-count: 2
     column-gap: 70px

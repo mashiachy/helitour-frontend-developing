@@ -18,6 +18,19 @@
   @media screen and (max-width: #{$screen}px)
     @content
 
+@mixin baseSectionHeader
+  text-align: center
+  &:not(:last-child)
+    margin-bottom: 40px
+
+@mixin baseSectionMarginBottom
+  &:not(:last-child)
+    margin-bottom: 120px
+    @include tablet
+      margin-bottom: 80px
+    @include phone
+      margin-bottom: 60px
+
 $black-text: #212121
 $accent-text: #0facd0
 $accent-light: #e2f5f9

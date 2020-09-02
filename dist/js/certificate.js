@@ -11514,3 +11514,5 @@ questionsManager();
 Swiper.use(swiper_cjs_6);
 
 excursionsSlider();
+
+//# sourceMappingURL=certificate.js.map

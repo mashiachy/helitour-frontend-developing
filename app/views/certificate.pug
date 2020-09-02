@@ -1,0 +1,42 @@
+include mixins
+
+doctype html
+html(lang="us")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    meta(name="robots" content="noindex, nofollow")
+    title Helitour | certificate
+    link(href="css/certificate.css" rel="stylesheet")
+    script(defer src="js/certificate.js")
+  body
+    +header('_mb')
+    main
+      +b.SECTION.bg_stroke._with-header
+        h1 Сертифікат
+      +b.SECTION.col-text.content.content__inner
+        h2 Як працює
+        +e.text.content__text
+          p За відгуками багатьох, така розвага повністю виправдовує свою ціну і коштує досить недорого. Вартість вертолітного туру доступна людині із середнім рівнем доходу і залежить від тривалості подорожі. У компанії «Helitour» ви також можете недорого придбати сертифікат в подарунок. Такий презент стане прекрасним сюрпризом для близької вам людини.
+          p Для того, щоб дізнатися більш детальну інформацію про бронювання вертольота на весілля або уточнити скільки коштує тур, достатньо зателефонувати нам по одному з телефонних номерів, вказаних на сайті.
+      +b.SECTION.certificate-view
+        h2 Як Виглядає
+        picture
+          source(media='(max-width: 375px)' srcset='img/certificate-mobile.webp' type='image/webp')
+          source(media='(min-width: 376px)' srcset='img/certificate.webp' type='image/webp')
+          source(media='(max-width: 375px)' srcset='img/certificate-mobile.png' type='image/webp')
+          source(media='(min-width: 376px)' srcset='img/certificate.png' type='image/webp')
+          img(src='img/certificate.png' alt='Certificate view')
+        //+picture('img/certificate.webp', 'img/certificate.png', 'Certificate view', '')
+      +b.SECTION.certificate-faq.content.content__inner.default-article
+        h2 Як оплатити і отримати
+        article(data-question).content__text
+          h3(data-question-anchor) Як оплатити
+          p Lorem Ipsum - це текст-"риба", що використовується в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя, коли невідомий друкар взяв шрифтову гранку та склав на ній підбірку зразків шрифтів. "Риба" не тільки успішно пережила п'ять століть, але й прижилася в електронному верстуванні, залишаючись по суті незмінною.
+          p Вона популяризувалась в 60-их роках минулого сторіччя завдяки виданню зразків шрифтів Letraset, які містили уривки з Lorem Ipsum, і вдруге - нещодавно завдяки програмам комп'ютерного верстування на кшталт Aldus Pagemaker, які використовували різні версії Lorem Ipsum.
+        article(data-question).content__text
+          h3(data-question-anchor) Як отримати
+          p Вже давно відомо, що читабельний зміст буде заважати зосередитись людині, яка оцінює композицію сторінки. Сенс використання Lorem Ipsum полягає в тому, що цей текст має більш-менш нормальне розподілення літер на відміну від, наприклад, "Тут іде текст. Тут іде текст." Це робить текст схожим на оповідний. Багато програм верстування та веб-дизайну використовують Lorem Ipsum як зразок і пошук за терміном "lorem ipsum" відкриє багато веб-сайтів, які знаходяться ще в зародковому стані. Різні версії Lorem Ipsum з'явились за минулі роки, деякі випадково, деякі було створено зумисно (зокрема, жартівливі).
+      +our-excursions
+    +footer
