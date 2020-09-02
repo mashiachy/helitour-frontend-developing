@@ -1,13 +1,15 @@
 @import '../mixins'
 
 .button
-  display: block
+  display: flex
+  justify-content: center
+  align-items: center
   width: fit-content
   text-decoration: none
   text-align: center
   color: #ffffff
   box-sizing: border-box
-  padding: 30px 30px
+  padding: 30px 12px
   min-width: 220px
   background-color: $accent-text
   transition: color .25s ease-out, background-color .25s ease-out
@@ -24,7 +26,7 @@
     background-color: transparent
     color: $black-text
     border: 2px solid $accent-text
-    padding: 28px
+    padding: 28px 10px
     &:hover
       color: #ffffff
       background-color: $accent-text

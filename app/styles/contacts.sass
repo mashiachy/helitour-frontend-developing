@@ -1,0 +1,113 @@
+@import "mixins"
+
+.contacts-page
+  display: flex
+  align-items: flex-start
+  margin-bottom: 0 !important
+  @include portrait
+    flex-direction: column
+  @include sm-tablet
+    flex-direction: column
+  &__item_map
+    background-color: $accent-light
+    @include landscape
+      width: 50%
+      height: calc(var(--vh) * 100)
+    @media screen and (max-width: 1440px) and (orientation: landscape)
+      width: calc(50% - #{$w-cg})
+    @media screen and (max-width: 1200px) and (orientation: landscape)
+      width: calc(50% - #{$w-cg} * 2)
+    @include sm-tablet
+      width: 100vw
+      max-height: calc(var(--vh) * 100 - 200px)
+    @include phone
+      max-height: calc(var(--vh) * 100 - 100px)
+    @include portrait
+      width: 100vw
+      height: 100vw
+
+
+.contacts-page-content
+  display: flex
+  flex-direction: column
+  @include landscape
+    width: calc(#{$w-cg} * 5 + #{$w-c})
+    padding: calc(#{$w-c} * 2) 0 calc(#{$w-c}) calc(#{$w-c}) !important
+    box-sizing: border-box
+    margin: 0 !important
+    justify-content: center
+    min-height: calc(var(--vh) * 100)
+  @media screen and (min-width: 1201px) and (max-width: 1440px) and (orientation: landscape)
+    width: calc(#{$w-cg} * 6 + #{$w-c})
+  @media screen and (min-width: 992px) and (max-width: 1200px) and (orientation: landscape)
+    width: calc(#{$w-cg} * 7 + #{$w-c})
+  @include portrait
+    width: unset
+    justify-content: flex-start
+    min-height: unset
+    margin-bottom: 60px
+    padding-top: calc(#{$w-c})
+  @include sm-tablet
+    width: unset
+    justify-content: flex-start
+    min-height: unset
+    margin-bottom: 60px
+    padding-top: calc(#{$w-c})
+  @include phone
+    padding-top: 40px
+  h1
+    margin-bottom: 60px
+    @include adaptive(1440)
+      margin-bottom: 40px
+    @include sm-phone
+      text-align: center
+  &__content
+    display: flex
+    flex-wrap: wrap
+    @include landscape
+      margin-bottom: -10px
+    @include sm-phone
+      align-items: center
+  &__content-item
+    flex-basis: calc(100% - 10px)
+    margin-right: 10px
+    flex-grow: 1
+    margin-bottom: 40px
+    @include adaptive(1440)
+      margin-bottom: 32px
+    @include sm-phone
+      text-align: center
+    &:last-child
+      margin-bottom: 0 !important
+    &_short
+      flex-basis: 50%
+      margin-right: 0
+      @include sm-phone
+        flex-basis: 100%
+    &_button
+      display: inline-flex
+      margin-right: 10px
+      margin-bottom: 10px
+      flex-grow: 1
+      flex-basis: unset
+      min-width: 150px
+      max-width: 220px
+      white-space: nowrap
+  .societies
+    display: flex
+    width: fit-content
+    margin-right: -10px
+    @include sm-phone
+      @include centerMargin
+    .society
+      margin-right: 10px
+  &__item-title
+    display: block
+    margin-bottom: 24px
+    @include adaptive(1440)
+      margin-bottom: 18px
+  &__item-bold
+    font-size: 22px
+    line-height: 28px
+    text-transform: uppercase
+    font-weight: bold

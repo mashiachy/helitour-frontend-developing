@@ -1,0 +1,45 @@
+include mixins
+
+doctype html
+html(lang="us")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    meta(name="robots" content="noindex, nofollow")
+    title Helitour | contacts
+    link(href="css/contacts.css" rel="stylesheet")
+    script(defer src="js/contacts.js")
+  body
+    +header('_mb')
+    +b.MAIN.contacts-page
+      +e.SECTION.item_map
+      +b.SECTION.contacts-page-content.contacts-page__item_content.content.content__inner
+        h1 Контакти
+        +e.content
+          +e.content-item_short
+            +e.SPAN.item-title Телефон
+            +e.A(href='tel:+380673703687').item-bold +380 67 370–3687
+          +e.content-item_short
+            +e.SPAN.item-title E-mail
+            +e.A(href='mailto:info@helitour.com.ua').item-bold info@helitour.com.ua
+          +e.content-item_short
+            +e.SPAN.item-title Адрес
+            +e.SPAN.item-bold м. Київ, 02000, міні аеродром "Гідропарк"
+          +e.content-item
+            +e.SPAN.item-title Ми в соцмережах
+            .societies
+              +b.A(href="#" alt='Facebook').society
+                include ../../mokups/exports/facebook.svg
+              +b.A(href="#" alt='Youtube').society
+                include ../../mokups/exports/youtube.svg
+              +b.A(href="#" alt='Telegram').society
+                include ../../mokups/exports/telegram.svg
+              +b.A(href="#" alt='Instagram').society
+                include ../../mokups/exports/instagram.svg
+              +b.A(href="#" alt='Twitter').society
+                include ../../mokups/exports/twitter.svg
+          +e.content-item
+            +e.A(href='#').content-item_button.button Як проїхати
+            +e.A(href='#').content-item_button.button_flat Задати запитання
+    +footer

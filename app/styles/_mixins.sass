@@ -18,6 +18,14 @@
   @media screen and (max-width: #{$screen}px)
     @content
 
+@mixin portrait
+  @media all and (orientation: portrait)
+    @content
+
+@mixin landscape
+  @media all and (orientation: landscape)
+    @content
+
 @mixin baseSectionHeader
   text-align: center
   &:not(:last-child)
