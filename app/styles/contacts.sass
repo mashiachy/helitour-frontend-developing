@@ -104,10 +104,18 @@
   &__item-title
     display: block
     margin-bottom: 24px
+    font-size: 14px
+    line-height: 16px
     @include adaptive(1440)
       margin-bottom: 18px
+    @include phone
+      font-size: 12px
   &__item-bold
     font-size: 22px
     line-height: 28px
     text-transform: uppercase
     font-weight: bold
+    @include phone
+      font-size: 16px
+      line-height: 20px
+      font-weight: 500
