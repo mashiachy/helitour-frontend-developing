@@ -1,0 +1,35 @@
+{
+  "excursions": [
+    {
+      "title": "Оглядовий політ над Києвом",
+      "info": "18",
+      "linkText": "дОКЛАДНШЕ",
+      "linkHref": "#",
+      "img": {
+        "webp": "img/exc1.webp",
+        "jpg": "img/exc1.jpg"
+      }
+    },
+    {
+      "title": "Політ над Київом та Межигір’ям",
+      "info": "18",
+      "linkText": "дОКЛАДНШЕ",
+      "linkHref": "#",
+      "img": {
+        "webp": "img/exc2.webp",
+        "jpg": "img/exc2.jpg"
+      }
+    },
+    {
+      "title": "Вертолітний тур «Церква на воді»",
+      "info": "18",
+      "linkText": "дОКЛАДНШЕ",
+      "linkHref": "#",
+      "img": {
+        "webp": "img/exc3.webp",
+        "jpg": "img/exc3.jpg"
+      }
+    }
+  ],
+  "ended": true
+}

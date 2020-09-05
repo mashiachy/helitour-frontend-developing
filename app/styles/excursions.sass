@@ -1,0 +1,113 @@
+@import "mixins"
+
+.bg
+  padding-bottom: 120px
+  margin-bottom: -100px !important
+  @include tablet
+    padding-bottom: 40px
+    margin-bottom: -20px !important
+
+.excursions
+  &:not(:last-child)
+    position: relative
+    padding-bottom: 120px
+    @include tablet
+      padding-bottom: 80px
+    @include phone
+      padding-bottom: 40px
+    &:after
+      content: ''
+      position: absolute
+      left: 15px
+      bottom: 0
+      width: calc(100% - 30px)
+      height: 1px
+      background-color: $gray
+  .button
+    @include centerMargin
+
+.excursions-gallery
+  display: flex
+  flex-wrap: wrap
+  margin-right: -20px
+  margin-bottom: -20px
+  @include tablet
+    margin-right: -10px
+    margin-bottom: -10px
+  @include sm-phone
+    flex-direction: column
+    margin-right: 0
+  &:not(:last-child)
+    margin-bottom: 60px
+    @include tablet
+      margin-bottom: 40px
+    @include phone
+      margin-bottom: 20px
+  .excursion-card
+    width: calc(33% - 20px)
+    margin-right: 20px
+    margin-bottom: 20px
+    @include tablet
+      margin-right: 10px
+      margin-bottom: 10px
+    @include sm-tablet
+      width: calc(50% - 10px)
+    @include sm-phone
+      width: 100%
+      margin-bottom: 10px
+      margin-right: 0
+
+.excursions-certificate
+  @include baseSectionMarginBottom
+  background-size: 100% auto
+  background-position: center bottom
+  background-repeat: no-repeat
+  padding-top: 7.3vw
+  padding-bottom: 5.21vw
+  @include adaptive(1440)
+    background-size: 1440px auto
+    padding-top: 100px
+    padding-bottom: 65px
+  @include phone
+    padding-top: 240px
+    padding-bottom: 40px
+    background-size: auto 100%
+    background-position: 12% bottom
+    *
+      text-align: center
+  @include sm-phone
+    background-image: url('../img/certificate-mobile-2.png') !important
+    background-image: url('../img/certificate-mobile-2.webp') !important
+    background-size: 100% auto
+    background-repeat: no-repeat
+    background-position: center top
+  @include adaptive(375)
+    background-position: center bottom
+  h2
+    margin-left: calc(#{$w-cg} * 6)
+    max-width: 335px
+    &:not(:last-child)
+      margin-bottom: 50px
+      @include phone
+        margin-bottom: 20px
+    @include phone
+      @include centerMargin
+  p, .button
+    margin-left: calc(#{$w-cg} * 7)
+  p
+    max-width: 265px
+    &:not(:last-child)
+      margin-bottom: 40px
+      @include phone
+        margin-bottom: 27px
+        @include centerMargin
+  .button
+    font-size: 14px
+    @include phone
+      @include centerMargin
+
+.excursion-card-list
+  &-enter, &-leave-to
+    opacity: 0
+  &-enter-active, &-leave-active
+    transition: opacity 1s ease-in-out

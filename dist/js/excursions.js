@@ -13725,3 +13725,5 @@ const app = new Vue({
     },
   },
 });
+
+//# sourceMappingURL=excursions.js.map
