@@ -1,5 +1,4 @@
 import Swiper, { Pagination } from 'swiper';
-import supportsWebP from 'supports-webp';
 
 import { webp, headerPopup, vhFix, instagramSlider } from './base';
 

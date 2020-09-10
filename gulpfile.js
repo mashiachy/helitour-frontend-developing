@@ -19,9 +19,11 @@ const
   shell = require('gulp-shell'),
   rename = require('gulp-rename'),
   createFile = require('create-file'),
-  webp = require('gulp-webp');
+  webp = require('gulp-webp'),
+  jsonTransform = require('gulp-json-transform'),
+  fs = require('fs');
 
-const {
+let {
   name = 'index',
   production = false,
 } = argv;
@@ -50,18 +52,15 @@ gulp.task('sass',  () => {
       content: [`dist/${name}.html`],
       whitelistPatternsChildren: whiteListPatterns[name],
     })))
-    .pipe(autoprefixer({
-      browsers: ['last 20 versions'],
-      cascade: false,
-    }))
+    .pipe(autoprefixer())
     .pipe(gulp.dest('dist/css'))
     .pipe(browserSync.stream());
 });
 
-gulp.task('js-bundle', shell.task(`node_modules\\.bin\\rollup app\\js\\${name}.js -c`));
+gulp.task('js-bundle', shell.task(`node_modules\\.bin\\rollup app\\js\\${name}.js --file app\\js\\bundle\\bundle-${name}.js -c`));
 
 gulp.task('js', gulp.series('js-bundle', () => {
-  return gulp.src('app/js/bundle.js')
+  return gulp.src(`app/js/bundle/bundle-${name}.js`)
     .pipe(rename(`${name}.js`))
     .pipe(sourcemap.init({ loadMaps: true }))
     .pipe(gulpif(production, uglify()))
@@ -99,7 +98,7 @@ gulp.task('default', () => {
   gulp.watch([`app/views/${name}.pug`, 'app/views/mixins.pug'], gulp.series('pug'));
   gulp.watch(['app/styles/blocks/*.sass', 'app/styles/_mixins.sass', `app/styles/${name}.sass`], gulp.series('sass'));
   gulp.watch("app/img/*", gulp.series('images', 'media'));
-  gulp.watch([`app/js/${name}.js`, 'app/js/modules/*.js'], gulp.series('js-watch'));
+  gulp.watch([`app/js/${name}.js`, 'app/js/base.js'], gulp.series('js-watch'));
   gulp.watch('dist/*.html',	browserSync.reload);
   gulp.watch('dist/img/*',	browserSync.reload);
   gulp.watch('dist/css/*.css',	browserSync.reload);
@@ -116,7 +115,16 @@ gulp.task('build', gulp.series('pug', 'js', 'sass', 'fonts', 'images', 'media'))
 
 gulp.task('build-default', gulp.series('build', 'default'));
 
-gulp.task('new-page', done => {
+gulp.task('build-all', done => {
+  JSON.parse(fs.readFileSync('./my-config.json')).pages.forEach(page => {
+    name = page;
+    console.log(page);
+    gulp.start('build');
+  });
+  done();
+});
+
+gulp.task('new-page', () => {
   createFile(`app/views/${name}.pug`,
     'include mixins\n\n' +
     'doctype html\n' +
@@ -138,5 +146,12 @@ gulp.task('new-page', done => {
   createFile(`app/js/${name}.js`,
     '',
     console.log);
-  done();
+  return gulp.src('./my-config.json')
+    .pipe(jsonTransform(({ pages, ...data }) => {
+      return({
+        pages: [name, ...pages],
+        ...data
+      });
+    }))
+    .pipe(gulp.dest('./'));
 });

@@ -46,13 +46,13 @@
       justify-content: center
       @include phone
         justify-content: space-between
-        align-items: baseline
+        align-items: flex-start
       & > *
         min-height: 30px
         @include phone
           min-height: 22px
       & > *:nth-child(1), & > *:nth-child(3)
-        flex-basis: calc(50% - 140px)
+        flex-basis: calc(50% - 150px)
         @include phone
           flex-basis: auto
       & > *:nth-child(2)

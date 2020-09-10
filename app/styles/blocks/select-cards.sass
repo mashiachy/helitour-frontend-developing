@@ -33,11 +33,12 @@
       width: calc(50% - 10px)
     @include adaptive(360)
       width: calc(100% - 10px)
+    &_active
+      border: 1px solid $accent-text
+      color: $accent-text
   &__item-icon
-    min-height: 26px
-    background-position: center center
-    background-repeat: no-repeat
-    background-size: auto 26px
+    svg
+      height: 26px
     &:not(:last-child)
       margin-bottom: 11px
   &__item-title
@@ -49,3 +50,4 @@
     font-weight: normal
     font-size: 11px
     line-height: 15px
+    color: $black-text !important

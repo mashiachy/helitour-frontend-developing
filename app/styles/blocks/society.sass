@@ -1,18 +1,28 @@
 @import '../mixins'
 
 .society
-  display: flex
+  display: block
+  overflow: hidden
   box-sizing: border-box
-  width: 50px
-  height: 50px
+  max-width: 50px
+  width: 100%
   border-radius: 50%
   border: 1px solid rgba(227,227,227,0.5)
-  justify-content: center
-  align-items: center
+  position: relative
+  &:before
+    content: ''
+    width: 0
+    height: 0
+    padding-top: calc(100% - 5px)
+    display: inline-block
   svg
+    position: absolute
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
     fill: $black-text
-    width: 18px
-    height: 18px
+    width: #{'min(40%, 18px)'}
+    height: #{'min(40%, 18px)'}
   &_white
     svg
       fill: #ffffff

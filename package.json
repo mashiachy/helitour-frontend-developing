@@ -4,7 +4,7 @@
   "description": "helitour web-site frontend-developing",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node build-all.js"
   },
   "author": "Mashoachy",
   "license": "ISC",
@@ -46,8 +46,12 @@
     "yargs": "^15.4.1"
   },
   "devDependencies": {
+    "gulp-json-transform": "^0.4.7",
     "gulp-modernizr": "^4.0.1"
   },
+  "browserslist": [
+    "defaults"
+  ],
   "browser": {
     "vue": "./node_modules/vue/dist/vue.js"
   }

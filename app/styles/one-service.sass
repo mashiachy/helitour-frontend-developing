@@ -1,0 +1,158 @@
+@import "mixins"
+
+.bg
+  min-height: calc(var(--vh) * 100)
+  color: #ffffff
+  @include baseSectionMarginBottom
+  @include tablet
+    height: 480px
+  @include phone
+    height: 300px
+  &__content
+    display: flex
+    flex-direction: column
+    justify-content: center
+    text-align: left
+  .price
+    justify-content: flex-start
+  &__content-item
+    &:not(:last-child)
+      margin-bottom: 24px !important
+    &_header
+      max-width: 330px !important
+    &_text
+      display: flex
+      p
+        width: 330px
+        margin-right: 55px
+        margin-bottom: 0 !important
+    &_buttons
+      .button
+        display: inline-flex
+        &:not(:last-child)
+          margin-right: 20px
+
+
+.with-helic-back
+  position: relative
+  overflow: visible
+  @include baseSectionMarginBottom
+  @include baseSectionPaddingBottom
+  &:after
+    content: ''
+    position: absolute
+    height: 1px
+    width: 100%
+    background-color: $gray
+    left: 0
+    bottom: 0
+  &__back-image
+    position: absolute
+    top: -5%
+    right: calc(#{$w-c})
+    height: 110%
+    width: fit-content
+    z-index: 1
+    @include adaptive(1600)
+      right: 0
+    img
+      min-width: unset
+      max-height: 100%
+  & *:not(&__back-image)
+    z-index: 2
+  &__header
+    max-width: 311px
+    &:not(:last-child)
+      margin-bottom: 48px
+  &__text
+    margin-bottom: 36px
+    max-width: 475px
+  &__text, .button
+    margin-left: calc(#{$w-cg})
+    @include adaptive(1600)
+      margin-left: 0
+
+.service-advantages
+  @include baseSectionMarginBottom
+  text-align: center
+  padding-bottom: 250px
+  background-size: 100% auto
+  background-position: center bottom
+  &__header
+    max-width: 470px
+    margin-bottom: 56px
+    @include centerMargin
+  &__list
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+  &__list-item
+    width: 29%
+    display: flex
+    flex-direction: column
+    align-items: center
+    &:before
+      display: block
+      content: var(--data-before)
+      order: 1 !important
+      margin-bottom: 30px
+    &:after
+      content: ''
+      order: 2 !important
+      width: 12px
+      height: 12px
+      box-sizing: border-box
+      border-radius: 50%
+      border: 2px solid $accent-text
+      margin-bottom: 30px
+    *
+      order: 3
+  &__list-item-header
+    margin-bottom: 36px
+
+.rental-terms
+  @include baseSectionMarginBottom
+  display: flex
+  &__header
+    flex-basis: 430px
+    margin-right: 100px
+  &__content-list
+    flex-basis: calc(100% - 430px)
+    flex-grow: 1
+  &__title
+    max-width: 230px
+    margin-bottom: 45px
+  &__list-item
+    display: flex
+    align-items: baseline
+    &:not(:last-child)
+      margin-bottom: 30px
+    &:before
+      content: ''
+      width: 12px
+      height: 12px
+      flex-shrink: 0
+      transform: translateY(1px)
+      box-sizing: border-box
+      border-radius: 50%
+      border: 2px solid $accent-text
+      margin-right: 30px
+
+.service-prices
+  text-align: center
+  &__title
+    margin-bottom: 18px
+  &__text
+    margin-bottom: 60px
+  &__title, &__text
+    @include centerMargin
+  &__svg-map
+    path
+      fill-rule: evenodd
+      clip-rule: evenodd
+      fill: #EFEFEF
+      stroke: #ADADAD
+      stroke-width: 0.216
+      cursor: pointer
+      &:hover
+        fill: $accent-light

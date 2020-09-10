@@ -5,7 +5,6 @@ import replace from "@rollup/plugin-replace";
 
 export default {
   output: {
-    file: 'app/js/bundle.js',
     format: 'es',
   },
   plugins: [

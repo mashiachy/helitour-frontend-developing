@@ -69,11 +69,11 @@ html(lang="us")
               +e.SPAN(
                 v-for='helicopterItem in filteredHelicopters'
                 :key='helicopterItem.id'
-                :class='{ \'select-cards_active\': helicopter === helicopterItem.id }'
+                :class='{ \'select-cards__item_active\': helicopter === helicopterItem.id }'
                 @click='helicopter = helicopterItem.id'
               ).item
                 +e.SPAN(
-                  :style='{ backgroundImage: \'url("\' + helicopterItem.icon + \'")\'}'
+                  v-html='helicopterItem.icon'
                 ).item-icon
                 +e.item-title {{ helicopterItem.name }}
                 +e.item-text {{ helicopterItem.text }}

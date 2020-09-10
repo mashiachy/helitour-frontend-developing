@@ -7,13 +7,13 @@ mixin lazy-picture(webp, jpg, alt, cls)
     img(data-l-src=jpg alt=alt)
 
 mixin picture(webp, jpg, alt, cls)
-  picture(class=cls)
+  picture(class=cls)&attributes(attributes)
     source(srcset=webp type='image/webp')
     source(srcset=jpg type='image/jpeg')
     img(src=jpg alt=alt)
 
 
-mixin header(modifier)
+mixin header(modifier='')
   +b.HEADER(class='header'+modifier+' content')
     +e.link-tree.js__header-popup_controller
       +e.SPAN.item_square._light-gray.js__header-popup_controller-content(data-popup-content='<svg style="width: 17px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 11 11" style="enable-background:new 0 0 11 11;" xml:space="preserve"><style type="text/css">.st0{stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}</style><path class="st0" d="M1 1 L10 10"/><path class="st0" d="M10 1 L1 10"/></svg>')
@@ -39,32 +39,36 @@ mixin header(modifier)
         a(href="#") Рус
       a(href="tel:+380673703687").telephone.sm-phone +380 67 370–3687
       +e.nav
-        +e.A(href='#').main-link Екскурсії на гелікоптері
-        +e.SPAN(data-hide-content='Згонути' data-show-content='Дивитись всi').extended-control
-        +e.UL.list
+        +e.SPAN.main-link
+          a(href='#') Екскурсії на гелікоптері
+        +e.SPAN(data-hide-content='Згонути' data-show-content='Дивитись всi').extended-control.js__header-nav_control
+        +e.UL.list.js__header-nav_controller
           each i in ['Політ над Києвом', 'Київ та Межигір’я', 'Київські мости та Межигір’я', 'Вертолітний тур — Церква на воді', 'Прип’ять і Чорнобиль', 'Політ в Прип’ять для туристичних груп']
             li
               a(href="#")=i
       +e.nav
-        +e.A(href='#').main-link Послуги
-        +e.SPAN(data-hide-content='Згонути' data-show-content='Дивитись всi').extended-control
-        +e.UL.list
+        +e.SPAN.main-link
+          a(href='#') Послуги
+        +e.SPAN(data-hide-content='Згонути' data-show-content='Дивитись всi').extended-control.js__header-nav_control
+        +e.UL.list.js__header-nav_controller
           each i in ['Оренда гелікоптера', 'Вертоліт на весілля', 'Політ на вертольоті для двох', 'Хеліскіінг', 'Чартерні рейси']
             li
               a(href="#")=i
       +e.nav
-        +e.A(href='#').main-link Наші вертольоти
-        +e.SPAN(data-hide-content='Згонути' data-show-content='Дивитись всi').extended-control
-        +e.UL.list
+        +e.SPAN.main-link
+          a(href='#') Наші вертольоти
+        +e.SPAN(data-hide-content='Згонути' data-show-content='Дивитись всi').extended-control.js__header-nav_control
+        +e.UL.list.js__header-nav_controller
           each i in ['Robinson R44 Raven II', 'Eurocopter EC120', 'Bell 407', 'Agusta 109', 'R66']
             li
               a(href="#")=i
       +e.nav_no-shrink
         each i in ['Сертифікати', 'Статті', 'Питання та відповіді', 'Контакти']
-          +e.A(href='#').main-link=i
+          +e.SPAN.main-link
+            a(href='#')=i
 
 mixin footer
-  +b.FOOTER.footer
+  +b.FOOTER(data-back-jpg='img/footer-back.jpg').footer
     +e.content.content
       +e.block
         +b.footer-col_left
@@ -121,7 +125,6 @@ mixin footer
           p Ви можете оплатити послуги гелікоптера за безготівковим розраху
           .spacer
           .row.phone.short
-            a(href="#") Карта сайту
             a(href="#") Оферта
           p.tablet © 2020. Helitour. Всі права захищені.
           p.kost

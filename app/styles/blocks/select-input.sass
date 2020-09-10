@@ -59,8 +59,10 @@
   &__dropdown
     position: absolute
     top: 100%
-    left: -1px
-    width: 100%
+    left: -18px
+    width: calc(100% + 36px)
+    box-sizing: border-box
+    padding: 18px
     height: auto
     max-height: 0
     overflow: hidden
@@ -68,30 +70,34 @@
     z-index: 1
     background: #ffffff
     opacity: 0
+    box-shadow: 18px 18px 21px rgba(31,31,31,0.06)
   &_active &__dropdown
     max-height: 480px
     opacity: 1
     overflow-y: auto
   &_boxed &__dropdown
     border: 1px solid $gray
+    left: -1px
+    width: calc(100% + 2px)
+    padding: 0
   &__dropdown-item
-    padding: 30px 0
-    box-sizing: border-box
-    position: relative
-    background-color: #ffffff
-    @include sm-phone
-      padding: 20px 0
-    &:not(:last-child):after
-      content: ''
-      position: absolute
-      width: 100%
-      height: 1px
-      left: 0
-      bottom: 0
-      background-color: $gray
+    &:not(:last-child)
+      margin-bottom: 12px
     &:hover, &_current
       color: $accent-text
   &_boxed &__dropdown-item
     padding: 30px
+    box-sizing: border-box
+    position: relative
+    &:not(:last-child)
+      margin-bottom: 0
+      &:after
+        content: ''
+        position: absolute
+        width: 100%
+        height: 1px
+        left: 0
+        bottom: 0
+        background-color: $gray
     @include sm-phone
       padding: 20px

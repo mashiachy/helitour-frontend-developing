@@ -4,34 +4,33 @@
 
 .header-extended
   z-index: 18
-  position: absolute
+  position: fixed
   top: 0
   left: 0
   width: 100%
   height: auto
   background-color: #ffffff
-  padding: 0
-  font-size: 14px
+  font-size: 15px
   line-height: 22px
   background-size: 100% auto
   background-position: center top
   background-repeat: no-repeat
   opacity: 0
-  max-height: 0
-  transition: all .5s ease-in-out
+  max-height: calc(var(--vh) * 100)
+  padding: calc(#{$w-c} * 2) 0 80px
+  transition: opacity .5s ease-in-out, transform .5s ease-in-out
   box-shadow: 0 5px 40px rgba(37, 37, 37, 0.3)
   pointer-events: none
+  transform: translateY(-100%)
+  box-sizing: border-box
   @include phone
     background-size: auto 100%
+    overflow-y: scroll
+    min-height: calc(var(--vh) * 100)
   &_active
     pointer-events: all
     opacity: 1
-    max-height: calc(var(--vh) * 100)
-    padding: calc(#{$w-c} * 2) 0 80px
-    @include phone
-      overflow-y: scroll
-      box-sizing: border-box
-      min-height: calc(var(--vh) * 100)
+    transform: translateY(0)
   @include tablet
     padding: 100px 0 60px
   &__wrapper
@@ -64,10 +63,10 @@
       margin-bottom: 0
   a
     transition: all .1s ease-out
-    text-decoration: transparent underline
+    border-bottom: 2px solid transparent
     &:hover
       color: $accent-text
-      text-decoration: $accent-text underline
+      border-bottom: 2px solid $accent-text
   &__list
     display: flex
     flex-direction: column
@@ -99,7 +98,7 @@
       font-weight: 500
     &__list
       max-height: 0
-      transition: max-height .5s ease-in-out, opacity .5s ease-in-out, margin-bottom .5s ease-in-out
+      transition: all .5s ease-in-out
       opacity: 0
       margin-bottom: 0
       pointer-events: none
@@ -127,7 +126,7 @@
         text-transform: uppercase
         font-weight: bold
         margin-right: 1em
-      &:hover:before
+      &.active:before
         content: attr(data-hide-content)
       &:after
         content: ''
@@ -139,14 +138,13 @@
         border-right: 2px solid $black-text
         transition: all .5s ease-in-out
         transform: rotate(45deg) translate(-2px, -2px)
-      &:hover:after
+      &.active:after
         border-bottom: 2px solid $accent-text
         border-right: 2px solid $accent-text
         transform: rotate(-135deg)
-      &:hover
+      &.active
         color: $accent-text
-    &__extended-control:hover + &__list
-      max-height: 1000px
+    &__extended-control.active + &__list
       opacity: 1
       pointer-events: all
       margin-bottom: 32px

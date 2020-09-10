@@ -104,9 +104,11 @@ picture
 
 .content
   max-width: 1540px
+  width: 80%
   margin-left: 10%
   margin-right: 10%
   @include phone
+    width: calc(100% - 20px)
     margin-left: 10px
     margin-right: 10px
   &__inner
@@ -191,3 +193,12 @@ main:not(:last-child)
 .desktop
   @include tablet
     display: none !important
+
+a.base-link
+  text-transform: none
+  font-size: inherit
+  line-height: inherit
+  color: $accent-text
+  font-weight: 500
+  &:hover
+    border-bottom: 2px solid $accent-text

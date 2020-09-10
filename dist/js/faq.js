@@ -56,18 +56,65 @@ const webp = () => {
 };
 
 const headerPopup = () => {
-  document.querySelectorAll('.js__header-popup_controller').forEach(control => {
-    control.addEventListener('click', () => {
+  document.querySelectorAll('.js__header-popup_controller').forEach(controller => {
+    controller.addEventListener('click', e => {
       if (window.innerWidth <= 768) toggleBodyScrollable();
-      document.querySelectorAll('.js__header-popup_control').forEach(p => {
-        p.classList.toggle('header-extended_active');
+      document.querySelectorAll('.js__header-popup_control').forEach(control => {
+        control.classList.toggle('header-extended_active');
       });
       document.querySelectorAll('.js__header-popup_controller-content').forEach(c => {
         const content = c.innerHTML;
         c.innerHTML = c.getAttribute('data-popup-content');
         c.setAttribute('data-popup-content', content);
       });
+      e.stopPropagation();
     });
+  });
+  let activeNav = null;
+  document.querySelectorAll('.js__header-nav_control').forEach(control => {
+    control.addEventListener('click', (e) => {
+      let target = e.target;
+      target.classList.toggle('active');
+      const nav = target.parentElement.querySelector('.js__header-nav_controller');
+      if (target.classList.contains('active')) {
+        nav.style.maxHeight = `${nav.scrollHeight + 100}px`;
+        if (activeNav) {
+          activeNav.classList.remove('active');
+          activeNav.parentElement.querySelector('.js__header-nav_controller').style.maxHeight = `0px`;
+        }
+        activeNav = target;
+      } else {
+        nav.style.maxHeight = `0px`;
+        activeNav = null;
+      }
+      e.stopPropagation();
+    });
+  });
+  document.querySelector('.header-extended.js__header-popup_control').addEventListener('click', e => {
+    e.stopPropagation();
+  });
+  window.addEventListener('click', () => {
+    if (activeNav) {
+      activeNav.classList.remove('active');
+      activeNav.parentElement.querySelector('.js__header-nav_controller').style.maxHeight = `0px`;
+    }
+    activeNav = null;
+
+    let isActiveHeader = document.querySelector('.header-extended.js__header-popup_control')
+      .classList.contains('header-extended_active');
+    if (isActiveHeader) {
+      if (window.innerWidth <= 768) {
+        toggleBodyScrollable();
+      }
+      document.querySelectorAll('.js__header-popup_control').forEach(control => {
+        control.classList.toggle('header-extended_active');
+      });
+      document.querySelectorAll('.js__header-popup_controller-content').forEach(c => {
+        const content = c.innerHTML;
+        c.innerHTML = c.getAttribute('data-popup-content');
+        c.setAttribute('data-popup-content', content);
+      });
+    }
   });
 };
 
