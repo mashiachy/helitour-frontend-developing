@@ -4,15 +4,15 @@
   min-height: calc(var(--vh) * 100)
   color: #ffffff
   @include baseSectionMarginBottom
-  @include tablet
-    height: 480px
   @include phone
-    height: 300px
+    padding: 120px 0
   &__content
     display: flex
     flex-direction: column
     justify-content: center
     text-align: left
+    @include phone
+      justify-content: flex-start
   .price
     justify-content: flex-start
   &__content-item
@@ -22,22 +22,51 @@
       max-width: 330px !important
     &_text
       display: flex
+      @include sm-tablet
+        display: block
       p
         width: 330px
         margin-right: 55px
         margin-bottom: 0 !important
     &_buttons
+      display: flex
+      flex-wrap: wrap
       .button
-        display: inline-flex
+        @include phone
+          max-width: calc(50% - 10px)
+          min-width: fit-content
+          white-space: nowrap
+        @include sm-phone
+          margin-bottom: 10px
         &:not(:last-child)
           margin-right: 20px
-
+          @include tablet
+            margin-right: 10px
 
 .with-helic-back
   position: relative
-  overflow: visible
-  @include baseSectionMarginBottom
-  @include baseSectionPaddingBottom
+  padding-top: 100px
+  margin-top: -100px
+  .webp &
+    background-image: url('../img/service-helicopter.webp')
+  .no-webp &
+    background-image: url('../img/service-helicopter.png')
+  background-position: right calc(#{$w-c}) bottom -10px
+  background-repeat: no-repeat
+  margin-bottom: 80px
+  padding-bottom: 160px
+  @include adaptive(1440)
+    background-position: right bottom
+  @include tablet
+    margin-bottom: 40px
+    background-size: 75% auto
+    padding-bottom: 100px
+  @include sm-tablet
+    padding-bottom: 350px
+    background-position: center bottom 10px
+    background-size: 420px auto
+  @include phone
+    margin-bottom: 40px
   &:after
     content: ''
     position: absolute
@@ -45,28 +74,25 @@
     width: 100%
     background-color: $gray
     left: 0
-    bottom: 0
-  &__back-image
-    position: absolute
-    top: -5%
-    right: calc(#{$w-c})
-    height: 110%
-    width: fit-content
-    z-index: 1
-    @include adaptive(1600)
-      right: 0
-    img
-      min-width: unset
-      max-height: 100%
-  & *:not(&__back-image)
-    z-index: 2
+    bottom: 40px
+    mix-blend-mode: color
+  .content__text
+    position: relative
   &__header
     max-width: 311px
     &:not(:last-child)
       margin-bottom: 48px
+    @include tablet
+      max-width: 25%
+    @include sm-tablet
+      max-width: unset
   &__text
     margin-bottom: 36px
     max-width: 475px
+    @include tablet
+      max-width: 50%
+    @include sm-tablet
+      max-width: unset
   &__text, .button
     margin-left: calc(#{$w-cg})
     @include adaptive(1600)
@@ -78,24 +104,48 @@
   padding-bottom: 250px
   background-size: 100% auto
   background-position: center bottom
+  background-repeat: no-repeat
+  .webp &
+    background-image: url("../img/back-city.webp")
+    @include sm-phone
+      background-image: url("../img/back-city-mobile.webp")
+  .no-webp &
+    background-image: url("../img/back-city.png")
+    @include sm-phone
+      background-image: url("../img/back-city-mobile.png")
+  @include tablet
+    padding-bottom: 125px
+    background-size: unset
+  @include sm-phone
+    background-size: 100% auto
   &__header
     max-width: 470px
     margin-bottom: 56px
     @include centerMargin
+    @include tablet
+      max-width: 345px
   &__list
     display: flex
     flex-direction: row
     justify-content: space-between
+    @include sm-tablet
+      flex-direction: column
+      justify-content: unset
   &__list-item
     width: 29%
     display: flex
     flex-direction: column
     align-items: center
+    @include sm-tablet
+      width: 100%
+      margin-bottom: 30px
     &:before
       display: block
       content: var(--data-before)
       order: 1 !important
       margin-bottom: 30px
+      @include sm-tablet
+        margin-bottom: 12px
     &:after
       content: ''
       order: 2 !important
@@ -105,28 +155,46 @@
       border-radius: 50%
       border: 2px solid $accent-text
       margin-bottom: 30px
+      @include sm-tablet
+        margin-bottom: 18px
     *
       order: 3
   &__list-item-header
     margin-bottom: 36px
+    @include sm-tablet
+      margin-bottom: 18px
 
 .rental-terms
   @include baseSectionMarginBottom
   display: flex
+  @include sm-tablet
+    flex-direction: column
   &__header
     flex-basis: 430px
     margin-right: 100px
+    @include tablet
+      flex-basis: 245px
+    @include sm-tablet
+      flex-basis: unset
+      margin-right: unset
+      margin-bottom: 30px
+    @include phone
+      margin-bottom: 20px
   &__content-list
     flex-basis: calc(100% - 430px)
     flex-grow: 1
   &__title
     max-width: 230px
     margin-bottom: 45px
+    @include phone
+      margin-bottom: 24px
   &__list-item
     display: flex
     align-items: baseline
     &:not(:last-child)
       margin-bottom: 30px
+      @include phone
+        margin-bottom: 30px
     &:before
       content: ''
       width: 12px
@@ -137,15 +205,67 @@
       border-radius: 50%
       border: 2px solid $accent-text
       margin-right: 30px
+      @include phone
+        margin-bottom: 20px
+
+@function top($px)
+  @return percentage($px/986)
+
+@function left($px)
+  @return percentage($px/1313)
 
 .service-prices
   text-align: center
+  @include baseSectionPaddingBottom
+  @include baseSectionMarginBottom
+  position: relative
+  &:after
+    content: ''
+    position: absolute
+    height: 1px
+    width: 100%
+    background-color: $gray
+    left: 0
+    bottom: 0
   &__title
     margin-bottom: 18px
   &__text
     margin-bottom: 60px
+    @include phone
+      margin-bottom: 30px
   &__title, &__text
     @include centerMargin
+  &__regions-list
+    display: flex
+    flex-wrap: wrap
+    margin-right: -10px
+    margin-bottom: -10px
+    &:not(:last-child)
+      margin-bottom: 50px
+    .region-info
+      width: calc(25% - 10px)
+      box-sizing: border-box
+      margin-right: 10px
+      margin-bottom: 10px
+      order: 1
+      @include sm-phone
+        width: calc(33% - 10px)
+      @include adaptive(440)
+        width: calc(50% - 10px)
+      &.disable
+        order: 2
+      &:nth-child(n+9)
+        display: none
+    &.extended .region-info:nth-child(n+9)
+      display: flex
+  .button
+    @include centerMargin
+  &__svg-wrapper
+    position: relative
+    width: 85%
+    @include centerMargin
+    @include adaptive(1600)
+      width: unset
   &__svg-map
     path
       fill-rule: evenodd
@@ -154,5 +274,87 @@
       stroke: #ADADAD
       stroke-width: 0.216
       cursor: pointer
-      &:hover
-        fill: $accent-light
+      transition: stroke .25s ease-out, fill .25s ease-out
+      &.active
+        stroke: $accent-text
+        fill: $accent-text
+  &__svg-wrapper
+    .region-info
+      position: absolute
+      transform: translate(-50%, -50%)
+      pointer-events: none
+      &[data-path-ref='svg-map_1']
+        left: left(717)
+        top: top(129)
+      &[data-path-ref='svg-map_2']
+        left: left(224)
+        top: top(139)
+      &[data-path-ref='svg-map_3']
+        left: left(338)
+        top: top(168)
+      &[data-path-ref='svg-map_4']
+        left: left(470)
+        top: top(217)
+      &[data-path-ref='svg-map_5']
+        left: left(620)
+        top: top(266)
+      &[data-path-ref='svg-map_6']
+        left: left(130)
+        top: top(308)
+      &[data-path-ref='svg-map_7']
+        left: left(255)
+        top: top(360)
+      &[data-path-ref='svg-map_8']
+        left: left(65)
+        top: top(449)
+      &[data-path-ref='svg-map_9']
+        left: left(180)
+        top: top(426)
+      &[data-path-ref='svg-map_10']
+        left: left(361)
+        top: top(348)
+      &[data-path-ref='svg-map_12']
+        left: left(480)
+        top: top(425)
+      &[data-path-ref='svg-map_13']
+        left: left(704)
+        top: top(371)
+      &#svg-map_13_second
+        left: left(594)
+        top: top(431)
+      &[data-path-ref='svg-map_14']
+        left: left(847)
+        top: top(335)
+      &[data-path-ref='svg-map_15']
+        left: left(861)
+        top: top(171)
+      &[data-path-ref='svg-map_16']
+        left: left(1037)
+        top: top(341)
+      &[data-path-ref='svg-map_17']
+        left: left(943)
+        top: top(467)
+      &[data-path-ref='svg-map_18']
+        left: left(738)
+        top: top(489)
+      &[data-path-ref='svg-map_19']
+        left: left(585)
+        top: top(629)
+      &[data-path-ref='svg-map_20']
+        left: left(838)
+        top: top(686)
+      &[data-path-ref='svg-map_21']
+        left: left(1003)
+        top: top(630)
+      &[data-path-ref='svg-map_22']
+        left: left(910)
+        top: top(870)
+      &[data-path-ref='svg-map_23']
+        left: left(700)
+        top: top(616)
+      &[data-path-ref='svg-map_24']
+        left: left(1153)
+        top: top(513)
+      &[data-path-ref='svg-map_25']
+        left: left(1228)
+        top: top(390)

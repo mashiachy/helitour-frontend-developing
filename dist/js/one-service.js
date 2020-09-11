@@ -11462,6 +11462,7 @@ const instagramSlider = () => {
 const webp = () => {
   supportsWebp_commonJs.then(result => {
     if (result) {
+      document.body.classList.add('webp');
       document.querySelectorAll('[data-back-webp], [data-back-jpg]').forEach(el => {
         if (el.hasAttribute('data-back-webp'))
           el.style.backgroundImage = `url(${el.getAttribute('data-back-webp')})`;
@@ -11469,6 +11470,7 @@ const webp = () => {
           el.style.backgroundImage = `url(${el.getAttribute('data-back-jpg')})`;
       });
     } else {
+      document.body.classList.add('no-webp');
       document.querySelectorAll('[data-back-jpg]').forEach(el => {
         if (el.hasAttribute('data-back-jpg'))
           el.style.backgroundImage = `url(${el.getAttribute('data-back-jpg')})`;
@@ -11541,7 +11543,47 @@ const headerPopup = () => {
 };
 
 const toggleBodyScrollable = () => {
-  document.body.classList.toggle('noscroll');
+  document.documentElement.classList.toggle('noscroll');
+};
+
+const initModal = (modalSelector) => {
+  document.querySelectorAll(modalSelector).forEach(modal => {
+    modal.querySelector('[data-modal-body]').addEventListener('click', e => e.stopPropagation());
+  });
+  window.addEventListener('click', () => {
+    closeModal(modalSelector);
+  });
+};
+
+const openModal = (modalSelector) => {
+  document.documentElement.classList.add('noscroll');
+  document.querySelectorAll(modalSelector).forEach(modal => {
+    modal.classList.add('active', 'before-enter');
+    modal.classList.add('enter');
+    const handler = ({ target }) => {
+      target.classList.remove('before-enter');
+      target.classList.remove('enter');
+      modal.removeEventListener('animationend', handler);
+    };
+    modal.addEventListener('animationend', handler);
+  });
+  document.querySelector('.modal-overlay').classList.add('active');
+};
+
+const closeModal = (modalSelector) => {
+  document.documentElement.classList.remove('noscroll');
+  document.querySelectorAll(modalSelector).forEach(modal => {
+    modal.classList.add('leave');
+    const handler = ({ target }) => {
+      target.classList.add('after-leave');
+      target.classList.remove('leave');
+      target.classList.remove('active');
+      target.classList.remove('after-leave');
+      document.querySelector('.modal-overlay').classList.remove('active');
+      modal.removeEventListener('animationend', handler);
+    };
+    modal.addEventListener('animationend', handler);
+  });
 };
 
 webp();
@@ -11551,5 +11593,30 @@ vhFix();
 Swiper.use(swiper_cjs_6);
 
 instagramSlider();
+
+document.querySelectorAll('#svg-map path').forEach(path => {
+  document.querySelectorAll(`[data-path-ref="${path.getAttribute('id')}"]`).forEach(infoBlock => {
+    if (!infoBlock || infoBlock.classList.contains('disable')) return;
+    path.addEventListener('mouseenter', () => {
+      infoBlock.classList.add('active');
+      path.classList.add('active');
+    });
+    path.addEventListener('mouseleave', () => {
+      infoBlock.classList.remove('active');
+      path.classList.remove('active');
+    });
+  });
+});
+
+document.getElementById('js__extend-list-controller').addEventListener('click', ({ target }) => {
+  document.getElementById('js__extend-list-control').classList.add('extended');
+  target.parentNode.removeChild(target);
+});
+
+initModal('.modal-reserve');
+document.getElementById('js__open-modal-reserve').addEventListener('click', e => {
+  openModal('.modal-reserve');
+  e.stopPropagation();
+});
 
 //# sourceMappingURL=one-service.js.map

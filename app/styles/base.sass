@@ -28,7 +28,8 @@
   font-weight: 700
   font-style: normal
 
-
+html
+  overflow-x: hidden
 
 body
   font-family: Gilroy
@@ -121,7 +122,7 @@ picture
   &__text
     padding-left: calc(#{$w-cg} + 20px)
     padding-right: calc(#{$w-cg} + 20px)
-    @include tablet
+    @include adaptive(1600)
       padding-left: 0
       padding-right: 0
 
@@ -174,9 +175,11 @@ main:not(:last-child)
 .spacer
   margin: auto
 
-.noscroll
-  overflow: hidden
-  height: calc(var(--vh) * 100)
+.noscroll, .noscroll-by-modal
+  overflow-y: hidden
+  height: 100%
+.noscroll-by-modal
+  filter: blur(5px)
 
 .sm-phone
   @media screen and (min-width: 577px)

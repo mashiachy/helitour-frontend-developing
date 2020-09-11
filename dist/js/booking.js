@@ -18449,6 +18449,7 @@ const vhFix = () => {
 const webp = () => {
   supportsWebp_commonJs.then(result => {
     if (result) {
+      document.body.classList.add('webp');
       document.querySelectorAll('[data-back-webp], [data-back-jpg]').forEach(el => {
         if (el.hasAttribute('data-back-webp'))
           el.style.backgroundImage = `url(${el.getAttribute('data-back-webp')})`;
@@ -18456,6 +18457,7 @@ const webp = () => {
           el.style.backgroundImage = `url(${el.getAttribute('data-back-jpg')})`;
       });
     } else {
+      document.body.classList.add('no-webp');
       document.querySelectorAll('[data-back-jpg]').forEach(el => {
         if (el.hasAttribute('data-back-jpg'))
           el.style.backgroundImage = `url(${el.getAttribute('data-back-jpg')})`;
@@ -18528,7 +18530,7 @@ const headerPopup = () => {
 };
 
 const toggleBodyScrollable = () => {
-  document.body.classList.toggle('noscroll');
+  document.documentElement.classList.toggle('noscroll');
 };
 
 webp();
