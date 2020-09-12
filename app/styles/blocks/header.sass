@@ -4,7 +4,7 @@
 .header
   position: fixed
   height: calc(#{$w-c})
-  background-color: $black-text
+  background-color: $header-back-gray
   margin-top: $gap
   display: flex
   align-items: stretch
@@ -25,7 +25,7 @@
     display: flex
     align-items: center
     justify-content: center
-    color: #ffffff
+    color: $black-text
     transition: color .25s ease-out
     &_extended
       justify-content: space-between
@@ -53,17 +53,14 @@
         display: none
     &_gray
       background-color: $gray
-      color: $black-text
     &_accent
       background-color: $accent-text
-      color: $black-text
       &:hover, a:hover
         color: #ffffff
     &_accent-svg
       background-color: $accent-light
     &_light-gray
       background-color: $light-gray
-      color: $black-text
     svg
       width: 36px
       height: 36px

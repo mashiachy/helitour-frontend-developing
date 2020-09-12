@@ -1,0 +1,27 @@
+@import '../mixins'
+
+.services-gallery
+  display: flex
+  flex-wrap: wrap
+  margin-bottom: -20px
+  margin-right: -20px
+  @include tablet
+    margin-right: -10px
+    margin-bottom: -10px
+  @include sm-phone
+    margin-right: 0
+  .service-card
+    width: calc(33% - 20px)
+    margin-right: 20px
+    margin-bottom: 20px
+    @include tablet
+      width: calc(33% - 10px)
+      margin-right: 10px
+      margin-bottom: 10px
+    @include sm-tablet
+      width: calc(50% - 10px)
+      margin-right: 10px
+      margin-bottom: 10px
+    @include sm-phone
+      width: 100%
+      margin-right: 0

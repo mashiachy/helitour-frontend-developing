@@ -1,0 +1,90 @@
+include mixins
+
+doctype html
+html(lang="us")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    meta(name="robots" content="noindex, nofollow")
+    title Helitour | index
+    link(href="css/index.css" rel="stylesheet")
+    script(defer src="js/index.js")
+  body
+    +header
+    main
+      +b.SECTION.bg_with-header
+        +picture('img/back-index.webp', 'img/back-index.jpg', 'Main helicopter', 'bg__image')
+        .content.content__inner
+          h1 Польоти на вертольотах Helitour
+          .buttons
+            +b.A(href='#').button Забронювати
+            +b.A(href='#').button_white послуги
+      +b.SECTION.our-excursions
+        .content.content__inner
+          +e.header
+            h2 Екскурсії
+              br
+              |на вертольотах
+            +e.header-el-wrapper
+              a(href='#') Всі екскурсії
+          .swiper-container
+            .swiper-wrapper
+              +b.excursion-card.swiper-slide
+                +picture('img/exc1.webp', 'img/exc1.jpg', 'Excursion', 'excursion-card__img')
+                +e.content
+                  h3 Оглядовий політ над Києвом
+                  +e.SPAN(data-after='гр').info 18
+                  +e.footer
+                    a(href="#") забронювати
+                    +e.SPAN(data-after='грн').price 5 680
+              +b.excursion-card.swiper-slide
+                +picture('img/exc2.webp', 'img/exc2.jpg', 'Excursion', 'excursion-card__img')
+                +e.content
+                  h3 Політ над Київом та Межигір’ям
+                  +e.SPAN(data-after='гр').info 18
+                  +e.footer
+                    a(href="#") забронювати
+                    +e.SPAN(data-after='грн').price 2 333
+              +b.excursion-card.swiper-slide
+                +picture('img/exc3.webp', 'img/exc3.jpg', 'Excursion', 'excursion-card__img')
+                +e.content
+                  h3 Вертолітний тур «Церква на воді»
+                  +e.SPAN(data-after='гр').info 18
+                  +e.footer
+                    a(href="#") забронювати
+                    +e.SPAN(data-after='грн').price 5 680
+              +b.excursion-card.swiper-slide
+                +picture('img/exc4.webp', 'img/exc4.jpg', 'Excursion', 'excursion-card__img')
+                +e.content
+                  h3 Політ над Київом та Межигір’ям
+                  +e.SPAN(data-after='гр').info 18
+                  +e.footer
+                    a(href="#") забронювати
+                    +e.SPAN(data-after='грн').price 2 333
+            .swiper-pagination
+      +excursions-certificate
+      +b.SECTION.index-services
+        .content.content__inner
+          h2 Наші послуги
+          +services-gallery
+      +b.SECTION.license.content.content__inner
+        h2 Ліцензії
+        +e.content
+          +e.content-item
+            +e.H3.content-item-title Ліцензія Льотної придатності
+            +e.SPAN(data-popup-webp='img/license.webp' data-popup-jpg='img/license.jpg' data-popup-alt='License photo 1').content-item-button.js__open-modal-document
+          +e.content-item
+            +e.H3.content-item-title Сертифікат Авіаціної служби
+            +e.SPAN(data-popup-webp='img/license.webp' data-popup-jpg='img/license.jpg' data-popup-alt='License photo 2').content-item-button.js__open-modal-document
+          +e.content-item
+            +e.H3.content-item-title Сертифікат експерта
+            +e.SPAN(data-popup-webp='img/license.webp' data-popup-jpg='img/license.jpg' data-popup-alt='License photo 3').content-item-button.js__open-modal-document
+          +e.content-item
+            +e.H3.content-item-title Сертифікат експерта
+            +e.SPAN(data-popup-webp='img/license.webp' data-popup-jpg='img/license.jpg' data-popup-alt='License photo 4').content-item-button.js__open-modal-document
+    +footer
+    +b.modal
+      +b.modal-document
+        img(data-modal-body src='' alt='')
+        .js__close-modal-document

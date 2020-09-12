@@ -57,55 +57,6 @@
       margin-bottom: 10px
       margin-right: 0
 
-.excursions-certificate
-  @include baseSectionMarginBottom
-  background-size: 100% auto
-  background-position: center bottom
-  background-repeat: no-repeat
-  padding-top: 7.3vw
-  padding-bottom: 5.21vw
-  @include adaptive(1440)
-    background-size: 1440px auto
-    padding-top: 100px
-    padding-bottom: 65px
-  @include phone
-    padding-top: 240px
-    padding-bottom: 40px
-    background-size: auto 100%
-    background-position: 12% bottom
-    *
-      text-align: center
-  @include sm-phone
-    background-image: url('../img/certificate-mobile-2.png') !important
-    background-image: url('../img/certificate-mobile-2.webp') !important
-    background-size: 100% auto
-    background-repeat: no-repeat
-    background-position: center top
-  @include adaptive(375)
-    background-position: center bottom
-  h2
-    margin-left: calc(#{$w-cg} * 6)
-    max-width: 335px
-    &:not(:last-child)
-      margin-bottom: 50px
-      @include phone
-        margin-bottom: 20px
-    @include phone
-      @include centerMargin
-  p, .button
-    margin-left: calc(#{$w-cg} * 7)
-  p
-    max-width: 265px
-    &:not(:last-child)
-      margin-bottom: 40px
-      @include phone
-        margin-bottom: 27px
-        @include centerMargin
-  .button
-    font-size: 14px
-    @include phone
-      @include centerMargin
-
 .excursion-card-list
   &-enter, &-leave-to
     opacity: 0

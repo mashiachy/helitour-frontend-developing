@@ -277,11 +277,11 @@ html(lang="us")
             +e.H4.title Луганськ
       +our-instagram
     +footer
-    +b.DIV.modal-overlay
-    +b.DIV.modal-reserve
-      +e.FORM.content(data-modal-body)
-        +e.H2.title Задати запитання
-        +b.INPUT(type='text' placeholder='Ваше ім’я').text-input
-        +b.INPUT(type='text' placeholder='Ваш телефон').text-input
-        +b.TEXTAREA(placeholder='Ваше питання').text-input
-        +b.BUTTON().button Забронювати
+    +b.modal
+      +b.modal-reserve
+        +e.FORM.content(data-modal-body)
+          +e.H2.title Задати запитання
+          +b.INPUT(type='text' placeholder='Ваше ім’я').text-input
+          +b.INPUT(type='text' placeholder='Ваш телефон').text-input
+          +b.TEXTAREA(placeholder='Ваше питання').text-input
+          +b.BUTTON().button Забронювати

@@ -11470,6 +11470,7 @@ const excursionsSlider = () => {
 
 const webp = () => {
   supportsWebp_commonJs.then(result => {
+    window.webp = result;
     if (result) {
       document.body.classList.add('webp');
       document.querySelectorAll('[data-back-webp], [data-back-jpg]').forEach(el => {

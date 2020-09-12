@@ -1,0 +1,99 @@
+@import "mixins"
+
+.bg
+  min-height: calc(var(--vh) * 100)
+  align-items: flex-start
+  text-align: left
+  color: #ffffff
+  padding: calc(#{$w-cg} * 2 - 20px) 0 calc(#{$w-c})
+  @include phone
+    padding: calc(#{$w-cg-phone} * 2 - 20px) 0 calc(#{$w-c-phone})
+  @include baseSectionMarginBottom
+  h1
+    font-size: 70px
+    line-height: 82px
+    max-width: 600px
+  .buttons
+    display: flex
+    flex-wrap: wrap
+    margin-bottom: -20px
+    margin-right: -20px
+  .button
+    margin-right: 20px
+    margin-bottom: 20px
+
+.our-excursions
+  .content
+    @include baseSectionPaddingBottom
+    @include sectionAfterLine
+
+.excursions-certificate
+  margin-bottom: 0 !important
+
+.index-services
+  @include baseSectionMarginBottom
+  background-color: $back-light
+  background-image: url("../img/stroke.svg")
+  background-size: 32px 32px
+  padding: 120px 0
+  @include tablet
+    padding: 80px 0
+  @include phone
+    padding: 60px 0
+  @include baseSectionHeader
+
+.license
+  @include baseSectionHeader
+  margin-bottom: -130px
+  &__content
+    display: flex
+    align-items: stretch
+    background-color: $back-light
+  &__content-item
+    width: 25%
+    box-sizing: border-box
+    &:not(:last-child)
+      border-right: 1px solid $gray
+    padding: 75px 25px 35px
+    display: flex
+    flex-direction: column
+    align-items: center
+    min-height: 330px
+    &:before
+      content: url('data:image/svg+xml; base64, PHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiAJIHZpZXdCb3g9IjAgMCAyNSAyMyIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMjUgMjM7IiB4bWw6c3BhY2U9InByZXNlcnZlIj4gPHN0eWxlIHR5cGU9InRleHQvY3NzIj4gCS5zdDB7ZmlsbDpub25lO3N0cm9rZTojMGZhY2QwO3N0cm9rZS13aWR0aDoxLjU7c3Ryb2tlLWxpbmVjYXA6cm91bmQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kO3N0cm9rZS1taXRlcmxpbWl0OjEwO30gPC9zdHlsZT4gPHBhdGggY2xhc3M9InN0MCIgZD0iTTMsMjJoMmgxOGMwLjYsMCwxLTAuNCwxLTFWMTBjMC0xLjEtMC45LTItMi0ySDdjLTEuMSwwLTIsMC45LTIsMnY5Ii8+IDxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik01LDEwdjEwYzAsMS4xLTAuOSwyLTIsMnMtMi0wLjktMi0yVjJjMC0wLjYsMC40LTEsMS0xaDQuMkM2LjYsMSw3LDEuMyw3LjEsMS42bDAuNiwxLjcgCWMwLjEsMC40LDAuNSwwLjYsMC45LDAuNmgxMS4zYzEuMSwwLDIsMC45LDIsMnYyaC0xNUM1LjksOCw1LDguOSw1LDEweiIvPiA8L3N2Zz4=')
+      display: block
+      width: 25px
+      height: 23px
+      margin-bottom: 30px
+      order: 1
+    &:after
+      content: ''
+      display: block
+      width: 12px
+      height: 12px
+      box-sizing: border-box
+      border-radius: 50%
+      border: 2px solid $accent-text
+      margin-bottom: 27px
+      order: 2
+  &__content-item-title
+    margin-bottom: auto
+    order: 3
+    text-align: center
+  &__content-item-button
+    width: 50px
+    height: 50px
+    border-radius: 50%
+    background-color: $accent-text
+    cursor: pointer
+    display: flex
+    align-items: center
+    justify-content: center
+    order: 3
+    &:after
+      content: '+'
+      font-size: 24px
+      line-height: 24px
+      transition: color .25s ease-out
+    &:hover:after
+      color: #ffffff

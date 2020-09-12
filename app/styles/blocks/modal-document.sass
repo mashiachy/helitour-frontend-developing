@@ -1,0 +1,29 @@
+@import '../mixins'
+
+.modal-document
+  display: none
+  &.active
+    display: block
+  &.before-enter, &.after-leave
+    opacity: 0
+  &.enter
+    animation: .25s ease-out modalOpacity 1
+  &.leave
+    animation: .25s ease-out modalOpacity 1 reverse
+  max-height: 80%
+  position: relative
+  img
+    height: 100%
+    width: auto
+    display: block
+  .js__close-modal-document
+    cursor: pointer
+    position: absolute
+    width: 30px
+    height: 30px
+    top: 0
+    right: 0
+    background-image: url('../img/close.svg')
+    background-size: 10px 10px
+    background-position: center center
+    background-repeat: no-repeat

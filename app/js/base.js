@@ -106,6 +106,7 @@ export const instagramSlider = () => {
 
 export const webp = () => {
   supportsWebP.then(result => {
+    window.webp = result;
     if (result) {
       document.body.classList.add('webp');
       document.querySelectorAll('[data-back-webp], [data-back-jpg]').forEach(el => {
@@ -202,6 +203,7 @@ export const initModal = (modalSelector) => {
 
 export const openModal = (modalSelector) => {
   document.documentElement.classList.add('noscroll');
+  document.querySelector('.modal').classList.add('active');
   document.querySelectorAll(modalSelector).forEach(modal => {
     modal.classList.add('active', 'before-enter');
     modal.classList.add('enter');
@@ -212,19 +214,20 @@ export const openModal = (modalSelector) => {
     };
     modal.addEventListener('animationend', handler);
   });
-  document.querySelector('.modal-overlay').classList.add('active');
 };
 
 export const closeModal = (modalSelector) => {
   document.documentElement.classList.remove('noscroll');
   document.querySelectorAll(modalSelector).forEach(modal => {
+    if (!modal.classList.contains('active'))
+      return;
     modal.classList.add('leave');
     const handler = ({ target }) => {
       target.classList.add('after-leave');
       target.classList.remove('leave');
       target.classList.remove('active');
       target.classList.remove('after-leave');
-      document.querySelector('.modal-overlay').classList.remove('active');
+      document.querySelector('.modal').classList.remove('active');
       modal.removeEventListener('animationend', handler);
     };
     modal.addEventListener('animationend', handler);

@@ -94,10 +94,6 @@ html(lang="us")
               +e.footer
                 a(:href='card.linkHref') {{ card.linkText }}
         +b.SPAN(v-if='!endedCards' @click='clickMore').button Більше
-      +b.SECTION(data-back-webp='img/certificate-2.webp' data-back-jpg='img/certificate-2.png').excursions-certificate
-        .content.content__inner
-          h2 Політ на вертольоті в подарунок
-          p Подарунковий сертифікат польоту на вертольоті - це приємний сюрприз для себе і близьких. Такий подарунок запам'ятається кожному на все життя.
-          +b.A(href='#').button Замовити
+      +excursions-certificate
       +col-text
     +footer

@@ -9,3 +9,29 @@
       margin-bottom: 30px
   .swiper-container
     overflow: visible
+  &__header
+    display: flex
+    align-items: flex-end
+    justify-content: space-between
+    margin-bottom: 60px
+    &:before
+      content: ''
+      display: block
+      pointer-events: none
+      opacity: 0
+    @include phone
+      margin-bottom: 30px
+    h2
+      margin-bottom: unset !important
+      max-width: 300px
+    a
+      font-size: 14px
+      border-bottom: 1px solid $black-text
+      transition: color .25s ease-out, border-bottom .25s ease-out
+      &:hover
+        border-bottom: 1px solid $accent-text
+  &__header:before, &__header-el-wrapper
+    width: 110px
+  &__header-el-wrapper
+    display: flex
+    justify-content: flex-end
