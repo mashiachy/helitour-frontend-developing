@@ -68,6 +68,93 @@ html(lang="us")
         .content.content__inner
           h2 Наші послуги
           +services-gallery
+
+      +b.SECTION.index-booking.content.content__inner#booking-form
+        +e.FORM.front
+          h2 Бронювання польоту
+          +e.form-line
+            label(for='trip-select') Оберіть маршрут
+            +b.DIV(
+              :class='{ \'select-input_disable\': !trip }'
+              ref='tripSelect'
+              @click='clickSelect($refs.tripSelect, $event)'
+            ).select-input
+              input(
+                type='number'
+                id='trip-select'
+                v-model='trip'
+              )
+              +e.SPAN.value-block {{ trip ? tripInfo.name : 'Маршруты загружаются' }}
+              +e.dropdown
+                +e.DIV(
+                  v-for='tripItem in trips'
+                  :key='tripItem.id'
+                  :class='{ \'select-input__dropdown-item_current\': tripItem.id === trip }'
+                  @click='trip = tripItem.id'
+                ).dropdown-item {{ tripItem.name }}
+          +e.form-line_select-cards
+            label(for='helicopter-select') Виберіть вертоліт
+            +b.select-cards_index.desktop
+              input(
+                type='number'
+                name='helicopter-select'
+                v-model='helicopter'
+                :key='404'
+              )
+              +e.SPAN(
+                v-for='helicopterItem in filteredHelicopters'
+                :key='helicopterItem.id'
+                :class='{ \'select-cards__item_active\': helicopter === helicopterItem.id }'
+                @click='helicopter = helicopterItem.id'
+              ).item
+                +e.SPAN(
+                  v-html='helicopterItem.icon'
+                ).item-icon
+                +e.item-title(data-before='Вертоліт') {{ helicopterItem.name }}
+            +b.DIV(
+              :class='{ \'select-input_disable\': !helicopter }'
+              ref='helicopterSelect'
+              @click='clickSelect($refs.helicopterSelect, $event)'
+            ).select-input.tablet
+              input(
+                type='number'
+                name='helicopter-select'
+                v-model='helicopter'
+              )
+              +e.SPAN.value-block
+                +e.SPAN.icon(v-html='helicopterInfo.icon')
+                | {{ helicopter ? helicopterInfo.name : 'Маршруты загружаются' }}
+                span.sm-phone {{ ` (${helicopterInfo.text})` }}
+              +e.dropdown
+                +e.DIV(
+                  v-for='helicopterItem in helicopters'
+                  :key='helicopterItem.id'
+                  :class='{ \'select-input__dropdown-item_current\': helicopterItem.id === helicopter }'
+                  @click='helicopter = helicopterItem.id'
+                ).dropdown-item {{ helicopterItem.name }}
+          +e.price-block.sm-phone
+            span.price(data-before='вiд' data-after='грн') 1899
+            +e.SPAN.back-subtext Вартість польоту
+          +b.BUTTON.button Забронювати
+        +e.back
+          picture.rounded-image
+            source(:srcset='helicopterInfo.webp' type='image/webp')
+            source(:srcset='helicopterInfo.jpg' type='image/png')
+            img(:src='helicopterInfo.jpg' alt='Mini helicopter 2')
+          div
+            +e.SPAN.back-subtitle HELiTOUR
+            +e.SPAN.back-helicname {{ helicopterInfo.name }}
+            +e.SPAN.back-text {{ helicopterInfo.text }}
+          .delimeter
+          div
+            +e.SPAN.back-title {{ helicopterInfo.aerodromtext }}
+            +e.SPAN.back-subtext Місце вильоту
+            +e.SPAN.back-title {{ helicopterInfo.time }}
+            +e.SPAN.back-subtext Час польоту
+          .delimeter
+          div
+            .price(data-before='вiд' data-after='грн') 1899
+            +e.SPAN.back-subtext Вартість польоту
       +b.SECTION.license.content.content__inner
         h2 Ліцензії
         +e.content
@@ -83,6 +170,64 @@ html(lang="us")
           +e.content-item
             +e.H3.content-item-title Сертифікат експерта
             +e.SPAN(data-popup-webp='img/license.webp' data-popup-jpg='img/license.jpg' data-popup-alt='License photo 4').content-item-button.js__open-modal-document
+      +b.SECTION.index-charter
+        .content.content__inner
+          .content__text
+            +e.text-content
+              h2 Чартерні
+                br
+                | рейси
+              p Все частіше люди шукають альтернативу стомлюючим автомобільним подорожам або тривалих поїздок на поїздах чи автобусах. Такою альтернативою може стати чартерний рейс на вертольоті.
+              +b.A(href='').button Замовити
+            +e.card
+              +picture('img/mini-helicopter-1.webp', 'img/mini-helicopter-1.png', 'Helicopter Icon', 'rounded-image')
+              +e.P.card-text Враження – це те, що напевно залишиться з нами на все життя.
+      +b.SECTION.our-articles.content.content__inner
+        h2 Ми в ЗМІ
+        .swiper-container.swiper-container--two
+          .swiper-wrapper
+            .swiper-slide
+              +b.article-card
+                +picture('img/hel1.webp', 'img/hel1.jpg', 'Article', 'article-card__img')
+                +e.content
+                  h3 Lorem Ipsum - це текст-"риба", що використовується в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
+                  a(href="#") чатати
+            .swiper-slide
+              +b.article-card
+                +picture('img/hel3.webp', 'img/hel3.jpg', 'Article', 'article-card__img')
+                +e.content
+                  h3 в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
+                  a(href="#") чатати
+            .swiper-slide
+              +b.article-card
+                +picture('img/hel5.webp', 'img/hel5.jpg', 'Article', 'article-card__img')
+                +e.content
+                  h3 Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
+                  a(href="#") чатати
+            .swiper-slide
+              +b.article-card
+                +picture('img/hel4.webp', 'img/hel4.jpg', 'Article', 'article-card__img')
+                +e.content
+                  h3 в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
+                  a(href="#") чатати
+          .swiper-pagination
+      +b.SECTION.faq.content.content__inner.default-article
+        h2 Часто задавані питання
+        article(data-question)
+          h3(data-question-anchor) Що таке Lorem Ipsum?
+          p Lorem Ipsum - це текст-"риба", що використовується в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя, коли невідомий друкар взяв шрифтову гранку та склав на ній підбірку зразків шрифтів. "Риба" не тільки успішно пережила п'ять століть, але й прижилася в електронному верстуванні, залишаючись по суті незмінною.
+          p Вона популяризувалась в 60-их роках минулого сторіччя завдяки виданню зразків шрифтів Letraset, які містили уривки з Lorem Ipsum, і вдруге - нещодавно завдяки програмам комп'ютерного верстування на кшталт Aldus Pagemaker, які використовували різні версії Lorem Ipsum.
+        article(data-question)
+          h3(data-question-anchor) Чому ми ним користуємось?
+          p Вже давно відомо, що читабельний зміст буде заважати зосередитись людині, яка оцінює композицію сторінки. Сенс використання Lorem Ipsum полягає в тому, що цей текст має більш-менш нормальне розподілення літер на відміну від, наприклад, "Тут іде текст. Тут іде текст." Це робить текст схожим на оповідний. Багато програм верстування та веб-дизайну використовують Lorem Ipsum як зразок і пошук за терміном "lorem ipsum" відкриє багато веб-сайтів, які знаходяться ще в зародковому стані. Різні версії Lorem Ipsum з'явились за минулі роки, деякі випадково, деякі було створено зумисно (зокрема, жартівливі).
+        article(data-question)
+          h3(data-question-anchor) Звідки він походить?
+          p Lorem Ipsum - це текст-"риба", що використовується в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя, коли невідомий друкар взяв шрифтову гранку та склав на ній підбірку зразків шрифтів. "Риба" не тільки успішно пережила п'ять століть, але й прижилася в електронному верстуванні, залишаючись по суті незмінною.
+          p Вона популяризувалась в 60-их роках минулого сторіччя завдяки виданню зразків шрифтів Letraset, які містили уривки з Lorem Ipsum, і вдруге - нещодавно завдяки програмам комп'ютерного верстування на кшталт Aldus Pagemaker, які використовували різні версії Lorem Ipsum.
+        article(data-question)
+          h3(data-question-anchor) Де собі взяти трохи
+          p Існує багато варіацій уривків з Lorem Ipsum, але більшість з них зазнала певних змін на кшталт жартівливих вставок або змішування слів, які навіть не виглядають правдоподібно. Якщо ви збираєтесь використовувати Lorem Ipsum, ви маєте упевнитись в тому, що всередині тексту не приховано нічого, що могло б викликати у читача конфуз. Більшість відомих генераторів Lorem Ipsum в Мережі генерують текст шляхом повторення наперед заданих послідовностей Lorem Ipsum. Принципова відмінність цього генератора робить його першим справжнім генератором Lorem Ipsum. Він використовує словник з більш як 200 слів латини та цілий набір моделей речень - це дозволяє генерувати Lorem Ipsum, який виглядає осмислено. Таким чином, згенерований Lorem Ipsum не міститиме повторів, жартів, нехарактерних для латини слів і т.ін.
+      +col-text
     +footer
     +b.modal
       +b.modal-document

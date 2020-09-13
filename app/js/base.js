@@ -9,7 +9,7 @@ export const questionsManager = () => {
       e.removeAttribute('data-question-anchor-active', 'true');
     };
     const active = e => {
-      e.parentNode.style.maxHeight = '1000px';
+      e.parentNode.style.maxHeight = `${e.parentNode.scrollHeight}px`;
       e.setAttribute('data-question-anchor-active', true);
     };
     disActive(anchor);
@@ -50,6 +50,30 @@ export const excursionsSlider = () => {
     },
     loop: true,
     loopAdditionalSlides: 1,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+      renderBullet: (index, className) => {
+        return `<span class=${className}></span>`;
+      },
+    },
+  });
+};
+
+export const articlesSlider = () => {
+  const articlesSlider = new Swiper('.our-articles .swiper-container', {
+    slidesPerView: 1,
+    spaceBetween: 10,
+    breakpoints: {
+      568: {
+        slidesPerView: 2,
+        spaceBetween: 10,
+      },
+      1280: {
+        slidesPerView: 2,
+        spaceBetween: 20,
+      }
+    },
     pagination: {
       el: '.swiper-pagination',
       clickable: true,

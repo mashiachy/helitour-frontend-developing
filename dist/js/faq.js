@@ -17,7 +17,7 @@ const questionsManager = () => {
       e.removeAttribute('data-question-anchor-active', 'true');
     };
     const active = e => {
-      e.parentNode.style.maxHeight = '1000px';
+      e.parentNode.style.maxHeight = `${e.parentNode.scrollHeight}px`;
       e.setAttribute('data-question-anchor-active', true);
     };
     disActive(anchor);

@@ -11415,6 +11415,30 @@ const vhFix = () => {
   window.addEventListener('resize', setVh);
 };
 
+const articlesSlider = () => {
+  const articlesSlider = new Swiper('.our-articles .swiper-container', {
+    slidesPerView: 1,
+    spaceBetween: 10,
+    breakpoints: {
+      568: {
+        slidesPerView: 2,
+        spaceBetween: 10,
+      },
+      1280: {
+        slidesPerView: 2,
+        spaceBetween: 20,
+      }
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+      renderBullet: (index, className) => {
+        return `<span class=${className}></span>`;
+      },
+    },
+  });
+};
+
 const webp = () => {
   supportsWebp_commonJs.then(result => {
     window.webp = result;
@@ -11519,26 +11543,6 @@ const swiperOne = new Swiper('.swiper-container--one', {
   },
 });
 
-const swiperTwo = new Swiper('.swiper-container--two', {
-  slidesPerView: 1,
-  spaceBetween: 10,
-  breakpoints: {
-    568: {
-      slidesPerView: 2,
-      spaceBetween: 10,
-    },
-    1280: {
-      slidesPerView: 2,
-      spaceBetween: 20,
-    }
-  },
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true,
-    renderBullet: (index, className) => {
-      return `<span class=${className}></span>`;
-    },
-  },
-});
+articlesSlider();
 
 //# sourceMappingURL=article.js.map

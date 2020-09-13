@@ -1,0 +1,24 @@
+@import '../mixins'
+
+.faq
+  article
+    position: relative
+    padding-top: 40px
+    padding-bottom: 40px
+    @include tablet
+      padding-top: 30px
+      padding-bottom: 30px
+    @include phone
+      padding-top: 20px
+      padding-bottom: 20px
+    &:before, &:last-child:after
+      content: ''
+      position: absolute
+      left: 0
+      height: 1px
+      width: 100%
+      background-color: $gray
+    &:before
+      top: 0
+    &:after
+      bottom: 0

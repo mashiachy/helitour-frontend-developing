@@ -198,6 +198,40 @@
                 </div>
             </div>
         </section>
+        <section class="index-booking content content__inner" id="booking-form">
+            <form class="index-booking__front">
+                <h2>Бронювання польоту</h2>
+                <div class="index-booking__form-line"><label for="trip-select">Оберіть маршрут</label>
+                    <div class="select-input" :class="{ 'select-input_disable': !trip }" ref="tripSelect" @click="clickSelect($refs.tripSelect, $event)"><input type="number" id="trip-select" v-model="trip"><span class="select-input__value-block">{{ trip ? tripInfo.name : 'Маршруты загружаются' }}</span>
+                        <div class="select-input__dropdown">
+                            <div class="select-input__dropdown-item" v-for="tripItem in trips" :key="tripItem.id" :class="{ 'select-input__dropdown-item_current': tripItem.id === trip }" @click="trip = tripItem.id">{{ tripItem.name }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="index-booking__form-line index-booking__form-line_select-cards"><label for="helicopter-select">Виберіть вертоліт</label>
+                    <div class="select-cards select-cards_index desktop"><input type="number" name="helicopter-select" v-model="helicopter" :key="404"><span class="select-cards__item" v-for="helicopterItem in filteredHelicopters" :key="helicopterItem.id" :class="{ 'select-cards__item_active': helicopter === helicopterItem.id }" @click="helicopter = helicopterItem.id"><span class="select-cards__item-icon" v-html="helicopterItem.icon"></span><span class="select-cards__item-title" data-before="Вертоліт">{{ helicopterItem.name }}</span></span></div>
+                    <div class="select-input tablet" :class="{ 'select-input_disable': !helicopter }" ref="helicopterSelect" @click="clickSelect($refs.helicopterSelect, $event)"><input type="number" name="helicopter-select" v-model="helicopter"><span class="select-input__value-block"><span class="select-input__icon" v-html="helicopterInfo.icon"></span>{{ helicopter ? helicopterInfo.name : 'Маршруты загружаются' }}<span class="sm-phone">{{ ` (${helicopterInfo.text})` }}</span></span>
+                        <div class="select-input__dropdown">
+                            <div class="select-input__dropdown-item" v-for="helicopterItem in helicopters" :key="helicopterItem.id" :class="{ 'select-input__dropdown-item_current': helicopterItem.id === helicopter }" @click="helicopter = helicopterItem.id">{{ helicopterItem.name }}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="index-booking__price-block sm-phone"><span class="price" data-before="вiд" data-after="грн">1899</span><span class="index-booking__back-subtext">Вартість польоту</span></div><button class="button">Забронювати</button>
+            </form>
+            <div class="index-booking__back">
+                <picture class="rounded-image">
+                    <source :srcset="helicopterInfo.webp" type="image/webp">
+                    <source :srcset="helicopterInfo.jpg" type="image/png"><img :src="helicopterInfo.jpg" alt="Mini helicopter 2">
+                </picture>
+                <div><span class="index-booking__back-subtitle">HELiTOUR</span><span class="index-booking__back-helicname">{{ helicopterInfo.name }}</span><span class="index-booking__back-text">{{ helicopterInfo.text }}</span></div>
+                <div class="delimeter"></div>
+                <div><span class="index-booking__back-title">{{ helicopterInfo.aerodromtext }}</span><span class="index-booking__back-subtext">Місце вильоту</span><span class="index-booking__back-title">{{ helicopterInfo.time }}</span><span class="index-booking__back-subtext">Час польоту</span></div>
+                <div class="delimeter"></div>
+                <div>
+                    <div class="price" data-before="вiд" data-after="грн">1899</div><span class="index-booking__back-subtext">Вартість польоту</span>
+                </div>
+            </div>
+        </section>
         <section class="license content content__inner">
             <h2>Ліцензії</h2>
             <div class="license__content">
@@ -213,6 +247,102 @@
                 <div class="license__content-item">
                     <h3 class="license__content-item-title">Сертифікат експерта</h3><span class="license__content-item-button js__open-modal-document" data-popup-webp="img/license.webp" data-popup-jpg="img/license.jpg" data-popup-alt="License photo 4"></span>
                 </div>
+            </div>
+        </section>
+        <section class="index-charter">
+            <div class="content content__inner">
+                <div class="content__text">
+                    <div class="index-charter__text-content">
+                        <h2>Чартерні<br>рейси</h2>
+                        <p>Все частіше люди шукають альтернативу стомлюючим автомобільним подорожам або тривалих поїздок на поїздах чи автобусах. Такою альтернативою може стати чартерний рейс на вертольоті.</p><a class="button" href="">Замовити</a>
+                    </div>
+                    <div class="index-charter__card">
+                        <picture class="rounded-image">
+                            <source srcset="img/mini-helicopter-1.webp" type="image/webp" />
+                            <source srcset="img/mini-helicopter-1.png" type="image/jpeg" /><img src="img/mini-helicopter-1.png" alt="Helicopter Icon" />
+                        </picture>
+                        <p class="index-charter__card-text">Враження – це те, що напевно залишиться з нами на все життя.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="our-articles content content__inner">
+            <h2>Ми в ЗМІ</h2>
+            <div class="swiper-container swiper-container--two">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="article-card">
+                            <picture class="article-card__img">
+                                <source srcset="img/hel1.webp" type="image/webp" />
+                                <source srcset="img/hel1.jpg" type="image/jpeg" /><img src="img/hel1.jpg" alt="Article" />
+                            </picture>
+                            <div class="article-card__content">
+                                <h3>Lorem Ipsum - це текст-"риба", що використовується в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,</h3><a href="#">чатати</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="article-card">
+                            <picture class="article-card__img">
+                                <source srcset="img/hel3.webp" type="image/webp" />
+                                <source srcset="img/hel3.jpg" type="image/jpeg" /><img src="img/hel3.jpg" alt="Article" />
+                            </picture>
+                            <div class="article-card__content">
+                                <h3>в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,</h3><a href="#">чатати</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="article-card">
+                            <picture class="article-card__img">
+                                <source srcset="img/hel5.webp" type="image/webp" />
+                                <source srcset="img/hel5.jpg" type="image/jpeg" /><img src="img/hel5.jpg" alt="Article" />
+                            </picture>
+                            <div class="article-card__content">
+                                <h3>Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,</h3><a href="#">чатати</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="article-card">
+                            <picture class="article-card__img">
+                                <source srcset="img/hel4.webp" type="image/webp" />
+                                <source srcset="img/hel4.jpg" type="image/jpeg" /><img src="img/hel4.jpg" alt="Article" />
+                            </picture>
+                            <div class="article-card__content">
+                                <h3>в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,</h3><a href="#">чатати</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </section>
+        <section class="faq content content__inner default-article">
+            <h2>Часто задавані питання</h2>
+            <article data-question>
+                <h3 data-question-anchor>Що таке Lorem Ipsum?</h3>
+                <p>Lorem Ipsum - це текст-"риба", що використовується в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя, коли невідомий друкар взяв шрифтову гранку та склав на ній підбірку зразків шрифтів. "Риба" не тільки успішно пережила п'ять століть, але й прижилася в електронному верстуванні, залишаючись по суті незмінною.</p>
+                <p>Вона популяризувалась в 60-их роках минулого сторіччя завдяки виданню зразків шрифтів Letraset, які містили уривки з Lorem Ipsum, і вдруге - нещодавно завдяки програмам комп'ютерного верстування на кшталт Aldus Pagemaker, які використовували різні версії Lorem Ipsum.</p>
+            </article>
+            <article data-question>
+                <h3 data-question-anchor>Чому ми ним користуємось?</h3>
+                <p>Вже давно відомо, що читабельний зміст буде заважати зосередитись людині, яка оцінює композицію сторінки. Сенс використання Lorem Ipsum полягає в тому, що цей текст має більш-менш нормальне розподілення літер на відміну від, наприклад, "Тут іде текст. Тут іде текст." Це робить текст схожим на оповідний. Багато програм верстування та веб-дизайну використовують Lorem Ipsum як зразок і пошук за терміном "lorem ipsum" відкриє багато веб-сайтів, які знаходяться ще в зародковому стані. Різні версії Lorem Ipsum з'явились за минулі роки, деякі випадково, деякі було створено зумисно (зокрема, жартівливі).</p>
+            </article>
+            <article data-question>
+                <h3 data-question-anchor>Звідки він походить?</h3>
+                <p>Lorem Ipsum - це текст-"риба", що використовується в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя, коли невідомий друкар взяв шрифтову гранку та склав на ній підбірку зразків шрифтів. "Риба" не тільки успішно пережила п'ять століть, але й прижилася в електронному верстуванні, залишаючись по суті незмінною.</p>
+                <p>Вона популяризувалась в 60-их роках минулого сторіччя завдяки виданню зразків шрифтів Letraset, які містили уривки з Lorem Ipsum, і вдруге - нещодавно завдяки програмам комп'ютерного верстування на кшталт Aldus Pagemaker, які використовували різні версії Lorem Ipsum.</p>
+            </article>
+            <article data-question>
+                <h3 data-question-anchor>Де собі взяти трохи</h3>
+                <p>Існує багато варіацій уривків з Lorem Ipsum, але більшість з них зазнала певних змін на кшталт жартівливих вставок або змішування слів, які навіть не виглядають правдоподібно. Якщо ви збираєтесь використовувати Lorem Ipsum, ви маєте упевнитись в тому, що всередині тексту не приховано нічого, що могло б викликати у читача конфуз. Більшість відомих генераторів Lorem Ipsum в Мережі генерують текст шляхом повторення наперед заданих послідовностей Lorem Ipsum. Принципова відмінність цього генератора робить його першим справжнім генератором Lorem Ipsum. Він використовує словник з більш як 200 слів латини та цілий набір моделей речень - це дозволяє генерувати Lorem Ipsum, який виглядає осмислено. Таким чином, згенерований Lorem Ipsum не міститиме повторів, жартів, нехарактерних для латини слів і т.ін.</p>
+            </article>
+        </section>
+        <section class="col-text content content__inner">
+            <div class="col-text__text content__text">
+                <p>За відгуками багатьох, така розвага повністю виправдовує свою ціну і коштує досить недорого. Вартість вертолітного туру доступна людині із середнім рівнем доходу і залежить від тривалості подорожі. У компанії «Helitour» ви також можете недорого придбати сертифікат в подарунок. Такий презент стане прекрасним сюрпризом для близької вам людини.</p>
+                <p>Для того, щоб дізнатися більш детальну інформацію про бронювання вертольота на весілля або уточнити скільки коштує тур, достатньо зателефонувати нам по одному з телефонних номерів, вказаних на сайті.</p>
             </div>
         </section>
     </main>
