@@ -77,14 +77,15 @@ html(lang="us")
             +b.DIV(
               :class='{ \'select-input_disable\': !trip }'
               ref='tripSelect'
-              @click='clickSelect($refs.tripSelect, $event)'
             ).select-input
               input(
                 type='number'
                 id='trip-select'
                 v-model='trip'
               )
-              +e.SPAN.value-block {{ trip ? tripInfo.name : 'Маршруты загружаются' }}
+              +e.SPAN(
+                @click='clickSelect($refs.tripSelect, $event)'
+              ).value-block {{ trip ? tripInfo.name : 'Маршруты загружаются' }}
               +e.dropdown
                 +e.DIV(
                   v-for='tripItem in trips'
@@ -114,14 +115,15 @@ html(lang="us")
             +b.DIV(
               :class='{ \'select-input_disable\': !helicopter }'
               ref='helicopterSelect'
-              @click='clickSelect($refs.helicopterSelect, $event)'
             ).select-input.tablet
               input(
                 type='number'
                 name='helicopter-select'
                 v-model='helicopter'
               )
-              +e.SPAN.value-block
+              +e.SPAN(
+                @click='clickSelect($refs.helicopterSelect, $event)'
+              ).value-block
                 +e.SPAN.icon(v-html='helicopterInfo.icon')
                 | {{ helicopter ? helicopterInfo.name : 'Маршруты загружаются' }}
                 span.sm-phone {{ ` (${helicopterInfo.text})` }}
@@ -155,32 +157,33 @@ html(lang="us")
           div
             .price(data-before='вiд' data-after='грн') 1899
             +e.SPAN.back-subtext Вартість польоту
-      +b.SECTION.license.content.content__inner
-        h2 Ліцензії
-        +e.content
-          +e.content-item
-            +e.H3.content-item-title Ліцензія Льотної придатності
-            +e.SPAN(data-popup-webp='img/license.webp' data-popup-jpg='img/license.jpg' data-popup-alt='License photo 1').content-item-button.js__open-modal-document
-          +e.content-item
-            +e.H3.content-item-title Сертифікат Авіаціної служби
-            +e.SPAN(data-popup-webp='img/license.webp' data-popup-jpg='img/license.jpg' data-popup-alt='License photo 2').content-item-button.js__open-modal-document
-          +e.content-item
-            +e.H3.content-item-title Сертифікат експерта
-            +e.SPAN(data-popup-webp='img/license.webp' data-popup-jpg='img/license.jpg' data-popup-alt='License photo 3').content-item-button.js__open-modal-document
-          +e.content-item
-            +e.H3.content-item-title Сертифікат експерта
-            +e.SPAN(data-popup-webp='img/license.webp' data-popup-jpg='img/license.jpg' data-popup-alt='License photo 4').content-item-button.js__open-modal-document
+      +b.SECTION.license
+        .content.content__inner
+          h2 Ліцензії
+          +e.content.swiper-container
+            .swiper-wrapper
+              +e.content-item.swiper-slide
+                +e.H3.content-item-title Ліцензія Льотної придатності
+                +e.SPAN(data-popup-webp='img/license.webp' data-popup-jpg='img/license.jpg' data-popup-alt='License photo 1').content-item-button.js__open-modal-document
+              +e.content-item.swiper-slide
+                +e.H3.content-item-title Сертифікат Авіаціної служби
+                +e.SPAN(data-popup-webp='img/license.webp' data-popup-jpg='img/license.jpg' data-popup-alt='License photo 2').content-item-button.js__open-modal-document
+              +e.content-item.swiper-slide
+                +e.H3.content-item-title Сертифікат експерта
+                +e.SPAN(data-popup-webp='img/license.webp' data-popup-jpg='img/license.jpg' data-popup-alt='License photo 3').content-item-button.js__open-modal-document
+              +e.content-item.swiper-slide
+                +e.H3.content-item-title Сертифікат експерта
+                +e.SPAN(data-popup-webp='img/license.webp' data-popup-jpg='img/license.jpg' data-popup-alt='License photo 4').content-item-button.js__open-modal-document
+            .swiper-pagination
       +b.SECTION.index-charter
         .content.content__inner
           .content__text
             +e.text-content
-              h2 Чартерні
-                br
-                | рейси
+              h2 Чартерні рейси
               p Все частіше люди шукають альтернативу стомлюючим автомобільним подорожам або тривалих поїздок на поїздах чи автобусах. Такою альтернативою може стати чартерний рейс на вертольоті.
               +b.A(href='').button Замовити
             +e.card
-              +picture('img/mini-helicopter-1.webp', 'img/mini-helicopter-1.png', 'Helicopter Icon', 'rounded-image')
+              +picture('img/mini-helicopter-1.webp', 'img/mini-helicopter-1.png', 'Helicopter Icon', '').rounded-image.rounded-image_adaptive-tablet
               +e.P.card-text Враження – це те, що напевно залишиться з нами на все життя.
       +b.SECTION.our-articles.content.content__inner
         h2 Ми в ЗМІ

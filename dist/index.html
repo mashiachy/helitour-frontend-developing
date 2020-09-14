@@ -202,7 +202,7 @@
             <form class="index-booking__front">
                 <h2>Бронювання польоту</h2>
                 <div class="index-booking__form-line"><label for="trip-select">Оберіть маршрут</label>
-                    <div class="select-input" :class="{ 'select-input_disable': !trip }" ref="tripSelect" @click="clickSelect($refs.tripSelect, $event)"><input type="number" id="trip-select" v-model="trip"><span class="select-input__value-block">{{ trip ? tripInfo.name : 'Маршруты загружаются' }}</span>
+                    <div class="select-input" :class="{ 'select-input_disable': !trip }" ref="tripSelect"><input type="number" id="trip-select" v-model="trip"><span class="select-input__value-block" @click="clickSelect($refs.tripSelect, $event)">{{ trip ? tripInfo.name : 'Маршруты загружаются' }}</span>
                         <div class="select-input__dropdown">
                             <div class="select-input__dropdown-item" v-for="tripItem in trips" :key="tripItem.id" :class="{ 'select-input__dropdown-item_current': tripItem.id === trip }" @click="trip = tripItem.id">{{ tripItem.name }}</div>
                         </div>
@@ -210,7 +210,7 @@
                 </div>
                 <div class="index-booking__form-line index-booking__form-line_select-cards"><label for="helicopter-select">Виберіть вертоліт</label>
                     <div class="select-cards select-cards_index desktop"><input type="number" name="helicopter-select" v-model="helicopter" :key="404"><span class="select-cards__item" v-for="helicopterItem in filteredHelicopters" :key="helicopterItem.id" :class="{ 'select-cards__item_active': helicopter === helicopterItem.id }" @click="helicopter = helicopterItem.id"><span class="select-cards__item-icon" v-html="helicopterItem.icon"></span><span class="select-cards__item-title" data-before="Вертоліт">{{ helicopterItem.name }}</span></span></div>
-                    <div class="select-input tablet" :class="{ 'select-input_disable': !helicopter }" ref="helicopterSelect" @click="clickSelect($refs.helicopterSelect, $event)"><input type="number" name="helicopter-select" v-model="helicopter"><span class="select-input__value-block"><span class="select-input__icon" v-html="helicopterInfo.icon"></span>{{ helicopter ? helicopterInfo.name : 'Маршруты загружаются' }}<span class="sm-phone">{{ ` (${helicopterInfo.text})` }}</span></span>
+                    <div class="select-input tablet" :class="{ 'select-input_disable': !helicopter }" ref="helicopterSelect"><input type="number" name="helicopter-select" v-model="helicopter"><span class="select-input__value-block" @click="clickSelect($refs.helicopterSelect, $event)"><span class="select-input__icon" v-html="helicopterInfo.icon"></span>{{ helicopter ? helicopterInfo.name : 'Маршруты загружаются' }}<span class="sm-phone">{{ ` (${helicopterInfo.text})` }}</span></span>
                         <div class="select-input__dropdown">
                             <div class="select-input__dropdown-item" v-for="helicopterItem in helicopters" :key="helicopterItem.id" :class="{ 'select-input__dropdown-item_current': helicopterItem.id === helicopter }" @click="helicopter = helicopterItem.id">{{ helicopterItem.name }}</div>
                         </div>
@@ -232,20 +232,25 @@
                 </div>
             </div>
         </section>
-        <section class="license content content__inner">
-            <h2>Ліцензії</h2>
-            <div class="license__content">
-                <div class="license__content-item">
-                    <h3 class="license__content-item-title">Ліцензія Льотної придатності</h3><span class="license__content-item-button js__open-modal-document" data-popup-webp="img/license.webp" data-popup-jpg="img/license.jpg" data-popup-alt="License photo 1"></span>
-                </div>
-                <div class="license__content-item">
-                    <h3 class="license__content-item-title">Сертифікат Авіаціної служби</h3><span class="license__content-item-button js__open-modal-document" data-popup-webp="img/license.webp" data-popup-jpg="img/license.jpg" data-popup-alt="License photo 2"></span>
-                </div>
-                <div class="license__content-item">
-                    <h3 class="license__content-item-title">Сертифікат експерта</h3><span class="license__content-item-button js__open-modal-document" data-popup-webp="img/license.webp" data-popup-jpg="img/license.jpg" data-popup-alt="License photo 3"></span>
-                </div>
-                <div class="license__content-item">
-                    <h3 class="license__content-item-title">Сертифікат експерта</h3><span class="license__content-item-button js__open-modal-document" data-popup-webp="img/license.webp" data-popup-jpg="img/license.jpg" data-popup-alt="License photo 4"></span>
+        <section class="license">
+            <div class="content content__inner">
+                <h2>Ліцензії</h2>
+                <div class="license__content swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="license__content-item swiper-slide">
+                            <h3 class="license__content-item-title">Ліцензія Льотної придатності</h3><span class="license__content-item-button js__open-modal-document" data-popup-webp="img/license.webp" data-popup-jpg="img/license.jpg" data-popup-alt="License photo 1"></span>
+                        </div>
+                        <div class="license__content-item swiper-slide">
+                            <h3 class="license__content-item-title">Сертифікат Авіаціної служби</h3><span class="license__content-item-button js__open-modal-document" data-popup-webp="img/license.webp" data-popup-jpg="img/license.jpg" data-popup-alt="License photo 2"></span>
+                        </div>
+                        <div class="license__content-item swiper-slide">
+                            <h3 class="license__content-item-title">Сертифікат експерта</h3><span class="license__content-item-button js__open-modal-document" data-popup-webp="img/license.webp" data-popup-jpg="img/license.jpg" data-popup-alt="License photo 3"></span>
+                        </div>
+                        <div class="license__content-item swiper-slide">
+                            <h3 class="license__content-item-title">Сертифікат експерта</h3><span class="license__content-item-button js__open-modal-document" data-popup-webp="img/license.webp" data-popup-jpg="img/license.jpg" data-popup-alt="License photo 4"></span>
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
                 </div>
             </div>
         </section>
@@ -253,11 +258,11 @@
             <div class="content content__inner">
                 <div class="content__text">
                     <div class="index-charter__text-content">
-                        <h2>Чартерні<br>рейси</h2>
+                        <h2>Чартерні рейси</h2>
                         <p>Все частіше люди шукають альтернативу стомлюючим автомобільним подорожам або тривалих поїздок на поїздах чи автобусах. Такою альтернативою може стати чартерний рейс на вертольоті.</p><a class="button" href="">Замовити</a>
                     </div>
                     <div class="index-charter__card">
-                        <picture class="rounded-image">
+                        <picture class="rounded-image rounded-image_adaptive-tablet">
                             <source srcset="img/mini-helicopter-1.webp" type="image/webp" />
                             <source srcset="img/mini-helicopter-1.png" type="image/jpeg" /><img src="img/mini-helicopter-1.png" alt="Helicopter Icon" />
                         </picture>

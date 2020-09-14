@@ -14,11 +14,15 @@
     align-items: flex-end
     justify-content: space-between
     margin-bottom: 60px
+    @include sm-phone
+      justify-content: center
     &:before
       content: ''
       display: block
       pointer-events: none
       opacity: 0
+      @include sm-phone
+        content: unset
     @include phone
       margin-bottom: 30px
     h2
@@ -35,3 +39,5 @@
   &__header-el-wrapper
     display: flex
     justify-content: flex-end
+    @include sm-phone
+      display: none

@@ -11589,6 +11589,7 @@ Swiper.use(swiper_cjs_6);
 const len = document.querySelector('.thumb-slider .swiper-container .swiper-wrapper').children.length;
 const thumbSlider = new Swiper('.thumb-slider .swiper-container', {
   slidesPerView: len > 5 ? 5 : len,
+  slideToClickedSlide: true,
   navigation: {
     nextEl: '.swiper-button-next',
     prevEl: '.swiper-button-prev',
@@ -11597,6 +11598,7 @@ const thumbSlider = new Swiper('.thumb-slider .swiper-container', {
 
 const helicopterSlider = new Swiper('.main-slider', {
   slidesPerView: 1,
+  touchMoveStopPropagation: true,
   thumbs: {
     swiper: thumbSlider,
   },

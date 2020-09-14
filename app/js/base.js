@@ -84,6 +84,54 @@ export const articlesSlider = () => {
   });
 };
 
+export const documentSlider = () => {
+  const documentSlider = new Swiper('.license .swiper-container', {
+    loop: true,
+    loopAdditionalSlides: 1,
+    slidesPerView: 'auto',
+    loopedSlides: 1,
+    spaceBetween: 10,
+    centeredSlides: true,
+    breakpoints: {
+      420: {
+        slidesPerView: 2,
+        spaceBetween: 10,
+        centeredSlides: true,
+      },
+      576: {
+        slidesPerView: 3,
+        spaceBetween: 10,
+        centeredSlides: true,
+      },
+      992: {
+        slidesPerView: 4,
+        spaceBetween: 1,
+        centeredSlides: false,
+      },
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+      renderBullet: (index, className) => {
+        return `<span class=${className}></span>`;
+      },
+    },
+  });
+  const documentSliderElement = document.querySelector('.license .swiper-container');
+  const length = 1 + Math.max(...Array.from(documentSliderElement.querySelectorAll('.swiper-wrapper .swiper-slide'))
+    .map(el => Number.parseInt(el.getAttribute('data-swiper-slide-index'))));
+  const paginationElement = documentSliderElement.querySelector('.swiper-pagination');
+  const paginationVisible = () => {
+    if (length <= 4 && window.innerWidth > 991) {
+      paginationElement.style.display = 'none';
+    } else {
+      paginationElement.style.display = 'block';
+    }
+  };
+  paginationVisible();
+  window.addEventListener('resize', paginationVisible);
+};
+
 export const instagramSlider = () => {
   const instagramSlider = new Swiper('.our-instagram .swiper-container', {
     loop: true,

@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import axios from 'axios';
-import {webp, headerPopup, vhFix, questionsManager, excursionsSlider, articlesSlider, initModal, openModal, closeModal} from './base';
+import {webp, headerPopup, vhFix, questionsManager, excursionsSlider, articlesSlider, documentSlider, initModal, openModal, closeModal} from './base';
 import Swiper, {Pagination} from 'swiper';
 
 webp();
@@ -11,6 +11,7 @@ Swiper.use(Pagination);
 
 excursionsSlider();
 articlesSlider();
+documentSlider();
 questionsManager();
 
 initModal('.modal-document');
