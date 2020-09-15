@@ -1,0 +1,37 @@
+@import '../mixins'
+
+.fixed-excursion-info
+  background-color: #ffffff
+  z-index: 15
+  position: fixed
+  top: calc(#{$w-cg})
+  visibility: hidden
+  opacity: 0
+  transition: opacity .25s ease-out
+  &.active
+    opacity: 1
+    visibility: visible
+  display: flex
+  align-items: stretch
+  box-sizing: border-box
+  border: 1px solid $gray
+  border-top: none
+  @include sm-tablet
+    flex-wrap: wrap
+  @include tablet
+    top: calc(#{$w-cg-phone})
+  .excursion-info-card
+    flex-basis: 25%
+    box-sizing: border-box
+    @include sm-tablet
+      flex-basis: 50%
+    &:not(:last-child)
+      position: relative
+      &:after
+        position: absolute
+        content: ''
+        top: 15px
+        right: 0
+        height: calc(100% - 30px)
+        width: 1px
+        background-color: $gray

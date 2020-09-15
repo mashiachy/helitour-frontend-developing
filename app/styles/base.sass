@@ -194,6 +194,14 @@ main:not(:last-child)
   @media screen and (min-width: 577px)
     display: none !important
 
+.sm-tablet
+  @media screen and (min-width: 992px)
+    display: none !important
+
+.no-sm-tablet
+  @include sm-tablet
+    display: none !important
+
 .phone
   @media screen and (min-width: 769px)
     display: none !important

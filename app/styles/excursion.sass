@@ -1,0 +1,126 @@
+@import "mixins"
+
+.bg
+  min-height: calc(var(--vh) * 100)
+  align-items: flex-start
+  text-align: left
+  color: #ffffff
+  padding: calc(#{$w-cg} * 2 - 20px) 0 calc(#{$w-c})
+  @include phone
+    padding: calc(#{$w-cg-phone} * 2 - 20px) 0 calc(#{$w-c-phone})
+  @include baseSectionMarginBottom
+  h1
+    font-size: 36px
+    line-height: 48px
+    @include tablet
+      font-size: 28px
+      line-height: 36px
+    max-width: 335px
+  &__excursion-info-cards
+    max-width: 400px
+    display: flex
+    justify-content: space-between
+    flex-wrap: wrap
+    margin-bottom: -40px
+    @include sm-phone
+      display: block
+    .excursion-info-card
+      margin-bottom: 40px
+
+.info-cards
+  @include baseSectionMarginBottom
+  &__gallery
+    width: 100%
+    display: flex
+    align-items: stretch
+    justify-content: center
+    flex-wrap: wrap
+    margin-right: -20px
+    margin-bottom: -20px
+    @include adaptive(480)
+      flex-direction: column
+      margin-right: 0
+      margin-bottom: 0
+    &:not(:last-child)
+      margin-bottom: 40px
+    .excursion-info-card
+      width: calc((100% + 20px) / 5 - 20px)
+      margin-right: 10px
+      margin-bottom: 20px
+      min-width: 220px
+      @include adaptive(480)
+        width: 100%
+        margin-right: 0
+        margin-bottom: 10px
+        &:last-child
+          margin-bottom: 0
+  .button
+    @include centerMargin
+
+.trip-on-map
+  display: flex
+  align-items: stretch
+  @include baseSectionMarginBottom
+  @include sm-tablet
+    display: block
+  h2.sm-tablet
+    text-align: center
+    margin-bottom: 60px
+    @include phone
+      margin-bottom: 30px
+  &__map-wrapper
+    width: 50%
+    margin-right: 10px
+    background-color: $back-light
+    @include sm-tablet
+      width: 100%
+      margin-bottom: 48px
+      height: 400px
+      margin-right: 0
+  &__content
+    padding: 130px 0 90px calc(#{$w-c} / 2)
+    width: calc(#{$w-cg} * 6 - 20px)
+    h2
+      max-width: 480px
+      margin-bottom: 48px
+  ul
+    column-count: 2
+    column-gap: 20px
+    &:not(:last-child)
+      margin-bottom: 36px
+      @include phone
+        margin-bottom: 24px
+    @include sm-phone
+      column-count: 1
+  li
+    list-style: none
+    line-height: 24px
+    margin-bottom: 12px
+    &:before
+      content: ''
+      display: inline-block
+      width: 12px
+      height: 12px
+      box-sizing: border-box
+      border-radius: 50%
+      border: 2px solid $accent-text
+      margin-right: 20px
+  p:not(:last-child)
+    margin-bottom: 36px
+    @include phone
+      margin-bottom: 24px
+
+.first-col-text
+  @include baseSectionPaddingBottom
+  @include sectionAfterLine
+  margin-bottom: 0 !important
+
+.helitours-for-excursions
+  @include baseSectionMarginBottom
+  @include baseSectionHeader
+
+.our-instagram
+  @include baseSectionMarginBottom
+  .content
+    @include baseSectionPaddingBottom
+    @include sectionAfterLine

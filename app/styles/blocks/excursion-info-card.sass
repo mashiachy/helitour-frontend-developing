@@ -1,0 +1,81 @@
+@import '../mixins'
+
+.excursion-info-card
+  width: fit-content
+  &__icon
+    width: auto
+    display: block
+    height: 25px
+    path
+      fill: #ffffff
+    &:not(:last-child)
+      margin-bottom: 18px
+  &__subtitle, &__content:before
+    width: fit-content
+    display: block
+    font-size: 12px
+    line-height: 16px
+  &__subtitle
+    &:not(:last-child)
+      margin-bottom: 12px
+      @include tablet
+        margin-bottom: 4px
+  &__title
+    width: fit-content
+    font-size: 20px
+    text-transform: uppercase
+    font-weight: bold
+    line-height: 24px
+    @include tablet
+      font-size: 16px
+      line-height: 20px
+  &_boxed
+    display: flex
+    align-items: stretch
+    min-height: 85px
+    border: 1px solid $gray
+  &_boxed &__icon
+    width: 85px
+    height: auto
+    margin-bottom: 0
+    flex-shrink: 0
+    border-right: 1px solid $gray
+    display: flex
+    align-items: center
+    justify-content: center
+    svg
+      height: 27px
+      width: auto
+      path
+        fill: #212121
+        stroke: #212121
+  &_flat
+    width: auto
+    display: flex
+    align-items: center
+    justify-content: center
+    padding: 20px
+  &_flat &__icon
+    height: 25px
+    width: auto
+    margin-bottom: 0
+    margin-right: 30px
+    path
+      fill: #212121
+      stroke: #212121
+  &_flat &__subtitle
+    margin-bottom: 0 !important
+  &__content
+    font-size: 14px
+    font-weight: bold
+    text-transform: uppercase
+    line-height: 18px
+    padding: 20px
+    display: flex
+    flex-direction: column
+    justify-content: center
+  &__content[data-before]:before
+    content: attr(data-before)
+    //margin-bottom: 9px
+    font-weight: normal
+    text-transform: none

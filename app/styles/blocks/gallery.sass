@@ -22,11 +22,11 @@
     @include sm-phone
       width: 100% !important
       margin-right: 0 !important
-    img
+    &:not(&_free) img
       top: 0
       left: 0
       position: absolute
-    &:before
+    &:not(&_free):before
       content: ''
       display: inline-block
       width: 0

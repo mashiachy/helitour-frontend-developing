@@ -174,7 +174,7 @@ mixin our-instagram
           .swiper-slide(data-back-webp='img/inst2.webp' data-back-jpg='img/inst2.jpg')
           .swiper-slide(data-back-webp='img/inst3.webp' data-back-jpg='img/inst3.jpg')
         .swiper-pagination
-    +b.A.button.our-instagram__button(href="#") пІДПИСАТИСЬ
+      +b.A.button.our-instagram__button(href="#") пІДПИСАТИСЬ
 
 mixin our-excursions
   +b.SECTION.our-excursions
@@ -258,7 +258,7 @@ mixin services-gallery
         a(href='#') дОКЛАДНШЕ
 
 mixin col-text
-  +b.SECTION.col-text.content.content__inner
+  +b.SECTION.col-text.content.content__inner&attributes(attributes)
     +e.text.content__text
       p За відгуками багатьох, така розвага повністю виправдовує свою ціну і коштує досить недорого. Вартість вертолітного туру доступна людині із середнім рівнем доходу і залежить від тривалості подорожі. У компанії «Helitour» ви також можете недорого придбати сертифікат в подарунок. Такий презент стане прекрасним сюрпризом для близької вам людини.
       p Для того, щоб дізнатися більш детальну інформацію про бронювання вертольота на весілля або уточнити скільки коштує тур, достатньо зателефонувати нам по одному з телефонних номерів, вказаних на сайті.

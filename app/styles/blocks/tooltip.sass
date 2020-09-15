@@ -1,0 +1,57 @@
+@import '../mixins'
+
+.tooltip
+  margin: 0 .5em
+  cursor: pointer
+  text-align: center
+  display: inline-block
+  position: relative
+  &:before
+    content: '?'
+    height: 16px
+    width: 16px
+    display: block
+    border-radius: 50%
+    background-color: #ffffff
+    color: $black-text
+  &_black:before
+    background-color: $black-text
+    color: #ffffff
+  &__text
+    position: absolute
+    z-index: 3
+    visibility: hidden
+    background-color: $black-text
+    color: #ffffff
+    text-align: center
+    padding: 5px
+    box-sizing: border-box
+    border-radius: 6px
+    max-width: 200px
+    width: max-content
+    left: 50%
+    bottom: -15px
+    transform: translate(-50%, 100%)
+    opacity: 0
+    transition: opacity .25s ease-out
+    &:after
+      content: ''
+      position: absolute
+      top: -10px
+      left: calc(50% - 5px)
+      border-width: 5px
+      border-style: solid
+      border-color: transparent transparent $black-text transparent
+  &:hover &__text
+    visibility: visible
+    opacity: 1
+  &_right &__text
+    top: 50%
+    right: -15px
+    left: unset
+    bottom: unset
+    transform: translate(100%, -50%)
+    &:after
+      top: calc(50% - 5px)
+      left: -5px
+      border-color: transparent $black-text transparent transparent
