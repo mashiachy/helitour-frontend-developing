@@ -6,10 +6,14 @@
   color: #ffffff
   margin-bottom: 84px
   @include tablet
-    height: 480px
-  @include phone
-    height: 300px
-
+    height: unset
+    min-height: 480px
+  h1
+    font-size: 36px
+    line-height: 48px
+    @include tablet
+      font-size: 24px
+      line-height: 32px
 
 .blog-article
   &:not(:last-child)
@@ -29,14 +33,19 @@
       height: 1px
       background-color: $gray
   article
-    p
+    p, ul, ol
       &:not(:last-child)
         margin-bottom: 30px
         @include phone
           margin-bottom: 22px
-  &__big-text
+  h3.blog-article__big-text, .blog-article__big-text
+    text-transform: none
+    font-weight: normal
     font-size: 25px
     line-height: 36px
+    @include tablet
+      font-size: 21px
+      line-height: 30px
     @include phone
       font-size: 18px
       line-height: 30px

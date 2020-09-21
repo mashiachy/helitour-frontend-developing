@@ -19,7 +19,7 @@ html(lang="us")
           h1 Польоти на вертольотах Helitour
           .buttons
             +b.A(href='#').button Забронювати
-            +b.A(href='#').button_white послуги
+            +b.A(href='#').button_white Екскурсії
       +b.SECTION.our-excursions
         .content.content__inner
           +e.header
@@ -30,34 +30,34 @@ html(lang="us")
               a(href='#') Всі екскурсії
           .swiper-container
             .swiper-wrapper
-              +b.excursion-card.swiper-slide
-                +picture('img/exc1.webp', 'img/exc1.jpg', 'Excursion', 'excursion-card__img')
+              +b.base-card_excursion.swiper-slide
+                +e.img(data-back-webp='img/exc1.webp' data-back-jpg='img/exc1.jpg')
                 +e.content
-                  h3 Оглядовий політ над Києвом
+                  +e.P.title Оглядовий політ над Києвом
                   +e.SPAN(data-after='гр').info 18
                   +e.footer
                     a(href="#") забронювати
                     +e.SPAN(data-after='грн').price 5 680
-              +b.excursion-card.swiper-slide
-                +picture('img/exc2.webp', 'img/exc2.jpg', 'Excursion', 'excursion-card__img')
+              +b.base-card_excursion.swiper-slide
+                +e.img(data-back-webp='img/exc2.webp' data-back-jpg='img/exc2.jpg')
                 +e.content
-                  h3 Політ над Київом та Межигір’ям
+                  +e.P.title Політ над Київом та Межигір’ям
                   +e.SPAN(data-after='гр').info 18
                   +e.footer
                     a(href="#") забронювати
                     +e.SPAN(data-after='грн').price 2 333
-              +b.excursion-card.swiper-slide
-                +picture('img/exc3.webp', 'img/exc3.jpg', 'Excursion', 'excursion-card__img')
+              +b.base-card_excursion.swiper-slide
+                +e.img(data-back-webp='img/exc3.webp' data-back-jpg='img/exc3.jpg')
                 +e.content
-                  h3 Вертолітний тур «Церква на воді»
+                  +e.P.title Вертолітний тур «Церква на воді»
                   +e.SPAN(data-after='гр').info 18
                   +e.footer
                     a(href="#") забронювати
                     +e.SPAN(data-after='грн').price 5 680
-              +b.excursion-card.swiper-slide
-                +picture('img/exc4.webp', 'img/exc4.jpg', 'Excursion', 'excursion-card__img')
+              +b.base-card_excursion.swiper-slide
+                +e.img(data-back-webp='img/exc4.webp' data-back-jpg='img/exc4.jpg')
                 +e.content
-                  h3 Політ над Київом та Межигір’ям
+                  +e.P.title Політ над Київом та Межигір’ям
                   +e.SPAN(data-after='гр').info 18
                   +e.footer
                     a(href="#") забронювати
@@ -85,7 +85,7 @@ html(lang="us")
               )
               +e.SPAN(
                 @click='clickSelect($refs.tripSelect, $event)'
-              ).value-block {{ trip ? tripInfo.name : 'Маршруты загружаются' }}
+              ).value-block {{ trip ? tripInfo.name : 'Маршрути завантажуються' }}
               +e.dropdown
                 +e.DIV(
                   v-for='tripItem in trips'
@@ -125,11 +125,11 @@ html(lang="us")
                 @click='clickSelect($refs.helicopterSelect, $event)'
               ).value-block
                 +e.SPAN.icon(v-html='helicopterInfo.icon')
-                | {{ helicopter ? helicopterInfo.name : 'Маршруты загружаются' }}
+                | {{ helicopter ? helicopterInfo.name : 'Вертольоти завантажуються' }}
                 span.sm-phone {{ ` (${helicopterInfo.text})` }}
               +e.dropdown
                 +e.DIV(
-                  v-for='helicopterItem in helicopters'
+                  v-for='helicopterItem in filteredHelicopters'
                   :key='helicopterItem.id'
                   :class='{ \'select-input__dropdown-item_current\': helicopterItem.id === helicopter }'
                   @click='helicopter = helicopterItem.id'
@@ -190,28 +190,28 @@ html(lang="us")
         .swiper-container.swiper-container--two
           .swiper-wrapper
             .swiper-slide
-              +b.article-card
-                +picture('img/hel1.webp', 'img/hel1.jpg', 'Article', 'article-card__img')
+              +b.base-card_article
+                +e.img(data-back-webp='img/hel1.webp' data-back-jpg='img/hel1.jpg')
                 +e.content
-                  h3 Lorem Ipsum - це текст-"риба", що використовується в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
+                  +e.P.title Lorem Ipsum - це текст-"риба", що використовується в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
                   a(href="#") чатати
             .swiper-slide
-              +b.article-card
-                +picture('img/hel3.webp', 'img/hel3.jpg', 'Article', 'article-card__img')
+              +b.base-card_article
+                +e.img(data-back-webp='img/hel2.webp' data-back-jpg='img/hel2.jpg')
                 +e.content
-                  h3 в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
+                  +e.P.title в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
                   a(href="#") чатати
             .swiper-slide
-              +b.article-card
-                +picture('img/hel5.webp', 'img/hel5.jpg', 'Article', 'article-card__img')
+              +b.base-card_article
+                +e.img(data-back-webp='img/hel5.webp' data-back-jpg='img/hel5.jpg')
                 +e.content
-                  h3 Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
+                  +e.P.title Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
                   a(href="#") чатати
             .swiper-slide
-              +b.article-card
-                +picture('img/hel4.webp', 'img/hel4.jpg', 'Article', 'article-card__img')
+              +b.base-card_article
+                +e.img(data-back-webp='img/hel4.webp' data-back-jpg='img/hel4.jpg')
                 +e.content
-                  h3 в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
+                  +e.P.title в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
                   a(href="#") чатати
           .swiper-pagination
       +b.SECTION.faq.content.content__inner.default-article

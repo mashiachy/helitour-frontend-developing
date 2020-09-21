@@ -32,7 +32,7 @@
     right: 0
     bottom: 0
     left: 0
-    padding: 11% 9% 7%
+    padding: 8% 9% 6%
     display: flex
     flex-direction: column
     align-items: center
@@ -58,17 +58,14 @@
     margin: auto 0
   &__img
     position: absolute
-    left: 0
-    top: 0
-    right: 0
-    bottom: 0
-    overflow: hidden
+    left: 50%
+    top: 50%
+    height: 100%
+    width: 100%
+    transform: translate(-50%, -50%)
     transition: transform .25s ease-out
-    img
-      position: absolute
-      top: 50%
-      left: 50%
-      transform: translate(-50%, -50%)
+    background-size: cover
+    background-position: center center
     &:after
       content: ''
       position: absolute
@@ -77,9 +74,9 @@
       bottom: 0
       left: 0
       background-color: rgba(23, 23, 23, 0)
-      transition: background-color .25s ease-out
+      transition: background-color .5s ease-out
   &:hover &__img
-    transform: scale(1.25)
+    transform: translate(-50%, -50%) scale(1.25)
     &:after
       background-color: rgba(23, 23, 23, 0.4)
   &__info

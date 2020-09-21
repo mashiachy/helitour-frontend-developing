@@ -2,7 +2,7 @@
 
 .default-article
   article
-    h3:not(:last-child)
+    h3:not(:last-child), h2:not(:last-child)
       margin-bottom: 40px
       @include phone
         margin-bottom: 22px
@@ -10,5 +10,5 @@
       margin-bottom: 30px
       @include phone
         margin-bottom: 22px
-    h3
+    h3, h2
       text-align: center

@@ -39,6 +39,7 @@
 
 html
   overflow-x: hidden
+  -webkit-tap-highlight-color: transparent
 
 body
   font-family: Gilroy
@@ -47,6 +48,9 @@ body
   font-size: 16px
   line-height: 30px
   color: $black-text
+  @include adaptive(1200)
+    font-size: 15px
+    line-height: 28px
   @include phone
     font-size: 14px
     line-height: 28px
@@ -62,29 +66,17 @@ p
   padding: 0
   margin: 0
 
-h1
-  font-size: 50px
-  line-height: 64px
-  @include tablet
-    font-size: 28px
-    line-height: 36px
+h1, .h1
+  @include h1Styles
 
-h2
-  font-size: 36px
-  line-height: 48px
-  @include tablet
-    font-size: 24px
-    line-height: 32px
-  @include sm-tablet
-    font-size: 20px
-    line-height: 28px
+h2, .h2
+  @include h2Styles
 
-h3
-  font-size: 18px
-  line-height: 24px
-  @include sm-tablet
-    font-size: 14px
-    line-height: 18px
+.h23
+  @include h23Styles
+
+h3, .h3
+  @include h3Styles
 
 h4
   font-size: 14px
@@ -113,11 +105,11 @@ picture
     min-height: 100%
 
 .content
-  max-width: 1540px
-  width: 80%
-  margin-left: 10%
-  margin-right: 10%
-  @include phone
+  max-width: 1730px
+  width: 90%
+  margin-left: 5%
+  margin-right: 5%
+  @include adaptive(820)
     width: calc(100% - 20px)
     margin-left: 10px
     margin-right: 10px
@@ -125,23 +117,55 @@ picture
     box-sizing: border-box
     padding-left: calc(#{$w-c})
     padding-right: calc(#{$w-c})
-    @include phone
+    @include adaptive(820)
       padding-left: 15px
       padding-right: 15px
   &__text
     padding-left: calc(#{$w-cg} + 20px)
     padding-right: calc(#{$w-cg} + 20px)
-    @include adaptive(1600)
+    @include adaptive(1680)
       padding-left: 0
       padding-right: 0
 
-ul
+ul, ol
   margin: 0
   padding: 0
 li
   margin: 0
   padding: 0
   list-style: none
+
+ul.rounded
+  li
+    display: flex
+    align-items: baseline
+    &:before
+      content: ''
+      width: 12px
+      height: 12px
+      flex-shrink: 0
+      transform: translateY(1px)
+      box-sizing: border-box
+      border-radius: 50%
+      border: 2px solid $accent-text
+      margin-right: 30px
+      @include phone
+        margin-right: 20px
+
+ol.numeric
+  counter-reset: my-awesome-counter
+  li
+    counter-increment: my-awesome-counter
+    display: flex
+    align-items: baseline
+    &:before
+      content: counter(my-awesome-counter) ". "
+      width: fit-content
+      height: fit-content
+      flex-shrink: 0
+      margin-right: 30px
+      @include phone
+        margin-right: 20px
 
 .bold
   font-weight: bold
@@ -163,7 +187,7 @@ main:not(:last-child)
   svg
     display: inline-block
     height: 15px
-    margin: 0 4px -4px
+    margin-bottom: -4px
     width: auto
     cursor: pointer
     &:hover
@@ -220,5 +244,6 @@ a.base-link
   line-height: inherit
   color: $accent-text
   font-weight: 500
+  border-bottom: 2px solid transparent
   &:hover
     border-bottom: 2px solid $accent-text

@@ -28,14 +28,13 @@
         width: 330px
         margin-right: 55px
         margin-bottom: 0 !important
+        @include sm-tablet
+          width: unset
+          max-width: unset
     &_buttons
       display: flex
       flex-wrap: wrap
       .button
-        @include phone
-          max-width: calc(50% - 10px)
-          min-width: fit-content
-          white-space: nowrap
         @include sm-phone
           margin-bottom: 10px
         &:not(:last-child)
@@ -143,7 +142,7 @@
       display: block
       content: var(--data-before)
       order: 1 !important
-      margin-bottom: 30px
+      margin-bottom: 24px
       @include sm-tablet
         margin-bottom: 12px
     &:after
@@ -154,7 +153,7 @@
       box-sizing: border-box
       border-radius: 50%
       border: 2px solid $accent-text
-      margin-bottom: 30px
+      margin-bottom: 24px
       @include sm-tablet
         margin-bottom: 18px
     *
@@ -189,22 +188,10 @@
     @include phone
       margin-bottom: 24px
   &__list-item
-    display: flex
-    align-items: baseline
     &:not(:last-child)
       margin-bottom: 30px
-      @include phone
-        margin-bottom: 30px
-    &:before
-      content: ''
-      width: 12px
-      height: 12px
-      flex-shrink: 0
-      transform: translateY(1px)
-      box-sizing: border-box
-      border-radius: 50%
-      border: 2px solid $accent-text
-      margin-right: 30px
+      @include adaptive(1366)
+        margin-bottom: 24px
       @include phone
         margin-bottom: 20px
 

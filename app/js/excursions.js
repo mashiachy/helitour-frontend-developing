@@ -23,3 +23,5 @@ const app = new Vue({
     },
   },
 });
+
+window.addEventListener('load', () => console.log(1))

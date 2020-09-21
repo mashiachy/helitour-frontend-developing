@@ -47,15 +47,19 @@
       @include phone
         justify-content: space-between
         align-items: flex-start
+      @include adaptive(460)
+        flex-wrap: wrap
+        .checkbox
+          margin-top: 12px
       & > *
         min-height: 30px
         @include phone
           min-height: 22px
-      & > *:nth-child(1), & > *:nth-child(3)
+      .booking-form__item-label, .checkbox
         flex-basis: calc(50% - 150px)
         @include phone
           flex-basis: auto
-      & > *:nth-child(2)
+      .price
         padding: 0 50px
         @include sm-phone
           padding: 0 20px
@@ -99,31 +103,49 @@
   &__personal-wrapper
     display: flex
     flex-wrap: wrap
-    flex-direction: column
-    margin-bottom: -10px
-    margin-right: -20px
-    max-height: 364px
+    align-items: stretch
+    justify-content: space-between
     @include sm-phone
       max-height: unset
       margin-right: 0
-    .text-input, .select-input
-      margin-right: 20px
+      flex-direction: column
+  &__personal-wrapper-item
+    width: calc(50% - 10px)
+    margin-bottom: -20px
+    @include tablet
+      margin-bottom: -10px
+      width: calc(50% - 5px)
+    @include sm-phone
+      width: 100%
+      margin-bottom: 0
+      &:last-child
+        margin-bottom: -10px
+  .text-input, .select-input, textarea
+    width: 100%
+    margin-bottom: 20px
+    @include tablet
       margin-bottom: 10px
-      width: calc(50% - 20px)
-      @include sm-phone
-        margin-right: 0
-        width: 100%
-    textarea
-      height: 354px
-      resize: none
-      @include sm-phone
-        height: 284px
+  textarea
+    height: calc(100% - 20px)
+    resize: none
+    @include tablet
+      height: calc(100% - 10px)
+    @include sm-phone
+      height: 128px
   &__buttons-container
     @include centerMargin
     max-width: 460px
     width: 100%
     display: flex
     flex-wrap: wrap
+    margin-bottom: -10px
+    .checkbox
+      flex-basis: 100%
+      margin-bottom: 10px
+      .base-link
+        margin-left: .3em
+      &__label
+        justify-content: center
     .button
       margin-bottom: 10px
       @include phone
@@ -134,10 +156,9 @@
       @include adaptive(380)
         width: 100%
         margin-right: unset !important
-      &:first-child
+      &:not(:last-child)
         margin-right: 20px
         @include phone
           margin-right: 10px
-
 .mx-datepicker
   width: calc(50% + 45px)

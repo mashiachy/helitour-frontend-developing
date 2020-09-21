@@ -11421,13 +11421,15 @@ const excursionsSlider = () => {
     spaceBetween: 10,
     centeredSlides: true,
     breakpoints: {
-      461: {
+      481: {
         slidesPerView: 2,
         spaceBetween: 10,
+        centeredSlides: true,
       },
       992: {
-        slidesPerView: 3,
+        slidesPerView: 2,
         spaceBetween: 10,
+        centeredSlides: false,
       },
       1280: {
         slidesPerView: 3,
@@ -11454,11 +11456,11 @@ const instagramSlider = () => {
     slidesPerView: 1,
     spaceBetween: 10,
     breakpoints: {
-      460: {
+      578: {
         slidesPerView: 2,
         spaceBetween: 10,
       },
-      577: {
+      768: {
         slidesPerView: 3,
         spaceBetween: 10,
       },
@@ -11480,7 +11482,7 @@ const instagramSlider = () => {
     .map(el => Number.parseInt(el.getAttribute('data-swiper-slide-index'))));
   const paginationElement = instagramSliderElement.querySelector('.swiper-pagination');
   const paginationVisible = () => {
-    if (length <= 3 && window.innerWidth >= 578) {
+    if (length <= 3 && window.innerWidth >= 768) {
       paginationElement.style.display = 'none';
     } else {
       paginationElement.style.display = 'block';
@@ -11491,23 +11493,40 @@ const instagramSlider = () => {
 };
 
 const webp = () => {
-  supportsWebp_commonJs.then(result => {
-    window.webp = result;
-    if (result) {
-      document.body.classList.add('webp');
-      document.querySelectorAll('[data-back-webp], [data-back-jpg]').forEach(el => {
+  const handle = (domEl) => {
+    if (window.webp) {
+      domEl.querySelectorAll('[data-back-webp], [data-back-jpg]').forEach(el => {
         if (el.hasAttribute('data-back-webp'))
           el.style.backgroundImage = `url(${el.getAttribute('data-back-webp')})`;
         else
           el.style.backgroundImage = `url(${el.getAttribute('data-back-jpg')})`;
       });
     } else {
-      document.body.classList.add('no-webp');
-      document.querySelectorAll('[data-back-jpg]').forEach(el => {
+      domEl.querySelectorAll('[data-back-jpg]').forEach(el => {
         if (el.hasAttribute('data-back-jpg'))
           el.style.backgroundImage = `url(${el.getAttribute('data-back-jpg')})`;
       });
     }
+  };
+  const observer = new MutationObserver((mutationList, observer) => {
+    mutationList.forEach(mutation => {
+      if (mutation.target.querySelectorAll('[data-back-webp], [data-back-jpg]').length)
+        handle(mutation.target);
+    });
+  });
+  observer.observe(document, {
+    attributes: true,
+    childList: true,
+    subtree: true
+  });
+  supportsWebp_commonJs.then(result => {
+    window.webp = result;
+    if (window.webp) {
+      document.body.classList.add('webp');
+    } else {
+      document.body.classList.add('no-webp');
+    }
+    handle(document);
   });
 };
 

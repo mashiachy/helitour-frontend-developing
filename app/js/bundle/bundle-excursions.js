@@ -26,23 +26,40 @@ const vhFix = () => {
 };
 
 const webp = () => {
-  supportsWebp_commonJs.then(result => {
-    window.webp = result;
-    if (result) {
-      document.body.classList.add('webp');
-      document.querySelectorAll('[data-back-webp], [data-back-jpg]').forEach(el => {
+  const handle = (domEl) => {
+    if (window.webp) {
+      domEl.querySelectorAll('[data-back-webp], [data-back-jpg]').forEach(el => {
         if (el.hasAttribute('data-back-webp'))
           el.style.backgroundImage = `url(${el.getAttribute('data-back-webp')})`;
         else
           el.style.backgroundImage = `url(${el.getAttribute('data-back-jpg')})`;
       });
     } else {
-      document.body.classList.add('no-webp');
-      document.querySelectorAll('[data-back-jpg]').forEach(el => {
+      domEl.querySelectorAll('[data-back-jpg]').forEach(el => {
         if (el.hasAttribute('data-back-jpg'))
           el.style.backgroundImage = `url(${el.getAttribute('data-back-jpg')})`;
       });
     }
+  };
+  const observer = new MutationObserver((mutationList, observer) => {
+    mutationList.forEach(mutation => {
+      if (mutation.target.querySelectorAll('[data-back-webp], [data-back-jpg]').length)
+        handle(mutation.target);
+    });
+  });
+  observer.observe(document, {
+    attributes: true,
+    childList: true,
+    subtree: true
+  });
+  supportsWebp_commonJs.then(result => {
+    window.webp = result;
+    if (window.webp) {
+      document.body.classList.add('webp');
+    } else {
+      document.body.classList.add('no-webp');
+    }
+    handle(document);
   });
 };
 
@@ -13775,3 +13792,5 @@ const app = new Vue({
     },
   },
 });
+
+window.addEventListener('load', () => console.log(1));

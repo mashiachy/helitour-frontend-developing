@@ -73,14 +73,14 @@
         <section class="booking content content__inner" id="app">
             <form class="booking-form content__text">
                 <div class="booking-form__form-item booking-form__form-item_select"><label class="booking-form__item-label" for="trip-select">Оберіть маршрут</label>
-                    <div class="select-input" :class="{ 'select-input_disable': !trip }" ref="tripSelect" @click="clickSelect($refs.tripSelect, $event)"><input type="number" id="trip-select" v-model="trip"><span class="select-input__value-block">{{ trip ? tripInfo.name : 'Маршруты загружаются' }}</span>
+                    <div class="select-input" :class="{ 'select-input_disable': !trip }"><input type="number" id="trip-select" v-model="trip"><span class="select-input__value-block">{{ trip ? tripInfo.name : 'Маршрути завантажуються' }}</span>
                         <div class="select-input__dropdown">
                             <div class="select-input__dropdown-item" v-for="tripItem in trips" :key="tripItem.id" :class="{ 'select-input__dropdown-item_current': tripItem.id === trip }" @click="trip = tripItem.id">{{ tripItem.name }}</div>
                         </div>
                     </div>
                 </div>
                 <div class="booking-form__form-item booking-form__form-item_select"><label class="booking-form__item-label" for="passengers-select">Кількість пасажирів</label>
-                    <div class="select-input" :class="{ 'select-input_disable': !passengers }" ref="passengersSelect" @click="clickSelect($refs.passengersSelect, $event)"><input type="number" id="passengers-select" v-model="passengers"><span class="select-input__value-block">{{ passengers ? passengers : 'Маршруты загружаются' }}</span>
+                    <div class="select-input" :class="{ 'select-input_disable': !passengers }"><input type="number" id="passengers-select" v-model="passengers"><span class="select-input__value-block">{{ passengers ? passengers : 'Кількість пасажирів завантажується' }}</span>
                         <div class="select-input__dropdown">
                             <div class="select-input__dropdown-item" v-for="p in passengersMax" :key="p" :class="{ 'select-input__dropdown-item_current': passengers === p }" @click="passengers = p">{{ p }}</div>
                         </div>
@@ -93,7 +93,7 @@
                 <div class="booking-form__form-item booking-form__form-item_datepicker">
                     <div class="booking-form__item-label">Оберіть дату та час польоту</div>
                     <div class="booking-form__form-item booking-form__form-item_select"><label for="dateInput">Дата:</label>
-                        <date-picker v-model="date" value-type="format" format="DD:MM:YYYY" :append-to-body="false" :clearable="false" :lang="lang" :input-attr="{id: 'dateInput',placeholder: '00:00:0000'}"><template v-slot:icon-calendar>
+                        <date-picker v-model="date" value-type="format" format="DD.MM.YYYY" :append-to-body="false" :clearable="false" :lang="lang" :input-attr="{id: 'dateInput',}"><template v-slot:icon-calendar>
                                 <?xml version="1.0" encoding="iso-8859-1"?>
                                 <!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
                                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
@@ -217,21 +217,24 @@
                 </div>
                 <div class="booking-form__form-item booking-form__form-item_personal">
                     <div class="booking-form__item-label">Інформація для зв’язку</div>
-                    <div class="booking-form__personal-wrapper"><input class="text-input" type="text" placeholder="Ваше ім’я" v-model="name" /><input class="text-input" type="text" placeholder="Ваш телефон" v-model="telephone" /><input class="text-input" type="text" placeholder="Ваша почта" v-model="email" />
-                        <div class="select-input select-input_boxed" :class="{ 'select-input_disable': !delivery }" ref="deliverySelect" @click="clickSelect($refs.deliverySelect, $event)"><input type="number" id="delivery-select" v-model="delivery"><span class="select-input__value-block">{{ delivery ? deliveryName : 'Як вам доставити сертифікат' }}</span>
-                            <div class="select-input__dropdown">
-                                <div class="select-input__dropdown-item" v-for="deliveryItem in deliveries" :key="deliveryItem.id" :class="{ 'select-input__dropdown-item_current': deliveryItem.id === delivery }" @click="clickSelectItem($refs.deliverySelect, 'delivery', deliveryItem.id, $event)">{{ deliveryItem.name }}</div>
+                    <div class="booking-form__personal-wrapper">
+                        <div class="booking-form__personal-wrapper-item"><input class="text-input" type="text" placeholder="Ваше ім’я" v-model="name" /><input class="text-input" type="text" placeholder="Ваш телефон" v-model="telephone" /><input class="text-input" type="text" placeholder="Ваша почта" v-model="email" />
+                            <div class="select-input select-input_boxed" :class="{ 'select-input_disable': !delivery }" v-show="present"><input type="number" id="delivery-select" v-model="delivery"><span class="select-input__value-block">{{ delivery ? deliveryName : 'Як вам доставити сертифікат' }}</span>
+                                <div class="select-input__dropdown">
+                                    <div class="select-input__dropdown-item" v-for="deliveryItem in deliveries" :key="deliveryItem.id" :class="{ 'select-input__dropdown-item_current': deliveryItem.id === delivery }" @click="delivery = deliveryItem.id">{{ deliveryItem.name }}</div>
+                                </div>
                             </div>
-                        </div><textarea class="text-input" placeholder="Коментар"></textarea>
+                        </div>
+                        <div class="booking-form__personal-wrapper-item"><textarea class="text-input" placeholder="Коментар"></textarea></div>
                     </div>
                 </div>
                 <div class="booking-form__form-item booking-form__form-item_buttons">
-                    <div class="booking-form__buttons-container"><button class="button" type="submit">Оплатити онлайн</button><button class="button button_flat" type="submit">Готівкою</button><span class="checkbox checkbox_flat"><input type="checkbox" id="offer-checkbox" v-model="offerAccept" /><label class="checkbox__label" for="offer-checkbox">Погоджуюсь з офертою</label></span></div>
+                    <div class="booking-form__buttons-container"><span class="checkbox checkbox_flat"><input type="checkbox" id="offer-checkbox" v-model="offerAccept" /><label class="checkbox__label" for="offer-checkbox">Погоджуюсь з <a class="base-link" href="#">офертою</a></label></span><button class="button" type="submit">Оплатити онлайн</button><button class="button button_flat" type="submit">Готівкою</button></div>
                 </div>
             </form>
         </section>
         <section class="col-text content content__inner">
-            <div class="col-text__text content__text">
+            <div class="col-text__text">
                 <p>За відгуками багатьох, така розвага повністю виправдовує свою ціну і коштує досить недорого. Вартість вертолітного туру доступна людині із середнім рівнем доходу і залежить від тривалості подорожі. У компанії «Helitour» ви також можете недорого придбати сертифікат в подарунок. Такий презент стане прекрасним сюрпризом для близької вам людини.</p>
                 <p>Для того, щоб дізнатися більш детальну інформацію про бронювання вертольота на весілля або уточнити скільки коштує тур, достатньо зателефонувати нам по одному з телефонних номерів, вказаних на сайті.</p>
             </div>
@@ -321,14 +324,14 @@
                     <div class="spacer"></div>
                     <div class="row phone short"><a href="#">Оферта</a></div>
                     <p class="tablet">© 2020. Helitour. Всі права захищені.</p>
-                    <p class="kost">Зроблено з<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" fill="#ff6666">
+                    <p class="kost">Зроблено з &nbsp<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" fill="#ff6666">
                             <path d="M376,30c-27.783,0-53.255,8.804-75.707,26.168c-21.525,16.647-35.856,37.85-44.293,53.268
 			c-8.437-15.419-22.768-36.621-44.293-53.268C189.255,38.804,163.783,30,136,30C58.468,30,0,93.417,0,177.514
 			c0,90.854,72.943,153.015,183.369,247.118c18.752,15.981,40.007,34.095,62.099,53.414C248.38,480.596,252.12,482,256,482
 			s7.62-1.404,10.532-3.953c22.094-19.322,43.348-37.435,62.111-53.425C439.057,330.529,512,268.368,512,177.514
 			C512,93.417,453.532,30,376,30z" />
                         </svg>
-                        від Kost</p>
+                        &nbsp від Kost</p>
                 </div>
             </div>
         </div>

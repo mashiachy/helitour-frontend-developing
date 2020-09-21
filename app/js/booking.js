@@ -2,11 +2,12 @@ import Vue from 'vue';
 import VueCurrencyFilter from 'vue-currency-filter';
 import DatePicker from 'vue2-datepicker';
 import axios from 'axios';
-import { webp, headerPopup, vhFix } from './base';
+import { webp, headerPopup, vhFix, selectItemInit } from './base';
 
 webp();
 headerPopup();
 vhFix();
+selectItemInit();
 
 Vue.use(VueCurrencyFilter, {
   thousandsSeparator: ' ',
@@ -20,6 +21,7 @@ const app = new Vue({
     DatePicker,
   },
   data () {
+    const date = new Date();
     return {
       trip: null,
       passengers: null,
@@ -28,7 +30,7 @@ const app = new Vue({
       helicopters: [],
       price: 25000,
       present: false,
-      date: '20:12:2020',
+      date: `${('0'+date.getDate()).slice(-2)}.${('0'+(date.getMonth()+1)).slice(-2)}.${date.getFullYear()}`,
       time: '12:00',
       name: null,
       telephone: null,
@@ -93,17 +95,6 @@ const app = new Vue({
       return this.deliveries.find(d => d.id === this.delivery).name;
     },
   },
-  methods: {
-    clickSelect (target, e) {
-      target.classList.toggle('select-input_active');
-      e.stopPropagation();
-    },
-    clickSelectItem (target, key, value, e) {
-      this[key] = value;
-      target.classList.remove('select-input_active');
-      e.stopPropagation();
-    },
-  },
   async created () {
     const { data } = await axios.get('/helitours_info.json');
     this.trips = [...data.trips];
@@ -111,11 +102,4 @@ const app = new Vue({
     this.trip = this.trips[0].id;
     this.passengers = 1;
   },
-  mounted () {
-    window.addEventListener('click', () => {
-      document.querySelectorAll('.select-input').forEach(el => {
-        if (el.classList.contains('select-input_active')) el.classList.remove('select-input_active');
-      });
-    });
-  }
 });

@@ -8,7 +8,10 @@
   padding: calc(#{$w-cg} * 2 - 20px) 0 calc(#{$w-c})
   @include phone
     padding: calc(#{$w-cg-phone} * 2 - 20px) 0 calc(#{$w-c-phone})
-  @include baseSectionMarginBottom
+  &:not(:last-child)
+    margin-bottom: 60px
+    @include tablet
+      margin-bottom: 40px
   h1
     font-size: 36px
     line-height: 48px
@@ -34,9 +37,10 @@
     display: flex
     align-items: stretch
     justify-content: center
-    flex-wrap: wrap
     margin-right: -20px
     margin-bottom: -20px
+    @include tablet
+      flex-wrap: wrap
     @include adaptive(480)
       flex-direction: column
       margin-right: 0
@@ -78,8 +82,9 @@
       height: 400px
       margin-right: 0
   &__content
-    padding: 130px 0 90px calc(#{$w-c} / 2)
+    padding: calc(#{$w-c}) 0 90px calc(#{$w-c} / 2)
     width: calc(#{$w-cg} * 6 - 20px)
+    box-sizing: border-box
     h2
       max-width: 480px
       margin-bottom: 48px
@@ -93,18 +98,18 @@
     @include sm-phone
       column-count: 1
   li
-    list-style: none
-    line-height: 24px
+    //list-style: none
+    //line-height: 24px
     margin-bottom: 12px
-    &:before
-      content: ''
-      display: inline-block
-      width: 12px
-      height: 12px
-      box-sizing: border-box
-      border-radius: 50%
-      border: 2px solid $accent-text
-      margin-right: 20px
+    //&:before
+    //  content: ''
+    //  display: inline-block
+    //  width: 12px
+    //  height: 12px
+    //  box-sizing: border-box
+    //  border-radius: 50%
+    //  border: 2px solid $accent-text
+    //  margin-right: 20px
   p:not(:last-child)
     margin-bottom: 36px
     @include phone

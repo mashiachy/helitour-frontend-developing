@@ -1,0 +1,171 @@
+@import '../mixins'
+
+.base-card
+  width: 100%
+  background-color: $back-dark
+  position: relative
+  color: #ffffff
+  overflow: hidden
+  &:before
+    content: ''
+    display: inline-block
+    height: 0
+    width: 0
+    padding-top: 100%
+  &:after
+    content: ''
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    z-index: 12
+    background: linear-gradient(155deg, rgba(0,0,0,0.4) 0%, rgba(255,255,255,0) 100%);
+  &__content
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    display: flex
+    flex-direction: column
+    p, a, h3, span
+      position: relative
+      z-index: 13
+    p:not(.h23):not(.base-card__title)
+      font-size: 14px
+      line-height: 18px
+      margin-bottom: 14px
+      max-width: 50%
+    a
+      width: fit-content
+      position: relative
+      color: inherit
+      text-transform: uppercase
+      text-decoration: none
+      font-weight: bold
+      padding-bottom: 7px
+      margin-top: auto
+      transition: color .25s ease-out
+      &:after
+        content: ''
+        position: absolute
+        left: 0
+        bottom: 0
+        height: 2px
+        width: 100%
+        transition: background-color .25s ease-out
+        background-color: #ffffff
+      &:hover
+        color: $accent-text
+        &:hover:after
+          background-color: $accent-text
+  &__title
+    text-transform: uppercase
+    font-weight: bold
+    max-height: calc(100% - 45px)
+    overflow: hidden
+    margin-bottom: 24px
+    @include phone
+      max-width: unset !important
+      max-height: calc(100% - 35px)
+  &__img
+    position: absolute
+    left: 50%
+    top: 50%
+    height: 100%
+    width: 100%
+    transform: translate(-50%, -50%)
+    transition: transform .5s ease-out
+    background-size: cover
+    background-position: center center
+  .webp &__img_var
+    background-image: var(--img_webp)
+  .no-webp &__img_var
+    background-image: var(--img_jpg)
+  &:hover &__img
+    transform: translate(-50%, -50%) scale(1.25)
+
+  &_article
+    &:before
+      padding-top: 71%
+      @include adaptive(414)
+        padding-top: 100%
+  &_article &__content
+    padding: 8% 9% 6%
+    @include sm-phone
+      padding: 20px 20px 14px
+    p:not(.h23):not(.base-card__title)
+      max-width: unset
+      @include phone
+        margin-bottom: 2px
+  &_article &__title
+    max-width: 55%
+    @include h3Styles
+    @include tablet
+      max-width: unset
+
+  &_service &__content
+    padding: 11% 9% 6%
+    @include sm-phone
+      padding: 32px 28px 18px
+  &_service &__title
+    max-width: 200px
+    @include h23Styles
+
+  &_excursion
+    &:before
+      padding-top: 116%
+      @include adaptive(414)
+        padding-top: 100%
+  &_excursion &__content
+    padding: 8% 9% 6%
+  &_excursion &__title
+    max-width: 60%
+    margin-bottom: 8%
+    @include h3Styles
+  &_excursion &__info
+    margin-bottom: auto
+    font-size: 30px
+    line-height: 30px
+    vertical-align: bottom
+    @include phone
+      font-size: 20px
+      line-height: 20px
+    &:not(.excursion-card__info_w-icon):before
+      content: ''
+      background-image: url('../img/clock.svg')
+      width: 22px
+      height: 22px
+      background-size: 22px 22px
+      display: inline-block
+      margin-right: 10px
+      @include phone
+        width: 14px
+        height: 14px
+        background-size: 14px 14px
+    &:after
+      content: attr(data-after)
+      font-size: 16px
+      margin-left: 5px
+  &_excursion &__price
+    font-size: 30px
+    line-height: 30px
+    vertical-align: bottom
+    display: flex
+    flex-wrap: wrap
+    justify-content: flex-end
+    align-items: baseline
+    white-space: nowrap
+    @include phone
+      font-size: 20px
+      line-height: 20px
+    &:after
+      content: attr(data-after)
+      font-size: 16px
+      margin-left: 5px
+      word-break: break-word
+  &_excursion &__footer
+    display: flex
+    align-items: flex-end
+    justify-content: space-between

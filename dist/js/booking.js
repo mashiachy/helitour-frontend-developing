@@ -18440,6 +18440,36 @@ var index = new Promise(function (resolve) {
 
 var supportsWebp_commonJs = index;
 
+const selectItemInit = () => {
+  window.addEventListener('load', () => {
+    window.activeSelectInput = null;
+    document.querySelectorAll('.select-input').forEach(selectInput => {
+      selectInput.querySelector('.select-input__value-block').addEventListener('click', e => {
+        console.log('value-block clicked');
+        const parent = e.target.parentElement;
+        if (!parent.classList.contains('select-input_active')) {
+          if (window.activeSelectInput) window.activeSelectInput.classList.remove('select-input_active');
+          window.activeSelectInput = parent;
+        } else {
+          window.activeSelectInput = null;
+        }
+        parent.classList.toggle('select-input_active');
+        e.stopPropagation();
+      });
+      selectInput.querySelectorAll('.select-input__dropdown-item').forEach(dropdownItem => {
+        dropdownItem.addEventListener('click', e => {
+          e.target.parentElement.parentElement.classList.remove('select-input_active');
+          window.activeSelectInput = null;
+          e.stopPropagation();
+        });
+      });
+    });
+    window.addEventListener('click', () => {
+      if (window.activeSelectInput) window.activeSelectInput.classList.remove('select-input_active');
+    });
+  });
+};
+
 const vhFix = () => {
   const setVh = () => document.documentElement.style.setProperty('--vh', `${window.innerHeight / 100}px`);
   setVh();
@@ -18447,23 +18477,40 @@ const vhFix = () => {
 };
 
 const webp = () => {
-  supportsWebp_commonJs.then(result => {
-    window.webp = result;
-    if (result) {
-      document.body.classList.add('webp');
-      document.querySelectorAll('[data-back-webp], [data-back-jpg]').forEach(el => {
+  const handle = (domEl) => {
+    if (window.webp) {
+      domEl.querySelectorAll('[data-back-webp], [data-back-jpg]').forEach(el => {
         if (el.hasAttribute('data-back-webp'))
           el.style.backgroundImage = `url(${el.getAttribute('data-back-webp')})`;
         else
           el.style.backgroundImage = `url(${el.getAttribute('data-back-jpg')})`;
       });
     } else {
-      document.body.classList.add('no-webp');
-      document.querySelectorAll('[data-back-jpg]').forEach(el => {
+      domEl.querySelectorAll('[data-back-jpg]').forEach(el => {
         if (el.hasAttribute('data-back-jpg'))
           el.style.backgroundImage = `url(${el.getAttribute('data-back-jpg')})`;
       });
     }
+  };
+  const observer = new MutationObserver((mutationList, observer) => {
+    mutationList.forEach(mutation => {
+      if (mutation.target.querySelectorAll('[data-back-webp], [data-back-jpg]').length)
+        handle(mutation.target);
+    });
+  });
+  observer.observe(document, {
+    attributes: true,
+    childList: true,
+    subtree: true
+  });
+  supportsWebp_commonJs.then(result => {
+    window.webp = result;
+    if (window.webp) {
+      document.body.classList.add('webp');
+    } else {
+      document.body.classList.add('no-webp');
+    }
+    handle(document);
   });
 };
 
@@ -18537,6 +18584,7 @@ const toggleBodyScrollable = () => {
 webp();
 headerPopup();
 vhFix();
+selectItemInit();
 
 Vue.use(vueCurrencyFilter, {
   thousandsSeparator: ' ',
@@ -18550,6 +18598,7 @@ const app = new Vue({
     DatePicker,
   },
   data () {
+    const date = new Date();
     return {
       trip: null,
       passengers: null,
@@ -18558,7 +18607,7 @@ const app = new Vue({
       helicopters: [],
       price: 25000,
       present: false,
-      date: '20:12:2020',
+      date: `${('0'+date.getDate()).slice(-2)}.${('0'+(date.getMonth()+1)).slice(-2)}.${date.getFullYear()}`,
       time: '12:00',
       name: null,
       telephone: null,
@@ -18623,17 +18672,6 @@ const app = new Vue({
       return this.deliveries.find(d => d.id === this.delivery).name;
     },
   },
-  methods: {
-    clickSelect (target, e) {
-      target.classList.toggle('select-input_active');
-      e.stopPropagation();
-    },
-    clickSelectItem (target, key, value, e) {
-      this[key] = value;
-      target.classList.remove('select-input_active');
-      e.stopPropagation();
-    },
-  },
   async created () {
     const { data } = await axios$1.get('/helitours_info.json');
     this.trips = [...data.trips];
@@ -18641,13 +18679,6 @@ const app = new Vue({
     this.trip = this.trips[0].id;
     this.passengers = 1;
   },
-  mounted () {
-    window.addEventListener('click', () => {
-      document.querySelectorAll('.select-input').forEach(el => {
-        if (el.classList.contains('select-input_active')) el.classList.remove('select-input_active');
-      });
-    });
-  }
 });
 
 //# sourceMappingURL=booking.js.map

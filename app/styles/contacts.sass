@@ -13,10 +13,10 @@
     @include landscape
       width: 50%
       height: calc(var(--vh) * 100)
-    @media screen and (max-width: 1440px) and (orientation: landscape)
-      width: calc(50% - #{$w-cg})
-    @media screen and (max-width: 1200px) and (orientation: landscape)
-      width: calc(50% - #{$w-cg} * 2)
+    //@media screen and (max-width: 1440px) and (orientation: landscape)
+    //  width: calc(50% - #{$w-cg})
+    //@media screen and (max-width: 1200px) and (orientation: landscape)
+    //  width: calc(50% - #{$w-cg} * 2)
     @include sm-tablet
       width: 100vw
       max-height: calc(var(--vh) * 100 - 200px)
@@ -24,7 +24,7 @@
       max-height: calc(var(--vh) * 100 - 100px)
     @include portrait
       width: 100vw
-      height: 100vw
+      height: 120vw
 
 
 .contacts-page-content
@@ -37,10 +37,10 @@
     margin: 0 !important
     justify-content: center
     min-height: calc(var(--vh) * 100)
-  @media screen and (min-width: 1201px) and (max-width: 1440px) and (orientation: landscape)
-    width: calc(#{$w-cg} * 6 + #{$w-c})
-  @media screen and (min-width: 992px) and (max-width: 1200px) and (orientation: landscape)
-    width: calc(#{$w-cg} * 7 + #{$w-c})
+  //@media screen and (min-width: 1201px) and (max-width: 1440px) and (orientation: landscape)
+  //  width: calc(#{$w-cg} * 6 + #{$w-c})
+  //@media screen and (min-width: 992px) and (max-width: 1200px) and (orientation: landscape)
+  //  width: calc(#{$w-cg} * 7 + #{$w-c})
   @include portrait
     width: unset
     justify-content: flex-start
@@ -100,14 +100,19 @@
     @include sm-phone
       @include centerMargin
     .society
+      width: 50px
       margin-right: 10px
+      @include adaptive(380)
+        width: 40px
+      @include adaptive(320)
+        width: 30px
   &__item-title
     display: block
-    margin-bottom: 24px
+    margin-bottom: 16px
     font-size: 14px
     line-height: 16px
     @include adaptive(1440)
-      margin-bottom: 18px
+      margin-bottom: 14px
     @include phone
       font-size: 12px
   &__item-bold
@@ -115,6 +120,9 @@
     line-height: 28px
     text-transform: uppercase
     font-weight: bold
+    @include tablet
+      font-size: 20px
+      line-height: 24px
     @include phone
       font-size: 16px
       line-height: 20px

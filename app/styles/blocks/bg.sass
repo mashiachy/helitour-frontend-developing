@@ -50,10 +50,12 @@
     &:not(:last-child)
       margin-bottom: 18px
   &_with-header
-    min-height: 530px
+    min-height: 420px
     padding-top: calc(#{$w-cg} + 20px)
     padding-bottom: 20px
     @include tablet
-      min-height: 180px
+      min-height: 320px
       padding-top: calc(#{$w-c-phone} + #{$gap-phone} * 2)
       padding-bottom: calc(#{$gap-phone})
+    @include sm-phone
+      min-height: 180px

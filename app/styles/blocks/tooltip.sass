@@ -55,3 +55,13 @@
       top: calc(50% - 5px)
       left: -5px
       border-color: transparent $black-text transparent transparent
+    @include sm-phone
+      top: unset
+      right: unset
+      left: 50%
+      bottom: -15px
+      transform: translate(-50%, 100%)
+      &:after
+        top: -10px
+        left: calc(50% - 5px)
+        border-color: transparent transparent $black-text transparent

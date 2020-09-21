@@ -71,9 +71,10 @@ $gray: #e3e3e3
 $header-back-gray: #d5d5d5
 $light-gray: #f0f0f0
 
-$w-c: '((80vw + 20px) / 12 - 20px)' // Ширина колонки
-$w-cg: '((80vw + 20px) / 12)' // Ширина колонки с разделителем
+$w-c: '((90vw + 20px) / 12 - 20px)' // Ширина колонки
+$w-cg: '((90vw + 20px) / 12)' // Ширина колонки с разделителем
 $gap: 20px // Разделитель
+
 
 $w-c-phone: 50px
 $w-cg-phone: 60px
@@ -82,3 +83,62 @@ $gap-phone: 10px
 @mixin centerMargin
   margin-left: auto
   margin-right: auto
+
+@mixin bgNegativeMarginBottom
+  min-height: 500px
+  padding-bottom: 120px
+  margin-bottom: -100px !important
+  @include tablet
+    min-height: 320px
+    padding-bottom: 80px
+    margin-bottom: -60px !important
+  @include phone
+    min-height: 240px
+  @include sm-phone
+    padding-bottom: 40px
+    margin-bottom: -20px !important
+
+@mixin h1Styles
+  font-size: 50px
+  line-height: 64px
+  @include tablet
+    font-size: 28px
+    line-height: 36px
+
+@mixin h2Styles
+  font-size: 36px
+  line-height: 48px
+  @include tablet
+    font-size: 24px
+    line-height: 32px
+  @include sm-tablet
+    font-size: 20px
+    line-height: 28px
+
+@mixin h23Styles
+  text-transform: uppercase
+  font-weight: bold
+  font-size: 22px
+  line-height: 28px
+  @include adaptive(1024)
+    font-size: 18px
+    line-height: 24px
+  @include sm-tablet
+    font-size: 16px
+    line-height: 18px
+  @include sm-phone
+    font-size: 18px
+    line-height: 20px
+
+@mixin h3Styles
+  font-size: 18px
+  line-height: 24px
+  @include adaptive(1024)
+    font-size: 16px
+    line-height: 22px
+  @include sm-tablet
+    font-size: 14px
+    line-height: 18px
+  @include sm-phone
+    font-size: 16px
+    line-height: 20px

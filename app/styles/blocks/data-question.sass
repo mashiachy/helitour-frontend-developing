@@ -1,7 +1,13 @@
+@import '../mixins'
+
 [data-question]
   transition: max-height .5s ease-out
-  max-height: 1000px
   overflow: hidden
+  max-height: 24px
+  @include adaptive(1024)
+    max-height: 22px
+  @include sm-tablet
+    max-height: 18px
   [data-question-anchor]
     cursor: pointer
     display: flex

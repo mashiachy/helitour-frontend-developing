@@ -141,7 +141,7 @@ html(lang="us")
         h2.sm-tablet Замовивши дану екскурсію, ви побачите
         +e.map-wrapper
         .content.content__inner.sm-tablet
-          ul
+          ul.rounded
             li Трухановим островом;
             li Дніпром;
             li Набережним шосе;
@@ -159,7 +159,7 @@ html(lang="us")
           a.button(href='#') Замовити
         +e.content.no-sm-tablet
           h2 Замовивши дану екскурсію, ви побачите
-          ul
+          ul.rounded
             li Трухановим островом;
             li Дніпром;
             li Набережним шосе;
@@ -180,19 +180,19 @@ html(lang="us")
       +b.SECTION.helitours-for-excursions.content.content__inner
         h2 Доступні вертольоти для ЦІЄЇ ЕКСКУРСІЇ
         .gallery
-          +b.article-card.gallery__item_free
-            +picture('img/helic1.webp', 'img/helic1.jpg', 'Helicopter', 'article-card__img')
+          +b.base-card_article.gallery__item_free
+            +e.img(data-back-webp='img/helic1.webp' data-back-jpg='img/helic1.jpg')
             +e.content
-              h3 Robinson R44 Raven II
+              +e.P.title Robinson R44 Raven II
               +e.text
                 p Дальність польоту: 770 км
                 p Крейсерська швидкість: 200 км/год
                 p Місткість: 4 пасажирів + пілот
               a(href="#") забронювати
-          +b.article-card.gallery__item_free
-            +picture('img/helic2.webp', 'img/helic2.jpg', 'Helicopter', 'article-card__img')
+          +b.base-card_article.gallery__item_free
+            +e.img(data-back-webp='img/helic2.webp' data-back-jpg='img/helic2.jpg')
             +e.content
-              h3 Bell 407
+              +e.P.title Bell 407
               +e.text
                 p Дальність польоту: 598 км
                 p Крейсерська швидкість: 246 км/год

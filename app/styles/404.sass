@@ -6,35 +6,48 @@ main
 .error-page
   min-height: calc(var(--vh) * 100)
   padding-bottom: 40px
-  h2:not(:last-child)
+  h1
+    font-size: 36px
+    line-height: 48px
+    @include tablet
+      font-size: 24px
+      line-height: 32px
+    @include sm-tablet
+      font-size: 20px
+      line-height: 28px
+  h1:not(:last-child)
     margin-bottom:  40px
   .svg
     position: relative
     &:not(:last-child)
       margin-bottom: 24px
     width: calc(#{$w-cg} * 5 - 20px)
+    max-width: 612px
     height: auto
     @include phone
       width: 80%
-      max-width: 600px
+      max-width: 560px
     svg
       height: auto
     .marker
       position: absolute
-      left: calc(50% - 33px)
-      bottom: 50%
-      width: 66px
+      left: calc(50% - 44px)
+      bottom: calc(50% + 15px)
+      width: 88px
       height: 88px
       box-sizing: border-box
-      padding-top: 22px
+      padding-top: 20px
       background-image: url('../img/pin.svg')
-      background-size: 66px 88px
-      @include phone
+      background-size: contain
+      @include tablet
         padding-top: 11px
-        left: calc(50% - 21px)
-        width: 42px
+        height: 66px
+        width: 66px
+        left: calc(50% - 33px)
+      @include phone
+        left: calc(50% - 28px)
+        width: 56px
         height: 56px
-        background-size: 42px 56px
       span
         display: block
         color: #ffffff

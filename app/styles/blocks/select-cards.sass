@@ -25,18 +25,20 @@
     text-align: center
     cursor: pointer
     width: calc(20% - 10px)
-    @include adaptive(1500)
-      width: calc(25% - 10px)
+    transition: color .25s ease-out, border .25s ease-out
     @include adaptive(1040)
       width: calc(33.33% - 10px)
     @include adaptive(578)
       width: calc(50% - 10px)
     @include adaptive(360)
       width: calc(100% - 10px)
-    &_active
+    &_active, &:active
       border: 1px solid $accent-text
       color: $accent-text
+  &__item:hover &__item-icon
+    color: $accent-text
   &__item-icon
+    transition: color .25s ease-out
     svg
       height: 26px
     &:not(:last-child)
@@ -50,7 +52,6 @@
     font-weight: normal
     font-size: 11px
     line-height: 15px
-    color: $black-text !important
   &_index
     margin-right: 0
     margin-bottom: 0

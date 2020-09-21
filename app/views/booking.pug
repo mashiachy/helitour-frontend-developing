@@ -21,15 +21,13 @@ html(lang="us")
             +e.LABEL(for='trip-select').item-label Оберіть маршрут
             +b.DIV(
               :class='{ \'select-input_disable\': !trip }'
-              ref='tripSelect'
-              @click='clickSelect($refs.tripSelect, $event)'
             ).select-input
               input(
                 type='number'
                 id='trip-select'
                 v-model='trip'
               )
-              +e.SPAN.value-block {{ trip ? tripInfo.name : 'Маршруты загружаются' }}
+              +e.SPAN.value-block {{ trip ? tripInfo.name : 'Маршрути завантажуються' }}
               +e.dropdown
                 +e.DIV(
                   v-for='tripItem in trips'
@@ -41,15 +39,13 @@ html(lang="us")
             +e.LABEL(for='passengers-select').item-label Кількість пасажирів
             +b.DIV(
               :class='{ \'select-input_disable\': !passengers }'
-              ref='passengersSelect'
-              @click='clickSelect($refs.passengersSelect, $event)'
             ).select-input
               input(
                 type='number'
                 id='passengers-select'
                 v-model='passengers'
               )
-              +e.SPAN.value-block {{ passengers ? passengers : 'Маршруты загружаются' }}
+              +e.SPAN.value-block {{ passengers ? passengers : 'Кількість пасажирів завантажується' }}
               +e.dropdown
                 +e.DIV(
                   v-for='p in passengersMax'
@@ -90,13 +86,12 @@ html(lang="us")
               date-picker(
                 v-model='date'
                 value-type='format'
-                format='DD:MM:YYYY'
+                format='DD.MM.YYYY'
                 :append-to-body='false'
                 :clearable='false'
                 :lang='lang'
                 :input-attr='{' +
                   'id: \'dateInput\',' +
-                  'placeholder: \'00:00:0000\'' +
                 '}'
               )
                 template(v-slot:icon-calendar)
@@ -120,37 +115,39 @@ html(lang="us")
           +e.form-item_personal
             +e.item-label Інформація для зв’язку
             +e.personal-wrapper
-              +b.INPUT(type='text' placeholder='Ваше ім’я' v-model='name').text-input
-              +b.INPUT(type='text' placeholder='Ваш телефон' v-model='telephone').text-input
-              +b.INPUT(type='text' placeholder='Ваша почта' v-model='email').text-input
-              +b.DIV(
-                :class='{ \'select-input_disable\': !delivery }'
-                ref='deliverySelect'
-                @click='clickSelect($refs.deliverySelect, $event)'
-              ).select-input_boxed
-                input(
-                  type='number'
-                  id='delivery-select'
-                  v-model='delivery'
-                )
-                +e.SPAN.value-block {{ delivery ? deliveryName : 'Як вам доставити сертифікат' }}
-                +e.dropdown
-                  +e.DIV(
-                    v-for='deliveryItem in deliveries'
-                    :key='deliveryItem.id'
-                    :class='{ \'select-input__dropdown-item_current\': deliveryItem.id === delivery }'
-                    @click='clickSelectItem($refs.deliverySelect, \'delivery\', deliveryItem.id, $event)'
-                  ).dropdown-item {{ deliveryItem.name }}
-              +b.TEXTAREA(placeholder='Коментар').text-input
+              +e.personal-wrapper-item
+                +b.INPUT(type='text' placeholder='Ваше ім’я' v-model='name').text-input
+                +b.INPUT(type='text' placeholder='Ваш телефон' v-model='telephone').text-input
+                +b.INPUT(type='text' placeholder='Ваша почта' v-model='email').text-input
+                +b.DIV(
+                  :class='{ \'select-input_disable\': !delivery }'
+                  v-show='present'
+                ).select-input_boxed
+                  input(
+                    type='number'
+                    id='delivery-select'
+                    v-model='delivery'
+                  )
+                  +e.SPAN.value-block {{ delivery ? deliveryName : 'Як вам доставити сертифікат' }}
+                  +e.dropdown
+                    +e.DIV(
+                      v-for='deliveryItem in deliveries'
+                      :key='deliveryItem.id'
+                      :class='{ \'select-input__dropdown-item_current\': deliveryItem.id === delivery }'
+                      @click='delivery = deliveryItem.id'
+                    ).dropdown-item {{ deliveryItem.name }}
+              +e.personal-wrapper-item
+                +b.TEXTAREA(placeholder='Коментар').text-input
           +e.form-item_buttons
             +e.buttons-container
-              +b.BUTTON(type='submit').button Оплатити онлайн
-              +b.BUTTON(type='submit').button_flat Готівкою
               +b.SPAN.checkbox_flat
                 +e.INPUT(type='checkbox' id='offer-checkbox' v-model='offerAccept')
-                +e.LABEL(for='offer-checkbox').label Погоджуюсь з офертою
+                +e.LABEL(for='offer-checkbox').label='Погоджуюсь з '
+                  a.base-link(href='#') офертою
+              +b.BUTTON(type='submit').button Оплатити онлайн
+              +b.BUTTON(type='submit').button_flat Готівкою
       +b.SECTION.col-text.content.content__inner
-        +e.text.content__text
+        +e.text
           p За відгуками багатьох, така розвага повністю виправдовує свою ціну і коштує досить недорого. Вартість вертолітного туру доступна людині із середнім рівнем доходу і залежить від тривалості подорожі. У компанії «Helitour» ви також можете недорого придбати сертифікат в подарунок. Такий презент стане прекрасним сюрпризом для близької вам людини.
           p Для того, щоб дізнатися більш детальну інформацію про бронювання вертольота на весілля або уточнити скільки коштує тур, достатньо зателефонувати нам по одному з телефонних номерів, вказаних на сайті.
     +footer

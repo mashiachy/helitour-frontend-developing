@@ -8,6 +8,7 @@ vhFix();
 Swiper.use(Pagination);
 
 const swiperOne = new Swiper('.swiper-container--one', {
+  spaceBetween: 10,
   pagination: {
     el: '.swiper-pagination',
     clickable: true,

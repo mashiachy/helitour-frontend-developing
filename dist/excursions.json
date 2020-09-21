@@ -6,8 +6,8 @@
       "linkText": "дОКЛАДНШЕ",
       "linkHref": "#",
       "img": {
-        "webp": "img/exc1.webp",
-        "jpg": "img/exc1.jpg"
+        "webp": "../img/exc1.webp",
+        "jpg": "../img/exc1.jpg"
       }
     },
     {
@@ -16,8 +16,8 @@
       "linkText": "дОКЛАДНШЕ",
       "linkHref": "#",
       "img": {
-        "webp": "img/exc2.webp",
-        "jpg": "img/exc2.jpg"
+        "webp": "../img/exc2.webp",
+        "jpg": "../img/exc2.jpg"
       }
     },
     {
@@ -26,8 +26,8 @@
       "linkText": "дОКЛАДНШЕ",
       "linkHref": "#",
       "img": {
-        "webp": "img/exc3.webp",
-        "jpg": "img/exc3.jpg"
+        "webp": "../img/exc3.webp",
+        "jpg": "../img/exc3.jpg"
       }
     }
   ],

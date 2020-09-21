@@ -127,10 +127,9 @@ mixin footer
           .row.phone.short
             a(href="#") Оферта
           p.tablet © 2020. Helitour. Всі права захищені.
-          p.kost
-            | Зроблено з
+          p.kost Зроблено з &nbsp
             include ../../mokups/exports/heart.svg
-            | від Kost
+            | &nbsp від Kost
 
 
 mixin our-articles
@@ -139,29 +138,29 @@ mixin our-articles
     .swiper-container.swiper-container--two
       .swiper-wrapper
         .swiper-slide
-          +b.article-card
-            +picture('img/hel1.webp', 'img/hel1.jpg', 'Article', 'article-card__img')
+          +b.base-card_article
+            +e.img(data-back-webp='img/hel1.webp' data-back-jpg='img/hel1.jpg')
             +e.content
-              h3 Lorem Ipsum - це текст-"риба", що використовується в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
-              a(href="#") чатати
+              +e.P.title Lorem Ipsum - це текст-"риба", що використовується в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
+              a(href="#") читати
         .swiper-slide
-          +b.article-card
-            +picture('img/hel3.webp', 'img/hel3.jpg', 'Article', 'article-card__img')
+          +b.base-card_article
+            +e.img(data-back-webp='img/hel3.webp' data-back-jpg='img/hel3.jpg')
             +e.content
-              h3 в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
-              a(href="#") чатати
+              +e.P.title в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
+              a(href="#") читати
         .swiper-slide
-          +b.article-card
-            +picture('img/hel5.webp', 'img/hel5.jpg', 'Article', 'article-card__img')
+          +b.base-card_article
+            +e.img(data-back-webp='img/hel5.webp' data-back-jpg='img/hel5.jpg')
             +e.content
-              h3 Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
-              a(href="#") чатати
+              +e.P.title Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
+              a(href="#") читати
         .swiper-slide
-          +b.article-card
-            +picture('img/hel4.webp', 'img/hel4.jpg', 'Article', 'article-card__img')
+          +b.base-card_article
+            +e.img(data-back-webp='img/hel4.webp' data-back-jpg='img/hel4.jpg')
             +e.content
-              h3 в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
-              a(href="#") чатати
+              +e.P.title в друкарстві та дизайні. Lorem Ipsum є, фактично, стандартною "рибою" аж з XVI сторіччя,
+              a(href="#") читати
       .swiper-pagination
 
 mixin our-instagram
@@ -182,35 +181,35 @@ mixin our-excursions
     .content.content__inner
       .swiper-container
         .swiper-wrapper
-          +b.excursion-card.swiper-slide
-            +picture('img/exc1.webp', 'img/exc1.jpg', 'Excursion', 'excursion-card__img')
+          +b.base-card_excursion.swiper-slide
+            +e.img(data-back-webp='img/exc1.webp' data-back-jpg='img/exc1.jpg')
             +e.content
-              h3 Оглядовий політ над Києвом
-              +e.SPAN(data-after='гр').info 18
+              +e.P.title Оглядовий політ над Києвом
+              +e.SPAN(data-after='хв').info 18
               +e.footer
                 a(href="#") забронювати
                 +e.SPAN(data-after='грн').price 5 680
-          +b.excursion-card.swiper-slide
-            +picture('img/exc2.webp', 'img/exc2.jpg', 'Excursion', 'excursion-card__img')
+          +b.base-card_excursion.swiper-slide
+            +e.img(data-back-webp='img/exc2.webp' data-back-jpg='img/exc2.jpg')
             +e.content
-              h3 Політ над Київом та Межигір’ям
-              +e.SPAN(data-after='гр').info 18
+              +e.P.title Політ над Київом та Межигір’ям
+              +e.SPAN(data-after='хв').info 18
               +e.footer
                 a(href="#") забронювати
                 +e.SPAN(data-after='грн').price 2 333
-          +b.excursion-card.swiper-slide
-            +picture('img/exc3.webp', 'img/exc3.jpg', 'Excursion', 'excursion-card__img')
+          +b.base-card_excursion.swiper-slide
+            +e.img(data-back-webp='img/exc3.webp' data-back-jpg='img/exc3.jpg')
             +e.content
-              h3 Вертолітний тур «Церква на воді»
-              +e.SPAN(data-after='гр').info 18
+              +e.P.title Вертолітний тур «Церква на воді»
+              +e.SPAN(data-after='хв').info 18
               +e.footer
                 a(href="#") забронювати
                 +e.SPAN(data-after='грн').price 5 680
-          +b.excursion-card.swiper-slide
-            +picture('img/exc4.webp', 'img/exc4.jpg', 'Excursion', 'excursion-card__img')
+          +b.base-card_excursion.swiper-slide
+            +e.img(data-back-webp='img/exc4.webp' data-back-jpg='img/exc4.jpg')
             +e.content
-              h3 Політ над Київом та Межигір’ям
-              +e.SPAN(data-after='гр').info 18
+              +e.P.title Політ над Київом та Межигір’ям
+              +e.SPAN(data-after='хв').info 18
               +e.footer
                 a(href="#") забронювати
                 +e.SPAN(data-after='грн').price 2 333
@@ -225,36 +224,36 @@ mixin excursions-certificate
 
 mixin services-gallery
   +b.services-gallery
-    +b.service-card
-      +picture('img/services-1.webp', 'img/services-1.jpg', 'Service', 'service-card__img')
+    +b.base-card_service
+      +e.img(data-back-webp='img/services-1.webp' data-back-jpg='img/services-1.jpg')
       +e.content
-        h3 Оренда вертольота в Києві
+        +e.P.title Оренда вертольота в Києві
         a(href='#') дОКЛАДНШЕ
-    +b.service-card
-      +picture('img/services-2.webp', 'img/services-2.jpg', 'Service', 'service-card__img')
+    +b.base-card_service
+      +e.img(data-back-webp='img/services-2.webp' data-back-jpg='img/services-2.jpg')
       +e.content
-        h3 Екскурсія на вертольоті
+        +e.P.title Екскурсія на вертольоті
         a(href='#') дОКЛАДНШЕ
-    +b.service-card
-      +picture('img/services-3.webp', 'img/services-3.jpg', 'Service', 'service-card__img')
+    +b.base-card_service
+      +e.img(data-back-webp='img/services-3.webp' data-back-jpg='img/services-3.jpg')
       +e.content
-        h3 Чартерні польоти на вертольоті
+        +e.P.title Чартерні польоти на вертольоті
         p Польоти по маршрутам замовника
         a(href='#') дОКЛАДНШЕ
-    +b.service-card
-      +picture('img/services-4.webp', 'img/services-4.jpg', 'Service', 'service-card__img')
+    +b.base-card_service
+      +e.img(data-back-webp='img/services-4.webp' data-back-jpg='img/services-4.jpg')
       +e.content
-        h3 Політ на вертольоті для двох
+        +e.P.title Політ на вертольоті для двох
         a(href='#') дОКЛАДНШЕ
-    +b.service-card
-      +picture('img/services-5.webp', 'img/services-5.jpg', 'Service', 'service-card__img')
+    +b.base-card_service
+      +e.img(data-back-webp='img/services-5.webp' data-back-jpg='img/services-5.jpg')
       +e.content
-        h3 вертоліт на весіля
+        +e.P.title вертоліт на весіля
         a(href='#') дОКЛАДНШЕ
-    +b.service-card
-      +picture('img/services-6.webp', 'img/services-6.jpg', 'Service', 'service-card__img')
+    +b.base-card_service
+      +e.img(data-back-webp='img/services-6.webp' data-back-jpg='img/services-6.jpg')
       +e.content
-        h3 Хеліскіінг
+        +e.P.title Хеліскіінг
         a(href='#') дОКЛАДНШЕ
 
 mixin col-text
