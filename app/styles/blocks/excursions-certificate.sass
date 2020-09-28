@@ -7,25 +7,50 @@
   background-repeat: no-repeat
   padding-top: 7.3vw
   padding-bottom: 5.21vw
+  .webp &
+    background-image: url('../img/certificate-2.webp')
+  .no-webp &
+    background-image: url('../img/certificate-2.png')
   @include adaptive(1440)
     background-size: 1440px auto
     padding-top: 100px
     padding-bottom: 65px
+  @include adaptive(1280)
+    background-size: 100% auto
+    padding-bottom: 100px
+    .no-webp &
+      background-image: url('../img/certificate-1280.jpg')
+    .webp &
+      background-image: url('../img/certificate-1280.webp')
+  @include adaptive(1040)
+    padding-top: 65px
+    padding-bottom: 65px
+  @include adaptive(820)
+    background-size: 991px auto
+    background-position: left bottom
   @include phone
-    padding-top: 240px
+    .no-webp &
+      background-image: url('../img/certificate-768.jpg')
+    .webp &
+      background-image: url('../img/certificate-768.webp')
+    display: flex
+    flex-direction: column
+    justify-content: flex-end
+    align-items: center
+    min-height: 106vw
+    box-sizing: border-box
     padding-bottom: 40px
-    background-size: auto 100%
-    background-position: 12% bottom
+    background-size: 100% auto
+    background-position: center bottom
     *
       text-align: center
-  @include sm-phone
-    background-image: url('../img/certificate-mobile-2.png') !important
-    background-image: url('../img/certificate-mobile-2.webp') !important
-    background-size: 100% auto
-    background-repeat: no-repeat
-    background-position: center top
-  @include adaptive(375)
+  @include adaptive(480)
+    .no-webp &
+      background-image: url('../img/certificate-mobile-2.png')
+    .webp &
+      background-image: url('../img/certificate-mobile-2.webp')
     background-position: center bottom
+    min-height: 164vw
   h2
     margin-left: calc(#{$w-cg} * 6)
     max-width: 335px
@@ -33,17 +58,25 @@
       margin-bottom: 50px
       @include phone
         margin-bottom: 20px
+      @include adaptive(340)
+        margin-bottom: 10px
     @include phone
       @include centerMargin
   p, .button
     margin-left: calc(#{$w-cg} * 7)
   p
     max-width: 265px
+    @include phone
+      max-width: 80%
+    @include adaptive(375)
+      max-width: 265px
     &:not(:last-child)
       margin-bottom: 40px
       @include phone
         margin-bottom: 27px
         @include centerMargin
+      @include adaptive(350)
+        margin-bottom: 10px
   .button
     font-size: 14px
     @include phone

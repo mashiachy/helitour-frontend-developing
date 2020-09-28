@@ -10,6 +10,12 @@
   align-items: stretch
   font-size: 16px
   z-index: 20
+  @include sm-phone
+    &_keys
+      margin-top: 0 !important
+      margin-right: 0 !important
+      margin-left: 0 !important
+      width: 100% !important
   @include tablet
     height: calc(#{$w-c-phone})
     margin-top: $gap-phone

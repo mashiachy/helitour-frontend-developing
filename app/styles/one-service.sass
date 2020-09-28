@@ -58,8 +58,10 @@
     background-position: right bottom
   @include tablet
     margin-bottom: 40px
-    background-size: 75% auto
+    background-size: 50% auto
     padding-bottom: 100px
+  @include adaptive(1140)
+    background-size: 65% auto
   @include sm-tablet
     padding-bottom: 350px
     background-position: center bottom 10px
@@ -262,8 +264,10 @@
       stroke-width: 0.216
       cursor: pointer
       transition: stroke .25s ease-out, fill .25s ease-out
+      &.st2
+        stroke: #d8d8d8
       &.active
-        stroke: $accent-text
+        stroke: #ADADAD
         fill: $accent-text
   &__svg-wrapper
     .region-info
@@ -306,8 +310,8 @@
       &[data-path-ref='svg-map_13']
         left: left(704)
         top: top(371)
-      &#svg-map_13_second
-        left: left(594)
+      &[data-path-ref='svg-map_26']
+        left: left(590)
         top: top(431)
       &[data-path-ref='svg-map_14']
         left: left(847)

@@ -1,9 +1,10 @@
-import {webp, headerPopup, vhFix, excursionsSlider, instagramSlider} from './base';
+import {webp, headerPopup, vhFix, excursionsSlider, instagramSlider, initBaseMap} from './base';
 import Swiper, {Pagination} from 'swiper';
 
 webp();
 headerPopup();
 vhFix();
+initBaseMap('#js__map');
 
 Swiper.use(Pagination);
 

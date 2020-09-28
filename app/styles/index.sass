@@ -13,9 +13,13 @@
     font-size: 70px
     line-height: 82px
     max-width: 600px
+    @include adaptive(1440)
+      font-size: 56px
+      line-height: 66px
     @include tablet
       font-size: 48px
       line-height: 58px
+      max-width: 400px
     @include sm-tablet
       text-align: center
       @include centerMargin
@@ -160,6 +164,8 @@
     transform: translateY(60px)
     box-sizing: border-box
     padding: 80px 60px 80px 70px
+    @include adaptive(1440)
+      padding: 60px
     @include sm-phone
       transform: translateY(40px)
       width: calc(100% - 20px)
@@ -223,7 +229,7 @@
     display: flex
     flex-direction: column
     align-items: center
-    @include sm-tablet
+    @include adaptive(1200)
       padding: 55px 25px 30px
     @include adaptive(419)
       width: 260px
@@ -279,7 +285,10 @@
   background-size: 1920px auto
   background-repeat: no-repeat
   @include adaptive(1280)
-    background-position: right 20% bottom 0
+    background-position: right 18% bottom 0
+    background-size: 1680px auto
+  @include adaptive(1140)
+    background-size: 1440px auto
   @include sm-tablet
     background-size: auto 570px
     background-position: center bottom
@@ -298,6 +307,8 @@
     display: flex
     justify-content: space-between
     align-items: flex-start
+    @include adaptive(1140)
+      padding-bottom: 130px
     @include sm-tablet
       position: relative
       padding-top: 200px
@@ -343,6 +354,11 @@
     align-items: center
     flex-direction: column
     text-align: center
+    @include adaptive(1200)
+      padding: 27px 20px 18px
+      max-width: 200px
+    @include adaptive(1140)
+      min-width: 170px
     @include sm-tablet
       position: absolute
       padding: 27px 20px 18px
@@ -351,7 +367,7 @@
       max-width: 160px
     .rounded-image
       margin-bottom: 50px
-      @include sm-tablet
+      @include adaptive(1200)
         margin-bottom: 16px
   &__card-text
     max-width: 225px

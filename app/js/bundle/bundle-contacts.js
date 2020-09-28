@@ -120,6 +120,46 @@ const toggleBodyScrollable = () => {
   document.documentElement.classList.toggle('noscroll');
 };
 
+const loadMap = () => {
+  const mapApiKey = 'AIzaSyDwFJKis6dWeAiTjb4myRBXStoZPfXTZ3I';
+  return new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    const callback = () => {
+      script.removeEventListener('load', callback);
+      resolve(script);
+    };
+    script.addEventListener('load', callback);
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${mapApiKey}`;
+    script.async = true;
+    document.head.appendChild(script);
+  });
+};
+
+const initBaseMap = (container) => {
+  loadMap().then(() => {
+    const map = new google.maps.Map(document.querySelector(container), {
+      center: {lat: 50.4449, lng: 30.5087},
+      zoom: 14,
+      disableDefaultUI: true,
+      styles: [
+        {
+          featureType: 'poi',
+          stylers: [
+            { visibility: 'off' },
+          ],
+        },
+        {
+          featureType: 'transit.station.bus',
+          stylers: [
+            { visibility: 'off' },
+          ],
+        },
+      ],
+    });
+  });
+};
+
 webp();
 headerPopup();
 vhFix();
+initBaseMap('#js__map');

@@ -6,6 +6,8 @@ const
   sass = require('gulp-sass'),
   concat = require('gulp-concat'),
   purgecss = require('gulp-purgecss'),
+  purgeJs = require('purgecss-from-js'),
+  purgeHtml = require('purgecss-from-html'),
   sassGlob = require('gulp-sass-glob'),
   autoprefixer = require('gulp-autoprefixer'),
   postcss = require('gulp-postcss'),
@@ -34,7 +36,9 @@ gulp.task('fonts', () => {
     .pipe(browserSync.stream());
 });
 
-const whiteListPatterns = {};
+const whiteListPatterns = {
+  'booking': [/.*mx.*/]
+};
 
 gulp.task('sass',  () => {
   return gulp.src(['!app/styles/mixins.sass', 'app/styles/base.sass', 'app/styles/blocks/*.sass', `app/styles/${name}.sass`])
@@ -48,9 +52,11 @@ gulp.task('sass',  () => {
     }))
     .pipe(postcss([postcssImport()]))
     .pipe(concat(`${name}.css`))
-    .pipe(gulpif(production, purgecss({
-      content: [`dist/${name}.html`],
-      whitelistPatternsChildren: whiteListPatterns[name],
+    .pipe(gulpif(production, purgecss(!(name in whiteListPatterns) ? {
+      content: [`dist/${name}.html`, `dist/js/${name}.js`],
+    } : {
+      content: [`dist/${name}.html`, `dist/js/${name}.js`],
+      whitelistPatterns: whiteListPatterns[name],
     })))
     .pipe(autoprefixer())
     .pipe(gulp.dest('dist/css'))

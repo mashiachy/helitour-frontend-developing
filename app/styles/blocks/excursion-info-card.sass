@@ -55,17 +55,39 @@
     align-items: center
     justify-content: center
     padding: 20px
+    @include sm-phone
+      padding: 5px
   &_flat &__icon
     height: 25px
     width: auto
     margin-bottom: 0
     margin-right: 30px
+    @include phone
+      margin-right: 15px
+    @include sm-phone
+      margin-right: 10px
+      height: 20px
     path
       fill: #212121
       stroke: #212121
   &_flat &__subtitle
     margin-bottom: 0 !important
     white-space: nowrap
+    br
+      display: none
+      @include adaptive(440)
+        display: unset
+    @include sm-phone
+      font-size: 10px
+      line-height: 12px
+      white-space: unset
+      .tooltip:before
+        width: 12px
+        height: 12px
+  &_flat &__title
+    @include sm-phone
+      font-size: 13px
+      line-height: 16px
   &__content
     font-size: 14px
     font-weight: bold

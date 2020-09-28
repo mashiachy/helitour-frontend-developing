@@ -11634,7 +11634,9 @@ document.getElementById('js__extend-list-controller').addEventListener('click', 
 });
 
 initModal('.modal-reserve');
-document.getElementById('js__open-modal-reserve').addEventListener('click', e => {
-  openModal('.modal-reserve');
-  e.stopPropagation();
-});
+document.querySelectorAll('.js__open-modal-reserve').forEach(el =>
+  el.addEventListener('click', e => {
+    openModal('.modal-reserve');
+    e.stopPropagation();
+  })
+);

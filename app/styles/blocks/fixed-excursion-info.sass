@@ -8,6 +8,12 @@
   visibility: hidden
   opacity: 0
   transition: opacity .25s ease-out
+  @include sm-phone
+    &_keys
+      top: calc(#{$w-c-phone}) !important
+      margin-right: 0 !important
+      margin-left: 0 !important
+      width: 100% !important
   &.active
     opacity: 1
     visibility: visible
@@ -23,15 +29,39 @@
   .excursion-info-card
     flex-basis: 25%
     box-sizing: border-box
+    @media screen and (min-width: 992px)
+      &:not(:nth-child(4n))
+        position: relative
+        &:after
+          position: absolute
+          content: ''
+          top: 15px
+          right: 0
+          height: calc(100% - 30px)
+          width: 1px
+          background-color: $gray
     @include sm-tablet
       flex-basis: 50%
-    &:not(:last-child)
-      position: relative
-      &:after
-        position: absolute
-        content: ''
-        top: 15px
-        right: 0
-        height: calc(100% - 30px)
-        width: 1px
-        background-color: $gray
+      width: 50%
+      box-sizing: border-box
+      &:not(:nth-child(2n))
+        position: relative
+        &:after
+          position: absolute
+          content: ''
+          top: 15px
+          right: 0
+          height: calc(100% - 30px)
+          width: 1px
+          background-color: $gray
+    @include sm-phone
+      &:not(:nth-child(2n))
+        position: relative
+        &:after
+          position: absolute
+          content: ''
+          top: 0
+          right: 0
+          height: 100%
+          width: 1px
+          background-color: $gray

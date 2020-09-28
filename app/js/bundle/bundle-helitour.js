@@ -11629,7 +11629,30 @@ const helicopterSlider = new Swiper('.main-slider', {
     },
   },
 });
+helicopterSlider.on('slideChange', () => {
+  const state = player.getPlayerState();
+  if (state === 1 || state === 3 || state === 5) {
+    player.pauseVideo();
+  }
+});
 
 excursionsSlider();
-
 instagramSlider();
+
+let player;
+const playerId = 'youtube-player';
+const script = document.createElement('script');
+script.src = 'https://www.youtube.com/iframe_api';
+script.async = true;
+const handle = () => {
+  window.onYouTubeIframeAPIReady = function () {
+    player = new YT.Player(playerId, {
+      height: '100%',
+      width: '100%',
+      videoId: document.getElementById(playerId).getAttribute('data-youtube-player'),
+    });
+  };
+  script.removeEventListener('load', handle);
+};
+script.addEventListener('load', handle);
+document.head.appendChild(script);

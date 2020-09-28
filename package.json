@@ -4,7 +4,8 @@
   "description": "helitour web-site frontend-developing",
   "main": "index.js",
   "scripts": {
-    "dev": "node build-all.js"
+    "dev": "node build-all.js",
+    "build": "node prod-build-all.js"
   },
   "author": "Mashoachy",
   "license": "ISC",
@@ -47,7 +48,9 @@
   },
   "devDependencies": {
     "gulp-json-transform": "^0.4.7",
-    "gulp-modernizr": "^4.0.1"
+    "gulp-modernizr": "^4.0.1",
+    "purgecss-from-html": "^3.0.0",
+    "purgecss-from-js": "^1.0.0"
   },
   "browserslist": [
     "defaults"
