@@ -1,28 +1,63 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-app-bar
+      app
+      color="primary"
+      dark
+    >
+      <v-img
+        alt="Helitour Logo"
+        class="shrink mx-auto"
+        contain
+        src="./assets/logo.png"
+        transition="scale-transition"
+        width="80"
+      />
+    </v-app-bar>
+
+    <v-main>
+      <div class="main-wrapper d-flex align-content-stretch">
+        <v-col cols="6">
+          <Map />
+        </v-col>
+        <v-col class="map-controller-wrapper" cols="6">
+          <MapController />
+        </v-col>
+      </div>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Map from './components/Map';
+import MapController from "./components/MapController";
 
 export default {
   name: 'App',
+
   components: {
-    HelloWorld
+    Map, MapController
+  },
+
+  data: () => ({
+    //
+  }),
+
+  created () {
+    this.$store.dispatch('loadTrips')
   }
-}
+};
 </script>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="sass">
+html
+  overflow-y: unset
+  max-height: 100vh
+
+.main-wrapper
+  height: calc(100vh - 65px)
+
+.map-controller-wrapper
+  max-height: 100%
+  overflow-y: auto
 </style>
