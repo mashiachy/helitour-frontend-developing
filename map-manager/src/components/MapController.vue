@@ -56,8 +56,7 @@ export default {
 
   data () {
     return {
-      currentTripId: null,
-      // currentTrip: null
+      currentTripId: null
     }
   },
 
@@ -90,27 +89,21 @@ export default {
     clickCreateTrip () {
       eventBus.$emit('createTrip')
       this.currentTripId = this.idForNewTrip
-      // this.changeCurrentTripForCreate()
+      eventBus.$emit('setNewMapInfo')
+      eventBus.$emit('setMapInfo', {
+        id: this.currentTripId
+      })
     },
-    inputEditTrip (id) {
+    inputEditTrip (tripIid) {
+      const { id } = this.$store.getters.tripById(tripIid)
       eventBus.$emit('editTrip', id)
-      // this.changeCurrentTripForEdit()
+      eventBus.$emit('setMapInfo', {
+        id
+      })
     },
     setNullCurrentTrip () {
       this.currentTripId = null
-    },
-    changeCurrentTripForEdit () {
-      const { path, ...data } = this.$store.getters.tripById(this.currentTripId)
-      this.currentTrip = {
-        ...data,
-        wayPath: path
-      }
-    },
-    changeCurrentTripForCreate () {
-      this.currentTrip = {
-        id: this.currentTripId,
-        ...BASE_TRIP_OBJECT
-      }
+      eventBus.$emit('setNewMapInfo')
     },
     ...mapActions(['saveEdits', 'cancelEdits'])
   },
@@ -124,7 +117,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>

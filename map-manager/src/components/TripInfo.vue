@@ -10,12 +10,13 @@
         class="mb-4"
         @click="clickDrawButton"
       >
-        Рисование маршрутa
+        {{ isPolyEditMode ? 'Выход из режима рисования' : 'Рисование маршрутa' }}
       </v-btn>
       <v-data-table
         :headers="markerHeaders"
         :items="tripMarkers"
         class="elevation-1 mb-4"
+        @click:row.self="toggleActiveMarker"
       >
         <template v-slot:top>
           <v-toolbar flat>
@@ -75,6 +76,9 @@
               </v-card>
             </v-dialog>
           </v-toolbar>
+        </template>
+        <template v-slot:item.name="{ item, value }">
+          <span :class="{ bold: item.id === activeMarker }">{{ value }}</span>
         </template>
         <template v-slot:item.actions="{ item }">
           <v-icon small class="mr-2" @click="drawMarkerItem(item)">
@@ -137,6 +141,7 @@ export default {
       tripPath: [...this.wayPath],
       tripMarkers: [...this.markers],
       markerHeaders: MARKERS_TABLE_HEADER,
+      activeMarker: null,
       editedIndex: -1,
       dialog: false,
       dialogDelete: false,
@@ -150,6 +155,9 @@ export default {
         name: 'Новый маркер',
         latLng: { lat: 0, lng: 0 }
       },
+      isMarkerEditMode: false,
+      editingMarker: null,
+      isPolyEditMode: false
     }
   },
 
@@ -167,6 +175,20 @@ export default {
     }
   },
 
+  created () {
+    eventBus.$on('toggleMarkerSetMode', this.toggleMarkerEditMode)
+    eventBus.$on('drawn', this.setPoly)
+    eventBus.$on('drawerOn', this.enableDrawPolyMode)
+    eventBus.$on('drawerOff', this.disableDrawPolyMode)
+  },
+
+  beforeDestroy () {
+    eventBus.$off('toggleMarkerSetMode', this.toggleMarkerEditMode)
+    eventBus.$off('drawn', this.setPoly)
+    eventBus.$off('drawerOn', this.enableDrawPolyMode)
+    eventBus.$off('drawerOff', this.disableDrawPolyMode)
+  },
+
   mounted () {
     this.setDefaults()
   },
@@ -180,15 +202,58 @@ export default {
     },
     id () {
       this.setDefaults()
+    },
+    activeMarker (v) {
+      eventBus.$emit('toggleActiveMarker', v)
+    },
+    tripMarkers (v) {
+      this.activeMarker = null
+      eventBus.$emit('setMapInfo', {
+        markers: v.map(({ id, latLng }) => ({ id, latLng }))
+      })
+    },
+    tripPath (v) {
+      this.activeMarker = null
+      eventBus.$emit('setMapInfo', {
+        path: v
+      })
     }
   },
 
   methods: {
+    enableDrawPolyMode () {
+      this.isPolyEditMode = true
+    },
+    disableDrawPolyMode () {
+      this.isPolyEditMode = false
+    },
+    toggleMarkerEditMode () {
+      if (this.isMarkerEditMode) {
+        eventBus.$off('settedMarker', this.setMarker)
+      } else {
+        eventBus.$on('settedMarker', this.setMarker)
+      }
+    },
+    setMarker (latLng) {
+      const m = Object.assign({ ...this.tripMarkers.find(({ id }) => id === this.editingMarker) }, { latLng })
+      this.$set(this.tripMarkers, this.tripMarkers.findIndex(({ id }) => id === this.editingMarker), m)
+    },
+    setPoly (path) {
+      this.tripPath = [ ...path ]
+    },
+    toggleActiveMarker ({ id }) {
+      if (this.activeMarker === id) {
+        this.activeMarker = null
+      } else {
+        this.activeMarker = id
+      }
+    },
     setDefaults () {
       this.tripId = this.id
       this.tripName = this.name
       this.tripPath = [...this.wayPath]
       this.tripMarkers = [...this.markers]
+      this.activeMarker = null
     },
     clickDrawButton () {
       eventBus.$emit('toggleDrawMode')
@@ -198,8 +263,9 @@ export default {
       this.editedItem = { ...item }
       this.dialog = true
     },
-    drawMarkerItem () {
-      eventBus.$emit('toggleMarkerSetMode')
+    drawMarkerItem ({ id }) {
+      eventBus.$emit('toggleMarkerSetMode', id)
+      this.editingMarker = id
     },
     deleteItem (item) {
       this.editedIndex = this.tripMarkers.indexOf(item)
@@ -245,6 +311,7 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="sass">
+.bold
+  font-weight: bold
 </style>

@@ -55,7 +55,9 @@ export default new Vuex.Store({
       commit('UPDATE_INITIAL_ID_FOR_NEW_TRIP')
       eventBus.$emit('cancelEdits')
     },
-    saveEdits () {}
+    saveEdits ({ state }) {
+      console.log(state.changedTrips)
+    }
   },
   getters: {
     tripsInfo: ({ trips, changedTrips }) => {

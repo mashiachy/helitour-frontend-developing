@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "axios": "^0.20.0",
+    "chaikin-smooth": "^1.0.4",
     "core-js": "^3.6.5",
     "google-maps": "^4.3.3",
     "vue": "^2.6.11",
