@@ -28,7 +28,7 @@ const app = new Vue({
       helicopter: null,
       trips: [],
       helicopters: [],
-      price: 25000,
+      // price: 25000,
       present: false,
       date: `${('0'+date.getDate()).slice(-2)}.${('0'+(date.getMonth()+1)).slice(-2)}.${date.getFullYear()}`,
       time: '12:00',
@@ -94,6 +94,10 @@ const app = new Vue({
     deliveryName () {
       return this.deliveries.find(d => d.id === this.delivery).name;
     },
+    price () {
+      const t = this.tripInfo
+      return t.prices[t.helicopters.indexOf(this.helicopter)]
+    }
   },
   async created () {
     const { data } = await axios.get('/helitours_info.json');

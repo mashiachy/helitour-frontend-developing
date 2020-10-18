@@ -15,6 +15,7 @@
     "axios": "^0.20.0",
     "bemto.pug": "^2.1.0",
     "browser-sync": "^2.26.12",
+    "chaikin-smooth": "^1.0.4",
     "create-file": "^1.0.1",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",

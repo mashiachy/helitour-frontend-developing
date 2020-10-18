@@ -43,9 +43,8 @@
     &_price
       display: flex
       align-items: flex-end
-      justify-content: center
+      justify-content: space-between
       @include phone
-        justify-content: space-between
         align-items: flex-start
       @include adaptive(460)
         flex-wrap: wrap
@@ -57,7 +56,7 @@
           min-height: 22px
       .booking-form__item-label, .checkbox
         flex-basis: calc(50% - 150px)
-        @include phone
+        @include tablet
           flex-basis: auto
       .price
         padding: 0 50px

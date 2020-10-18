@@ -121,7 +121,7 @@ const toggleBodyScrollable = () => {
 };
 
 const loadMap = () => {
-  const mapApiKey = 'AIzaSyDwFJKis6dWeAiTjb4myRBXStoZPfXTZ3I';
+  const mapApiKey = 'AIzaSyBUevELRNQrstYsf6nlw74wsrukteZiguc';
   return new Promise((resolve, reject) => {
     const script = document.createElement('script');
     const callback = () => {
@@ -136,26 +136,36 @@ const loadMap = () => {
 };
 
 const initBaseMap = (container) => {
-  loadMap().then(() => {
-    const map = new google.maps.Map(document.querySelector(container), {
-      center: {lat: 50.4449, lng: 30.5087},
-      zoom: 14,
-      disableDefaultUI: true,
-      styles: [
-        {
-          featureType: 'poi',
-          stylers: [
-            { visibility: 'off' },
-          ],
-        },
-        {
-          featureType: 'transit.station.bus',
-          stylers: [
-            { visibility: 'off' },
-          ],
-        },
-      ],
-    });
+  return loadMap().then(() => {
+    return new Promise(resolve => {
+      const map = new google.maps.Map(document.querySelector(container), {
+        center: { lat: 50.434341, lng: 30.527756 },
+        zoom: 14,
+        disableDefaultUI: true,
+        clickableIcons: false,
+        styles: [
+          {
+            featureType: 'poi',
+            stylers: [
+              { visibility: 'off' }
+            ]
+          },
+          {
+            featureType: 'poi.park',
+            stylers: [
+              { visibility: 'on' }
+            ]
+          },
+          {
+            featureType: 'transit',
+            stylers: [
+              { visibility: 'off' }
+            ]
+          }
+        ]
+      });
+      resolve(map);
+    })
   });
 };
 

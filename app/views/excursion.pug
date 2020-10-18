@@ -8,6 +8,7 @@ html(lang="us")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     meta(name="robots" content="noindex, nofollow")
     title Helitour | excursion
+    link(href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet")
     link(href="css/excursion.css" rel="stylesheet")
     script(defer src="js/excursion.js")
   body
@@ -160,12 +161,12 @@ html(lang="us")
         +e.content.no-sm-tablet
           h2 Замовивши дану екскурсію, ви побачите
           ul.rounded
-            li Трухановим островом;
-            li Дніпром;
-            li Набережним шосе;
-            li Аркою дружби народів;
-            li Аркою дружби народів;
-            li Вул. Набережно-Хрещатицькою;
+            li(data-marker="0") Трухановим островом;
+            li(data-marker="1") Дніпром;
+            li(data-marker="2") Набережним шосе;
+            li(data-marker="3") Аркою дружби народів;
+            li(data-marker="4") Аркою дружби народів;
+            li(data-marker="5") Вул. Набережно-Хрещатицькою;
             li Гаванським та Південним мостом;
             li Парком та островом Муромець;
             li Оболонською набережною;

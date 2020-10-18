@@ -8,6 +8,7 @@ html(lang="us")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     meta(name="robots" content="noindex, nofollow")
     title Helitour | booking
+    link(href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet")
     link(href="css/booking.css" rel="stylesheet")
     script(defer src="js/booking.js")
   body
@@ -74,8 +75,8 @@ html(lang="us")
                 +e.item-title {{ helicopterItem.name }}
                 +e.item-text {{ helicopterItem.text }}
           +e.form-item_price
-            +e.SPAN.item-label Цiна:
-            +b.SPAN(data-after='грн').price {{ price | currency }}
+            +e.SPAN(v-if="helicopter").item-label Цiна:
+            +b.SPAN(data-after='грн' v-if="helicopter").price {{ price | currency }}
             +b.SPAN.checkbox
               +e.INPUT(type='checkbox' id='present-checkbox' v-model='present')
               +e.LABEL(for='present-checkbox').label Хочу замовити в подарунок
@@ -144,7 +145,7 @@ html(lang="us")
                 +e.INPUT(type='checkbox' id='offer-checkbox' v-model='offerAccept')
                 +e.LABEL(for='offer-checkbox').label='Погоджуюсь з '
                   a.base-link(href='#') офертою
-              +b.BUTTON(type='submit').button Оплатити онлайн
+              +b.BUTTON(type='submit' @click.prevent="sendForm").button Оплатити онлайн
               +b.BUTTON(type='submit').button_flat Готівкою
       +b.SECTION.col-text.content.content__inner
         +e.text

@@ -8,6 +8,7 @@ html(lang="us")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     meta(name="robots" content="noindex, nofollow")
     title Helitour | index
+    link(href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet")
     link(href="css/index.css" rel="stylesheet")
     script(defer src="js/index.js")
   body
@@ -155,7 +156,7 @@ html(lang="us")
             +e.SPAN.back-subtext Час польоту
           .delimeter
           div
-            .price(data-before='вiд' data-after='грн') 1899
+            .price(data-before='вiд' data-after='грн' v-if='price') {{ price }}
             +e.SPAN.back-subtext Вартість польоту
       +b.SECTION.license
         .content.content__inner

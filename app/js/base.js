@@ -1,5 +1,6 @@
 import supportsWebP from "supports-webp";
 import Swiper from "swiper";
+import smooth from 'chaikin-smooth';
 
 export const selectItemInit = () => {
   window.addEventListener('load', () => {
@@ -356,7 +357,7 @@ export const closeModal = (modalSelector) => {
 };
 
 export const loadMap = () => {
-  const mapApiKey = 'AIzaSyDwFJKis6dWeAiTjb4myRBXStoZPfXTZ3I';
+  const mapApiKey = 'AIzaSyBUevELRNQrstYsf6nlw74wsrukteZiguc';
   return new Promise((resolve, reject) => {
     const script = document.createElement('script');
     const callback = () => {
@@ -371,25 +372,153 @@ export const loadMap = () => {
 };
 
 export const initBaseMap = (container) => {
-  loadMap().then(() => {
-    const map = new google.maps.Map(document.querySelector(container), {
-      center: {lat: 50.4449, lng: 30.5087},
-      zoom: 14,
-      disableDefaultUI: true,
-      styles: [
-        {
-          featureType: 'poi',
-          stylers: [
-            { visibility: 'off' },
-          ],
-        },
-        {
-          featureType: 'transit.station.bus',
-          stylers: [
-            { visibility: 'off' },
-          ],
-        },
-      ],
-    });
+  return loadMap().then(() => {
+    return new Promise(resolve => {
+      const map = new google.maps.Map(document.querySelector(container), {
+        center: { lat: 50.434341, lng: 30.527756 },
+        zoom: 14,
+        disableDefaultUI: true,
+        clickableIcons: false,
+        styles: [
+          {
+            featureType: 'poi',
+            stylers: [
+              { visibility: 'off' }
+            ]
+          },
+          {
+            featureType: 'poi.park',
+            stylers: [
+              { visibility: 'on' }
+            ]
+          },
+          {
+            featureType: 'transit',
+            stylers: [
+              { visibility: 'off' }
+            ]
+          }
+        ]
+      });
+      resolve(map);
+    })
   });
 };
+
+export const MAP_POLYGON_CONFIG = {
+  strokeColor: '#0facd0',
+  strokeOpacity: 1,
+  strokeWeight: 3,
+  fillColor: '#0facd0',
+  fillOpacity: 0,
+  draggable: false,
+  geodesic: false,
+  clickable: false
+}
+
+export const MAP_MARKER_CONFIG = () => ({
+  draggable: false,
+  clickable: false,
+  icon: {
+    path: google.maps.SymbolPath.CIRCLE,
+    fillColor: '#0facd0',
+    fillOpacity: 1,
+    anchor: new google.maps.Point(0,0),
+    strokeWeight: 0,
+    scale: 10
+  }
+})
+
+export const INIT_MARKERS_ANIMATION = (map) => {
+  google.maps.Marker.prototype.animateInterval = null;
+  google.maps.Marker.prototype.i = 1;
+  google.maps.Marker.prototype.startAnimation = function() {
+    this.setDefaultScale()
+    this.animateInterval = setInterval(this.animateHandler.bind(this), 5)
+  }
+  google.maps.Marker.prototype.stopAnimation = function() {
+    clearInterval(this.animateInterval)
+    this.animateInterval = null
+    this.setDefaultScale()
+  }
+  google.maps.Marker.prototype.animateHandler = function() {
+    const s = this.getIcon();
+    s.scale = s.scale + this.i * 0.1
+    this.setIcon(s)
+    const f = Math.floor(s.scale)
+    if (f === 20) this.i = -1
+    if (f === 10) this.i = 1
+  }
+  google.maps.Marker.prototype.setDefaultScale = function() {
+    this.i = 1
+    const s = this.getIcon()
+    s.scale = 10
+    this.setIcon(s)
+  }
+}
+
+export const INIT_DOUGLAS_PEUCKER = (map) => {
+  google.maps.Polygon.prototype.douglasPeucker = function(tolerance) {
+    let res = null;
+    tolerance = tolerance * Math.pow(2, 20 - map.getZoom());
+    if(this.getPath() && this.getPath().getLength()) {
+      const points = this.getPath().getArray();
+
+      const Line = function( p1, p2 ) {
+        this.p1 = p1;
+        this.p2 = p2;
+
+        this.distanceToPoint = function( point ) {
+          let m = ( this.p2.lat() - this.p1.lat() ) / ( this.p2.lng() - this.p1.lng() ),
+            b = this.p1.lat() - ( m * this.p1.lng() ),
+            d = [];
+          d.push( Math.abs( point.lat() - ( m * point.lng() ) - b ) / Math.sqrt( Math.pow( m, 2 ) + 1 ) );
+          d.push( Math.sqrt( Math.pow( ( point.lng() - this.p1.lng() ), 2 ) + Math.pow( ( point.lat() - this.p1.lat() ), 2 ) ) );
+          d.push( Math.sqrt( Math.pow( ( point.lng() - this.p2.lng() ), 2 ) + Math.pow( ( point.lat() - this.p2.lat() ), 2 ) ) );
+          return d.sort((a, b) => a - b)[0];
+        };
+      };
+
+      const douglasPeucker = function( points, tolerance ) {
+        if ( points.length <= 2 ) {
+          return [points[0]];
+        }
+        let returnPoints = [],
+          line = new Line( points[0], points[points.length - 1] ),
+          maxDistance = 0,
+          maxDistanceIndex = 0,
+          p;
+        for(let i = 1; i <= points.length - 2; i++) {
+          const distance = line.distanceToPoint(points[i]);
+          if( distance > maxDistance ) {
+            maxDistance = distance;
+            maxDistanceIndex = i;
+          }
+        }
+        if (maxDistance >= tolerance) {
+          p = points[maxDistanceIndex];
+          line.distanceToPoint( p, true );
+          returnPoints = returnPoints.concat(douglasPeucker(points.slice( 0, maxDistanceIndex + 1), tolerance));
+          returnPoints = returnPoints.concat(douglasPeucker(points.slice( maxDistanceIndex, points.length ), tolerance));
+        } else {
+          p = points[maxDistanceIndex];
+          line.distanceToPoint( p, true );
+          returnPoints = [points[0]];
+        }
+        return returnPoints;
+      };
+      res = douglasPeucker(points, tolerance);
+      res.push(points[points.length - 1 ]);
+      this.setPath(res);
+    }
+    return this;
+  }
+  const EARTH_RADIUS = 6378137.0
+  google.maps.Polygon.prototype.setSmoothPath = function(path) {
+    this.setPath(path)
+    this.douglasPeucker(360.0 / (2.0 * Math.PI * EARTH_RADIUS))
+    this.setPath(smooth(smooth(this.getPath().i.map(({ lat, lng }) => [ lat(), lng() ])))
+      .map(([ lat, lng ]) => ({ lat, lng }))
+    )
+  }
+}

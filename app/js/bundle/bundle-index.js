@@ -25396,6 +25396,11 @@ const bookingForm = new Vue({
         this.tripInfo.helicopters.indexOf(id) !== -1
       );
     },
+    price () {
+      if (!this.helicopter) return null
+      if (this.tripInfo.helicopters.includes(this.helicopter)) return null
+      return this.tripInfo.prices[this.tripInfo.helicopters.indexOf(this.helicopter)]
+    }
   },
   methods: {
     clickSelect (target, e) {
