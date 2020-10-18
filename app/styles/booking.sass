@@ -44,6 +44,8 @@
       display: flex
       align-items: flex-end
       justify-content: space-between
+      > *:first-child *
+        justify-content: flex-start !important
       @include phone
         align-items: flex-start
       @include adaptive(460)
