@@ -37,7 +37,7 @@ gulp.task('fonts', () => {
 });
 
 const whiteListPatterns = {
-  'booking': [/.*mx.*/]
+  'booking': [/.*mx.*/, /.*helicopter-card-list.*/]
 };
 
 gulp.task('sass',  () => {

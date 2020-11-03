@@ -138,9 +138,9 @@ html(lang="us")
           +e.price-block.sm-phone
             span.price(data-before='вiд' data-after='грн') 1899
             +e.SPAN.back-subtext Вартість польоту
-          +b.BUTTON.button Забронювати
+          +b.BUTTON(@click.prevent='clickButton').button Забронювати
         +e.back
-          picture.rounded-image
+          picture(v-show='helicopterInfo').rounded-image
             source(:srcset='helicopterInfo.webp' type='image/webp')
             source(:srcset='helicopterInfo.jpg' type='image/png')
             img(:src='helicopterInfo.jpg' alt='Mini helicopter 2')

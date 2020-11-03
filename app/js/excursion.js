@@ -18,7 +18,10 @@ initBaseMap('#js__map')
   .then(async (map) => {
     INIT_DOUGLAS_PEUCKER(map);
     INIT_MARKERS_ANIMATION(map);
-    const { path, markers } = (await axios.get('../trip_info.json')).data;
+    const excursionMeta = document.querySelector('meta[name="excursionId"]');
+    if (!excursionMeta) return;
+    const excursionId = excursionMeta.getAttribute('content');
+    const { path, markers } = (await axios.get(`./api/excursions-map.json?ID=${excursionId}`)).data;
 
     // Draw path
     const tripPath = new google.maps.Polygon(MAP_POLYGON_CONFIG);

@@ -25398,7 +25398,7 @@ const bookingForm = new Vue({
     },
     price () {
       if (!this.helicopter) return null
-      if (this.tripInfo.helicopters.includes(this.helicopter)) return null
+      if (!this.tripInfo.helicopters.includes(this.helicopter)) return null
       return this.tripInfo.prices[this.tripInfo.helicopters.indexOf(this.helicopter)]
     }
   },
@@ -25412,6 +25412,11 @@ const bookingForm = new Vue({
       target.classList.remove('select-input_active');
       e.stopPropagation();
     },
+    clickButton() {
+      const data = JSON.stringify({ tripId: this.trip, helicopterId: this.helicopter });
+      axios$1.post('./booking.html', data)
+        .finally(e => console.log(e));
+    }
   },
   async created () {
     const { data } = await axios$1.get('/index-trips.json');

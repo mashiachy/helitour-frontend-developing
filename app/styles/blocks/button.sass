@@ -20,18 +20,21 @@
   text-transform: uppercase
   font-weight: bold
   cursor: pointer
-  &:hover
+  &[disabled]
+    cursor: auto
+    opacity: .5
+  &:not([disabled]):hover
     color: #ffffff
   &_flat
     background-color: transparent
     color: $black-text
     border: 2px solid $accent-text
     padding: 28px 10px
-    &:hover
+    &:not([disabled]):hover
       color: #ffffff
       background-color: $accent-text
   &_white
     background-color: #ffffff
     color: $black-text
-    &:hover
+    &:not([disabled]):hover
       color: $accent-text

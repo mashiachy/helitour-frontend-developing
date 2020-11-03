@@ -7,6 +7,8 @@ html(lang="us")
     meta(http-equiv="X-UA-Compatible" content="IE=edge")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     meta(name="robots" content="noindex, nofollow")
+    meta(name="tripId" content="101")
+    meta(name="helicopterId" content="13")
     title Helitour | booking
     link(href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet")
     link(href="css/booking.css" rel="stylesheet")
@@ -94,6 +96,7 @@ html(lang="us")
                 :input-attr='{' +
                   'id: \'dateInput\',' +
                 '}'
+                :disabled-date='disableDate'
               )
                 template(v-slot:icon-calendar)
                   include ../../mokups/exports/calendar.svg
@@ -103,6 +106,7 @@ html(lang="us")
                 v-model='time'
                 type='time'
                 value-type='format'
+                :minute-step='15'
                 format='HH:mm'
                 :append-to-body='false'
                 :clearable='false'
@@ -110,6 +114,7 @@ html(lang="us")
                   'id: \'timeInput\',' +
                   'placeholder: \'00:00\'' +
                 '}'
+                :disabled-time='disableTime'
               )
                 template(v-slot:icon-calendar)
                   include ../../mokups/exports/clock-black.svg
@@ -138,15 +143,15 @@ html(lang="us")
                       @click='delivery = deliveryItem.id'
                     ).dropdown-item {{ deliveryItem.name }}
               +e.personal-wrapper-item
-                +b.TEXTAREA(placeholder='Коментар').text-input
+                +b.TEXTAREA(placeholder='Коментар' v-model='message').text-input
           +e.form-item_buttons
             +e.buttons-container
               +b.SPAN.checkbox_flat
                 +e.INPUT(type='checkbox' id='offer-checkbox' v-model='offerAccept')
                 +e.LABEL(for='offer-checkbox').label='Погоджуюсь з '
                   a.base-link(href='#') офертою
-              +b.BUTTON(type='submit' @click.prevent="sendForm").button Оплатити онлайн
-              +b.BUTTON(type='submit').button_flat Готівкою
+              +b.BUTTON(@click.prevent="sendForm" :disabled='!offerAccept').button Оплатити онлайн
+              +b.BUTTON(@click.prevent='' :disabled='!offerAccept').button_flat Готівкою
       +b.SECTION.col-text.content.content__inner
         +e.text
           p За відгуками багатьох, така розвага повністю виправдовує свою ціну і коштує досить недорого. Вартість вертолітного туру доступна людині із середнім рівнем доходу і залежить від тривалості подорожі. У компанії «Helitour» ви також можете недорого придбати сертифікат в подарунок. Такий презент стане прекрасним сюрпризом для близької вам людини.

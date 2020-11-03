@@ -374,8 +374,20 @@ export const loadMap = () => {
 export const initBaseMap = (container) => {
   return loadMap().then(() => {
     return new Promise(resolve => {
+      let lat, lng;
+      const latMeta = document.querySelector('meta[name="mapLat"]');
+      if (latMeta)
+        lat = Number.parseFloat(latMeta.getAttribute('content'));
+      else
+        lat = 50.434341;
+      const lngMeta = document.querySelector('meta[name="mapLng"]');
+      if (lngMeta)
+        lng = Number.parseFloat(lngMeta.getAttribute('content'));
+      else
+        lng = 30.527756;
+      console.log(lat, lng);
       const map = new google.maps.Map(document.querySelector(container), {
-        center: { lat: 50.434341, lng: 30.527756 },
+        center: { lat, lng },
         zoom: 14,
         disableDefaultUI: true,
         clickableIcons: false,
