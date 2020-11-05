@@ -1,6 +1,7 @@
 import supportsWebP from "supports-webp";
 import Swiper from "swiper";
 import smooth from 'chaikin-smooth';
+// import { reject } from "lodash";
 
 export const selectItemInit = () => {
   window.addEventListener('load', () => {
@@ -61,6 +62,8 @@ export const vhFix = () => {
 };
 
 export const excursionsSlider = () => {
+  const container = document.querySelector('.our-excursions .swiper-container');
+  if (!container) return;
   const excursionsSlider = new Swiper('.our-excursions .swiper-container', {
     slidesPerView: 1,
     spaceBetween: 10,
@@ -94,6 +97,8 @@ export const excursionsSlider = () => {
 };
 
 export const articlesSlider = () => {
+  const container = document.querySelector('.our-articles .swiper-container');
+  if (!container) return;
   const articlesSlider = new Swiper('.our-articles .swiper-container', {
     slidesPerView: 1,
     spaceBetween: 10,
@@ -118,6 +123,8 @@ export const articlesSlider = () => {
 };
 
 export const documentSlider = () => {
+  const documentSliderElement = document.querySelector('.license .swiper-container');
+  if (!documentSliderElement) return;
   const documentSlider = new Swiper('.license .swiper-container', {
     loop: true,
     loopAdditionalSlides: 1,
@@ -150,7 +157,7 @@ export const documentSlider = () => {
       },
     },
   });
-  const documentSliderElement = document.querySelector('.license .swiper-container');
+  // const documentSliderElement = document.querySelector('.license .swiper-container');
   const length = 1 + Math.max(...Array.from(documentSliderElement.querySelectorAll('.swiper-wrapper .swiper-slide'))
     .map(el => Number.parseInt(el.getAttribute('data-swiper-slide-index'))));
   const paginationElement = documentSliderElement.querySelector('.swiper-pagination');
@@ -166,6 +173,8 @@ export const documentSlider = () => {
 };
 
 export const instagramSlider = () => {
+  const instagramSliderElement = document.querySelector('.our-instagram .swiper-container');
+  if (!instagramSliderElement) return;
   const instagramSlider = new Swiper('.our-instagram .swiper-container', {
     loop: true,
     loopAdditionalSlides: 1,
@@ -194,7 +203,7 @@ export const instagramSlider = () => {
       },
     },
   });
-  const instagramSliderElement = document.querySelector('.our-instagram .swiper-container');
+  // const instagramSliderElement = document.querySelector('.our-instagram .swiper-container');
   const length = 1 + Math.max(...Array.from(instagramSliderElement.querySelectorAll('.swiper-wrapper .swiper-slide'))
     .map(el => Number.parseInt(el.getAttribute('data-swiper-slide-index'))));
   const paginationElement = instagramSliderElement.querySelector('.swiper-pagination');
@@ -268,11 +277,13 @@ export const headerPopup = () => {
       let target = e.target;
       target.classList.toggle('active');
       const nav = target.parentElement.querySelector('.js__header-nav_controller');
+      if (!nav) return;
       if (target.classList.contains('active')) {
         nav.style.maxHeight = `${nav.scrollHeight + 100}px`;
         if (activeNav) {
           activeNav.classList.remove('active');
-          activeNav.parentElement.querySelector('.js__header-nav_controller').style.maxHeight = `0px`;
+          const navController = activeNav.parentElement.querySelector('.js__header-nav_controller')
+          if (navController) navController.style.maxHeight = `0px`;
         }
         activeNav = target;
       } else {
@@ -282,18 +293,26 @@ export const headerPopup = () => {
       e.stopPropagation();
     });
   });
-  document.querySelector('.header-extended.js__header-popup_control').addEventListener('click', e => {
-    e.stopPropagation();
-  });
+  const headerController = document.querySelector('.header-extended.js__header-popup_control')
+  if (headerController) {
+    headerController.addEventListener('click', e => {
+      e.stopPropagation();
+    });
+  }  
   window.addEventListener('click', () => {
     if (activeNav) {
       activeNav.classList.remove('active');
-      activeNav.parentElement.querySelector('.js__header-nav_controller').style.maxHeight = `0px`;
+      const navController = activeNav.parentElement.querySelector('.js__header-nav_controller')
+      if (navController)
+        navController.style.maxHeight = `0px`;
     }
     activeNav = null;
 
-    let isActiveHeader = document.querySelector('.header-extended.js__header-popup_control')
-      .classList.contains('header-extended_active');
+    const activeHeader = document.querySelector('.header-extended.js__header-popup_control')
+    let isActiveHeader = false
+    if (activeHeader) {
+      isActiveHeader = activeHeader.classList.contains('header-extended_active');
+    }
     if (isActiveHeader) {
       if (window.innerWidth <= 768) {
         toggleBodyScrollable();
@@ -316,7 +335,9 @@ const toggleBodyScrollable = () => {
 
 export const initModal = (modalSelector) => {
   document.querySelectorAll(modalSelector).forEach(modal => {
-    modal.querySelector('[data-modal-body]').addEventListener('click', e => e.stopPropagation());
+    const modalBody = modal.querySelector('[data-modal-body]')
+    if (modalBody)
+      modalBody.addEventListener('click', e => e.stopPropagation());
   });
   window.addEventListener('click', () => {
     closeModal(modalSelector);
@@ -325,7 +346,9 @@ export const initModal = (modalSelector) => {
 
 export const openModal = (modalSelector) => {
   document.documentElement.classList.add('noscroll');
-  document.querySelector('.modal').classList.add('active');
+  const modalW = document.querySelector('.modal')
+  if (modalW)
+    modalW.classList.add('active');
   document.querySelectorAll(modalSelector).forEach(modal => {
     modal.classList.add('active', 'before-enter');
     modal.classList.add('enter');
@@ -349,7 +372,7 @@ export const closeModal = (modalSelector) => {
       target.classList.remove('leave');
       target.classList.remove('active');
       target.classList.remove('after-leave');
-      document.querySelector('.modal').classList.remove('active');
+      document.querySelector('.modal')?.classList.remove('active');
       modal.removeEventListener('animationend', handler);
     };
     modal.addEventListener('animationend', handler);
@@ -373,7 +396,9 @@ export const loadMap = () => {
 
 export const initBaseMap = (container) => {
   return loadMap().then(() => {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
+      const containerElement = document.querySelector(container);
+      if (!containerElement) reject();
       let lat, lng;
       const latMeta = document.querySelector('meta[name="mapLat"]');
       if (latMeta)
@@ -386,7 +411,7 @@ export const initBaseMap = (container) => {
       else
         lng = 30.527756;
       console.log(lat, lng);
-      const map = new google.maps.Map(document.querySelector(container), {
+      const map = new google.maps.Map(containerElement, {
         center: { lat, lng },
         zoom: 14,
         disableDefaultUI: true,

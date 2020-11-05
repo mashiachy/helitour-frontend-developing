@@ -74,11 +74,13 @@ const headerPopup = () => {
       let target = e.target;
       target.classList.toggle('active');
       const nav = target.parentElement.querySelector('.js__header-nav_controller');
+      if (!nav) return;
       if (target.classList.contains('active')) {
         nav.style.maxHeight = `${nav.scrollHeight + 100}px`;
         if (activeNav) {
           activeNav.classList.remove('active');
-          activeNav.parentElement.querySelector('.js__header-nav_controller').style.maxHeight = `0px`;
+          const navController = activeNav.parentElement.querySelector('.js__header-nav_controller');
+          if (navController) navController.style.maxHeight = `0px`;
         }
         activeNav = target;
       } else {
@@ -88,18 +90,26 @@ const headerPopup = () => {
       e.stopPropagation();
     });
   });
-  document.querySelector('.header-extended.js__header-popup_control').addEventListener('click', e => {
-    e.stopPropagation();
-  });
+  const headerController = document.querySelector('.header-extended.js__header-popup_control');
+  if (headerController) {
+    headerController.addEventListener('click', e => {
+      e.stopPropagation();
+    });
+  }  
   window.addEventListener('click', () => {
     if (activeNav) {
       activeNav.classList.remove('active');
-      activeNav.parentElement.querySelector('.js__header-nav_controller').style.maxHeight = `0px`;
+      const navController = activeNav.parentElement.querySelector('.js__header-nav_controller');
+      if (navController)
+        navController.style.maxHeight = `0px`;
     }
     activeNav = null;
 
-    let isActiveHeader = document.querySelector('.header-extended.js__header-popup_control')
-      .classList.contains('header-extended_active');
+    const activeHeader = document.querySelector('.header-extended.js__header-popup_control');
+    let isActiveHeader = false;
+    if (activeHeader) {
+      isActiveHeader = activeHeader.classList.contains('header-extended_active');
+    }
     if (isActiveHeader) {
       if (window.innerWidth <= 768) {
         toggleBodyScrollable();
@@ -137,7 +147,9 @@ const loadMap = () => {
 
 const initBaseMap = (container) => {
   return loadMap().then(() => {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
+      const containerElement = document.querySelector(container);
+      if (!containerElement) reject();
       let lat, lng;
       const latMeta = document.querySelector('meta[name="mapLat"]');
       if (latMeta)
@@ -150,7 +162,7 @@ const initBaseMap = (container) => {
       else
         lng = 30.527756;
       console.log(lat, lng);
-      const map = new google.maps.Map(document.querySelector(container), {
+      const map = new google.maps.Map(containerElement, {
         center: { lat, lng },
         zoom: 14,
         disableDefaultUI: true,

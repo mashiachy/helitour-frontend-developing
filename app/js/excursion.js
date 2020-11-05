@@ -60,8 +60,11 @@ excursionsSlider();
 instagramSlider();
 
 window.addEventListener('scroll', () => {
-  const controllerLength = document.getElementById('js__fixed-visible-controller').scrollHeight;
+  const controllerElement = document.getElementById('js__fixed-visible-controller');
+  if (!controllerElement) return;
+  const controllerLength = controllerElement.scrollHeight;
   const control = document.getElementById('js__fixed-visible-control');
+  if (!control) return;
   if (window.pageYOffset >= controllerLength) {
     if (!control.classList.contains('active'))
       control.classList.add('active');

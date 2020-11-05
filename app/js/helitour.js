@@ -9,54 +9,60 @@ Swiper.use(Thumbs);
 Swiper.use(Navigation);
 Swiper.use(Pagination);
 
-const len = document.querySelector('.thumb-slider .swiper-container .swiper-wrapper').children.length;
-const thumbSlider = new Swiper('.thumb-slider .swiper-container', {
-  slidesPerView: len > 5 ? 5 : len,
-  slideToClickedSlide: true,
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-});
-
-const helicopterSlider = new Swiper('.main-slider', {
-  slidesPerView: 1,
-  touchMoveStopPropagation: true,
-  thumbs: {
-    swiper: thumbSlider,
-  },
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true,
-    renderBullet: (index, className) => {
-      return `<span class=${className}></span>`;
+const initSlider = () => {
+  const swiperWrapper = document.querySelector('.thumb-slider .swiper-container .swiper-wrapper');
+  if (!swiperWrapper) return;
+  const len = swiperWrapper.children.length;
+  const thumbSlider = new Swiper('.thumb-slider .swiper-container', {
+    slidesPerView: len > 5 ? 5 : len,
+    slideToClickedSlide: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
     },
-  },
-});
-helicopterSlider.on('slideChange', () => {
-  const state = player.getPlayerState();
-  if (state === 1 || state === 3 || state === 5) {
-    player.pauseVideo();
-  }
-});
+  });
+
+  const helicopterSlider = new Swiper('.main-slider', {
+    slidesPerView: 1,
+    touchMoveStopPropagation: true,
+    thumbs: {
+      swiper: thumbSlider,
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+      renderBullet: (index, className) => {
+        return `<span class=${className}></span>`;
+      },
+    },
+  });
+  helicopterSlider.on('slideChange', () => {
+    const state = player.getPlayerState();
+    if (state === 1 || state === 3 || state === 5) {
+      player.pauseVideo();
+    }
+  });
+}
 
 excursionsSlider();
 instagramSlider();
 
 let player;
 const playerId = 'youtube-player';
-const script = document.createElement('script');
-script.src = 'https://www.youtube.com/iframe_api';
-script.async = true;
-const handle = () => {
-  window.onYouTubeIframeAPIReady = function () {
-    player = new YT.Player(playerId, {
-      height: '100%',
-      width: '100%',
-      videoId: document.getElementById(playerId).getAttribute('data-youtube-player'),
-    });
+if (document.querySelector(playerId)) {
+  const script = document.createElement('script');
+  script.src = 'https://www.youtube.com/iframe_api';
+  script.async = true;
+  const handle = () => {
+    window.onYouTubeIframeAPIReady = function () {
+      player = new YT.Player(playerId, {
+        height: '100%',
+        width: '100%',
+        videoId: document.getElementById(playerId).getAttribute('data-youtube-player'),
+      });
+    };
+    script.removeEventListener('load', handle);
   };
-  script.removeEventListener('load', handle);
-};
-script.addEventListener('load', handle)
-document.head.appendChild(script);
+  script.addEventListener('load', handle)
+  document.head.appendChild(script);
+}

@@ -25080,6 +25080,8 @@ const vhFix = () => {
 };
 
 const excursionsSlider = () => {
+  const container = document.querySelector('.our-excursions .swiper-container');
+  if (!container) return;
   const excursionsSlider = new Swiper('.our-excursions .swiper-container', {
     slidesPerView: 1,
     spaceBetween: 10,
@@ -25113,6 +25115,8 @@ const excursionsSlider = () => {
 };
 
 const articlesSlider = () => {
+  const container = document.querySelector('.our-articles .swiper-container');
+  if (!container) return;
   const articlesSlider = new Swiper('.our-articles .swiper-container', {
     slidesPerView: 1,
     spaceBetween: 10,
@@ -25137,6 +25141,8 @@ const articlesSlider = () => {
 };
 
 const documentSlider = () => {
+  const documentSliderElement = document.querySelector('.license .swiper-container');
+  if (!documentSliderElement) return;
   const documentSlider = new Swiper('.license .swiper-container', {
     loop: true,
     loopAdditionalSlides: 1,
@@ -25169,7 +25175,7 @@ const documentSlider = () => {
       },
     },
   });
-  const documentSliderElement = document.querySelector('.license .swiper-container');
+  // const documentSliderElement = document.querySelector('.license .swiper-container');
   const length = 1 + Math.max(...Array.from(documentSliderElement.querySelectorAll('.swiper-wrapper .swiper-slide'))
     .map(el => Number.parseInt(el.getAttribute('data-swiper-slide-index'))));
   const paginationElement = documentSliderElement.querySelector('.swiper-pagination');
@@ -25243,11 +25249,13 @@ const headerPopup = () => {
       let target = e.target;
       target.classList.toggle('active');
       const nav = target.parentElement.querySelector('.js__header-nav_controller');
+      if (!nav) return;
       if (target.classList.contains('active')) {
         nav.style.maxHeight = `${nav.scrollHeight + 100}px`;
         if (activeNav) {
           activeNav.classList.remove('active');
-          activeNav.parentElement.querySelector('.js__header-nav_controller').style.maxHeight = `0px`;
+          const navController = activeNav.parentElement.querySelector('.js__header-nav_controller');
+          if (navController) navController.style.maxHeight = `0px`;
         }
         activeNav = target;
       } else {
@@ -25257,18 +25265,26 @@ const headerPopup = () => {
       e.stopPropagation();
     });
   });
-  document.querySelector('.header-extended.js__header-popup_control').addEventListener('click', e => {
-    e.stopPropagation();
-  });
+  const headerController = document.querySelector('.header-extended.js__header-popup_control');
+  if (headerController) {
+    headerController.addEventListener('click', e => {
+      e.stopPropagation();
+    });
+  }  
   window.addEventListener('click', () => {
     if (activeNav) {
       activeNav.classList.remove('active');
-      activeNav.parentElement.querySelector('.js__header-nav_controller').style.maxHeight = `0px`;
+      const navController = activeNav.parentElement.querySelector('.js__header-nav_controller');
+      if (navController)
+        navController.style.maxHeight = `0px`;
     }
     activeNav = null;
 
-    let isActiveHeader = document.querySelector('.header-extended.js__header-popup_control')
-      .classList.contains('header-extended_active');
+    const activeHeader = document.querySelector('.header-extended.js__header-popup_control');
+    let isActiveHeader = false;
+    if (activeHeader) {
+      isActiveHeader = activeHeader.classList.contains('header-extended_active');
+    }
     if (isActiveHeader) {
       if (window.innerWidth <= 768) {
         toggleBodyScrollable();
@@ -25291,7 +25307,9 @@ const toggleBodyScrollable = () => {
 
 const initModal = (modalSelector) => {
   document.querySelectorAll(modalSelector).forEach(modal => {
-    modal.querySelector('[data-modal-body]').addEventListener('click', e => e.stopPropagation());
+    const modalBody = modal.querySelector('[data-modal-body]');
+    if (modalBody)
+      modalBody.addEventListener('click', e => e.stopPropagation());
   });
   window.addEventListener('click', () => {
     closeModal(modalSelector);
@@ -25300,7 +25318,9 @@ const initModal = (modalSelector) => {
 
 const openModal = (modalSelector) => {
   document.documentElement.classList.add('noscroll');
-  document.querySelector('.modal').classList.add('active');
+  const modalW = document.querySelector('.modal');
+  if (modalW)
+    modalW.classList.add('active');
   document.querySelectorAll(modalSelector).forEach(modal => {
     modal.classList.add('active', 'before-enter');
     modal.classList.add('enter');
@@ -25324,7 +25344,7 @@ const closeModal = (modalSelector) => {
       target.classList.remove('leave');
       target.classList.remove('active');
       target.classList.remove('after-leave');
-      document.querySelector('.modal').classList.remove('active');
+      document.querySelector('.modal')?.classList.remove('active');
       modal.removeEventListener('animationend', handler);
     };
     modal.addEventListener('animationend', handler);
@@ -25380,6 +25400,14 @@ const bookingForm = new Vue({
       helicopter: null,
     };
   },
+  watch: {
+    trip (v) {
+      const currentTrip = this.trips.find(({ id }) => id === v);
+      if (!currentTrip.helicopters.includes(this.helicopter)) {
+        this.helicopter = currentTrip.helicopters[0];
+      }
+    }
+  },
   computed: {
     tripInfo () {
       return this.trips.find( trip =>
@@ -25400,7 +25428,8 @@ const bookingForm = new Vue({
       if (!this.helicopter) return null
       if (!this.tripInfo.helicopters.includes(this.helicopter)) return null
       return this.tripInfo.prices[this.tripInfo.helicopters.indexOf(this.helicopter)]
-    }
+    },
+    isTablet: () => window.innerWidth < 1280
   },
   methods: {
     clickSelect (target, e) {

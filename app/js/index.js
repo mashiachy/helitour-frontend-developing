@@ -52,6 +52,14 @@ const bookingForm = new Vue({
       helicopter: null,
     };
   },
+  watch: {
+    trip (v) {
+      const currentTrip = this.trips.find(({ id }) => id === v)
+      if (!currentTrip.helicopters.includes(this.helicopter)) {
+        this.helicopter = currentTrip.helicopters[0]
+      }
+    }
+  },
   computed: {
     tripInfo () {
       return this.trips.find( trip =>
@@ -72,7 +80,8 @@ const bookingForm = new Vue({
       if (!this.helicopter) return null
       if (!this.tripInfo.helicopters.includes(this.helicopter)) return null
       return this.tripInfo.prices[this.tripInfo.helicopters.indexOf(this.helicopter)]
-    }
+    },
+    isTablet: () => window.innerWidth < 1280
   },
   methods: {
     clickSelect (target, e) {

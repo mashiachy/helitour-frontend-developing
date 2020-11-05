@@ -71,7 +71,7 @@ html(lang="us")
           +services-gallery
 
       +b.SECTION.index-booking.content.content__inner#booking-form
-        +e.FORM.front
+        +e.FORM(action='./booking' method='POST').front
           h2 Бронювання польоту
           +e.form-line
             label(for='trip-select') Оберіть маршрут
@@ -81,7 +81,7 @@ html(lang="us")
             ).select-input
               input(
                 type='number'
-                id='trip-select'
+                name='trip-select'
                 v-model='trip'
               )
               +e.SPAN(
@@ -96,7 +96,7 @@ html(lang="us")
                 ).dropdown-item {{ tripItem.name }}
           +e.form-line_select-cards
             label(for='helicopter-select') Виберіть вертоліт
-            +b.select-cards_index.desktop
+            +b.select-cards_index(v-if='!isTablet')
               input(
                 type='number'
                 name='helicopter-select'
@@ -116,7 +116,8 @@ html(lang="us")
             +b.DIV(
               :class='{ \'select-input_disable\': !helicopter }'
               ref='helicopterSelect'
-            ).select-input.tablet
+              v-if='isTablet'
+            ).select-input
               input(
                 type='number'
                 name='helicopter-select'
@@ -138,7 +139,8 @@ html(lang="us")
           +e.price-block.sm-phone
             span.price(data-before='вiд' data-after='грн') 1899
             +e.SPAN.back-subtext Вартість польоту
-          +b.BUTTON(@click.prevent='clickButton').button Забронювати
+          //- +b.BUTTON(@click.prevent='clickButton').button Забронювати
+          +b.BUTTON.button(type='submit') Забронювати
         +e.back
           picture(v-show='helicopterInfo').rounded-image
             source(:srcset='helicopterInfo.webp' type='image/webp')

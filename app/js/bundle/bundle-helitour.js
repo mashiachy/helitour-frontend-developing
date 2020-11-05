@@ -11416,6 +11416,8 @@ const vhFix = () => {
 };
 
 const excursionsSlider = () => {
+  const container = document.querySelector('.our-excursions .swiper-container');
+  if (!container) return;
   const excursionsSlider = new Swiper('.our-excursions .swiper-container', {
     slidesPerView: 1,
     spaceBetween: 10,
@@ -11449,6 +11451,8 @@ const excursionsSlider = () => {
 };
 
 const instagramSlider = () => {
+  const instagramSliderElement = document.querySelector('.our-instagram .swiper-container');
+  if (!instagramSliderElement) return;
   const instagramSlider = new Swiper('.our-instagram .swiper-container', {
     loop: true,
     loopAdditionalSlides: 1,
@@ -11477,7 +11481,7 @@ const instagramSlider = () => {
       },
     },
   });
-  const instagramSliderElement = document.querySelector('.our-instagram .swiper-container');
+  // const instagramSliderElement = document.querySelector('.our-instagram .swiper-container');
   const length = 1 + Math.max(...Array.from(instagramSliderElement.querySelectorAll('.swiper-wrapper .swiper-slide'))
     .map(el => Number.parseInt(el.getAttribute('data-swiper-slide-index'))));
   const paginationElement = instagramSliderElement.querySelector('.swiper-pagination');
@@ -11551,11 +11555,13 @@ const headerPopup = () => {
       let target = e.target;
       target.classList.toggle('active');
       const nav = target.parentElement.querySelector('.js__header-nav_controller');
+      if (!nav) return;
       if (target.classList.contains('active')) {
         nav.style.maxHeight = `${nav.scrollHeight + 100}px`;
         if (activeNav) {
           activeNav.classList.remove('active');
-          activeNav.parentElement.querySelector('.js__header-nav_controller').style.maxHeight = `0px`;
+          const navController = activeNav.parentElement.querySelector('.js__header-nav_controller');
+          if (navController) navController.style.maxHeight = `0px`;
         }
         activeNav = target;
       } else {
@@ -11565,18 +11571,26 @@ const headerPopup = () => {
       e.stopPropagation();
     });
   });
-  document.querySelector('.header-extended.js__header-popup_control').addEventListener('click', e => {
-    e.stopPropagation();
-  });
+  const headerController = document.querySelector('.header-extended.js__header-popup_control');
+  if (headerController) {
+    headerController.addEventListener('click', e => {
+      e.stopPropagation();
+    });
+  }  
   window.addEventListener('click', () => {
     if (activeNav) {
       activeNav.classList.remove('active');
-      activeNav.parentElement.querySelector('.js__header-nav_controller').style.maxHeight = `0px`;
+      const navController = activeNav.parentElement.querySelector('.js__header-nav_controller');
+      if (navController)
+        navController.style.maxHeight = `0px`;
     }
     activeNav = null;
 
-    let isActiveHeader = document.querySelector('.header-extended.js__header-popup_control')
-      .classList.contains('header-extended_active');
+    const activeHeader = document.querySelector('.header-extended.js__header-popup_control');
+    let isActiveHeader = false;
+    if (activeHeader) {
+      isActiveHeader = activeHeader.classList.contains('header-extended_active');
+    }
     if (isActiveHeader) {
       if (window.innerWidth <= 768) {
         toggleBodyScrollable();
@@ -11605,54 +11619,25 @@ Swiper.use(swiper_cjs_20);
 Swiper.use(swiper_cjs_5);
 Swiper.use(swiper_cjs_6);
 
-const len = document.querySelector('.thumb-slider .swiper-container .swiper-wrapper').children.length;
-const thumbSlider = new Swiper('.thumb-slider .swiper-container', {
-  slidesPerView: len > 5 ? 5 : len,
-  slideToClickedSlide: true,
-  navigation: {
-    nextEl: '.swiper-button-next',
-    prevEl: '.swiper-button-prev',
-  },
-});
-
-const helicopterSlider = new Swiper('.main-slider', {
-  slidesPerView: 1,
-  touchMoveStopPropagation: true,
-  thumbs: {
-    swiper: thumbSlider,
-  },
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true,
-    renderBullet: (index, className) => {
-      return `<span class=${className}></span>`;
-    },
-  },
-});
-helicopterSlider.on('slideChange', () => {
-  const state = player.getPlayerState();
-  if (state === 1 || state === 3 || state === 5) {
-    player.pauseVideo();
-  }
-});
-
 excursionsSlider();
 instagramSlider();
 
 let player;
 const playerId = 'youtube-player';
-const script = document.createElement('script');
-script.src = 'https://www.youtube.com/iframe_api';
-script.async = true;
-const handle = () => {
-  window.onYouTubeIframeAPIReady = function () {
-    player = new YT.Player(playerId, {
-      height: '100%',
-      width: '100%',
-      videoId: document.getElementById(playerId).getAttribute('data-youtube-player'),
-    });
+if (document.querySelector(playerId)) {
+  const script = document.createElement('script');
+  script.src = 'https://www.youtube.com/iframe_api';
+  script.async = true;
+  const handle = () => {
+    window.onYouTubeIframeAPIReady = function () {
+      player = new YT.Player(playerId, {
+        height: '100%',
+        width: '100%',
+        videoId: document.getElementById(playerId).getAttribute('data-youtube-player'),
+      });
+    };
+    script.removeEventListener('load', handle);
   };
-  script.removeEventListener('load', handle);
-};
-script.addEventListener('load', handle);
-document.head.appendChild(script);
+  script.addEventListener('load', handle);
+  document.head.appendChild(script);
+}

@@ -194,7 +194,8 @@ select { /* 1 */
  */
 
 button,
-[type="button"] {
+[type="button"],
+[type="reset"] {
   -webkit-appearance: button;
 }
 
@@ -203,7 +204,8 @@ button,
  */
 
 button::-moz-focus-inner,
-[type="button"]::-moz-focus-inner {
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner {
   border-style: none;
   padding: 0;
 }
@@ -213,7 +215,8 @@ button::-moz-focus-inner,
  */
 
 button:-moz-focusring,
-[type="button"]:-moz-focusring {
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring {
   outline: 1px dotted ButtonText;
 }
 
@@ -397,6 +400,12 @@ picture img{min-width:100%;min-height:100%}
 ul,ol{margin:0;padding:0}
 
 li{margin:0;padding:0;list-style:none}
+
+ul.rounded li{display:flex;align-items:baseline}
+
+ul.rounded li:before{content:'';width:12px;height:12px;flex-shrink:0;transform:translateY(1px);box-sizing:border-box;border-radius:50%;border:2px solid #0facd0;margin-right:30px}
+
+@media screen and (max-width: 768px){ul.rounded li:before{margin-right:20px}}
 
 main:not(:last-child){margin-bottom:130px}
 

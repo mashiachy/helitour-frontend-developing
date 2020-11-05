@@ -23,10 +23,15 @@ document.querySelectorAll('#svg-map path').forEach(path => {
   });
 });
 
-document.getElementById('js__extend-list-controller').addEventListener('click', ({ target }) => {
-  document.getElementById('js__extend-list-control').classList.add('extended');
-  target.parentNode.removeChild(target);
-});
+const listController = document.getElementById('js__extend-list-controller')
+if (listController) {
+  listController.addEventListener('click', ({ target }) => {
+    const listControl = document.getElementById('js__extend-list-control')
+    if (listControl) 
+      listControl.classList.add('extended');
+    target.parentNode.removeChild(target);
+  });
+}
 
 initModal('.modal-reserve');
 document.querySelectorAll('.js__open-modal-reserve').forEach(el =>
