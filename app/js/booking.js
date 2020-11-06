@@ -50,20 +50,7 @@ const app = new Vue({
         days: [],
         months: [],
       },
-      deliveries: [
-        {
-          id: 1000,
-          name: 'Способ 1',
-        },
-        {
-          id: 1001,
-          name: 'Способ 2 способ 2 способ 2',
-        },
-        {
-          id: 1002,
-          name: 'Способ 3 способ 3 способ 3 способ 3 способ 3 способ 3 способ 3 способ 3 способ 3',
-        },
-      ],
+      deliveries: null,
     };
   },
   watch: {
@@ -86,6 +73,13 @@ const app = new Vue({
       if (!helics.includes(this.helicopter))
         this.helicopter = helics[0]
     },
+    helicopter (v) {
+      // axios.get('./disabled_times.json')
+      axios.get(`/api/booking/free-date.json?ID=${v}`)  
+        .then(({ data: { disabledDates } }) => {
+          this.disabledDates = [...disabledDates]
+        })
+    }
   },
   computed: {
     tripInfo () {
@@ -114,7 +108,7 @@ const app = new Vue({
     }
   },
   methods: {
-    sendForm () {
+    sendForm (v) {
       const data = JSON.stringify({
         tripId: this.trip,
         passengers: this.passengers,
@@ -126,10 +120,10 @@ const app = new Vue({
         telephone: this.telephone,
         email: this.email,
         message: this.message,
-        deliveryId: this.delivery
+        deliveryId: this.delivery,
+        isOnlinePaymernt: v
       })
-      console.log(data)
-      axios.post('./api/booking.json', data)
+      axios.post('/api/booking.json', data)
         .then(({ data }) => {
           if (data.success) {
             window.location = data.location
@@ -166,7 +160,8 @@ const app = new Vue({
     const { data } = await axios.get('/helitours_info.json');
     this.trips = [...data.trips];
     this.helicopters = [...data.helicopters];
-    this.disabledDates = [...data.disabledDates];
+    // this.disabledDates = [...data.disabledDates];
+    this.deliveries = [...data.deliveryMethods];
     const tripMeta = document.querySelector('meta[name="tripId"]');
     const helicopterId = document.querySelector('meta[name="helicopterId"]');
     this.passengers = 1;

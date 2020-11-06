@@ -4,7 +4,6 @@
       "id": 10,
       "name": "Robinson R44",
       "aerodromtext": "Міні аеродром Гідропарк 1",
-      "time": "14 хв",
       "text": "3 пасажири + пілот",
       "webp": "img/mini-helicopter-2.webp",
       "jpg": "img/mini-helicopter-2.jpg",
@@ -14,7 +13,6 @@
       "id": 11,
       "name": "Eurocopter EC120",
       "aerodromtext": "Міні аеродром Гідропарк 2",
-      "time": "19 хв",
       "text": "4 пасажира + пілот",
       "webp": "img/mini-helicopter-1.webp",
       "jpg": "img/mini-helicopter-1.jpg",
@@ -24,7 +22,6 @@
       "id": 12,
       "name": "Bell 407",
       "aerodromtext": "Міні аеродром Гідропарк 3",
-      "time": "8 хв",
       "text": "5 пасажирів + пілот",
       "webp": "img/mini-helicopter-2.webp",
       "jpg": "img/mini-helicopter-2.jpg",
@@ -34,7 +31,6 @@
       "id": 13,
       "name": "R66",
       "aerodromtext": "Міні аеродром Гідропарк 4",
-      "time": "9 хв",
       "text": "4 пасажира + пілот",
       "webp": "img/mini-helicopter-1.webp",
       "jpg": "img/mini-helicopter-1.jpg",
@@ -44,7 +40,6 @@
       "id": 14,
       "name": "Agusta 109",
       "aerodromtext": "Міні аеродром Гідропарк 5",
-      "time": "15 хв",
       "text": "6 пасажирів + пілот",
       "webp": "img/mini-helicopter-2.webp",
       "jpg": "img/mini-helicopter-2.jpg",
@@ -55,42 +50,49 @@
     {
       "id": 100,
       "name": "Полёт вокруг Киева",
+      "time": "14 хв",
       "helicopters": [10, 11, 12, 13, 14],
       "prices": [25000, 26000, 27000, 28000, 29000]
     },
     {
       "id": 101,
       "name": "Часовой полёт над Киевом и окрестностями",
+      "time": "8 хв",
       "helicopters": [10, 13, 14],
       "prices": [25000, 26000, 27000]
     },
     {
       "id": 102,
       "name": "Полёт на вертолёте в с. Гусинцы над Киевом и окрестностями",
+      "time": "12 хв",
       "helicopters": [10, 11, 12],
       "prices": [25000, 26000, 27000]
     },
     {
       "id": 103,
       "name": "Полёт над Киевом, Межигорьем, Припятью и Чернобылем",
+      "time": "13 хв",
       "helicopters": [12, 13, 14],
       "prices": [25000, 26000, 27000]
     },
     {
       "id": 104,
       "name": "Киевские мосты и Межигорье, большой обзорный полёт",
+      "time": "11 хв",
       "helicopters": [10, 14],
       "prices": [26000, 27000]
     },
     {
       "id": 105,
       "name": "Полёт над Киевом и Межигорьем",
+      "time": "15 хв",
       "helicopters": [10, 12, 13, 14],
       "prices": [26000, 27000, 28000, 29000]
     },
     {
       "id": 106,
       "name": "Обзорный полёт над Киевом",
+      "time": "5 хв",
       "helicopters": [10, 11, 12],
       "prices": [25000, 27000, 29000]
     }

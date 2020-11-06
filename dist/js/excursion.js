@@ -13508,7 +13508,8 @@ initBaseMap('#js__map')
     const excursionMeta = document.querySelector('meta[name="excursionId"]');
     if (!excursionMeta) return;
     const excursionId = excursionMeta.getAttribute('content');
-    const { path, markers } = (await axios$1.get(`./api/excursions-map.json?ID=${excursionId}`)).data;
+    const { path, markers } = (await axios$1.get(`/api/excursions-map.json?ID=${excursionId}`)).data;
+    // const { path, markers } = (await axios.get('./trip_info.json')).data;
 
     // Draw path
     const tripPath = new google.maps.Polygon(MAP_POLYGON_CONFIG);
@@ -13517,7 +13518,7 @@ initBaseMap('#js__map')
 
     // Draw markers
     const tripMarkers = [];
-    markers.forEach(({ id, latLng }) => {
+    markers.forEach(({ id, latLng, name }) => {
       tripMarkers.push({
         id,
         marker: new google.maps.Marker({
@@ -13526,17 +13527,23 @@ initBaseMap('#js__map')
           position: latLng
         })
       });
+      document.querySelectorAll('.js__place-for-markers-take').forEach(container => {
+        const liElement = document.createElement('li');
+        liElement.innerText = name;
+        liElement.setAttribute('data-marker', id);
+        container.appendChild(liElement);
+      });
     });
 
     // Add listeners to pulse markers
     tripMarkers.forEach(marker => {
-      const controlEl = document.querySelector(`[data-marker="${marker.id}"]`);
-      if (!controlEl) return;
-      controlEl.addEventListener('mouseenter', () => {
-        marker.marker.startAnimation();
-      });
-      controlEl.addEventListener('mouseleave', () => {
-        marker.marker.stopAnimation();
+      document.querySelectorAll(`[data-marker="${marker.id}"]`).forEach(controlEl => {
+        controlEl.addEventListener('mouseenter', () => {
+          marker.marker.startAnimation();
+        });
+        controlEl.addEventListener('mouseleave', () => {
+          marker.marker.stopAnimation();
+        });
       });
     });
   });
