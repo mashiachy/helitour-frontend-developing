@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160.35 47.11">
+	<text transform="translate(34.35 34.12)" font-size="28" fill="#fff" font-family="Gilroy-Bold, Gilroy" font-weight="700">HELI<tspan x="54.49" y="0" letter-spacing="-0.04em">T</tspan><tspan x="68.49" y="0" letter-spacing="0em">O</tspan><tspan x="90.52" y="0">UR</tspan></text>
+    <circle cx="23.56" cy="23.56" r="3" fill="#fff"/>
+    <path d="M7.22,16.33h0a2,2,0,0,1,2,2V30.78a0,0,0,0,1,0,0h-4a0,0,0,0,1,0,0V18.33a2,2,0,0,1,2-2Z" transform="translate(30.78 16.33) rotate(90)" fill="#2ecbe5"/>
+    <path d="M12,27.88h0a2,2,0,0,1,2,2V42.33a0,0,0,0,1,0,0H10a0,0,0,0,1,0,0V29.88A2,2,0,0,1,12,27.88Z" transform="translate(28.34 1.79) rotate(45)" fill="#fff"/>
+    <path d="M21.56,0h4a0,0,0,0,1,0,0V12.44a2,2,0,0,1-2,2h0a2,2,0,0,1-2-2V0A0,0,0,0,1,21.56,0Z" fill="#2ecbe5"/>
+    <path d="M23.56,32.67h0a2,2,0,0,1,2,2V47.11a0,0,0,0,1,0,0h-4a0,0,0,0,1,0,0V34.67A2,2,0,0,1,23.56,32.67Z" fill="#2ecbe5"/>
+</svg>
