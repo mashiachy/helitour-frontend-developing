@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import Fuse from 'fuse.js';
 import VueCurrencyFilter from 'vue-currency-filter';
 import DatePicker from 'vue2-datepicker';
 import axios from 'axios';
@@ -51,6 +52,16 @@ const app = new Vue({
         months: [],
       },
       deliveries: null,
+      city: null,
+      citySearch: null,
+      cityFuse: null,
+      cities: null,
+      filteredCities: null,
+      warehouse: null,
+      warehouseSearch: null,
+      warehouseFuse: null,
+      filteredWarehouses: null,
+      warehouses: null
     };
   },
   watch: {
@@ -79,9 +90,73 @@ const app = new Vue({
         .then(({ data: { disabledDates } }) => {
           this.disabledDates = [...disabledDates]
         })
+    },
+    delivery (v) {
+      this.city = null;
+      if (v === 2) {
+        axios.post('/api/delivery/city.json').then( ({ data: cities }) => {
+          // this.cities = cities.map(({ id: strId, text: name }, i) => ({ strId, name, id: i+1 }));
+          this.cities = cities;
+          this.cityFuse = new Fuse(this.cities, { 
+            keys: ['text'],
+            threshold: 0.7,
+          });
+          this.filteredCities = [...this.cities];
+        })
+      } else {
+        this.cities = null;
+        this.warehouse = null;
+        this.warehouses = null;
+        this.filteredCities = null;
+        this.citySearch = null;
+        this.cityFuse = null;
+        this.warehouseSearch = null;
+        this.filteredWarehouses = null;
+        this.warehouseFuse = null;
+      }
+    },
+    city (v) {
+      this.warehouse = null;
+      if (v) {
+        axios.post('/api/delivery/warehouse.json', { id: this.city }).then( ({ data: warehouses }) => {
+          // this.warehouses = warehouses.map(({ id: strId, text: name }, i) => ({ strId, name, id: i+1 }));
+          this.warehouses = warehouses
+          this.warehouseFuse = new Fuse(this.warehouses, { 
+            keys: ['text'],
+            threshold: 0.7,
+          });
+          this.filteredWarehouses = [...this.warehouses];
+        } )
+      } else {
+        this.warehouses = null;
+        this.warehouseSearch = null;
+        this.filteredWarehouses = null;
+        this.warehouseFuse = null;
+        this.warehouse = null;
+      }
+    },
+    citySearch (v) {
+      if (v) {
+        this.filteredCities = this.cityFuse.search(v).map(({ item }) => item);
+      } else {
+        this.filteredCities = this.cities ? [...this.cities] : null;
+      }
+    },
+    warehouseSearch (v) {
+      if (v) {
+        this.filteredWarehouses = this.warehouseFuse.search(v).map(({ item }) => item);
+      } else {
+        this.filteredWarehouses = this.warehouses ? [...this.warehouses] : null;
+      }
+      
     }
   },
   computed: {
+    isFormReady () {
+      return this.trip && this.passengers && this.helicopter && this.date && this.time && 
+        this.name && this.telephone && this.email && this.offerAccept &&
+        (!this.present || (this.present && this.delivery && (this.delivery === 1 || this.delivery === 2 && this.city && this.warehouse)));
+    },
     tripInfo () {
       return this.trips.find(trip => trip.id === this.trip);
     },
@@ -102,17 +177,31 @@ const app = new Vue({
     deliveryName () {
       return this.deliveries.find(d => d.id === this.delivery).name;
     },
+    cityName () {
+      return this.cities.find(c => c.id === this.city).text;
+    },
+    warehouseName () {
+      return this.warehouses.find(w => w.id === this.warehouse).text;
+    },
     price () {
       const t = this.tripInfo
       return t.prices[t.helicopters.indexOf(this.helicopter)]
     }
   },
   methods: {
+    cityClick (id) {
+      this.city = id;
+      this.citySearch = this.cityName;
+    },
+    warehouseClick (id) {
+      this.warehouse = id;
+      this.warehouseSearch = this.warehouseName;
+    },
     sendForm (v) {
       const data = JSON.stringify({
         tripId: this.trip,
         passengers: this.passengers,
-        helicopterId: this.helicopterId,
+        helicopterId: this.helicopter,
         date: this.date,
         time: this.time,
         present: this.present,
@@ -121,6 +210,8 @@ const app = new Vue({
         email: this.email,
         message: this.message,
         deliveryId: this.delivery,
+        city: this.city,
+        warehouse: this.warehouse,
         isOnlinePaymernt: v
       })
       axios.post('/api/booking.json', data)
@@ -145,6 +236,10 @@ const app = new Vue({
       return false
     },
     disableTime (date) {
+      const hours = date.getHours();
+      if (hours < 8 || hours > 22) {
+        return true;
+      }
       const curDateTimes = this.disabledDates.filter(({ date: dateT, time }) => {
         if (!time.length) return false
         const p = dateT.split('.');
