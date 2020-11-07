@@ -17,7 +17,7 @@
     "browser-sync": "^2.26.12",
     "chaikin-smooth": "^1.0.4",
     "create-file": "^1.0.1",
-    "gulp": "^4.0.2",
+    "fuse.js": "^6.4.3",
     "gulp-autoprefixer": "^7.0.1",
     "gulp-concat": "^2.6.1",
     "gulp-html-beautify": "^1.0.1",
@@ -48,6 +48,7 @@
     "yargs": "^15.4.1"
   },
   "devDependencies": {
+    "gulp": "^4.0.2",
     "gulp-json-transform": "^0.4.7",
     "gulp-modernizr": "^4.0.1",
     "purgecss-from-html": "^3.0.0",
