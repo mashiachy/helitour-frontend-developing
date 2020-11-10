@@ -1,6 +1,6 @@
 import supportsWebP from "supports-webp";
 import Swiper from "swiper";
-import smooth from 'chaikin-smooth';
+// import smooth from 'chaikin-smooth';
 // import { reject } from "lodash";
 
 export const selectItemInit = () => {
@@ -556,8 +556,8 @@ export const INIT_DOUGLAS_PEUCKER = (map) => {
   google.maps.Polygon.prototype.setSmoothPath = function(path) {
     this.setPath(path)
     this.douglasPeucker(360.0 / (2.0 * Math.PI * EARTH_RADIUS))
-    this.setPath(smooth(smooth(this.getPath().i.map(({ lat, lng }) => [ lat(), lng() ])))
-      .map(([ lat, lng ]) => ({ lat, lng }))
-    )
+    // this.setPath(smooth(smooth(this.getPath().i.map(({ lat, lng }) => [ lat(), lng() ])))
+    //   .map(([ lat, lng ]) => ({ lat, lng }))
+    // )
   }
 }

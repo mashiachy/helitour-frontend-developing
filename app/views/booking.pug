@@ -20,6 +20,7 @@ html(lang="us")
         h1 БРОНЮВАННЯ ПОЛЬОТУ
       +b.SECTION.booking.content.content__inner#app
         +b.FORM.booking-form.content__text
+          input(type='text' ref='partnerId' name='partner_id' style='width:0;opacity:0; visibility:hidden;')
           +e.form-item_select
             +e.LABEL(for='trip-select').item-label Оберіть маршрут
             +b.DIV(
@@ -108,6 +109,7 @@ html(lang="us")
                 type='time'
                 value-type='format'
                 :minute-step='5'
+                :hour-option='[8,9,10,11,12,13,14,15,16,17,18,19,20]'
                 format='HH:mm'
                 :append-to-body='false'
                 :editable='false'
