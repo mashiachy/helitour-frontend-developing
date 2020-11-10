@@ -138,7 +138,7 @@ const app = new Vue({
     citySearch (v) {
       this.city = null;
       if (v) {
-        axios.post('/api/delivery/city.json').then( ({ data: cities }) => {
+        axios.post('/api/delivery/city.json', { id: v }).then( ({ data: cities }) => {
           // this.cities = cities.map(({ id: strId, text: name }, i) => ({ strId, name, id: i+1 }));
           this.cities = cities;
         })
