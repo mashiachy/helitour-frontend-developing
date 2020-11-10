@@ -20924,30 +20924,30 @@ const app = new Vue({
           this.disabledDates = [...disabledDates];
         });
     },
-    delivery (v) {
-      this.city = null;
-      if (v === 2) {
-        axios$1.post('/api/delivery/city.json').then( ({ data: cities }) => {
-          // this.cities = cities.map(({ id: strId, text: name }, i) => ({ strId, name, id: i+1 }));
-          this.cities = cities;
-          this.cityFuse = new fuse_common(this.cities, { 
-            keys: ['text'],
-            threshold: 0.7,
-          });
-          this.filteredCities = [...this.cities];
-        });
-      } else {
-        this.cities = null;
-        this.warehouse = null;
-        this.warehouses = null;
-        this.filteredCities = null;
-        this.citySearch = null;
-        this.cityFuse = null;
-        this.warehouseSearch = null;
-        this.filteredWarehouses = null;
-        this.warehouseFuse = null;
-      }
-    },
+    // delivery (v) {
+    //   this.city = null;
+    //   if (v === 2) {
+    //     axios.post('/api/delivery/city.json').then( ({ data: cities }) => {
+    //       // this.cities = cities.map(({ id: strId, text: name }, i) => ({ strId, name, id: i+1 }));
+    //       this.cities = cities;
+    //       this.cityFuse = new Fuse(this.cities, { 
+    //         keys: ['text'],
+    //         threshold: 0.7,
+    //       });
+    //       this.filteredCities = [...this.cities];
+    //     })
+    //   } else {
+    //     this.cities = null;
+    //     this.warehouse = null;
+    //     this.warehouses = null;
+    //     this.filteredCities = null;
+    //     this.citySearch = null;
+    //     this.cityFuse = null;
+    //     this.warehouseSearch = null;
+    //     this.filteredWarehouses = null;
+    //     this.warehouseFuse = null;
+    //   }
+    // },
     city (v) {
       this.warehouse = null;
       if (v) {
@@ -20969,11 +20969,28 @@ const app = new Vue({
       }
     },
     citySearch (v) {
+      this.city = null;
       if (v) {
-        this.filteredCities = this.cityFuse.search(v).map(({ item }) => item);
+        axios$1.post('/api/delivery/city.json').then( ({ data: cities }) => {
+          // this.cities = cities.map(({ id: strId, text: name }, i) => ({ strId, name, id: i+1 }));
+          this.cities = cities;
+        });
       } else {
-        this.filteredCities = this.cities ? [...this.cities] : null;
+        this.cities = null;
+        this.warehouse = null;
+        this.warehouses = null;
+        this.filteredCities = null;
+        this.citySearch = null;
+        this.warehouseSearch = null;
+        this.filteredWarehouses = null;
+        this.warehouseFuse = null;
       }
+      // if (v) {
+      //   this.filteredCities = this.cityFuse.search(v).map(({ item }) => item);
+      // } else {
+      //   this.filteredCities = this.cities ? [...this.cities] : null;
+      // }
+      
     },
     warehouseSearch (v) {
       if (v) {
@@ -21045,7 +21062,8 @@ const app = new Vue({
         deliveryId: this.delivery,
         city: this.city,
         warehouse: this.warehouse,
-        isOnlinePaymernt: v
+        isOnlinePaymernt: v,
+        partnerId: this.refs.partnerId.value
       });
       axios$1.post('/api/booking.json', data)
         .then(({ data }) => {
@@ -21070,7 +21088,8 @@ const app = new Vue({
     },
     disableTime (date) {
       const hours = date.getHours();
-      if (hours < 8 || hours > 22) {
+      let minutes = date.getMinutes();
+      if (hours === 20 && minutes >= 30) {
         return true;
       }
       const curDateTimes = this.disabledDates.filter(({ date: dateT, time }) => {
@@ -21079,8 +21098,8 @@ const app = new Vue({
         const t = this.date.split('.');
         return p[0] == t[0] && p[1] == t[1] && p[2] == t[2];
       }).map(({ time }) => time).flat();
-      const minutes = `${100 + date.getMinutes()}`.slice(1);
-      const time = `${date.getHours()}:${minutes}`;
+      minutes = `${100 + minutes}`.slice(1);
+      const time = `${hours}:${minutes}`;
       return curDateTimes.includes(time)
     }
   },
