@@ -230,7 +230,7 @@ const app = new Vue({
         city: this.city,
         warehouse: this.warehouse,
         isOnlinePaymernt: v,
-        partnerId: this.refs.partnerId.value
+        partnerId: this.$refs.partnerId.value
       })
       axios.post('/api/booking.json', data)
         .then(({ data }) => {
