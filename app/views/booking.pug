@@ -127,7 +127,7 @@ html(lang="us")
             +e.personal-wrapper
               +e.personal-wrapper-item
                 +b.INPUT(type='text' placeholder='Ваше ім’я' v-model='name').text-input
-                +b.INPUT(type='text' placeholder='Ваш телефон' v-model='telephone').text-input
+                +b.MASKED-INPUT(type='text' placeholder='Ваш телефон' mask='\\+\\1 (111) 1111-11' v-model='telephone').text-input
                 +b.INPUT(type='text' placeholder='Ваша почта' v-model='email').text-input
                 +b.DIV(
                   :class='{ \'select-input_disable\': !delivery }'

@@ -25112,6 +25112,9 @@ const excursionsSlider = () => {
       },
     },
   });
+  window.excursionClick = function (tripId) {
+    axios$1.post('./booking.html', JSON.stringify({ tripId, helicopterId: null }));
+  };
 };
 
 const articlesSlider = () => {
@@ -25344,7 +25347,9 @@ const closeModal = (modalSelector) => {
       target.classList.remove('leave');
       target.classList.remove('active');
       target.classList.remove('after-leave');
-      document.querySelector('.modal')?.classList.remove('active');
+      const newModal = document.querySelector('.modal');
+      if (newModal)
+        newModal.classList.remove('active');
       modal.removeEventListener('animationend', handler);
     };
     modal.addEventListener('animationend', handler);

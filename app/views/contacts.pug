@@ -46,5 +46,17 @@ html(lang="us")
                 include ../../mokups/exports/twitter.svg
           +e.content-item
             +e.A(href='#').content-item_button.button Як проїхати
-            +e.A(href='#').content-item_button.button_flat Задати запитання
+            +e.A(href='#').content-item_button.button_flat.js__open-modal-reserve Задати запитання
     +footer
+    +b.modal
+      +b.modal-reserve
+        +e.FORM.content(data-modal-body)
+          +e.H2.title Задати запитання
+          +b.INPUT(type='text' placeholder='Ваше ім’я').text-input
+          +b.INPUT(type='text' placeholder='Ваш телефон').text-input
+          +b.TEXTAREA(placeholder='Ваше питання').text-input
+          +b.BUTTON().button.js__open-thanks Забронювати
+      +b.modal-thanks
+        +e.content(data-modal-body)
+          +e.H2.title Дякуюмэо за заявку
+          +e.text Наш манеджер скоро з вами зв'яжеться з Вам найблищим часом

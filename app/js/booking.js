@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Fuse from 'fuse.js';
 import VueCurrencyFilter from 'vue-currency-filter';
+import MaskedInput from 'vue-masked-input';
 import DatePicker from 'vue2-datepicker';
 import axios from 'axios';
 import { webp, headerPopup, vhFix, selectItemInit } from './base';
@@ -19,7 +20,7 @@ Vue.use(VueCurrencyFilter, {
 const app = new Vue({
   el: '#app',
   components: {
-    DatePicker,
+    DatePicker, MaskedInput
   },
   data () {
     const date = new Date();
@@ -115,6 +116,16 @@ const app = new Vue({
     //     this.warehouseFuse = null;
     //   }
     // },
+    delivery () {
+      this.cities = null;
+      this.warehouse = null;
+      this.warehouses = null;
+      this.filteredCities = null;
+      this.citySearch = null;
+      this.warehouseSearch = null;
+      this.filteredWarehouses = null;
+      this.warehouseFuse = null;
+    },
     city (v) {
       this.warehouse = null;
       if (v) {
