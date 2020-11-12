@@ -92,30 +92,6 @@ const app = new Vue({
           this.disabledDates = [...disabledDates]
         })
     },
-    // delivery (v) {
-    //   this.city = null;
-    //   if (v === 2) {
-    //     axios.post('/api/delivery/city.json').then( ({ data: cities }) => {
-    //       // this.cities = cities.map(({ id: strId, text: name }, i) => ({ strId, name, id: i+1 }));
-    //       this.cities = cities;
-    //       this.cityFuse = new Fuse(this.cities, { 
-    //         keys: ['text'],
-    //         threshold: 0.7,
-    //       });
-    //       this.filteredCities = [...this.cities];
-    //     })
-    //   } else {
-    //     this.cities = null;
-    //     this.warehouse = null;
-    //     this.warehouses = null;
-    //     this.filteredCities = null;
-    //     this.citySearch = null;
-    //     this.cityFuse = null;
-    //     this.warehouseSearch = null;
-    //     this.filteredWarehouses = null;
-    //     this.warehouseFuse = null;
-    //   }
-    // },
     delivery () {
       this.cities = null;
       this.warehouse = null;
@@ -166,13 +142,7 @@ const app = new Vue({
         this.warehouseSearch = null;
         this.filteredWarehouses = null;
         this.warehouseFuse = null;
-      }
-      // if (v) {
-      //   this.filteredCities = this.cityFuse.search(v).map(({ item }) => item);
-      // } else {
-      //   this.filteredCities = this.cities ? [...this.cities] : null;
-      // }
-      
+      }      
     },
     warehouseSearch (v) {
       if (v) {
