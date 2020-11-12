@@ -11409,419 +11409,6 @@ var swiper_cjs_18 = swiper_cjs.EffectFlip;
 var swiper_cjs_19 = swiper_cjs.EffectCoverflow;
 var swiper_cjs_20 = swiper_cjs.Thumbs;
 
-var vec2Copy = function vec2Copy(out, a) {
-    out[0] = a[0];
-    out[1] = a[1];
-    return out
-};
-
-var chaikinSmooth = function(input, output) {
-    if (!Array.isArray(output))
-        output = [];
-
-    if (input.length>0)
-        output.push(vec2Copy([0, 0], input[0]));
-    for (var i=0; i<input.length-1; i++) {
-        var p0 = input[i];
-        var p1 = input[i+1];
-        var p0x = p0[0],
-            p0y = p0[1],
-            p1x = p1[0],
-            p1y = p1[1];
-
-        var Q = [ 0.75 * p0x + 0.25 * p1x, 0.75 * p0y + 0.25 * p1y ];
-        var R = [ 0.25 * p0x + 0.75 * p1x, 0.25 * p0y + 0.75 * p1y ];
-        output.push(Q);
-        output.push(R);
-    }
-    if (input.length > 1)
-        output.push(vec2Copy([0, 0], input[ input.length-1 ]));
-    return output
-};
-
-const vhFix = () => {
-  const setVh = () => document.documentElement.style.setProperty('--vh', `${window.innerHeight / 100}px`);
-  setVh();
-  window.addEventListener('resize', setVh);
-};
-
-const excursionsSlider = () => {
-  const container = document.querySelector('.our-excursions .swiper-container');
-  if (!container) return;
-  const excursionsSlider = new Swiper('.our-excursions .swiper-container', {
-    slidesPerView: 1,
-    spaceBetween: 10,
-    centeredSlides: true,
-    breakpoints: {
-      481: {
-        slidesPerView: 2,
-        spaceBetween: 10,
-        centeredSlides: true,
-      },
-      992: {
-        slidesPerView: 2,
-        spaceBetween: 10,
-        centeredSlides: false,
-      },
-      1280: {
-        slidesPerView: 3,
-        spaceBetween: 20,
-      },
-    },
-    loop: true,
-    loopAdditionalSlides: 1,
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-      renderBullet: (index, className) => {
-        return `<span class=${className}></span>`;
-      },
-    },
-  });
-};
-
-const instagramSlider = () => {
-  const instagramSliderElement = document.querySelector('.our-instagram .swiper-container');
-  if (!instagramSliderElement) return;
-  const instagramSlider = new Swiper('.our-instagram .swiper-container', {
-    loop: true,
-    loopAdditionalSlides: 1,
-    centeredSlides: true,
-    slidesPerView: 1,
-    spaceBetween: 10,
-    breakpoints: {
-      578: {
-        slidesPerView: 2,
-        spaceBetween: 10,
-      },
-      768: {
-        slidesPerView: 3,
-        spaceBetween: 10,
-      },
-      1280: {
-        slidesPerView: 3,
-        spaceBetween: 20,
-      },
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      clickable: true,
-      renderBullet: (index, className) => {
-        return `<span class=${className}></span>`;
-      },
-    },
-  });
-  // const instagramSliderElement = document.querySelector('.our-instagram .swiper-container');
-  const length = 1 + Math.max(...Array.from(instagramSliderElement.querySelectorAll('.swiper-wrapper .swiper-slide'))
-    .map(el => Number.parseInt(el.getAttribute('data-swiper-slide-index'))));
-  const paginationElement = instagramSliderElement.querySelector('.swiper-pagination');
-  const paginationVisible = () => {
-    if (length <= 3 && window.innerWidth >= 768) {
-      paginationElement.style.display = 'none';
-    } else {
-      paginationElement.style.display = 'block';
-    }
-  };
-  paginationVisible();
-  window.addEventListener('resize', paginationVisible);
-};
-
-const webp = () => {
-  const handle = (domEl) => {
-    if (window.webp) {
-      domEl.querySelectorAll('[data-back-webp], [data-back-jpg]').forEach(el => {
-        if (el.hasAttribute('data-back-webp'))
-          el.style.backgroundImage = `url(${el.getAttribute('data-back-webp')})`;
-        else
-          el.style.backgroundImage = `url(${el.getAttribute('data-back-jpg')})`;
-      });
-    } else {
-      domEl.querySelectorAll('[data-back-jpg]').forEach(el => {
-        if (el.hasAttribute('data-back-jpg'))
-          el.style.backgroundImage = `url(${el.getAttribute('data-back-jpg')})`;
-      });
-    }
-  };
-  const observer = new MutationObserver((mutationList, observer) => {
-    mutationList.forEach(mutation => {
-      if (mutation.target.querySelectorAll('[data-back-webp], [data-back-jpg]').length)
-        handle(mutation.target);
-    });
-  });
-  observer.observe(document, {
-    attributes: true,
-    childList: true,
-    subtree: true
-  });
-  supportsWebp_commonJs.then(result => {
-    window.webp = result;
-    if (window.webp) {
-      document.body.classList.add('webp');
-    } else {
-      document.body.classList.add('no-webp');
-    }
-    handle(document);
-  });
-};
-
-const headerPopup = () => {
-  document.querySelectorAll('.js__header-popup_controller').forEach(controller => {
-    controller.addEventListener('click', e => {
-      if (window.innerWidth <= 768) toggleBodyScrollable();
-      document.querySelectorAll('.js__header-popup_control').forEach(control => {
-        control.classList.toggle('header-extended_active');
-      });
-      document.querySelectorAll('.js__header-popup_controller-content').forEach(c => {
-        const content = c.innerHTML;
-        c.innerHTML = c.getAttribute('data-popup-content');
-        c.setAttribute('data-popup-content', content);
-      });
-      e.stopPropagation();
-    });
-  });
-  let activeNav = null;
-  document.querySelectorAll('.js__header-nav_control').forEach(control => {
-    control.addEventListener('click', (e) => {
-      let target = e.target;
-      target.classList.toggle('active');
-      const nav = target.parentElement.querySelector('.js__header-nav_controller');
-      if (!nav) return;
-      if (target.classList.contains('active')) {
-        nav.style.maxHeight = `${nav.scrollHeight + 100}px`;
-        if (activeNav) {
-          activeNav.classList.remove('active');
-          const navController = activeNav.parentElement.querySelector('.js__header-nav_controller');
-          if (navController) navController.style.maxHeight = `0px`;
-        }
-        activeNav = target;
-      } else {
-        nav.style.maxHeight = `0px`;
-        activeNav = null;
-      }
-      e.stopPropagation();
-    });
-  });
-  const headerController = document.querySelector('.header-extended.js__header-popup_control');
-  if (headerController) {
-    headerController.addEventListener('click', e => {
-      e.stopPropagation();
-    });
-  }  
-  window.addEventListener('click', () => {
-    if (activeNav) {
-      activeNav.classList.remove('active');
-      const navController = activeNav.parentElement.querySelector('.js__header-nav_controller');
-      if (navController)
-        navController.style.maxHeight = `0px`;
-    }
-    activeNav = null;
-
-    const activeHeader = document.querySelector('.header-extended.js__header-popup_control');
-    let isActiveHeader = false;
-    if (activeHeader) {
-      isActiveHeader = activeHeader.classList.contains('header-extended_active');
-    }
-    if (isActiveHeader) {
-      if (window.innerWidth <= 768) {
-        toggleBodyScrollable();
-      }
-      document.querySelectorAll('.js__header-popup_control').forEach(control => {
-        control.classList.toggle('header-extended_active');
-      });
-      document.querySelectorAll('.js__header-popup_controller-content').forEach(c => {
-        const content = c.innerHTML;
-        c.innerHTML = c.getAttribute('data-popup-content');
-        c.setAttribute('data-popup-content', content);
-      });
-    }
-  });
-};
-
-const toggleBodyScrollable = () => {
-  document.documentElement.classList.toggle('noscroll');
-};
-
-const loadMap = () => {
-  const mapApiKey = 'AIzaSyBUevELRNQrstYsf6nlw74wsrukteZiguc';
-  return new Promise((resolve, reject) => {
-    const script = document.createElement('script');
-    const callback = () => {
-      script.removeEventListener('load', callback);
-      resolve(script);
-    };
-    script.addEventListener('load', callback);
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${mapApiKey}`;
-    script.async = true;
-    document.head.appendChild(script);
-  });
-};
-
-const initBaseMap = (container) => {
-  return loadMap().then(() => {
-    return new Promise((resolve, reject) => {
-      const containerElement = document.querySelector(container);
-      if (!containerElement) reject();
-      let lat, lng;
-      const latMeta = document.querySelector('meta[name="mapLat"]');
-      if (latMeta)
-        lat = Number.parseFloat(latMeta.getAttribute('content'));
-      else
-        lat = 50.434341;
-      const lngMeta = document.querySelector('meta[name="mapLng"]');
-      if (lngMeta)
-        lng = Number.parseFloat(lngMeta.getAttribute('content'));
-      else
-        lng = 30.527756;
-      console.log(lat, lng);
-      const map = new google.maps.Map(containerElement, {
-        center: { lat, lng },
-        zoom: 14,
-        disableDefaultUI: true,
-        clickableIcons: false,
-        styles: [
-          {
-            featureType: 'poi',
-            stylers: [
-              { visibility: 'off' }
-            ]
-          },
-          {
-            featureType: 'poi.park',
-            stylers: [
-              { visibility: 'on' }
-            ]
-          },
-          {
-            featureType: 'transit',
-            stylers: [
-              { visibility: 'off' }
-            ]
-          }
-        ]
-      });
-      resolve(map);
-    })
-  });
-};
-
-const MAP_POLYGON_CONFIG = {
-  strokeColor: '#0facd0',
-  strokeOpacity: 1,
-  strokeWeight: 3,
-  fillColor: '#0facd0',
-  fillOpacity: 0,
-  draggable: false,
-  geodesic: false,
-  clickable: false
-};
-
-const MAP_MARKER_CONFIG = () => ({
-  draggable: false,
-  clickable: false,
-  icon: {
-    path: google.maps.SymbolPath.CIRCLE,
-    fillColor: '#0facd0',
-    fillOpacity: 1,
-    anchor: new google.maps.Point(0,0),
-    strokeWeight: 0,
-    scale: 10
-  }
-});
-
-const INIT_MARKERS_ANIMATION = (map) => {
-  google.maps.Marker.prototype.animateInterval = null;
-  google.maps.Marker.prototype.i = 1;
-  google.maps.Marker.prototype.startAnimation = function() {
-    this.setDefaultScale();
-    this.animateInterval = setInterval(this.animateHandler.bind(this), 5);
-  };
-  google.maps.Marker.prototype.stopAnimation = function() {
-    clearInterval(this.animateInterval);
-    this.animateInterval = null;
-    this.setDefaultScale();
-  };
-  google.maps.Marker.prototype.animateHandler = function() {
-    const s = this.getIcon();
-    s.scale = s.scale + this.i * 0.1;
-    this.setIcon(s);
-    const f = Math.floor(s.scale);
-    if (f === 20) this.i = -1;
-    if (f === 10) this.i = 1;
-  };
-  google.maps.Marker.prototype.setDefaultScale = function() {
-    this.i = 1;
-    const s = this.getIcon();
-    s.scale = 10;
-    this.setIcon(s);
-  };
-};
-
-const INIT_DOUGLAS_PEUCKER = (map) => {
-  google.maps.Polygon.prototype.douglasPeucker = function(tolerance) {
-    let res = null;
-    tolerance = tolerance * Math.pow(2, 20 - map.getZoom());
-    if(this.getPath() && this.getPath().getLength()) {
-      const points = this.getPath().getArray();
-
-      const Line = function( p1, p2 ) {
-        this.p1 = p1;
-        this.p2 = p2;
-
-        this.distanceToPoint = function( point ) {
-          let m = ( this.p2.lat() - this.p1.lat() ) / ( this.p2.lng() - this.p1.lng() ),
-            b = this.p1.lat() - ( m * this.p1.lng() ),
-            d = [];
-          d.push( Math.abs( point.lat() - ( m * point.lng() ) - b ) / Math.sqrt( Math.pow( m, 2 ) + 1 ) );
-          d.push( Math.sqrt( Math.pow( ( point.lng() - this.p1.lng() ), 2 ) + Math.pow( ( point.lat() - this.p1.lat() ), 2 ) ) );
-          d.push( Math.sqrt( Math.pow( ( point.lng() - this.p2.lng() ), 2 ) + Math.pow( ( point.lat() - this.p2.lat() ), 2 ) ) );
-          return d.sort((a, b) => a - b)[0];
-        };
-      };
-
-      const douglasPeucker = function( points, tolerance ) {
-        if ( points.length <= 2 ) {
-          return [points[0]];
-        }
-        let returnPoints = [],
-          line = new Line( points[0], points[points.length - 1] ),
-          maxDistance = 0,
-          maxDistanceIndex = 0,
-          p;
-        for(let i = 1; i <= points.length - 2; i++) {
-          const distance = line.distanceToPoint(points[i]);
-          if( distance > maxDistance ) {
-            maxDistance = distance;
-            maxDistanceIndex = i;
-          }
-        }
-        if (maxDistance >= tolerance) {
-          p = points[maxDistanceIndex];
-          line.distanceToPoint( p, true );
-          returnPoints = returnPoints.concat(douglasPeucker(points.slice( 0, maxDistanceIndex + 1), tolerance));
-          returnPoints = returnPoints.concat(douglasPeucker(points.slice( maxDistanceIndex, points.length ), tolerance));
-        } else {
-          p = points[maxDistanceIndex];
-          line.distanceToPoint( p, true );
-          returnPoints = [points[0]];
-        }
-        return returnPoints;
-      };
-      res = douglasPeucker(points, tolerance);
-      res.push(points[points.length - 1 ]);
-      this.setPath(res);
-    }
-    return this;
-  };
-  const EARTH_RADIUS = 6378137.0;
-  google.maps.Polygon.prototype.setSmoothPath = function(path) {
-    this.setPath(path);
-    this.douglasPeucker(360.0 / (2.0 * Math.PI * EARTH_RADIUS));
-    this.setPath(chaikinSmooth(chaikinSmooth(this.getPath().i.map(({ lat, lng }) => [ lat(), lng() ])))
-      .map(([ lat, lng ]) => ({ lat, lng }))
-    );
-  };
-};
-
 var bind = function bind(fn, thisArg) {
   return function wrap() {
     var args = new Array(arguments.length);
@@ -13497,6 +13084,392 @@ var default_1 = axios;
 axios_1.default = default_1;
 
 var axios$1 = axios_1;
+
+const vhFix = () => {
+  const setVh = () => document.documentElement.style.setProperty('--vh', `${window.innerHeight / 100}px`);
+  setVh();
+  window.addEventListener('resize', setVh);
+};
+
+const excursionsSlider = () => {
+  const container = document.querySelector('.our-excursions .swiper-container');
+  if (!container) return;
+  const excursionsSlider = new Swiper('.our-excursions .swiper-container', {
+    slidesPerView: 1,
+    spaceBetween: 10,
+    centeredSlides: true,
+    breakpoints: {
+      481: {
+        slidesPerView: 2,
+        spaceBetween: 10,
+        centeredSlides: true,
+      },
+      992: {
+        slidesPerView: 2,
+        spaceBetween: 10,
+        centeredSlides: false,
+      },
+      1280: {
+        slidesPerView: 3,
+        spaceBetween: 20,
+      },
+    },
+    loop: true,
+    loopAdditionalSlides: 1,
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+      renderBullet: (index, className) => {
+        return `<span class=${className}></span>`;
+      },
+    },
+  });
+  window.excursionClick = function (tripId) {
+    axios$1.post('./booking.html', JSON.stringify({ tripId, helicopterId: null }));
+  };
+};
+
+const instagramSlider = () => {
+  const instagramSliderElement = document.querySelector('.our-instagram .swiper-container');
+  if (!instagramSliderElement) return;
+  const instagramSlider = new Swiper('.our-instagram .swiper-container', {
+    loop: true,
+    loopAdditionalSlides: 1,
+    centeredSlides: true,
+    slidesPerView: 1,
+    spaceBetween: 10,
+    breakpoints: {
+      578: {
+        slidesPerView: 2,
+        spaceBetween: 10,
+      },
+      768: {
+        slidesPerView: 3,
+        spaceBetween: 10,
+      },
+      1280: {
+        slidesPerView: 3,
+        spaceBetween: 20,
+      },
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+      renderBullet: (index, className) => {
+        return `<span class=${className}></span>`;
+      },
+    },
+  });
+  // const instagramSliderElement = document.querySelector('.our-instagram .swiper-container');
+  const length = 1 + Math.max(...Array.from(instagramSliderElement.querySelectorAll('.swiper-wrapper .swiper-slide'))
+    .map(el => Number.parseInt(el.getAttribute('data-swiper-slide-index'))));
+  const paginationElement = instagramSliderElement.querySelector('.swiper-pagination');
+  const paginationVisible = () => {
+    if (length <= 3 && window.innerWidth >= 768) {
+      paginationElement.style.display = 'none';
+    } else {
+      paginationElement.style.display = 'block';
+    }
+  };
+  paginationVisible();
+  window.addEventListener('resize', paginationVisible);
+};
+
+const webp = () => {
+  const handle = (domEl) => {
+    if (window.webp) {
+      domEl.querySelectorAll('[data-back-webp], [data-back-jpg]').forEach(el => {
+        if (el.hasAttribute('data-back-webp'))
+          el.style.backgroundImage = `url(${el.getAttribute('data-back-webp')})`;
+        else
+          el.style.backgroundImage = `url(${el.getAttribute('data-back-jpg')})`;
+      });
+    } else {
+      domEl.querySelectorAll('[data-back-jpg]').forEach(el => {
+        if (el.hasAttribute('data-back-jpg'))
+          el.style.backgroundImage = `url(${el.getAttribute('data-back-jpg')})`;
+      });
+    }
+  };
+  const observer = new MutationObserver((mutationList, observer) => {
+    mutationList.forEach(mutation => {
+      if (mutation.target.querySelectorAll('[data-back-webp], [data-back-jpg]').length)
+        handle(mutation.target);
+    });
+  });
+  observer.observe(document, {
+    attributes: true,
+    childList: true,
+    subtree: true
+  });
+  supportsWebp_commonJs.then(result => {
+    window.webp = result;
+    if (window.webp) {
+      document.body.classList.add('webp');
+    } else {
+      document.body.classList.add('no-webp');
+    }
+    handle(document);
+  });
+};
+
+const headerPopup = () => {
+  document.querySelectorAll('.js__header-popup_controller').forEach(controller => {
+    controller.addEventListener('click', e => {
+      if (window.innerWidth <= 768) toggleBodyScrollable();
+      document.querySelectorAll('.js__header-popup_control').forEach(control => {
+        control.classList.toggle('header-extended_active');
+      });
+      document.querySelectorAll('.js__header-popup_controller-content').forEach(c => {
+        const content = c.innerHTML;
+        c.innerHTML = c.getAttribute('data-popup-content');
+        c.setAttribute('data-popup-content', content);
+      });
+      e.stopPropagation();
+    });
+  });
+  let activeNav = null;
+  document.querySelectorAll('.js__header-nav_control').forEach(control => {
+    control.addEventListener('click', (e) => {
+      let target = e.target;
+      target.classList.toggle('active');
+      const nav = target.parentElement.querySelector('.js__header-nav_controller');
+      if (!nav) return;
+      if (target.classList.contains('active')) {
+        nav.style.maxHeight = `${nav.scrollHeight + 100}px`;
+        if (activeNav) {
+          activeNav.classList.remove('active');
+          const navController = activeNav.parentElement.querySelector('.js__header-nav_controller');
+          if (navController) navController.style.maxHeight = `0px`;
+        }
+        activeNav = target;
+      } else {
+        nav.style.maxHeight = `0px`;
+        activeNav = null;
+      }
+      e.stopPropagation();
+    });
+  });
+  const headerController = document.querySelector('.header-extended.js__header-popup_control');
+  if (headerController) {
+    headerController.addEventListener('click', e => {
+      e.stopPropagation();
+    });
+  }  
+  window.addEventListener('click', () => {
+    if (activeNav) {
+      activeNav.classList.remove('active');
+      const navController = activeNav.parentElement.querySelector('.js__header-nav_controller');
+      if (navController)
+        navController.style.maxHeight = `0px`;
+    }
+    activeNav = null;
+
+    const activeHeader = document.querySelector('.header-extended.js__header-popup_control');
+    let isActiveHeader = false;
+    if (activeHeader) {
+      isActiveHeader = activeHeader.classList.contains('header-extended_active');
+    }
+    if (isActiveHeader) {
+      if (window.innerWidth <= 768) {
+        toggleBodyScrollable();
+      }
+      document.querySelectorAll('.js__header-popup_control').forEach(control => {
+        control.classList.toggle('header-extended_active');
+      });
+      document.querySelectorAll('.js__header-popup_controller-content').forEach(c => {
+        const content = c.innerHTML;
+        c.innerHTML = c.getAttribute('data-popup-content');
+        c.setAttribute('data-popup-content', content);
+      });
+    }
+  });
+};
+
+const toggleBodyScrollable = () => {
+  document.documentElement.classList.toggle('noscroll');
+};
+
+const loadMap = () => {
+  const mapApiKey = 'AIzaSyBUevELRNQrstYsf6nlw74wsrukteZiguc';
+  return new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    const callback = () => {
+      script.removeEventListener('load', callback);
+      resolve(script);
+    };
+    script.addEventListener('load', callback);
+    script.src = `https://maps.googleapis.com/maps/api/js?key=${mapApiKey}`;
+    script.async = true;
+    document.head.appendChild(script);
+  });
+};
+
+const initBaseMap = (container) => {
+  return loadMap().then(() => {
+    return new Promise((resolve, reject) => {
+      const containerElement = document.querySelector(container);
+      if (!containerElement) reject();
+      let lat, lng;
+      const latMeta = document.querySelector('meta[name="mapLat"]');
+      if (latMeta)
+        lat = Number.parseFloat(latMeta.getAttribute('content'));
+      else
+        lat = 50.434341;
+      const lngMeta = document.querySelector('meta[name="mapLng"]');
+      if (lngMeta)
+        lng = Number.parseFloat(lngMeta.getAttribute('content'));
+      else
+        lng = 30.527756;
+      console.log(lat, lng);
+      const map = new google.maps.Map(containerElement, {
+        center: { lat, lng },
+        zoom: 14,
+        disableDefaultUI: true,
+        clickableIcons: false,
+        styles: [
+          {
+            featureType: 'poi',
+            stylers: [
+              { visibility: 'off' }
+            ]
+          },
+          {
+            featureType: 'poi.park',
+            stylers: [
+              { visibility: 'on' }
+            ]
+          },
+          {
+            featureType: 'transit',
+            stylers: [
+              { visibility: 'off' }
+            ]
+          }
+        ]
+      });
+      resolve(map);
+    })
+  });
+};
+
+const MAP_POLYGON_CONFIG = {
+  strokeColor: '#0facd0',
+  strokeOpacity: 1,
+  strokeWeight: 3,
+  fillColor: '#0facd0',
+  fillOpacity: 0,
+  draggable: false,
+  geodesic: false,
+  clickable: false
+};
+
+const MAP_MARKER_CONFIG = () => ({
+  draggable: false,
+  clickable: false,
+  icon: {
+    path: google.maps.SymbolPath.CIRCLE,
+    fillColor: '#0facd0',
+    fillOpacity: 1,
+    anchor: new google.maps.Point(0,0),
+    strokeWeight: 0,
+    scale: 10
+  }
+});
+
+const INIT_MARKERS_ANIMATION = (map) => {
+  google.maps.Marker.prototype.animateInterval = null;
+  google.maps.Marker.prototype.i = 1;
+  google.maps.Marker.prototype.startAnimation = function() {
+    this.setDefaultScale();
+    this.animateInterval = setInterval(this.animateHandler.bind(this), 5);
+  };
+  google.maps.Marker.prototype.stopAnimation = function() {
+    clearInterval(this.animateInterval);
+    this.animateInterval = null;
+    this.setDefaultScale();
+  };
+  google.maps.Marker.prototype.animateHandler = function() {
+    const s = this.getIcon();
+    s.scale = s.scale + this.i * 0.1;
+    this.setIcon(s);
+    const f = Math.floor(s.scale);
+    if (f === 20) this.i = -1;
+    if (f === 10) this.i = 1;
+  };
+  google.maps.Marker.prototype.setDefaultScale = function() {
+    this.i = 1;
+    const s = this.getIcon();
+    s.scale = 10;
+    this.setIcon(s);
+  };
+};
+
+const INIT_DOUGLAS_PEUCKER = (map) => {
+  google.maps.Polygon.prototype.douglasPeucker = function(tolerance) {
+    let res = null;
+    tolerance = tolerance * Math.pow(2, 20 - map.getZoom());
+    if(this.getPath() && this.getPath().getLength()) {
+      const points = this.getPath().getArray();
+
+      const Line = function( p1, p2 ) {
+        this.p1 = p1;
+        this.p2 = p2;
+
+        this.distanceToPoint = function( point ) {
+          let m = ( this.p2.lat() - this.p1.lat() ) / ( this.p2.lng() - this.p1.lng() ),
+            b = this.p1.lat() - ( m * this.p1.lng() ),
+            d = [];
+          d.push( Math.abs( point.lat() - ( m * point.lng() ) - b ) / Math.sqrt( Math.pow( m, 2 ) + 1 ) );
+          d.push( Math.sqrt( Math.pow( ( point.lng() - this.p1.lng() ), 2 ) + Math.pow( ( point.lat() - this.p1.lat() ), 2 ) ) );
+          d.push( Math.sqrt( Math.pow( ( point.lng() - this.p2.lng() ), 2 ) + Math.pow( ( point.lat() - this.p2.lat() ), 2 ) ) );
+          return d.sort((a, b) => a - b)[0];
+        };
+      };
+
+      const douglasPeucker = function( points, tolerance ) {
+        if ( points.length <= 2 ) {
+          return [points[0]];
+        }
+        let returnPoints = [],
+          line = new Line( points[0], points[points.length - 1] ),
+          maxDistance = 0,
+          maxDistanceIndex = 0,
+          p;
+        for(let i = 1; i <= points.length - 2; i++) {
+          const distance = line.distanceToPoint(points[i]);
+          if( distance > maxDistance ) {
+            maxDistance = distance;
+            maxDistanceIndex = i;
+          }
+        }
+        if (maxDistance >= tolerance) {
+          p = points[maxDistanceIndex];
+          line.distanceToPoint( p, true );
+          returnPoints = returnPoints.concat(douglasPeucker(points.slice( 0, maxDistanceIndex + 1), tolerance));
+          returnPoints = returnPoints.concat(douglasPeucker(points.slice( maxDistanceIndex, points.length ), tolerance));
+        } else {
+          p = points[maxDistanceIndex];
+          line.distanceToPoint( p, true );
+          returnPoints = [points[0]];
+        }
+        return returnPoints;
+      };
+      res = douglasPeucker(points, tolerance);
+      res.push(points[points.length - 1 ]);
+      this.setPath(res);
+    }
+    return this;
+  };
+  const EARTH_RADIUS = 6378137.0;
+  google.maps.Polygon.prototype.setSmoothPath = function(path) {
+    this.setPath(path);
+    this.douglasPeucker(360.0 / (2.0 * Math.PI * EARTH_RADIUS));
+    // this.setPath(smooth(smooth(this.getPath().i.map(({ lat, lng }) => [ lat(), lng() ])))
+    //   .map(([ lat, lng ]) => ({ lat, lng }))
+    // )
+  };
+};
 
 webp();
 headerPopup();

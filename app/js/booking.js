@@ -86,7 +86,7 @@ const app = new Vue({
         this.helicopter = helics[0]
     },
     helicopter (v) {
-      // axios.get('./disabled_times.json')
+      axios.get('./disabled_times.json')
       axios.get(`/api/booking/free-date.json?ID=${v}`)  
         .then(({ data: { disabledDates } }) => {
           this.disabledDates = [...disabledDates]
@@ -130,6 +130,7 @@ const app = new Vue({
       this.warehouse = null;
       if (v) {
         axios.post('/api/delivery/warehouse.json', { id: this.city }).then( ({ data: warehouses }) => {
+        // axios.get('/warehouse.json').then( ({ data: warehouses }) => {
           // this.warehouses = warehouses.map(({ id: strId, text: name }, i) => ({ strId, name, id: i+1 }));
           this.warehouses = warehouses
           this.warehouseFuse = new Fuse(this.warehouses, { 
@@ -147,11 +148,14 @@ const app = new Vue({
       }
     },
     citySearch (v) {
-      this.city = null;
+      if (this.cityName !== v) {
+        this.city = null;
+      }
       if (v) {
         axios.post('/api/delivery/city.json', { id: v }).then( ({ data: cities }) => {
-          // this.cities = cities.map(({ id: strId, text: name }, i) => ({ strId, name, id: i+1 }));
+        // axios.get('/city.json').then( ({ data: cities}) => {
           this.cities = cities;
+          console.log(cities)
         })
       } else {
         this.cities = null;
@@ -203,13 +207,19 @@ const app = new Vue({
       ].slice(1) : [];
     },
     deliveryName () {
-      return this.deliveries.find(d => d.id === this.delivery).name;
+      if (!this.deliveries) return null
+      const d = this.deliveries.find(d => d.id === this.delivery)
+      return d ? d.name : null;
     },
     cityName () {
-      return this.cities.find(c => c.id === this.city).text;
+      if (!this.cities) return null
+      const c = this.cities.find(c => c.id === this.city)
+      return c ? c.text : null;
     },
     warehouseName () {
-      return this.warehouses.find(w => w.id === this.warehouse).text;
+      if (!this.warehouses) return null
+      const w = this.warehouses.find(w => w.id === this.warehouse)
+      return w ? w.text : null;
     },
     price () {
       const t = this.tripInfo
@@ -288,14 +298,14 @@ const app = new Vue({
     // this.disabledDates = [...data.disabledDates];
     this.deliveries = [...data.deliveryMethods];
     const tripMeta = document.querySelector('meta[name="tripId"]');
-    const helicopterId = document.querySelector('meta[name="helicopterId"]');
+    const helicopterMeta = document.querySelector('meta[name="helicopterId"]');
     this.passengers = 1;
     if (tripMeta)
       this.trip = Number.parseInt(tripMeta.getAttribute('content'));
     else
       this.trip = this.trips[0].id;
-    if (helicopterId)
-      this.helicopter = Number.parseInt(helicopterId.getAttribute('content'));
+    if (helicopterMeta)
+      this.helicopter = Number.parseInt(helicopterMeta.getAttribute('content'));
     else
       this.helicopter = this.trips.find(({ id }) => id === this.trip).helicopters[0];
   },

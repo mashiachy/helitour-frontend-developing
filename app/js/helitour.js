@@ -9,9 +9,11 @@ Swiper.use(Thumbs);
 Swiper.use(Navigation);
 Swiper.use(Pagination);
 
+let player
+
 const initSlider = () => {
   const swiperWrapper = document.querySelector('.thumb-slider .swiper-container .swiper-wrapper');
-  if (!swiperWrapper) return;
+  if (!swiperWrapper) return
   const len = swiperWrapper.children.length;
   const thumbSlider = new Swiper('.thumb-slider .swiper-container', {
     slidesPerView: len > 5 ? 5 : len,
@@ -37,19 +39,20 @@ const initSlider = () => {
     },
   });
   helicopterSlider.on('slideChange', () => {
-    const state = player.getPlayerState();
-    if (state === 1 || state === 3 || state === 5) {
-      player.pauseVideo();
+    if (player) {
+      const state = player.getPlayerState();
+      if (state === 1 || state === 3 || state === 5) {
+        player.pauseVideo();
+      }
     }
   });
 }
-
+initSlider();
 excursionsSlider();
 instagramSlider();
 
-let player;
 const playerId = 'youtube-player';
-if (document.querySelector(playerId)) {
+if (document.getElementById(playerId)) {
   const script = document.createElement('script');
   script.src = 'https://www.youtube.com/iframe_api';
   script.async = true;

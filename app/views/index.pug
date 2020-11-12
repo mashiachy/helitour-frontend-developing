@@ -37,7 +37,7 @@ html(lang="us")
                   +e.P.title Оглядовий політ над Києвом
                   +e.SPAN(data-after='гр').info 18
                   +e.footer
-                    a(onclick='window.excursionClick(10)') забронювати
+                    a(onclick='window.excursionClick(11)') забронювати
                     +e.SPAN(data-after='грн').price 5 680
               +b.base-card_excursion.swiper-slide
                 +e.img(data-back-webp='img/exc2.webp' data-back-jpg='img/exc2.jpg')
@@ -71,7 +71,7 @@ html(lang="us")
           +services-gallery
 
       +b.SECTION.index-booking.content.content__inner#booking-form
-        +e.FORM(action='./booking' method='POST').front
+        +e.FORM(action='./booking' method='POST' name='main-form').front
           h2 Бронювання польоту
           +e.form-line
             label(for='trip-select') Оберіть маршрут

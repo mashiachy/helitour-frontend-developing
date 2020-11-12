@@ -8,7 +8,7 @@ html(lang="us")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     meta(name="robots" content="noindex, nofollow")
     meta(name="tripId" content="101")
-    meta(name="helicopterId" content="13")
+    meta(name="helicopterId" content="10")
     title Helitour | booking
     link(href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet")
     link(href="css/booking.css" rel="stylesheet")
@@ -191,7 +191,7 @@ html(lang="us")
                 +e.LABEL(for='offer-checkbox').label='Погоджуюсь з '
                   a.base-link(href='#') офертою
               +b.BUTTON(@click.prevent="sendForm(true)" :disabled='!isFormReady').button Оплатити онлайн
-              +b.BUTTON(@click.prevent="sendForm(false)" :disabled='!isFormReady && delivery === 2').button_flat Готівкою
+              +b.BUTTON(@click.prevent="sendForm(false)" :disabled='!isFormReady || (present && delivery !== 1)').button_flat Готівкою
       +b.SECTION.col-text.content.content__inner
         +e.text
           p За відгуками багатьох, така розвага повністю виправдовує свою ціну і коштує досить недорого. Вартість вертолітного туру доступна людині із середнім рівнем доходу і залежить від тривалості подорожі. У компанії «Helitour» ви також можете недорого придбати сертифікат в подарунок. Такий презент стане прекрасним сюрпризом для близької вам людини.

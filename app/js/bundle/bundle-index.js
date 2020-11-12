@@ -25114,6 +25114,16 @@ const excursionsSlider = () => {
   });
   window.excursionClick = function (tripId) {
     axios$1.post('./booking.html', JSON.stringify({ tripId, helicopterId: null }));
+    const form = document.createElement('form');
+    form.setAttribute('method', 'POST');
+    form.setAttribute('action', '/booking.html');
+    form.setAttribute('name', 'excursion-form');
+    const input = document.createElement('input');
+    input.setAttribute('type', 'text');
+    input.setAttribute('name', 'tripId');
+    input.value = `${tripId}`;
+    form.appendChild(input);
+    form.submit();
   };
 };
 
@@ -25319,41 +25329,59 @@ const initModal = (modalSelector) => {
   });
 };
 
+const openThanksHandler = () => {
+  closeModal('.modal-reserve').then(() => openModal('.modal-thanks'));
+};
+
 const openModal = (modalSelector) => {
-  document.documentElement.classList.add('noscroll');
-  const modalW = document.querySelector('.modal');
-  if (modalW)
-    modalW.classList.add('active');
-  document.querySelectorAll(modalSelector).forEach(modal => {
-    modal.classList.add('active', 'before-enter');
-    modal.classList.add('enter');
-    const handler = ({ target }) => {
-      target.classList.remove('before-enter');
-      target.classList.remove('enter');
-      modal.removeEventListener('animationend', handler);
-    };
-    modal.addEventListener('animationend', handler);
-  });
+  return new Promise((resolve, _) => {
+    document.documentElement.classList.add('noscroll');
+    const modalW = document.querySelector('.modal');
+    if (modalW)
+      modalW.classList.add('active');
+    document.querySelectorAll(modalSelector).forEach(modal => {
+      modal.classList.add('active', 'before-enter');
+      modal.classList.add('enter');
+      const handler = ({ target }) => {
+        target.classList.remove('before-enter');
+        target.classList.remove('enter');
+        modal.removeEventListener('animationend', handler);
+        resolve();
+      };
+      modal.addEventListener('animationend', handler);
+      const openThanksButton = modal.querySelector('.js__open-thanks');
+      if (openThanksButton) {
+        openThanksButton.addEventListener('click', openThanksHandler);
+      }
+    });
+  })
 };
 
 const closeModal = (modalSelector) => {
-  document.documentElement.classList.remove('noscroll');
-  document.querySelectorAll(modalSelector).forEach(modal => {
-    if (!modal.classList.contains('active'))
-      return;
-    modal.classList.add('leave');
-    const handler = ({ target }) => {
-      target.classList.add('after-leave');
-      target.classList.remove('leave');
-      target.classList.remove('active');
-      target.classList.remove('after-leave');
-      const newModal = document.querySelector('.modal');
-      if (newModal)
-        newModal.classList.remove('active');
-      modal.removeEventListener('animationend', handler);
-    };
-    modal.addEventListener('animationend', handler);
-  });
+  return new Promise((resolve, _) => {
+    document.documentElement.classList.remove('noscroll');
+    document.querySelectorAll(modalSelector).forEach(modal => {
+      if (!modal.classList.contains('active'))
+        return;
+      modal.classList.add('leave');
+      const handler = ({ target }) => {
+        target.classList.add('after-leave');
+        target.classList.remove('leave');
+        target.classList.remove('active');
+        target.classList.remove('after-leave');
+        const newModal = document.querySelector('.modal');
+        if (newModal)
+          newModal.classList.remove('active');
+        modal.removeEventListener('animationend', handler);
+        resolve();
+      };
+      modal.addEventListener('animationend', handler);
+      const openThanksButton = modal.querySelector('.js__open-thanks');
+      if (openThanksButton) {
+        openThanksButton.removeEventListener('click', openThanksHandler);
+      }
+    });
+  })
 };
 
 webp();

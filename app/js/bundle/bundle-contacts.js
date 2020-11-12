@@ -1895,13 +1895,12 @@ const initBaseMap = (container) => {
       if (latMeta)
         lat = Number.parseFloat(latMeta.getAttribute('content'));
       else
-        lat = 50.434341;
+        lat = 50.4578396;
       const lngMeta = document.querySelector('meta[name="mapLng"]');
       if (lngMeta)
         lng = Number.parseFloat(lngMeta.getAttribute('content'));
       else
-        lng = 30.527756;
-      console.log(lat, lng);
+        lng = 30.5683109;
       const map = new google.maps.Map(containerElement, {
         center: { lat, lng },
         zoom: 14,
@@ -1936,7 +1935,23 @@ const initBaseMap = (container) => {
 webp();
 headerPopup();
 vhFix();
-initBaseMap('#js__map');
+initBaseMap('#js__map').then(map => {
+  const infowindow = new google.maps.InfoWindow();
+  const marker = new google.maps.Marker({
+    map,
+    position: {lat: 50.4578396, lng: 30.5683109},
+  });
+  google.maps.event.addListener(marker, "click", function () {
+    infowindow.setContent(
+      "<div><strong>" +
+        "Helitour Киев" +
+        "</strong><br>" +
+        "Адрес" +
+        "</div>"
+    );
+    infowindow.open(map, this);
+  });
+});
 
 initModal('.modal-reserve');
 initModal('.modal-thanks');

@@ -3,7 +3,23 @@ import { webp, headerPopup, vhFix, initBaseMap, initModal, openModal } from './b
 webp();
 headerPopup();
 vhFix();
-initBaseMap('#js__map');
+initBaseMap('#js__map').then(map => {
+  const infowindow = new google.maps.InfoWindow();
+  const marker = new google.maps.Marker({
+    map,
+    position: {lat: 50.4578396, lng: 30.5683109},
+  });
+  google.maps.event.addListener(marker, "click", function () {
+    infowindow.setContent(
+      "<div><strong>" +
+        "Helitour Киев" +
+        "</strong><br>" +
+        "Адрес" +
+        "</div>"
+    );
+    infowindow.open(map, this);
+  });
+})
 
 initModal('.modal-reserve');
 initModal('.modal-thanks')

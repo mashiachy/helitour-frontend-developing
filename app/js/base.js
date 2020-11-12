@@ -97,6 +97,16 @@ export const excursionsSlider = () => {
   });
   window.excursionClick = function (tripId) {
     axios.post('./booking.html', JSON.stringify({ tripId, helicopterId: null }))
+    const form = document.createElement('form')
+    form.setAttribute('method', 'POST')
+    form.setAttribute('action', '/booking.html')
+    form.setAttribute('name', 'excursion-form')
+    const input = document.createElement('input')
+    input.setAttribute('type', 'text')
+    input.setAttribute('name', 'tripId')
+    input.value = `${tripId}`
+    form.appendChild(input)
+    form.submit()
   }
 };
 
@@ -428,13 +438,12 @@ export const initBaseMap = (container) => {
       if (latMeta)
         lat = Number.parseFloat(latMeta.getAttribute('content'));
       else
-        lat = 50.434341;
+        lat = 50.4578396;
       const lngMeta = document.querySelector('meta[name="mapLng"]');
       if (lngMeta)
         lng = Number.parseFloat(lngMeta.getAttribute('content'));
       else
-        lng = 30.527756;
-      console.log(lat, lng);
+        lng = 30.5683109;
       const map = new google.maps.Map(containerElement, {
         center: { lat, lng },
         zoom: 14,
