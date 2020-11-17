@@ -127,8 +127,10 @@
       max-width: 345px
   &__list
     display: flex
+    flex-wrap: wrap
     flex-direction: row
     justify-content: space-between
+    margin: -10px
     @include sm-tablet
       flex-direction: column
       justify-content: unset
@@ -137,6 +139,8 @@
     display: flex
     flex-direction: column
     align-items: center
+    margin: 10px
+    flex: 1 1 20%
     @include sm-tablet
       width: 100%
       margin-bottom: 30px
