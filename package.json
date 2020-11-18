@@ -36,7 +36,7 @@
     "modernizr": "^3.11.3",
     "node-normalize-scss": "^8.1.2",
     "postcss-import": "^12.0.1",
-    "rollup": "^2.26.4",
+    "rollup": "^2.33.2",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-globals": "^1.4.0",
     "rollup-plugin-node-resolve": "^5.2.0",
@@ -44,6 +44,7 @@
     "swiper": "^6.1.2",
     "vue": "^2.6.12",
     "vue-currency-filter": "^5.1.1",
+    "vue-masked-input": "*",
     "vue2-datepicker": "^3.6.2",
     "yargs": "^15.4.1"
   },

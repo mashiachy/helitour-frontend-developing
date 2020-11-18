@@ -14219,7 +14219,7 @@ Fuse.config = Config;
 
 var fuse_common = Fuse;
 
-var r=Array.prototype.map,n=Array.isArray,t=Object.prototype.toString;function e(r){return !!(""===r||r&&r.charCodeAt&&r.substr)}function o(r){return n?n(r):"[object Array]"===t.call(r)}function a(r){return r&&"[object Object]"===t.call(r)}function i(r,n){var t;for(t in r=r||{},n=n||{})n.hasOwnProperty(t)&&null==r[t]&&(r[t]=n[t]);return r}function s(n,t,e){if(!n)return [];if(r&&n.map===r)return n.map(t,e);var o,a=[],i=0;for(i=0,o=n.length;i<o;i++)a[i]=t.call(e,n[i],i,n);return a}var u={settings:{currency:{symbol:"$",format:"%s%v",decimal:".",thousand:",",precision:2,grouping:3},number:{precision:0,grouping:3,thousand:",",decimal:"."}}};function c(r,n){return r=Math.round(Math.abs(r)),isNaN(r)?n:r}var f=function r(n,t){if(o(n))return s(n,function(n){return r(n,t)});if("number"==typeof(n=n||0))return n;t=t||u.settings.number.decimal;var e=new RegExp("[^0-9-"+t+"]",["g"]),a=parseFloat((""+n).replace(/\((?=\d+)(.*)\)/,"-$1").replace(e,"").replace(t,"."));return isNaN(a)?0:a},l=function(r,n){n=c(n,u.settings.number.precision);var t=Number(f(r)+"e"+n),e=Math.round(t);return Number(e+"e-"+n).toFixed(n)},p={name:"currency",symbol:"",thousandsSeparator:".",fractionCount:0,fractionSeparator:",",symbolPosition:"front",symbolSpacing:!0};var vueCurrencyFilter={install:function(r,n){var t=function(n){null==n&&(n={});var t=i(n,p),m=t.name,b=function(r,n){if(null==r)return {};var t,e,o={},a=Object.keys(r);for(e=0;e<a.length;e++)n.indexOf(t=a[e])>=0||(o[t]=r[t]);return o}(t,["name"]),y=function(r,n,t,p,m,y,g){var d=i({symbol:n,thousandsSeparator:t,fractionCount:p,fractionSeparator:m,symbolPosition:y,symbolSpacing:g},b);"object"==typeof n&&(d=i(n,b));var v=0,h="-"===String(r).charAt(0);h&&(r=String(r).slice(1));var S,A=parseFloat(r);return isNaN(A)||(v=A),S="front"===d.symbolPosition?d.symbolSpacing?"%s %v":"%s%v":d.symbolSpacing?"%v %s":"%v%s",d.fractionCount>0&&(r=l(r,d.fractionCount)),v=function r(n,t,p,m,b,y){if(o(n))return s(n,function(n){return r(n,t,p,m,b,y)});n=f(n);var g=i(a(t)?t:{symbol:t,precision:p,thousand:m,decimal:b,format:y},u.settings.currency),d=function(r){var n=u.settings.currency.format;return "function"==typeof r&&(r=r()),e(r)&&r.match("%v")?{pos:r,neg:r.replace("-","").replace("%v","-%v"),zero:r}:r&&r.pos&&r.pos.match("%v")?r:e(n)?u.settings.currency.format={pos:n,neg:n.replace("%v","-%v"),zero:n}:n}(g.format);return (n>0?d.pos:n<0?d.neg:d.zero).replace("%s",g.symbol).replace("%v",function r(n,t,e,p){if(o(n))return s(n,function(n){return r(n,t,e,p)});n=f(n);var m=i(a(t)?t:{precision:t,thousand:e,decimal:p},u.settings.number),b=c(m.precision),y=n<0?"-":"",g=parseInt(l(Math.abs(n||0),b),10)+"",d=g.length>3?g.length%3:0;return y+(d?g.substr(0,d)+m.thousand:"")+g.substr(d).replace(/(\d{3})(?=\d)/g,"$1"+m.thousand)+(b?m.decimal+l(Math.abs(n),b).split(".")[1]:"")}(Math.abs(n),c(g.precision),g.thousand,g.decimal))}(r,{format:S,symbol:d.symbol,precision:d.fractionCount,thousand:d.thousandsSeparator,decimal:d.fractionSeparator}),h&&(v="-"+v),v};r.filter(m,y),r.prototype["$"+m]={setConfig:function(r){b=i(r,p);},getConfig:function(){return b},format:y};};Array.isArray(n)?n.forEach(function(r){return t(r)}):t(n);}};
+var r=Array.prototype.map,t=Array.isArray,n=Object.prototype.toString;function o(r){return !!(""===r||r&&r.charCodeAt&&r.substr)}function e(r){return t?t(r):"[object Array]"===n.call(r)}function a(r){return r&&"[object Object]"===n.call(r)}function i(r,t){var n;for(n in r=r||{},t=t||{})t.hasOwnProperty(n)&&null==r[n]&&(r[n]=t[n]);return r}function s(t,n,o){if(!t)return [];if(r&&t.map===r)return t.map(n,o);var e,a=[],i=0;for(i=0,e=t.length;i<e;i++)a[i]=n.call(o,t[i],i,t);return a}var c={settings:{currency:{symbol:"$",format:"%s%v",decimal:".",thousand:",",precision:2,grouping:3},number:{precision:0,grouping:3,thousand:",",decimal:"."}}};function u(r,t){return void 0===t&&(t=0),r=Math.round(Math.abs(r)),isNaN(r)?t:r}var l=function r(t,n){if(e(t))return s(t,function(t){return r(t,n)});if("number"==typeof(t=t||0))return t;n=n||c.settings.number.decimal;var o=new RegExp("[^0-9-"+n+"]",["g"]),a=parseFloat((""+t).replace(/\((?=\d+)(.*)\)/,"-$1").replace(o,"").replace(n,"."));return isNaN(a)?0:a},p=function(r,t){t=u(t,c.settings.number.precision);var n=Number(l(r)+"e"+t),o=Math.round(n);return Number(o+"e-"+t).toFixed(t)},m={name:"currency",symbol:"",thousandsSeparator:".",fractionCount:0,fractionSeparator:",",symbolPosition:"front",symbolSpacing:!0,avoidEmptyDecimals:void 0};var vueCurrencyFilter={install:function(r,t){var n=function(t){null==t&&(t={});var n=i(t,m),f=n.name,y=function(r,t){if(null==r)return {};var n,o,e={},a=Object.keys(r);for(o=0;o<a.length;o++)t.indexOf(n=a[o])>=0||(e[n]=r[n]);return e}(n,["name"]),d=function(r,t,n,m,f,d,v,b){var g=i({symbol:t,thousandsSeparator:n,fractionCount:m,fractionSeparator:f,symbolPosition:d,symbolSpacing:v,avoidEmptyDecimals:b},y);"object"==typeof t&&(g=i(t,y));var h=0,S="-"===String(r).charAt(0);S&&(r=String(r).slice(1));var A,C=parseFloat(r);return isNaN(C)||(h=C),A="front"===g.symbolPosition?g.symbolSpacing?"%s %v":"%s%v":g.symbolSpacing?"%v %s":"%v%s",g.fractionCount>0&&(r=p(r,g.fractionCount)),h=function r(t,n,m,f,y,d,v){if(e(t))return s(t,function(t){return r(t,n,m,f,y,d,v)});t=l(t);var b=i(a(n)?n:{symbol:n,precision:m,thousand:f,decimal:y,format:d,avoidEmptyDecimals:v},c.settings.currency),g=function(r){var t=c.settings.currency.format;return "function"==typeof r&&(r=r()),o(r)&&r.match("%v")?{pos:r,neg:r.replace("-","").replace("%v","-%v"),zero:r}:r&&r.pos&&r.pos.match("%v")?r:o(t)?c.settings.currency.format={pos:t,neg:t.replace("%v","-%v"),zero:t}:t}(b.format);return (t>0?g.pos:t<0?g.neg:g.zero).replace("%s",b.symbol).replace("%v",function r(t,n,o,m,f){if(e(t))return s(t,function(t){return r(t,n,o,m,f)});t=l(t);var y=i(a(n)?n:{precision:n,thousand:o,decimal:m},c.settings.number),d=u(y.precision),v=t<0?"-":"",b=parseInt(p(Math.abs(t||0),d),10)+"",g=b.length>3?b.length%3:0,h="";return d&&(h=y.decimal+p(Math.abs(t),d).split(".")[1],void 0!==f&&parseInt(p(Math.abs(t||0),1),10)==t&&(h=""===f?"":y.decimal+f)),v+(g?b.substr(0,g)+y.thousand:"")+b.substr(g).replace(/(\d{3})(?=\d)/g,"$1"+y.thousand)+h}(Math.abs(t),u(b.precision),b.thousand,b.decimal,b.avoidEmptyDecimals))}(r,{format:A,symbol:g.symbol,precision:g.fractionCount,thousand:g.thousandsSeparator,decimal:g.fractionSeparator,avoidEmptyDecimals:g.avoidEmptyDecimals}),S&&(h="-"+h),h};r.filter(f,d),r.prototype["$"+f]={setConfig:function(r){y=i(r,m);},getConfig:function(){return y},format:d};};Array.isArray(t)?t.forEach(function(r){return n(r)}):n(t);}};
 
 function extend(dest, src) {
   if (src) {
@@ -17020,7 +17020,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
   var script = {
     name: 'TableDate',
     inject: {
-      t: {
+      translateFn: {
         default: function _default() {
           return getLocaleFieldValue;
         }
@@ -17070,10 +17070,10 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     },
     computed: {
       firstDayOfWeek: function firstDayOfWeek() {
-        return this.t('formatLocale.firstDayOfWeek') || 0;
+        return this.translateFn('formatLocale.firstDayOfWeek') || 0;
       },
       days: function days() {
-        var days = this.t('days') || this.t('formatLocale.weekdaysMin');
+        var days = this.translateFn('days') || this.translateFn('formatLocale.weekdaysMin');
         return days.concat(days).slice(this.firstDayOfWeek, this.firstDayOfWeek + 7);
       },
       dates: function dates() {
@@ -17122,7 +17122,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     methods: {
       formatDate: function formatDate(date, fmt) {
         return format(date, fmt, {
-          locale: this.t('formatLocale')
+          locale: this.translateFn('formatLocale')
         });
       },
       handleCellClick: function handleCellClick(evt) {
@@ -17149,7 +17149,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
         var year = this.calendarYear;
         var month = this.calendarMonth;
         var date = createDate(year, month, day);
-        return this.getWeek(date, this.t('formatLocale'));
+        return this.getWeek(date, this.translateFn('formatLocale'));
       }
     }
   };
@@ -17225,7 +17225,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
   var script$1 = {
     name: 'TableMonth',
     inject: {
-      t: {
+      translateFn: {
         default: function _default() {
           return getLocaleFieldValue;
         }
@@ -17244,7 +17244,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     },
     computed: {
       months: function months() {
-        var monthsLocale = this.t('months') || this.t('formatLocale.monthsShort');
+        var monthsLocale = this.translateFn('months') || this.translateFn('formatLocale.monthsShort');
         var months = monthsLocale.map(function (text, month) {
           return {
             text: text,
@@ -17466,7 +17466,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     },
     mixins: [emitter],
     inject: {
-      t: {
+      translateFn: {
         default: function _default() {
           return getLocaleFieldValue;
         }
@@ -17556,9 +17556,9 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
         return this.panel === 'date';
       },
       dateHeader: function dateHeader() {
-        var monthBeforeYear = this.t('monthBeforeYear');
-        var yearFormat = this.t('yearFormat');
-        var monthFormat = this.t('monthFormat') || 'MMM';
+        var monthBeforeYear = this.translateFn('monthBeforeYear');
+        var yearFormat = this.translateFn('yearFormat');
+        var monthFormat = this.translateFn('monthFormat') || 'MMM';
         var yearLabel = {
           panel: 'year',
           label: this.formatDate(this.innerCalendar, yearFormat)
@@ -17585,7 +17585,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     methods: {
       formatDate: function formatDate(date, fmt) {
         return format(date, fmt, {
-          locale: this.t('formatLocale')
+          locale: this.translateFn('formatLocale')
         });
       },
       initCalendar: function initCalendar() {
@@ -18548,7 +18548,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
       ScrollbarVertical: ScrollbarVertical
     },
     inject: {
-      t: {
+      translateFn: {
         default: function _default() {
           return getLocaleFieldValue;
         }
@@ -18617,7 +18617,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     methods: {
       formatDate: function formatDate(date, fmt) {
         return format(date, fmt, {
-          locale: this.t('formatLocale')
+          locale: this.translateFn('formatLocale')
         });
       },
       scrollToSelected: function scrollToSelected() {
@@ -18690,7 +18690,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
       ListOptions: ListOptions
     },
     inject: {
-      t: {
+      translateFn: {
         default: function _default() {
           return getLocaleFieldValue;
         }
@@ -18799,7 +18799,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     methods: {
       formatDate: function formatDate(date, fmt) {
         return format(date, fmt, {
-          locale: this.t('formatLocale')
+          locale: this.translateFn('formatLocale')
         });
       },
       isDisabled: function isDisabled(date) {
@@ -19250,7 +19250,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     },
     provide: function provide() {
       return {
-        t: this.getLocaleFieldValue,
+        translateFn: this.getLocaleFieldValue,
         getWeek: this.getWeek,
         prefixClass: this.prefixClass
       };
@@ -19268,7 +19268,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
         default: 'date'
       },
       format: {
-        type: [String, Object],
+        type: String,
         default: function _default() {
           var map = {
             date: 'YYYY-MM-DD',
@@ -19280,6 +19280,9 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
           };
           return map[this.type] || map.date;
         }
+      },
+      formatter: {
+        type: Object
       },
       range: {
         type: Boolean,
@@ -19457,6 +19460,11 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
         }
       }
     },
+    created: function created() {
+      if (_typeof(this.format) === 'object') {
+        console.warn("[vue2-datepicker]: The prop `format` don't support Object any more. You can use the new prop `formatter` to replace it");
+      }
+    },
     methods: {
       handleClickOutSide: function handleClickOutSide(evt) {
         var target = evt.target;
@@ -19465,16 +19473,19 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
           this.closePopup();
         }
       },
+      getFormatter: function getFormatter(key) {
+        return isObject(this.formatter) && this.formatter[key] || isObject(this.format) && this.format[key];
+      },
       getWeek: function getWeek$1(date, options) {
-        if (isObject(this.format) && typeof this.format.getWeek === 'function') {
-          return this.format.getWeek(date, options);
+        if (typeof this.getFormatter('getWeek') === 'function') {
+          return this.getFormatter('getWeek')(date, options);
         }
 
         return getWeek(date, options);
       },
       parseDate: function parseDate(value, fmt) {
-        if (isObject(this.format) && typeof this.format.parse === 'function') {
-          return this.format.parse(value, fmt);
+        if (typeof this.getFormatter('parse') === 'function') {
+          return this.getFormatter('parse')(value, fmt);
         }
 
         var backupDate = new Date();
@@ -19484,8 +19495,8 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
         });
       },
       formatDate: function formatDate(date, fmt) {
-        if (isObject(this.format) && typeof this.format.stringify === 'function') {
-          return this.format.stringify(date, fmt);
+        if (typeof this.getFormatter('stringify') === 'function') {
+          return this.getFormatter('stringify')(date, fmt);
         }
 
         return format(date, fmt, {
@@ -21812,30 +21823,6 @@ const app = new Vue({
           this.disabledDates = [...disabledDates];
         });
     },
-    // delivery (v) {
-    //   this.city = null;
-    //   if (v === 2) {
-    //     axios.post('/api/delivery/city.json').then( ({ data: cities }) => {
-    //       // this.cities = cities.map(({ id: strId, text: name }, i) => ({ strId, name, id: i+1 }));
-    //       this.cities = cities;
-    //       this.cityFuse = new Fuse(this.cities, { 
-    //         keys: ['text'],
-    //         threshold: 0.7,
-    //       });
-    //       this.filteredCities = [...this.cities];
-    //     })
-    //   } else {
-    //     this.cities = null;
-    //     this.warehouse = null;
-    //     this.warehouses = null;
-    //     this.filteredCities = null;
-    //     this.citySearch = null;
-    //     this.cityFuse = null;
-    //     this.warehouseSearch = null;
-    //     this.filteredWarehouses = null;
-    //     this.warehouseFuse = null;
-    //   }
-    // },
     delivery () {
       this.cities = null;
       this.warehouse = null;
@@ -21886,13 +21873,7 @@ const app = new Vue({
         this.warehouseSearch = null;
         this.filteredWarehouses = null;
         this.warehouseFuse = null;
-      }
-      // if (v) {
-      //   this.filteredCities = this.cityFuse.search(v).map(({ item }) => item);
-      // } else {
-      //   this.filteredCities = this.cities ? [...this.cities] : null;
-      // }
-      
+      }      
     },
     warehouseSearch (v) {
       if (v) {
@@ -22012,7 +21993,7 @@ const app = new Vue({
     }
   },
   async created () {
-    const { data } = await axios$1.get('/helitours_info.json');
+    const { data } = await axios$1.get('/helitours_info.json?lang='+document.querySelector('html').getAttribute('lang'));
     this.trips = [...data.trips];
     this.helicopters = [...data.helicopters];
     // this.disabledDates = [...data.disabledDates];
