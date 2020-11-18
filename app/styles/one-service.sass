@@ -259,6 +259,7 @@
     @include centerMargin
     @include adaptive(1600)
       width: unset
+
   &__svg-map
     path
       fill-rule: evenodd
@@ -270,7 +271,7 @@
       transition: stroke .25s ease-out, fill .25s ease-out
       &.st2
         stroke: #d8d8d8
-      &.active
+      &:not(.disabled):hover
         stroke: #ADADAD
         fill: $accent-text
   &__svg-wrapper
@@ -304,7 +305,7 @@
         top: top(449)
       &[data-path-ref='svg-map_9']
         left: left(180)
-        top: top(426)
+        top: 41.20487%
       &[data-path-ref='svg-map_10']
         left: left(361)
         top: top(348)
@@ -318,8 +319,8 @@
         left: left(590)
         top: top(431)
       &[data-path-ref='svg-map_14']
-        left: left(847)
-        top: top(335)
+        left: 63.50876%
+        top: 35.97566%
       &[data-path-ref='svg-map_15']
         left: left(861)
         top: top(171)
@@ -353,3 +354,15 @@
       &[data-path-ref='svg-map_25']
         left: left(1228)
         top: top(390)
+      &[data-path-ref='svg-map_27']
+        left: 12.65%
+        top: 50.5%
+      &[data-path-ref='svg-map_28']
+        left: 20.52628%
+        top: 51.55375%
+      &[data-path-ref='svg-map_29']
+        left: 62%
+        top: 59%
+      &[data-path-ref='svg-map_30']
+        left: 65.52628%
+        top: 27.55375%

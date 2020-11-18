@@ -13328,11 +13328,11 @@ document.querySelectorAll('#svg-map path').forEach(path => {
   document.querySelectorAll(`[data-path-ref="${path.getAttribute('id')}"]`).forEach(infoBlock => {
     if (!infoBlock || infoBlock.classList.contains('disable')) return;
     path.addEventListener('mouseenter', () => {
-      infoBlock.classList.add('active');
+      // infoBlock.classList.add('active');
       path.classList.add('active');
     });
     path.addEventListener('mouseleave', () => {
-      infoBlock.classList.remove('active');
+      // infoBlock.classList.remove('active');
       path.classList.remove('active');
     });
   });
