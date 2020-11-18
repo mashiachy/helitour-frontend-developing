@@ -95,20 +95,29 @@ export const excursionsSlider = () => {
       },
     },
   });
-  window.excursionClick = function (tripId) {
+  window.excursionClick = function (tripId, helicopterId = 0) {
     //axios.post('./booking.html', JSON.stringify({ tripId, helicopterId: null }))
     const form = document.createElement('form')
     form.style.position = 'absolute'
     form.style.zIndex = '-1'
     form.style.opacity = 0
     form.setAttribute('method', 'POST')
-    form.setAttribute('action', '/booking.html')
+    form.setAttribute('action', '/booking')
     form.setAttribute('name', 'excursion-form')
     const input = document.createElement('input')
     input.setAttribute('type', 'text')
     input.setAttribute('name', 'tripId')
     input.value = `${tripId}`
     form.appendChild(input)
+
+    if(helicopterId != 0){
+      const input = document.createElement('input')
+      input.setAttribute('type', 'text')
+      input.setAttribute('name', 'helicopterId')
+      input.value = `${helicopterId}`
+      form.appendChild(input)
+    }
+
     document.body.appendChild(form)
     form.submit()
     document.body.removeChild(form)

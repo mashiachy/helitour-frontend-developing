@@ -21,12 +21,10 @@ initBaseMap('#js__map')
     const excursionMeta = document.querySelector('meta[name="excursionId"]');
     if (!excursionMeta) return;
     const excursionId = excursionMeta.getAttribute('content');
-    const { path, markers, ...tripData } = (await axios.get(`/api/excursions-map.json?ID=${excursionId}`)).data;
+    const { path, markers, ...tripData } = (await axios.get(`/api/excursions-map.json?ID=${excursionId}&lang=`+document.querySelector('html').getAttribute('lang'))).data;
     // const { path, markers } = (await axios.get('./trip_info.json')).data;
 
-    if (tripData.zoom) {
-      map.setZoom(tripData.setZoom)
-    }
+    
 
     // Draw path
     const tripPath = new google.maps.Polygon(MAP_POLYGON_CONFIG);
@@ -63,6 +61,15 @@ initBaseMap('#js__map')
         })
       })
     });
+
+    if (tripData.zoom) {
+      map.setZoom(tripData.zoom)
+    }
+
+    if (tripData.center) {
+      map.setCenter({lat: tripData.center.lat, lng: tripData.center.lng});
+    }
+
   });
 
 Swiper.use(Pagination);

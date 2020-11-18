@@ -86,7 +86,7 @@ const app = new Vue({
         this.helicopter = helics[0]
     },
     helicopter (v) {
-      axios.get('./disabled_times.json')
+      //axios.get('./disabled_times.json')
       axios.get(`/api/booking/free-date.json?ID=${v}`)  
         .then(({ data: { disabledDates } }) => {
           this.disabledDates = [...disabledDates]
@@ -262,7 +262,7 @@ const app = new Vue({
     }
   },
   async created () {
-    const { data } = await axios.get('/helitours_info.json');
+    const { data } = await axios.get('/helitours_info.json?lang='+document.querySelector('html').getAttribute('lang'));
     this.trips = [...data.trips];
     this.helicopters = [...data.helicopters];
     // this.disabledDates = [...data.disabledDates];

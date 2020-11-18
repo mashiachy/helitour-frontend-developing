@@ -100,7 +100,7 @@ const bookingForm = new Vue({
     }
   },
   async created () {
-    const { data } = await axios.get('/index-trips.json');
+    const { data } = await axios.get('/index-trips.json?lang='+document.querySelector('html').getAttribute('lang'));
     this.trips = [...data.trips];
     this.helicopters = [...data.helicopters];
     this.trip = this.trips[0].id;
