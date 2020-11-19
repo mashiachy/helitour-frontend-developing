@@ -20,15 +20,12 @@
       line-height: 36px
     max-width: 335px
   &__excursion-info-cards
-    max-width: 400px
-    display: flex
-    justify-content: space-between
-    flex-wrap: wrap
-    margin-bottom: -40px
+    max-width: fit-content
+    display: grid
+    grid-template-columns: 1fr 1fr
+    gap: 40px 20px
     @include sm-phone
-      display: block
-    .excursion-info-card
-      margin-bottom: 40px
+      grid-template-columns: 1fr
 
 .info-cards
   @include baseSectionMarginBottom

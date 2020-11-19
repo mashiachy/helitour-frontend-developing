@@ -5,6 +5,7 @@ import MaskedInput from 'vue-masked-input';
 import DatePicker from 'vue2-datepicker';
 import axios from 'axios';
 import { webp, headerPopup, vhFix, selectItemInit } from './base';
+// import { time } from 'modernizr';
 
 webp();
 headerPopup();
@@ -85,12 +86,17 @@ const app = new Vue({
       if (!helics.includes(this.helicopter))
         this.helicopter = helics[0]
     },
-    helicopter (v) {
-      //axios.get('./disabled_times.json')
-      axios.get(`/api/booking/free-date.json?ID=${v}`)  
-        .then(({ data: { disabledDates } }) => {
-          this.disabledDates = [...disabledDates]
-        })
+    helicopter: {
+      immediate: true,
+      handler: function (v) {
+        if (v) {
+          // axios.get('./disabled_times.json')
+          axios.get(`/api/booking/free-date.json?ID=${v}`)  
+            .then(({ data: { disabledDates } }) => {
+              this.disabledDates = [...disabledDates]
+            })
+        }
+      }
     },
     delivery () {
       this.cities = null;
@@ -245,20 +251,22 @@ const app = new Vue({
       return false
     },
     disableTime (date) {
-      const hours = date.getHours();
-      let minutes = date.getMinutes();
-      if (hours === 20 && minutes >= 30) {
-        return true;
+      const dateP = this.date
+      let timesForDate = this.disabledDates.find(({ date:dateT }) => dateP === dateT )
+      console.log(timesForDate)
+      if (timesForDate) { 
+        timesForDate = timesForDate.time
+      } else {
+        return false
       }
-      const curDateTimes = this.disabledDates.filter(({ date: dateT, time }) => {
-        if (!time.length) return false
-        const p = dateT.split('.');
-        const t = this.date.split('.')
-        return p[0] == t[0] && p[1] == t[1] && p[2] == t[2];
-      }).map(({ time }) => time).flat()
-      minutes = `${100 + minutes}`.slice(1)
-      const time = `${hours}:${minutes}`
-      return curDateTimes.includes(time)
+      if (!timesForDate.length) {
+        return true
+      }
+      const minutes = `${date.getMinutes() + 100}`.slice(1)
+      if (timesForDate.includes(`${date.getHours()}:${minutes}`)) { 
+        return true
+      }
+      return false
     }
   },
   async created () {
