@@ -32,10 +32,13 @@
       width: calc(50% - 10px)
     @include adaptive(360)
       width: calc(100% - 10px)
-    &_active, &:active
+    &.disabled
+      opacity: .5
+      pointer-events: none
+    &_active:not(.disabled), &:not(.disabled):active
       border: 1px solid $accent-text
       color: $accent-text
-  &__item:hover &__item-icon
+  &__item:not(.disabled):hover &__item-icon
     color: $accent-text
   &__item-icon
     transition: color .25s ease-out
@@ -79,7 +82,7 @@
       left: -1px
       transform: translateX(-100%)
       transition: transform .25s ease-out
-    &_active
+    &:not(.disabled) &_active
       color: inherit
       &:after
         transform: translateX(0)

@@ -3,21 +3,25 @@
 .modal-document
   display: none
   &.active
-    display: block
+    display: flex
+    align-items: center
+    justify-content: center
   &.before-enter, &.after-leave
     opacity: 0
   &.enter
     animation: .25s ease-out modalOpacity 1
   &.leave
     animation: .25s ease-out modalOpacity 1 reverse
-  height: 80%
+  max-height: 80%
   width: fit-content
+  height: fit-content
   max-width: 90%
   position: relative
   img
     max-height: 100%
     max-width: 100%
     display: block
+    transition: transform .25s ease
   .js__close-modal-document
     cursor: pointer
     position: absolute
@@ -29,3 +33,25 @@
     background-size: 10px 10px
     background-position: center center
     background-repeat: no-repeat
+  .js__near-modal-document
+    cursor: pointer
+    position: absolute
+    width: 30px
+    height: 30px
+    top: 0
+    left: 0
+    background-color: rgba(0,0,0,0.1)
+    display: flex
+    align-items: center
+    justify-content: center
+  .js__far-modal-document
+    cursor: pointer
+    position: absolute
+    width: 30px
+    height: 30px
+    top: 0
+    left: 30px
+    background-color: rgba(0,0,0,0.1)
+    display: flex
+    align-items: center
+    justify-content: center

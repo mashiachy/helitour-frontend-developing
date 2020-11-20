@@ -15,6 +15,7 @@ documentSlider();
 questionsManager();
 
 initModal('.modal-document');
+let s = 1, step = 0.25
 document.querySelectorAll('.js__open-modal-document').forEach(control => {
   control.addEventListener('click', e => {
     const target = e.target;
@@ -26,14 +27,35 @@ document.querySelectorAll('.js__open-modal-document').forEach(control => {
             'data-popup-jpg'
         )
       );
-    document.querySelector('.modal-document img')
-      .setAttribute('alt',
-        target.getAttribute('data-popup-alt')
-      );
+    const img = document.querySelector('.modal-document img')
+    img.setAttribute('alt', target.getAttribute('data-popup-alt'));
+    img.style.transform = 'scale(1)'
+    s = 1
     openModal('.modal-document');
     e.stopPropagation();
   });
 });
+
+document.querySelector('.js__near-modal-document').addEventListener('click', (e) => {
+  if (s < 1.5) {
+    s += step
+    const img = document.querySelector('.modal-document img')
+    console.log(img)
+    img.style.transform = `scale(${s})`
+  }
+  e.stopPropagation()
+})
+
+document.querySelector('.js__far-modal-document').addEventListener('click', (e) => {
+  if (s > 1) {
+    s -= step
+    const img = document.querySelector('.modal-document img')
+    img.style.transform = `scale(${s})`
+  }
+  e.stopPropagation()
+})
+
+document.querySelector('img[data-modal-body]').addEventListener('contextmenu', (e) => e.preventDefault())
 
 document.querySelectorAll('.js__close-modal-document').forEach(control => {
   control.addEventListener('click', e => {
@@ -41,6 +63,11 @@ document.querySelectorAll('.js__close-modal-document').forEach(control => {
     e.stopPropagation();
   });
 });
+window.addEventListener('keydown', ({ key }) => {
+  if (key === 'Escape') {
+    closeModal('.modal-document');
+  }
+})
 
 const bookingForm = new Vue({
   el: '#booking-form',

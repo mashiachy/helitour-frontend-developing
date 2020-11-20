@@ -21747,6 +21747,7 @@ const app = new Vue({
   data () {
     const date = new Date();
     return {
+      validate: false,
       trip: null,
       passengers: null,
       helicopter: null,
@@ -21758,6 +21759,7 @@ const app = new Vue({
       time: '12:00',
       disabledDates: [],
       name: null,
+      lastName: null,
       telephone: null,
       email: null,
       delivery: null,
@@ -21882,8 +21884,8 @@ const app = new Vue({
   },
   computed: {
     isFormReady () {
-      return this.trip && this.passengers && this.helicopter && this.date && this.time && 
-        this.name && this.telephone && this.email && this.offerAccept &&
+      return this.trip && this.passengers && this.helicopter && (!this.present && this.date && this.time || this.present) && 
+        this.name && this.lastName && this.telephone && this.offerAccept &&
         (!this.present || (this.present && this.delivery && (this.delivery === 1 || this.delivery === 2 && this.city && this.warehouse)));
     },
     tripInfo () {
@@ -21892,7 +21894,7 @@ const app = new Vue({
     filteredHelicopters () {
       return this.helicopters.filter( ({ id, passengers }) =>
         this.tripInfo.helicopters.includes(id) && this.passengers <= passengers
-      );
+      )
     },
     passengersMax () {
       return this.trip ? [
@@ -21932,7 +21934,15 @@ const app = new Vue({
       this.warehouse = id;
       this.warehouseSearch = this.warehouseName;
     },
-    sendForm (v) {
+    checkFields () {
+      this.validate = true;
+    },
+    sendForm (isOnlinePayment, isFormUnready) {
+      if (isFormUnready) {
+        this.checkFields();
+        return
+      }
+      console.log(isOnlinePayment);
       const data = JSON.stringify({
         tripId: this.trip,
         passengers: this.passengers,
@@ -21941,13 +21951,14 @@ const app = new Vue({
         time: this.time,
         present: this.present,
         name: this.name,
+        lastName: this.lastName,
         telephone: this.telephone,
         email: this.email,
         message: this.message,
         deliveryId: this.delivery,
         city: this.city,
         warehouse: this.warehouse,
-        isOnlinePaymernt: v,
+        isOnlinePayment: isOnlinePayment,
         partnerId: this.$refs.partnerId.value
       });
       axios$1.post('/api/booking.json', data)

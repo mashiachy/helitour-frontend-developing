@@ -104,9 +104,9 @@ html(lang="us")
                 :key='404'
               )
               +e.SPAN(
-                v-for='helicopterItem in filteredHelicopters'
+                v-for='helicopterItem in helicopters'
                 :key='helicopterItem.id'
-                :class='{ \'select-cards__item_active\': helicopter === helicopterItem.id }'
+                :class='{ \'select-cards__item_active\': helicopter === helicopterItem.id, \'disabled\': !filteredHelicopters.includes(helicopterItem) }'
                 @click='helicopter = helicopterItem.id'
               ).item
                 +e.SPAN(
@@ -239,3 +239,5 @@ html(lang="us")
       +b.modal-document
         img(data-modal-body src='' alt='')
         .js__close-modal-document
+        .js__near-modal-document +
+        .js__far-modal-document -

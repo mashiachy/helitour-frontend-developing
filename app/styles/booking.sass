@@ -89,6 +89,8 @@
       left: 0
       bottom: 0
       background-color: $gray
+    &.unvalid:after
+      background-color: red
   &__form-item_datepicker &__item-label
     width: 100%
   .select-cards__item
@@ -147,6 +149,8 @@
         margin-left: .3em
       &__label
         justify-content: center
+        &.unvalid
+          color: red
     .button
       margin-bottom: 10px
       @include phone

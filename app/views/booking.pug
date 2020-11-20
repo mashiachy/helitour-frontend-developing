@@ -20,7 +20,7 @@ html(lang="us")
         h1 БРОНЮВАННЯ ПОЛЬОТУ
       +b.SECTION.booking.content.content__inner#app
         +b.FORM.booking-form.content__text
-          input(type='text' ref='partnerId' name='partner_id' style='width:0;opacity:0; visibility:hidden;')
+          input(type='text' ref='partnerId' name='partner_id' style='width:0;opacity:0;position:absolute;z-index:-1;visibility:hidden;')
           +e.form-item_select
             +e.LABEL(for='trip-select').item-label Оберіть маршрут
             +b.DIV(
@@ -67,9 +67,9 @@ html(lang="us")
                 :key='404'
               )
               +e.SPAN(
-                v-for='helicopterItem in filteredHelicopters'
+                v-for='helicopterItem in helicopters'
                 :key='helicopterItem.id'
-                :class='{ \'select-cards__item_active\': helicopter === helicopterItem.id }'
+                :class='{ \'select-cards__item_active\': helicopter === helicopterItem.id, \'disabled\': !filteredHelicopters.includes(helicopterItem) }'
                 @click='helicopter = helicopterItem.id'
               ).item
                 +e.SPAN(
@@ -83,9 +83,9 @@ html(lang="us")
             +b.SPAN.checkbox
               +e.INPUT(type='checkbox' id='present-checkbox' v-model='present')
               +e.LABEL(for='present-checkbox').label Хочу замовити в подарунок
-          +e.form-item_datepicker
+          +e.form-item_datepicker(v-show='!present')
             +e.item-label Оберіть дату та час польоту
-            +e.form-item_select
+            +e.form-item_select(:class="{ \'unvalid\': validate && !date}")
               label(for='dateInput') Дата:
               date-picker(
                 v-model='date'
@@ -102,7 +102,7 @@ html(lang="us")
               )
                 template(v-slot:icon-calendar)
                   include ../../mokups/exports/calendar.svg
-            +e.form-item_select
+            +e.form-item_select(:class="{ \'unvalid\': validate && !time}")
               label(for='timeInput') Время:
               date-picker(
                 v-model='time'
@@ -125,11 +125,12 @@ html(lang="us")
             +e.item-label Інформація для зв’язку
             +e.personal-wrapper
               +e.personal-wrapper-item
-                +b.INPUT(type='text' placeholder='Ваше ім’я' v-model='name').text-input
-                +b.MASKED-INPUT(type='text' placeholder='Ваш телефон' mask='\\+\\1 (111) 1111-11' v-model='telephone').text-input
+                +b.INPUT(type='text' placeholder='Ваше ім’я' v-model='name' :class="{ \'unvalid\': validate && !name}").text-input
+                +b.INPUT(type='text' placeholder='Ваше фамилия' v-model='lastName' :class="{ \'unvalid\': validate && !lastName}").text-input
+                +b.MASKED-INPUT(type='text' placeholder='Ваш телефон' mask='\\+\\1 (111) 1111-11' v-model='telephone' :class="{ \'unvalid\': validate && !telephone}").text-input
                 +b.INPUT(type='text' placeholder='Ваша почта' v-model='email').text-input
                 +b.DIV(
-                  :class='{ \'select-input_disable\': !delivery }'
+                  :class='{ \'select-input_disable\': !delivery, \'unvalid\': validate && !delivery && present }'
                   v-show='present'
                 ).select-input_boxed
                   input(
@@ -146,7 +147,7 @@ html(lang="us")
                       @click='delivery = deliveryItem.id'
                     ).dropdown-item {{ deliveryItem.name }}
                 +b.DIV(
-                  :class='{ \'select-input_disable\': !city }'
+                  :class='{ \'select-input_disable\': !city, \'unvalid\': validate && !city }'
                   v-show='delivery === 2'
                 ).select-input_boxed
                   input(
@@ -164,7 +165,7 @@ html(lang="us")
                       @click='cityClick(cityItem.id)'
                     ).dropdown-item {{ cityItem.text }}
                 +b.DIV(
-                  :class='{ \'select-input_disable\': !warehouse }'
+                  :class='{ \'select-input_disable\': !warehouse, \'unvalid\': validate && !warehouse }'
                   v-show='warehouses'
                 ).select-input_boxed
                   input(
@@ -187,10 +188,10 @@ html(lang="us")
             +e.buttons-container
               +b.SPAN.checkbox_flat
                 +e.INPUT(type='checkbox' id='offer-checkbox' v-model='offerAccept')
-                +e.LABEL(for='offer-checkbox').label='Погоджуюсь з '
+                +e.LABEL(for='offer-checkbox' :class="{ \'unvalid\': validate && !offerAccept}").label='Погоджуюсь з '
                   a.base-link(href='#') офертою
-              +b.BUTTON(@click.prevent="sendForm(true)" :disabled='!isFormReady').button Оплатити онлайн
-              +b.BUTTON(@click.prevent="sendForm(false)" :disabled='!isFormReady || (present && delivery !== 1)').button_flat Готівкою
+              +b.BUTTON(@click.prevent="sendForm(true, !isFormReady)").button Оплатити онлайн
+              +b.BUTTON(@click.prevent="sendForm(false, !isFormReady || (present && delivery !== 1))").button_flat Готівкою
       +b.SECTION.col-text.content.content__inner
         +e.text
           p За відгуками багатьох, така розвага повністю виправдовує свою ціну і коштує досить недорого. Вартість вертолітного туру доступна людині із середнім рівнем доходу і залежить від тривалості подорожі. У компанії «Helitour» ви також можете недорого придбати сертифікат в подарунок. Такий презент стане прекрасним сюрпризом для близької вам людини.
