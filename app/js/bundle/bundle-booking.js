@@ -21739,6 +21739,11 @@ Vue.use(vueCurrencyFilter, {
   fractionSeparator: '.',
 });
 
+const fixedHelitour = document.getElementById('fixed-helitour');
+const fixedPassengers = document.getElementById('fixed-passengers');
+const fixedDuration = document.getElementById('fixed-duration');
+const fixedPrice = document.getElementById('fixed-price');
+
 const app = new Vue({
   el: '#app',
   components: {
@@ -21801,6 +21806,9 @@ const app = new Vue({
       ).map(({ id }) => id);
       if (!helics.includes(this.helicopter))
         this.helicopter = helics[0];
+      if (v && fixedDuration) {
+        fixedDuration.innerText = this.trips.find(({ id }) => id === v).duration + ' хв';
+      }
     },
     passengers (v) {
       const helics = this.helicopters.filter( ({ id, passengers }) =>
@@ -21818,6 +21826,16 @@ const app = new Vue({
             .then(({ data: { disabledDates } }) => {
               this.disabledDates = [...disabledDates];
             });
+          const helicopter = this.helicopters.find(({ id }) => id === v);
+          if (fixedHelitour) {
+            fixedHelitour.innerText = helicopter.name;
+          }
+          if (fixedPassengers) {
+            fixedPassengers.innerText = helicopter.text;
+          }
+          if (fixedPrice) {
+            fixedPrice.innerText = Math.round(this.price / helicopter.passengers) + 'грн';
+          }
         }
       }
     },
@@ -22020,3 +22038,18 @@ const app = new Vue({
       this.helicopter = this.trips.find(({ id }) => id === this.trip).helicopters[0];
   },
 });
+
+window.addEventListener('scroll', () => {
+  const controllerElement = document.getElementById('js__fixed-visible-controller');
+  if (!controllerElement) return;
+  const controllerLength = controllerElement.scrollHeight;
+  const control = document.getElementById('js__fixed-visible-control');
+  if (!control) return;
+  if (window.pageYOffset >= controllerLength) {
+    if (!control.classList.contains('active'))
+      control.classList.add('active');
+  } else {
+    if (control.classList.contains('active'))
+      control.classList.remove('active');
+  }
+}, { passive: true });

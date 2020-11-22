@@ -77,7 +77,7 @@ Swiper.use(Pagination);
 excursionsSlider();
 instagramSlider();
 
-window.addEventListener('scroll', () => {
+/* window.addEventListener('scroll', () => {
   const controllerElement = document.getElementById('js__fixed-visible-controller');
   if (!controllerElement) return;
   const controllerLength = controllerElement.scrollHeight;
@@ -90,4 +90,4 @@ window.addEventListener('scroll', () => {
     if (control.classList.contains('active'))
       control.classList.remove('active');
   }
-}, { passive: true });
+}, { passive: true }); */
