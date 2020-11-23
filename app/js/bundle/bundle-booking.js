@@ -14219,7 +14219,7 @@ Fuse.config = Config;
 
 var fuse_common = Fuse;
 
-var r=Array.prototype.map,n=Array.isArray,t=Object.prototype.toString;function e(r){return !!(""===r||r&&r.charCodeAt&&r.substr)}function o(r){return n?n(r):"[object Array]"===t.call(r)}function a(r){return r&&"[object Object]"===t.call(r)}function i(r,n){var t;for(t in r=r||{},n=n||{})n.hasOwnProperty(t)&&null==r[t]&&(r[t]=n[t]);return r}function s(n,t,e){if(!n)return [];if(r&&n.map===r)return n.map(t,e);var o,a=[],i=0;for(i=0,o=n.length;i<o;i++)a[i]=t.call(e,n[i],i,n);return a}var u={settings:{currency:{symbol:"$",format:"%s%v",decimal:".",thousand:",",precision:2,grouping:3},number:{precision:0,grouping:3,thousand:",",decimal:"."}}};function c(r,n){return r=Math.round(Math.abs(r)),isNaN(r)?n:r}var f=function r(n,t){if(o(n))return s(n,function(n){return r(n,t)});if("number"==typeof(n=n||0))return n;t=t||u.settings.number.decimal;var e=new RegExp("[^0-9-"+t+"]",["g"]),a=parseFloat((""+n).replace(/\((?=\d+)(.*)\)/,"-$1").replace(e,"").replace(t,"."));return isNaN(a)?0:a},l=function(r,n){n=c(n,u.settings.number.precision);var t=Number(f(r)+"e"+n),e=Math.round(t);return Number(e+"e-"+n).toFixed(n)},p={name:"currency",symbol:"",thousandsSeparator:".",fractionCount:0,fractionSeparator:",",symbolPosition:"front",symbolSpacing:!0};var vueCurrencyFilter={install:function(r,n){var t=function(n){null==n&&(n={});var t=i(n,p),m=t.name,b=function(r,n){if(null==r)return {};var t,e,o={},a=Object.keys(r);for(e=0;e<a.length;e++)n.indexOf(t=a[e])>=0||(o[t]=r[t]);return o}(t,["name"]),y=function(r,n,t,p,m,y,g){var d=i({symbol:n,thousandsSeparator:t,fractionCount:p,fractionSeparator:m,symbolPosition:y,symbolSpacing:g},b);"object"==typeof n&&(d=i(n,b));var v=0,h="-"===String(r).charAt(0);h&&(r=String(r).slice(1));var S,A=parseFloat(r);return isNaN(A)||(v=A),S="front"===d.symbolPosition?d.symbolSpacing?"%s %v":"%s%v":d.symbolSpacing?"%v %s":"%v%s",d.fractionCount>0&&(r=l(r,d.fractionCount)),v=function r(n,t,p,m,b,y){if(o(n))return s(n,function(n){return r(n,t,p,m,b,y)});n=f(n);var g=i(a(t)?t:{symbol:t,precision:p,thousand:m,decimal:b,format:y},u.settings.currency),d=function(r){var n=u.settings.currency.format;return "function"==typeof r&&(r=r()),e(r)&&r.match("%v")?{pos:r,neg:r.replace("-","").replace("%v","-%v"),zero:r}:r&&r.pos&&r.pos.match("%v")?r:e(n)?u.settings.currency.format={pos:n,neg:n.replace("%v","-%v"),zero:n}:n}(g.format);return (n>0?d.pos:n<0?d.neg:d.zero).replace("%s",g.symbol).replace("%v",function r(n,t,e,p){if(o(n))return s(n,function(n){return r(n,t,e,p)});n=f(n);var m=i(a(t)?t:{precision:t,thousand:e,decimal:p},u.settings.number),b=c(m.precision),y=n<0?"-":"",g=parseInt(l(Math.abs(n||0),b),10)+"",d=g.length>3?g.length%3:0;return y+(d?g.substr(0,d)+m.thousand:"")+g.substr(d).replace(/(\d{3})(?=\d)/g,"$1"+m.thousand)+(b?m.decimal+l(Math.abs(n),b).split(".")[1]:"")}(Math.abs(n),c(g.precision),g.thousand,g.decimal))}(r,{format:S,symbol:d.symbol,precision:d.fractionCount,thousand:d.thousandsSeparator,decimal:d.fractionSeparator}),h&&(v="-"+v),v};r.filter(m,y),r.prototype["$"+m]={setConfig:function(r){b=i(r,p);},getConfig:function(){return b},format:y};};Array.isArray(n)?n.forEach(function(r){return t(r)}):t(n);}};
+var r=Array.prototype.map,t=Array.isArray,n=Object.prototype.toString;function o(r){return !!(""===r||r&&r.charCodeAt&&r.substr)}function e(r){return t?t(r):"[object Array]"===n.call(r)}function a(r){return r&&"[object Object]"===n.call(r)}function i(r,t){var n;for(n in r=r||{},t=t||{})t.hasOwnProperty(n)&&null==r[n]&&(r[n]=t[n]);return r}function s(t,n,o){if(!t)return [];if(r&&t.map===r)return t.map(n,o);var e,a=[],i=0;for(i=0,e=t.length;i<e;i++)a[i]=n.call(o,t[i],i,t);return a}var c={settings:{currency:{symbol:"$",format:"%s%v",decimal:".",thousand:",",precision:2,grouping:3},number:{precision:0,grouping:3,thousand:",",decimal:"."}}};function u(r,t){return void 0===t&&(t=0),r=Math.round(Math.abs(r)),isNaN(r)?t:r}var l=function r(t,n){if(e(t))return s(t,function(t){return r(t,n)});if("number"==typeof(t=t||0))return t;n=n||c.settings.number.decimal;var o=new RegExp("[^0-9-"+n+"]",["g"]),a=parseFloat((""+t).replace(/\((?=\d+)(.*)\)/,"-$1").replace(o,"").replace(n,"."));return isNaN(a)?0:a},p=function(r,t){t=u(t,c.settings.number.precision);var n=Number(l(r)+"e"+t),o=Math.round(n);return Number(o+"e-"+t).toFixed(t)},m={name:"currency",symbol:"",thousandsSeparator:".",fractionCount:0,fractionSeparator:",",symbolPosition:"front",symbolSpacing:!0,avoidEmptyDecimals:void 0};var vueCurrencyFilter={install:function(r,t){var n=function(t){null==t&&(t={});var n=i(t,m),f=n.name,y=function(r,t){if(null==r)return {};var n,o,e={},a=Object.keys(r);for(o=0;o<a.length;o++)t.indexOf(n=a[o])>=0||(e[n]=r[n]);return e}(n,["name"]),d=function(r,t,n,m,f,d,v,b){var g=i({symbol:t,thousandsSeparator:n,fractionCount:m,fractionSeparator:f,symbolPosition:d,symbolSpacing:v,avoidEmptyDecimals:b},y);"object"==typeof t&&(g=i(t,y));var h=0,S="-"===String(r).charAt(0);S&&(r=String(r).slice(1));var A,C=parseFloat(r);return isNaN(C)||(h=C),A="front"===g.symbolPosition?g.symbolSpacing?"%s %v":"%s%v":g.symbolSpacing?"%v %s":"%v%s",g.fractionCount>0&&(r=p(r,g.fractionCount)),h=function r(t,n,m,f,y,d,v){if(e(t))return s(t,function(t){return r(t,n,m,f,y,d,v)});t=l(t);var b=i(a(n)?n:{symbol:n,precision:m,thousand:f,decimal:y,format:d,avoidEmptyDecimals:v},c.settings.currency),g=function(r){var t=c.settings.currency.format;return "function"==typeof r&&(r=r()),o(r)&&r.match("%v")?{pos:r,neg:r.replace("-","").replace("%v","-%v"),zero:r}:r&&r.pos&&r.pos.match("%v")?r:o(t)?c.settings.currency.format={pos:t,neg:t.replace("%v","-%v"),zero:t}:t}(b.format);return (t>0?g.pos:t<0?g.neg:g.zero).replace("%s",b.symbol).replace("%v",function r(t,n,o,m,f){if(e(t))return s(t,function(t){return r(t,n,o,m,f)});t=l(t);var y=i(a(n)?n:{precision:n,thousand:o,decimal:m},c.settings.number),d=u(y.precision),v=t<0?"-":"",b=parseInt(p(Math.abs(t||0),d),10)+"",g=b.length>3?b.length%3:0,h="";return d&&(h=y.decimal+p(Math.abs(t),d).split(".")[1],void 0!==f&&parseInt(p(Math.abs(t||0),1),10)==t&&(h=""===f?"":y.decimal+f)),v+(g?b.substr(0,g)+y.thousand:"")+b.substr(g).replace(/(\d{3})(?=\d)/g,"$1"+y.thousand)+h}(Math.abs(t),u(b.precision),b.thousand,b.decimal,b.avoidEmptyDecimals))}(r,{format:A,symbol:g.symbol,precision:g.fractionCount,thousand:g.thousandsSeparator,decimal:g.fractionSeparator,avoidEmptyDecimals:g.avoidEmptyDecimals}),S&&(h="-"+h),h};r.filter(f,d),r.prototype["$"+f]={setConfig:function(r){y=i(r,m);},getConfig:function(){return y},format:d};};Array.isArray(t)?t.forEach(function(r){return n(r)}):n(t);}};
 
 function extend(dest, src) {
   if (src) {
@@ -15113,6 +15113,8 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
    module.exports = factory() ;
 }(commonjsGlobal, (function () {
   function _typeof(obj) {
+    "@babel/helpers - typeof";
+
     if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
       _typeof = function (obj) {
         return typeof obj;
@@ -15178,13 +15180,13 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
       var source = arguments[i] != null ? arguments[i] : {};
 
       if (i % 2) {
-        ownKeys(source, true).forEach(function (key) {
+        ownKeys(Object(source), true).forEach(function (key) {
           _defineProperty(target, key, source[key]);
         });
       } else if (Object.getOwnPropertyDescriptors) {
         Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
       } else {
-        ownKeys(source).forEach(function (key) {
+        ownKeys(Object(source)).forEach(function (key) {
           Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
         });
       }
@@ -15193,8 +15195,44 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     return target;
   }
 
+  function _objectWithoutPropertiesLoose(source, excluded) {
+    if (source == null) return {};
+    var target = {};
+    var sourceKeys = Object.keys(source);
+    var key, i;
+
+    for (i = 0; i < sourceKeys.length; i++) {
+      key = sourceKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      target[key] = source[key];
+    }
+
+    return target;
+  }
+
+  function _objectWithoutProperties(source, excluded) {
+    if (source == null) return {};
+
+    var target = _objectWithoutPropertiesLoose(source, excluded);
+
+    var key, i;
+
+    if (Object.getOwnPropertySymbols) {
+      var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+      for (i = 0; i < sourceSymbolKeys.length; i++) {
+        key = sourceSymbolKeys[i];
+        if (excluded.indexOf(key) >= 0) continue;
+        if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+        target[key] = source[key];
+      }
+    }
+
+    return target;
+  }
+
   function _slicedToArray(arr, i) {
-    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest();
+    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
   }
 
   function _arrayWithHoles(arr) {
@@ -15202,10 +15240,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
   }
 
   function _iterableToArrayLimit(arr, i) {
-    if (!(Symbol.iterator in Object(arr) || Object.prototype.toString.call(arr) === "[object Arguments]")) {
-      return;
-    }
-
+    if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
     var _arr = [];
     var _n = true;
     var _d = false;
@@ -15231,9 +15266,72 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     return _arr;
   }
 
-  function _nonIterableRest() {
-    throw new TypeError("Invalid attempt to destructure non-iterable instance");
+  function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(n);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
   }
+
+  function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+
+    for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+    return arr2;
+  }
+
+  function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+
+  function _extends$1() {
+    return _extends$1 = Object.assign || function (a) {
+      for (var b, c = 1; c < arguments.length; c++) {
+        for (var d in b = arguments[c], b) {
+          Object.prototype.hasOwnProperty.call(b, d) && (a[d] = b[d]);
+        }
+      }
+
+      return a;
+    }, _extends$1.apply(this, arguments);
+  }
+
+  var normalMerge = ["attrs", "props", "domProps"],
+      toArrayMerge = ["class", "style", "directives"],
+      functionalMerge = ["on", "nativeOn"],
+      mergeJsxProps = function mergeJsxProps(a) {
+    return a.reduce(function (c, a) {
+      for (var b in a) {
+        if (!c[b]) c[b] = a[b];else if (-1 !== normalMerge.indexOf(b)) c[b] = _extends$1({}, c[b], a[b]);else if (-1 !== toArrayMerge.indexOf(b)) {
+          var d = c[b] instanceof Array ? c[b] : [c[b]],
+              e = a[b] instanceof Array ? a[b] : [a[b]];
+          c[b] = d.concat(e);
+        } else if (-1 !== functionalMerge.indexOf(b)) {
+          for (var f in a[b]) {
+            if (c[b][f]) {
+              var g = c[b][f] instanceof Array ? c[b][f] : [c[b][f]],
+                  h = a[b][f] instanceof Array ? a[b][f] : [a[b][f]];
+              c[b][f] = g.concat(h);
+            } else c[b][f] = a[b][f];
+          }
+        } else if ("hook" == b) for (var i in a[b]) {
+          c[b][i] = c[b][i] ? mergeFn(c[b][i], a[b][i]) : a[b][i];
+        } else c[b] = a[b];
+      }
+
+      return c;
+    }, {});
+  },
+      mergeFn = function mergeFn(a, b) {
+    return function () {
+      a && a.apply(this, arguments), b && b.apply(this, arguments);
+    };
+  };
+
+  var helper = mergeJsxProps;
 
   function isDate(value) {
     return value instanceof Date || Object.prototype.toString.call(value) === '[object Date]';
@@ -15642,8 +15740,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
   var matchSigned = /[+-]?\d+/; // -inf - inf
 
   var matchTimestamp = /[+-]?\d+(\.\d{1,3})?/; // 123456789 123456789.123
-
-  var matchWord = /[0-9]{0,256}['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFF07\uFF10-\uFFEF]{1,256}|[\u0600-\u06FF\/]{1,256}(\s*?[\u0600-\u06FF]{1,256}){1,2}/i; // Word
+  // const matchWord = /[0-9]{0,256}['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFF07\uFF10-\uFFEF]{1,256}|[\u0600-\u06FF\/]{1,256}(\s*?[\u0600-\u06FF]{1,256}){1,2}/i; // Word
 
   var YEAR = 'year';
   var MONTH = 'month';
@@ -15670,6 +15767,22 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     tokens.forEach(function (key) {
       parseFlags[key] = [regex, func];
     });
+  };
+
+  var escapeStringRegExp = function escapeStringRegExp(str) {
+    return str.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&');
+  };
+
+  var matchWordRegExp = function matchWordRegExp(localeKey) {
+    return function (locale) {
+      var array = locale[localeKey];
+
+      if (!Array.isArray(array)) {
+        throw new Error("Locale[".concat(localeKey, "] need an array"));
+      }
+
+      return new RegExp(array.map(escapeStringRegExp).join('|'));
+    };
   };
 
   var matchWordCallback = function matchWordCallback(localeKey, key) {
@@ -15705,8 +15818,8 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
   addParseFlag('MM', match2, function (input) {
     return _defineProperty$1({}, MONTH, parseInt(input, 10) - 1);
   });
-  addParseFlag('MMM', matchWord, matchWordCallback('monthsShort', MONTH));
-  addParseFlag('MMMM', matchWord, matchWordCallback('months', MONTH));
+  addParseFlag('MMM', matchWordRegExp('monthsShort'), matchWordCallback('monthsShort', MONTH));
+  addParseFlag('MMMM', matchWordRegExp('months'), matchWordCallback('months', MONTH));
   addParseFlag('D', match1to2, DAY);
   addParseFlag('DD', match2, DAY);
   addParseFlag(['H', 'h'], match1to2, HOUR);
@@ -15770,9 +15883,9 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     };
   });
   addParseFlag('d', match1, 'weekday');
-  addParseFlag('dd', matchWord, matchWordCallback('weekdaysMin', 'weekday'));
-  addParseFlag('ddd', matchWord, matchWordCallback('weekdaysShort', 'weekday'));
-  addParseFlag('dddd', matchWord, matchWordCallback('weekdays', 'weekday'));
+  addParseFlag('dd', matchWordRegExp('weekdaysMin'), matchWordCallback('weekdaysMin', 'weekday'));
+  addParseFlag('ddd', matchWordRegExp('weekdaysShort'), matchWordCallback('weekdaysShort', 'weekday'));
+  addParseFlag('dddd', matchWordRegExp('weekdays'), matchWordCallback('weekdays', 'weekday'));
   addParseFlag('w', match1to2, 'week');
   addParseFlag('ww', match2, 'week');
 
@@ -15961,6 +16074,64 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
 
     return new Date();
   }
+  function startOfYear(value) {
+    var date = new Date(value);
+    date.setMonth(0, 1);
+    date.setHours(0, 0, 0, 0);
+    return date;
+  }
+  function startOfMonth(value) {
+    var date = new Date(value);
+    date.setDate(1);
+    date.setHours(0, 0, 0, 0);
+    return date;
+  }
+  function startOfDay(value) {
+    var date = new Date(value);
+    date.setHours(0, 0, 0, 0);
+    return date;
+  }
+  function getCalendar(_ref) {
+    var firstDayOfWeek = _ref.firstDayOfWeek,
+        year = _ref.year,
+        month = _ref.month;
+    var arr = []; // change to the last day of the last month
+
+    var calendar = createDate(year, month, 0);
+    var lastDayInLastMonth = calendar.getDate(); // getDay() 0 is Sunday, 1 is Monday
+
+    var firstDayInLastMonth = lastDayInLastMonth - (calendar.getDay() + 7 - firstDayOfWeek) % 7;
+
+    for (var i = firstDayInLastMonth; i <= lastDayInLastMonth; i++) {
+      arr.push(createDate(year, month, i - lastDayInLastMonth));
+    } // change to the last day of the current month
+
+
+    calendar.setMonth(month + 1, 0);
+    var lastDayInCurrentMonth = calendar.getDate();
+
+    for (var _i = 1; _i <= lastDayInCurrentMonth; _i++) {
+      arr.push(createDate(year, month, _i));
+    }
+
+    var lastMonthLength = lastDayInLastMonth - firstDayInLastMonth + 1;
+    var nextMonthLength = 6 * 7 - lastMonthLength - lastDayInCurrentMonth;
+
+    for (var _i2 = 1; _i2 <= nextMonthLength; _i2++) {
+      arr.push(createDate(year, month, lastDayInCurrentMonth + _i2));
+    }
+
+    return arr;
+  }
+  function setMonth(dirtyDate, dirtyMonth) {
+    var date = new Date(dirtyDate);
+    var month = Number(dirtyMonth);
+    var year = date.getFullYear();
+    var daysInMonth = createDate(year, month + 1, 0).getDate();
+    var day = date.getDate();
+    date.setMonth(month, Math.min(day, daysInMonth));
+    return date;
+  }
   function assignTime(target, source) {
     var date = new Date(target);
     var time = new Date(source);
@@ -16114,34 +16285,6 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
   function getLocale(name) {
     return locale$1(name, null, true);
   }
-  /**
-   * get locale field value
-   * @param {string} field field eg: 'formatLocale.shortMonth'
-   * @param {object} lang locale object
-   */
-
-  function getLocaleFieldValue(field, lang) {
-    var arr = (field || '').split('.');
-    var current = lang || getLocale();
-    var value;
-
-    for (var i = 0, len = arr.length; i < len; i++) {
-      var prop = arr[i];
-      value = current[prop];
-
-      if (i === len - 1) {
-        return value;
-      }
-
-      if (!value) {
-        return null;
-      }
-
-      current = value;
-    }
-
-    return null;
-  }
 
   /* istanbul ignore file */
   function rafThrottle(fn) {
@@ -16240,7 +16383,8 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     return scroll ? node : getScrollParent(node.parentNode, until);
   }
 
-  var Popup = {
+  //
+  var script = {
     name: 'Popup',
     inject: {
       prefixClass: {
@@ -16255,10 +16399,6 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
       appendToBody: {
         type: Boolean,
         default: true
-      },
-      inline: {
-        type: Boolean,
-        default: false
       }
     },
     data: function data() {
@@ -16284,10 +16424,6 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     mounted: function mounted() {
       var _this2 = this;
 
-      if (this.inline) {
-        return;
-      }
-
       if (this.appendToBody) {
         document.body.appendChild(this.$el);
       }
@@ -16306,10 +16442,6 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
       window.addEventListener('resize', this._displayPopup);
     },
     beforeDestroy: function beforeDestroy() {
-      if (this.inline) {
-        return;
-      }
-
       if (this.appendToBody && this.$el.parentNode) {
         this.$el.parentNode.removeChild(this.$el);
       }
@@ -16331,7 +16463,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
         }
       },
       displayPopup: function displayPopup() {
-        if (this.inline || !this.visible) return;
+        if (!this.visible) return;
         var popup = this.$el;
         var relativeElement = this.$parent.$el;
         var appendToBody = this.appendToBody;
@@ -16351,29 +16483,6 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
         this.left = left;
         this.top = top;
       }
-    },
-    render: function render() {
-      var h = arguments[0];
-      var prefixClass = this.prefixClass;
-
-      if (this.inline) {
-        return h("div", {
-          "class": "".concat(prefixClass, "-datepicker-main")
-        }, [this.$slots.default]);
-      }
-
-      return h("transition", {
-        "attrs": {
-          "name": "".concat(prefixClass, "-zoom-in-down")
-        }
-      }, [this.visible && h("div", {
-        "class": "".concat(prefixClass, "-datepicker-main ").concat(prefixClass, "-datepicker-popup"),
-        "style": {
-          top: this.top,
-          left: this.left,
-          position: 'absolute'
-        }
-      }, [this.$slots.default])]);
     }
   };
 
@@ -16460,11 +16569,10 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     return script;
   }
 
-  var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\\b/.test(navigator.userAgent.toLowerCase());
-
   /* script */
-
+  var __vue_script__ = script;
   /* template */
+
   var __vue_render__ = function __vue_render__() {
     var _vm = this;
 
@@ -16472,16 +16580,18 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
 
     var _c = _vm._self._c || _h;
 
-    return _c('svg', {
+    return _c('transition', {
       attrs: {
-        "xmlns": "http://www.w3.org/2000/svg",
-        "viewBox": "0 0 1024 1024"
+        "name": _vm.prefixClass + "-zoom-in-down"
       }
-    }, [_c('path', {
-      attrs: {
-        "d": "M940.218182 107.054545h-209.454546V46.545455h-65.163636v60.50909H363.054545V46.545455H297.890909v60.50909H83.781818c-18.618182 0-32.581818 13.963636-32.581818 32.581819v805.236363c0 18.618182 13.963636 32.581818 32.581818 32.581818h861.090909c18.618182 0 32.581818-13.963636 32.581818-32.581818V139.636364c-4.654545-18.618182-18.618182-32.581818-37.236363-32.581819zM297.890909 172.218182V232.727273h65.163636V172.218182h307.2V232.727273h65.163637V172.218182h176.872727v204.8H116.363636V172.218182h181.527273zM116.363636 912.290909V442.181818h795.927273v470.109091H116.363636z"
+    }, [_vm.visible ? _c('div', {
+      class: _vm.prefixClass + "-datepicker-main " + _vm.prefixClass + "-datepicker-popup",
+      style: {
+        top: _vm.top,
+        left: _vm.left,
+        position: 'absolute'
       }
-    })]);
+    }, [_vm._t("default")], 2) : _vm._e()]);
   };
 
   var __vue_staticRenderFns__ = [];
@@ -16503,10 +16613,10 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
 
   /* style inject shadow dom */
 
-  var IconCalendar = normalizeComponent({
+  var __vue_component__ = normalizeComponent({
     render: __vue_render__,
     staticRenderFns: __vue_staticRenderFns__
-  }, __vue_inject_styles__, {}, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, false, undefined, undefined, undefined);
+  }, __vue_inject_styles__, __vue_script__, __vue_scope_id__, __vue_is_functional_template__, __vue_module_identifier__, false, undefined, undefined, undefined);
 
   /* script */
 
@@ -16521,11 +16631,13 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     return _c('svg', {
       attrs: {
         "xmlns": "http://www.w3.org/2000/svg",
-        "viewBox": "0 0 1024 1024"
+        "viewBox": "0 0 1024 1024",
+        "width": "1em",
+        "height": "1em"
       }
     }, [_c('path', {
       attrs: {
-        "d": "M810.005333 274.005333l-237.994667 237.994667 237.994667 237.994667-60.010667 60.010667-237.994667-237.994667-237.994667 237.994667-60.010667-60.010667 237.994667-237.994667-237.994667-237.994667 60.010667-60.010667 237.994667 237.994667 237.994667-237.994667z"
+        "d": "M940.218182 107.054545h-209.454546V46.545455h-65.163636v60.50909H363.054545V46.545455H297.890909v60.50909H83.781818c-18.618182 0-32.581818 13.963636-32.581818 32.581819v805.236363c0 18.618182 13.963636 32.581818 32.581818 32.581818h861.090909c18.618182 0 32.581818-13.963636 32.581818-32.581818V139.636364c-4.654545-18.618182-18.618182-32.581818-37.236363-32.581819zM297.890909 172.218182V232.727273h65.163636V172.218182h307.2V232.727273h65.163637V172.218182h176.872727v204.8H116.363636V172.218182h181.527273zM116.363636 912.290909V442.181818h795.927273v470.109091H116.363636z"
       }
     })]);
   };
@@ -16549,480 +16661,135 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
 
   /* style inject shadow dom */
 
-  var IconClose = normalizeComponent({
+  var __vue_component__$1 = normalizeComponent({
     render: __vue_render__$1,
     staticRenderFns: __vue_staticRenderFns__$1
   }, __vue_inject_styles__$1, {}, __vue_scope_id__$1, __vue_is_functional_template__$1, __vue_module_identifier__$1, false, undefined, undefined, undefined);
 
-  /**
-   * @name toDate
-   * @category Common Helpers
-   * @summary Convert the given argument to an instance of Date.
-   *
-   * @description
-   * Convert the given argument to an instance of Date.
-   *
-   * If the argument is an instance of Date, the function returns its clone.
-   *
-   * If the argument is a number, it is treated as a timestamp.
-   *
-   * If the argument is none of the above, the function returns Invalid Date.
-   *
-   * **Note**: *all* Date arguments passed to any *date-fns* function is processed by `toDate`.
-   *
-   * @param {Date|Number} argument - the value to convert
-   * @returns {Date} the parsed date in the local time zone
-   * @throws {TypeError} 1 argument required
-   *
-   * @example
-   * // Clone the date:
-   * const result = toDate(new Date(2014, 1, 11, 11, 30, 30))
-   * //=> Tue Feb 11 2014 11:30:30
-   *
-   * @example
-   * // Convert the timestamp to date:
-   * const result = toDate(1392098430000)
-   * //=> Tue Feb 11 2014 11:30:30
-   */
-  function toDate$1(argument) {
-    if (arguments.length < 1) {
-      throw new TypeError('1 argument required, but only ' + arguments.length + ' present');
-    }
+  /* script */
 
-    var argStr = Object.prototype.toString.call(argument); // Clone the date
+  /* template */
+  var __vue_render__$2 = function __vue_render__() {
+    var _vm = this;
 
-    if (argument instanceof Date || _typeof(argument) === 'object' && argStr === '[object Date]') {
-      // Prevent the date to lose the milliseconds when passed to new Date() in IE10
-      return new Date(argument.getTime());
-    } else if (typeof argument === 'number' || argStr === '[object Number]') {
-      return new Date(argument);
-    } else {
-      if ((typeof argument === 'string' || argStr === '[object String]') && typeof console !== 'undefined') {
-        // eslint-disable-next-line no-console
-        console.warn("Starting with v2.0.0-beta.1 date-fns doesn't accept strings as arguments. Please use `parseISO` to parse strings. See: https://git.io/fjule"); // eslint-disable-next-line no-console
+    var _h = _vm.$createElement;
 
-        console.warn(new Error().stack);
+    var _c = _vm._self._c || _h;
+
+    return _c('svg', {
+      attrs: {
+        "xmlns": "http://www.w3.org/2000/svg",
+        "viewBox": "0 0 1024 1024",
+        "width": "1em",
+        "height": "1em"
       }
+    }, [_c('path', {
+      attrs: {
+        "d": "M810.005333 274.005333l-237.994667 237.994667 237.994667 237.994667-60.010667 60.010667-237.994667-237.994667-237.994667 237.994667-60.010667-60.010667 237.994667-237.994667-237.994667-237.994667 60.010667-60.010667 237.994667 237.994667 237.994667-237.994667z"
+      }
+    })]);
+  };
 
-      return new Date(NaN);
-    }
-  }
+  var __vue_staticRenderFns__$2 = [];
+  /* style */
 
-  function toInteger(dirtyNumber) {
-    if (dirtyNumber === null || dirtyNumber === true || dirtyNumber === false) {
-      return NaN;
-    }
+  var __vue_inject_styles__$2 = undefined;
+  /* scoped */
 
-    var number = Number(dirtyNumber);
+  var __vue_scope_id__$2 = undefined;
+  /* module identifier */
 
-    if (isNaN(number)) {
-      return number;
-    }
+  var __vue_module_identifier__$2 = undefined;
+  /* functional template */
 
-    return number < 0 ? Math.ceil(number) : Math.floor(number);
-  }
+  var __vue_is_functional_template__$2 = false;
+  /* style inject */
 
-  /**
-   * @name startOfDay
-   * @category Day Helpers
-   * @summary Return the start of a day for the given date.
-   *
-   * @description
-   * Return the start of a day for the given date.
-   * The result will be in the local timezone.
-   *
-   * ### v2.0.0 breaking changes:
-   *
-   * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
-   *
-   * @param {Date|Number} date - the original date
-   * @returns {Date} the start of a day
-   * @throws {TypeError} 1 argument required
-   *
-   * @example
-   * // The start of a day for 2 September 2014 11:55:00:
-   * var result = startOfDay(new Date(2014, 8, 2, 11, 55, 0))
-   * //=> Tue Sep 02 2014 00:00:00
-   */
+  /* style inject SSR */
 
-  function startOfDay(dirtyDate) {
-    if (arguments.length < 1) {
-      throw new TypeError('1 argument required, but only ' + arguments.length + ' present');
-    }
+  /* style inject shadow dom */
 
-    var date = toDate$1(dirtyDate);
-    date.setHours(0, 0, 0, 0);
-    return date;
-  }
-
-  /**
-   * @name getDaysInMonth
-   * @category Month Helpers
-   * @summary Get the number of days in a month of the given date.
-   *
-   * @description
-   * Get the number of days in a month of the given date.
-   *
-   * ### v2.0.0 breaking changes:
-   *
-   * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
-   *
-   * @param {Date|Number} date - the given date
-   * @returns {Number} the number of days in a month
-   * @throws {TypeError} 1 argument required
-   *
-   * @example
-   * // How many days are in February 2000?
-   * var result = getDaysInMonth(new Date(2000, 1))
-   * //=> 29
-   */
-
-  function getDaysInMonth(dirtyDate) {
-    if (arguments.length < 1) {
-      throw new TypeError('1 argument required, but only ' + arguments.length + ' present');
-    }
-
-    var date = toDate$1(dirtyDate);
-    var year = date.getFullYear();
-    var monthIndex = date.getMonth();
-    var lastDayOfMonth = new Date(0);
-    lastDayOfMonth.setFullYear(year, monthIndex + 1, 0);
-    lastDayOfMonth.setHours(0, 0, 0, 0);
-    return lastDayOfMonth.getDate();
-  }
-
-  /**
-   * @name addMonths
-   * @category Month Helpers
-   * @summary Add the specified number of months to the given date.
-   *
-   * @description
-   * Add the specified number of months to the given date.
-   *
-   * ### v2.0.0 breaking changes:
-   *
-   * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
-   *
-   * @param {Date|Number} date - the date to be changed
-   * @param {Number} amount - the amount of months to be added
-   * @returns {Date} the new date with the months added
-   * @throws {TypeError} 2 arguments required
-   *
-   * @example
-   * // Add 5 months to 1 September 2014:
-   * var result = addMonths(new Date(2014, 8, 1), 5)
-   * //=> Sun Feb 01 2015 00:00:00
-   */
-
-  function addMonths(dirtyDate, dirtyAmount) {
-    if (arguments.length < 2) {
-      throw new TypeError('2 arguments required, but only ' + arguments.length + ' present');
-    }
-
-    var date = toDate$1(dirtyDate);
-    var amount = toInteger(dirtyAmount);
-    var desiredMonth = date.getMonth() + amount;
-    var dateWithDesiredMonth = new Date(0);
-    dateWithDesiredMonth.setFullYear(date.getFullYear(), desiredMonth, 1);
-    dateWithDesiredMonth.setHours(0, 0, 0, 0);
-    var daysInMonth = getDaysInMonth(dateWithDesiredMonth); // Set the last day of the new month
-    // if the original date was the last day of the longer month
-
-    date.setMonth(desiredMonth, Math.min(daysInMonth, date.getDate()));
-    return date;
-  }
-
-  /**
-   * @name addYears
-   * @category Year Helpers
-   * @summary Add the specified number of years to the given date.
-   *
-   * @description
-   * Add the specified number of years to the given date.
-   *
-   * ### v2.0.0 breaking changes:
-   *
-   * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
-   *
-   * @param {Date|Number} date - the date to be changed
-   * @param {Number} amount - the amount of years to be added
-   * @returns {Date} the new date with the years added
-   * @throws {TypeError} 2 arguments required
-   *
-   * @example
-   * // Add 5 years to 1 September 2014:
-   * var result = addYears(new Date(2014, 8, 1), 5)
-   * //=> Sun Sep 01 2019 00:00:00
-   */
-
-  function addYears(dirtyDate, dirtyAmount) {
-    if (arguments.length < 2) {
-      throw new TypeError('2 arguments required, but only ' + arguments.length + ' present');
-    }
-
-    var amount = toInteger(dirtyAmount);
-    return addMonths(dirtyDate, amount * 12);
-  }
-
-  /**
-   * @name differenceInCalendarMonths
-   * @category Month Helpers
-   * @summary Get the number of calendar months between the given dates.
-   *
-   * @description
-   * Get the number of calendar months between the given dates.
-   *
-   * ### v2.0.0 breaking changes:
-   *
-   * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
-   *
-   * @param {Date|Number} dateLeft - the later date
-   * @param {Date|Number} dateRight - the earlier date
-   * @returns {Number} the number of calendar months
-   * @throws {TypeError} 2 arguments required
-   *
-   * @example
-   * // How many calendar months are between 31 January 2014 and 1 September 2014?
-   * var result = differenceInCalendarMonths(
-   *   new Date(2014, 8, 1),
-   *   new Date(2014, 0, 31)
-   * )
-   * //=> 8
-   */
-
-  function differenceInCalendarMonths(dirtyDateLeft, dirtyDateRight) {
-    if (arguments.length < 2) {
-      throw new TypeError('2 arguments required, but only ' + arguments.length + ' present');
-    }
-
-    var dateLeft = toDate$1(dirtyDateLeft);
-    var dateRight = toDate$1(dirtyDateRight);
-    var yearDiff = dateLeft.getFullYear() - dateRight.getFullYear();
-    var monthDiff = dateLeft.getMonth() - dateRight.getMonth();
-    return yearDiff * 12 + monthDiff;
-  }
-
-  /**
-   * @name startOfMonth
-   * @category Month Helpers
-   * @summary Return the start of a month for the given date.
-   *
-   * @description
-   * Return the start of a month for the given date.
-   * The result will be in the local timezone.
-   *
-   * ### v2.0.0 breaking changes:
-   *
-   * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
-   *
-   * @param {Date|Number} date - the original date
-   * @returns {Date} the start of a month
-   * @throws {TypeError} 1 argument required
-   *
-   * @example
-   * // The start of a month for 2 September 2014 11:55:00:
-   * var result = startOfMonth(new Date(2014, 8, 2, 11, 55, 0))
-   * //=> Mon Sep 01 2014 00:00:00
-   */
-
-  function startOfMonth(dirtyDate) {
-    if (arguments.length < 1) {
-      throw new TypeError('1 argument required, but only ' + arguments.length + ' present');
-    }
-
-    var date = toDate$1(dirtyDate);
-    date.setDate(1);
-    date.setHours(0, 0, 0, 0);
-    return date;
-  }
-
-  /**
-   * @name startOfYear
-   * @category Year Helpers
-   * @summary Return the start of a year for the given date.
-   *
-   * @description
-   * Return the start of a year for the given date.
-   * The result will be in the local timezone.
-   *
-   * ### v2.0.0 breaking changes:
-   *
-   * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
-   *
-   * @param {Date|Number} date - the original date
-   * @returns {Date} the start of a year
-   * @throws {TypeError} 1 argument required
-   *
-   * @example
-   * // The start of a year for 2 September 2014 11:55:00:
-   * var result = startOfYear(new Date(2014, 8, 2, 11, 55, 00))
-   * //=> Wed Jan 01 2014 00:00:00
-   */
-
-  function startOfYear(dirtyDate) {
-    if (arguments.length < 1) {
-      throw new TypeError('1 argument required, but only ' + arguments.length + ' present');
-    }
-
-    var cleanDate = toDate$1(dirtyDate);
-    var date = new Date(0);
-    date.setFullYear(cleanDate.getFullYear(), 0, 1);
-    date.setHours(0, 0, 0, 0);
-    return date;
-  }
-
-  /**
-   * @name setMonth
-   * @category Month Helpers
-   * @summary Set the month to the given date.
-   *
-   * @description
-   * Set the month to the given date.
-   *
-   * ### v2.0.0 breaking changes:
-   *
-   * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
-   *
-   * @param {Date|Number} date - the date to be changed
-   * @param {Number} month - the month of the new date
-   * @returns {Date} the new date with the month set
-   * @throws {TypeError} 2 arguments required
-   *
-   * @example
-   * // Set February to 1 September 2014:
-   * var result = setMonth(new Date(2014, 8, 1), 1)
-   * //=> Sat Feb 01 2014 00:00:00
-   */
-
-  function setMonth(dirtyDate, dirtyMonth) {
-    if (arguments.length < 2) {
-      throw new TypeError('2 arguments required, but only ' + arguments.length + ' present');
-    }
-
-    var date = toDate$1(dirtyDate);
-    var month = toInteger(dirtyMonth);
-    var year = date.getFullYear();
-    var day = date.getDate();
-    var dateWithDesiredMonth = new Date(0);
-    dateWithDesiredMonth.setFullYear(year, month, 15);
-    dateWithDesiredMonth.setHours(0, 0, 0, 0);
-    var daysInMonth = getDaysInMonth(dateWithDesiredMonth); // Set the last day of the new month
-    // if the original date was the last day of the longer month
-
-    date.setMonth(month, Math.min(day, daysInMonth));
-    return date;
-  }
-
-  /**
-   * @name setYear
-   * @category Year Helpers
-   * @summary Set the year to the given date.
-   *
-   * @description
-   * Set the year to the given date.
-   *
-   * ### v2.0.0 breaking changes:
-   *
-   * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
-   *
-   * @param {Date|Number} date - the date to be changed
-   * @param {Number} year - the year of the new date
-   * @returns {Date} the new date with the year set
-   * @throws {TypeError} 2 arguments required
-   *
-   * @example
-   * // Set year 2013 to 1 September 2014:
-   * var result = setYear(new Date(2014, 8, 1), 2013)
-   * //=> Sun Sep 01 2013 00:00:00
-   */
-
-  function setYear(dirtyDate, dirtyYear) {
-    if (arguments.length < 2) {
-      throw new TypeError('2 arguments required, but only ' + arguments.length + ' present');
-    }
-
-    var date = toDate$1(dirtyDate);
-    var year = toInteger(dirtyYear); // Check if date is Invalid Date because Date.prototype.setFullYear ignores the value of Invalid Date
-
-    if (isNaN(date)) {
-      return new Date(NaN);
-    }
-
-    date.setFullYear(year);
-    return date;
-  }
-
-  /**
-   * @name subMonths
-   * @category Month Helpers
-   * @summary Subtract the specified number of months from the given date.
-   *
-   * @description
-   * Subtract the specified number of months from the given date.
-   *
-   * ### v2.0.0 breaking changes:
-   *
-   * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
-   *
-   * @param {Date|Number} date - the date to be changed
-   * @param {Number} amount - the amount of months to be subtracted
-   * @returns {Date} the new date with the months subtracted
-   * @throws {TypeError} 2 arguments required
-   *
-   * @example
-   * // Subtract 5 months from 1 February 2015:
-   * var result = subMonths(new Date(2015, 1, 1), 5)
-   * //=> Mon Sep 01 2014 00:00:00
-   */
-
-  function subMonths(dirtyDate, dirtyAmount) {
-    if (arguments.length < 2) {
-      throw new TypeError('2 arguments required, but only ' + arguments.length + ' present');
-    }
-
-    var amount = toInteger(dirtyAmount);
-    return addMonths(dirtyDate, -amount);
-  }
-
-  /**
-   * @name subYears
-   * @category Year Helpers
-   * @summary Subtract the specified number of years from the given date.
-   *
-   * @description
-   * Subtract the specified number of years from the given date.
-   *
-   * ### v2.0.0 breaking changes:
-   *
-   * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
-   *
-   * @param {Date|Number} date - the date to be changed
-   * @param {Number} amount - the amount of years to be subtracted
-   * @returns {Date} the new date with the years subtracted
-   * @throws {TypeError} 2 arguments required
-   *
-   * @example
-   * // Subtract 5 years from 1 September 2014:
-   * var result = subYears(new Date(2014, 8, 1), 5)
-   * //=> Tue Sep 01 2009 00:00:00
-   */
-
-  function subYears(dirtyDate, dirtyAmount) {
-    if (arguments.length < 2) {
-      throw new TypeError('2 arguments required, but only ' + arguments.length + ' present');
-    }
-
-    var amount = toInteger(dirtyAmount);
-    return addYears(dirtyDate, -amount);
-  }
+  var __vue_component__$2 = normalizeComponent({
+    render: __vue_render__$2,
+    staticRenderFns: __vue_staticRenderFns__$2
+  }, __vue_inject_styles__$2, {}, __vue_scope_id__$2, __vue_is_functional_template__$2, __vue_module_identifier__$2, false, undefined, undefined, undefined);
 
   //
-  var script = {
-    name: 'TableDate',
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  var script$1 = {
+    props: {
+      type: String
+    },
     inject: {
-      t: {
+      prefixClass: {
+        default: 'mx'
+      }
+    }
+  };
+
+  /* script */
+  var __vue_script__$1 = script$1;
+  /* template */
+
+  var __vue_render__$3 = function __vue_render__() {
+    var _vm = this;
+
+    var _h = _vm.$createElement;
+
+    var _c = _vm._self._c || _h;
+
+    return _c('button', _vm._g({
+      class: _vm.prefixClass + "-btn " + _vm.prefixClass + "-btn-text " + _vm.prefixClass + "-btn-icon-" + _vm.type,
+      attrs: {
+        "type": "button"
+      }
+    }, _vm.$listeners), [_c('i', {
+      class: _vm.prefixClass + "-icon-" + _vm.type
+    })]);
+  };
+
+  var __vue_staticRenderFns__$3 = [];
+  /* style */
+
+  var __vue_inject_styles__$3 = undefined;
+  /* scoped */
+
+  var __vue_scope_id__$3 = undefined;
+  /* module identifier */
+
+  var __vue_module_identifier__$3 = undefined;
+  /* functional template */
+
+  var __vue_is_functional_template__$3 = false;
+  /* style inject */
+
+  /* style inject SSR */
+
+  /* style inject shadow dom */
+
+  var __vue_component__$3 = normalizeComponent({
+    render: __vue_render__$3,
+    staticRenderFns: __vue_staticRenderFns__$3
+  }, __vue_inject_styles__$3, __vue_script__$1, __vue_scope_id__$3, __vue_is_functional_template__$3, __vue_module_identifier__$3, false, undefined, undefined, undefined);
+
+  //
+  var script$2 = {
+    name: 'TableDate',
+    components: {
+      IconButton: __vue_component__$3
+    },
+    inject: {
+      getLocale: {
         default: function _default() {
-          return getLocaleFieldValue;
+          return getLocale;
         }
       },
       getWeek: {
@@ -17035,16 +16802,10 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
       }
     },
     props: {
-      calendarYear: {
-        type: Number,
+      calendar: {
+        type: Date,
         default: function _default() {
-          return new Date().getFullYear();
-        }
-      },
-      calendarMonth: {
-        type: Number,
-        default: function _default() {
-          return new Date().getMonth();
+          return new Date();
         }
       },
       showWeekNumber: {
@@ -17070,60 +16831,61 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     },
     computed: {
       firstDayOfWeek: function firstDayOfWeek() {
-        return this.t('formatLocale.firstDayOfWeek') || 0;
+        return this.getLocale().formatLocale.firstDayOfWeek || 0;
+      },
+      yearMonth: function yearMonth() {
+        var _this$getLocale = this.getLocale(),
+            yearFormat = _this$getLocale.yearFormat,
+            monthBeforeYear = _this$getLocale.monthBeforeYear,
+            _this$getLocale$month = _this$getLocale.monthFormat,
+            monthFormat = _this$getLocale$month === void 0 ? 'MMM' : _this$getLocale$month;
+
+        var yearLabel = {
+          panel: 'year',
+          label: this.formatDate(this.calendar, yearFormat)
+        };
+        var monthLabel = {
+          panel: 'month',
+          label: this.formatDate(this.calendar, monthFormat)
+        };
+        return monthBeforeYear ? [monthLabel, yearLabel] : [yearLabel, monthLabel];
       },
       days: function days() {
-        var days = this.t('days') || this.t('formatLocale.weekdaysMin');
+        var locale = this.getLocale();
+        var days = locale.days || locale.formatLocale.weekdaysMin;
         return days.concat(days).slice(this.firstDayOfWeek, this.firstDayOfWeek + 7);
       },
       dates: function dates() {
-        var arr = [];
-        var firstDayOfWeek = this.firstDayOfWeek;
-        var year = this.calendarYear;
-        var month = this.calendarMonth; // change to the last day of the last month
-
-        var calendar = createDate(year, month, 0);
-        var lastDayInLastMonth = calendar.getDate(); // getDay() 0 is Sunday, 1 is Monday
-
-        var firstDayInLastMonth = lastDayInLastMonth - (calendar.getDay() + 7 - firstDayOfWeek) % 7;
-
-        for (var i = firstDayInLastMonth; i <= lastDayInLastMonth; i++) {
-          var day = i - lastDayInLastMonth;
-          arr.push({
-            day: day,
-            text: i
-          });
-        } // change to the last day of the current month
-
-
-        calendar.setMonth(month + 1, 0);
-        var lastDayInCurrentMonth = calendar.getDate();
-
-        for (var _i = 1; _i <= lastDayInCurrentMonth; _i++) {
-          arr.push({
-            day: _i,
-            text: _i
-          });
-        }
-
-        var lastMonthLength = lastDayInLastMonth - firstDayInLastMonth + 1;
-        var nextMonthLength = 6 * 7 - lastMonthLength - lastDayInCurrentMonth;
-
-        for (var _i2 = 1; _i2 <= nextMonthLength; _i2++) {
-          arr.push({
-            day: lastDayInCurrentMonth + _i2,
-            text: _i2
-          });
-        }
-
+        var year = this.calendar.getFullYear();
+        var month = this.calendar.getMonth();
+        var arr = getCalendar({
+          firstDayOfWeek: this.firstDayOfWeek,
+          year: year,
+          month: month
+        });
         return chunk(arr, 7);
       }
     },
     methods: {
-      formatDate: function formatDate(date, fmt) {
-        return format(date, fmt, {
-          locale: this.t('formatLocale')
-        });
+      getNextCalendar: function getNextCalendar(diffMonth) {
+        var year = this.calendar.getFullYear();
+        var month = this.calendar.getMonth();
+        return createDate(year, month + diffMonth);
+      },
+      handleIconLeftClick: function handleIconLeftClick() {
+        this.$emit('changecalendar', this.getNextCalendar(-1), 'last-month');
+      },
+      handleIconRightClick: function handleIconRightClick() {
+        this.$emit('changecalendar', this.getNextCalendar(1), 'next-month');
+      },
+      handleIconDoubleLeftClick: function handleIconDoubleLeftClick() {
+        this.$emit('changecalendar', this.getNextCalendar(-12), 'last-year');
+      },
+      handleIconDoubleRightClick: function handleIconDoubleRightClick() {
+        this.$emit('changecalendar', this.getNextCalendar(12), 'next-year');
+      },
+      handlePanelChange: function handlePanelChange(panel) {
+        this.$emit('changepanel', panel);
       },
       handleCellClick: function handleCellClick(evt) {
         var target = evt.target;
@@ -17132,40 +16894,88 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
           target = target.parentNode;
         }
 
-        var day = target.getAttribute('data-day');
+        var date = target.getAttribute('data-date');
 
-        if (day) {
-          this.$emit('select', parseInt(day, 10));
+        if (date) {
+          this.$emit('select', new Date(parseInt(date, 10)));
         }
       },
-      getCellTitle: function getCellTitle(day) {
-        var year = this.calendarYear;
-        var month = this.calendarMonth;
+      formatDate: function formatDate(date, fmt) {
+        return format(date, fmt, {
+          locale: this.getLocale().formatLocale
+        });
+      },
+      getCellTitle: function getCellTitle(date) {
         var fmt = this.titleFormat;
-        var date = createDate(year, month, day);
         return this.formatDate(date, fmt);
       },
-      getWeekNumber: function getWeekNumber(day) {
-        var year = this.calendarYear;
-        var month = this.calendarMonth;
-        var date = createDate(year, month, day);
-        return this.getWeek(date, this.t('formatLocale'));
+      getWeekNumber: function getWeekNumber(date) {
+        return this.getWeek(date, this.getLocale().formatLocale);
       }
     }
   };
 
   /* script */
-  var __vue_script__ = script;
+  var __vue_script__$2 = script$2;
   /* template */
 
-  var __vue_render__$2 = function __vue_render__() {
+  var __vue_render__$4 = function __vue_render__() {
     var _vm = this;
 
     var _h = _vm.$createElement;
 
     var _c = _vm._self._c || _h;
 
-    return _c('table', {
+    return _c('div', {
+      class: _vm.prefixClass + "-calendar " + _vm.prefixClass + "-calendar-panel-date"
+    }, [_c('div', {
+      class: _vm.prefixClass + "-calendar-header"
+    }, [_c('icon-button', {
+      attrs: {
+        "type": "double-left"
+      },
+      on: {
+        "click": _vm.handleIconDoubleLeftClick
+      }
+    }), _vm._v(" "), _c('icon-button', {
+      attrs: {
+        "type": "left"
+      },
+      on: {
+        "click": _vm.handleIconLeftClick
+      }
+    }), _vm._v(" "), _c('icon-button', {
+      attrs: {
+        "type": "double-right"
+      },
+      on: {
+        "click": _vm.handleIconDoubleRightClick
+      }
+    }), _vm._v(" "), _c('icon-button', {
+      attrs: {
+        "type": "right"
+      },
+      on: {
+        "click": _vm.handleIconRightClick
+      }
+    }), _vm._v(" "), _c('span', {
+      class: _vm.prefixClass + "-calendar-header-label"
+    }, _vm._l(_vm.yearMonth, function (item) {
+      return _c('button', {
+        key: item.panel,
+        class: _vm.prefixClass + "-btn " + _vm.prefixClass + "-btn-text " + _vm.prefixClass + "-btn-current-" + item.panel,
+        attrs: {
+          "type": "button"
+        },
+        on: {
+          "click": function click($event) {
+            return _vm.handlePanelChange(item.panel);
+          }
+        }
+      }, [_vm._v("\n        " + _vm._s(item.label) + "\n      ")]);
+    }), 0)], 1), _vm._v(" "), _c('div', {
+      class: _vm.prefixClass + "-calendar-content"
+    }, [_c('table', {
       class: _vm.prefixClass + "-table " + _vm.prefixClass + "-table-date"
     }, [_c('thead', [_c('tr', [_vm.showWeekNumber ? _c('th', {
       class: _vm.prefixClass + "-week-number-header"
@@ -17183,226 +16993,18 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
         class: [_vm.prefixClass + "-date-row", _vm.getRowClasses(row)]
       }, [_vm.showWeekNumber ? _c('td', {
         class: _vm.prefixClass + "-week-number"
-      }, [_vm._v("\n        " + _vm._s(_vm.getWeekNumber(row[0].day)) + "\n      ")]) : _vm._e(), _vm._v(" "), _vm._l(row, function (cell, j) {
-        return _c('td', {
-          key: j,
-          staticClass: "cell",
-          class: _vm.getCellClasses(cell.day),
-          attrs: {
-            "data-day": cell.day,
-            "title": _vm.getCellTitle(cell.day)
-          }
-        }, [_c('div', [_vm._v(_vm._s(cell.text))])]);
-      })], 2);
-    }), 0)]);
-  };
-
-  var __vue_staticRenderFns__$2 = [];
-  /* style */
-
-  var __vue_inject_styles__$2 = undefined;
-  /* scoped */
-
-  var __vue_scope_id__$2 = undefined;
-  /* module identifier */
-
-  var __vue_module_identifier__$2 = undefined;
-  /* functional template */
-
-  var __vue_is_functional_template__$2 = false;
-  /* style inject */
-
-  /* style inject SSR */
-
-  /* style inject shadow dom */
-
-  var TableDate = normalizeComponent({
-    render: __vue_render__$2,
-    staticRenderFns: __vue_staticRenderFns__$2
-  }, __vue_inject_styles__$2, __vue_script__, __vue_scope_id__$2, __vue_is_functional_template__$2, __vue_module_identifier__$2, false, undefined, undefined, undefined);
-
-  //
-  var script$1 = {
-    name: 'TableMonth',
-    inject: {
-      t: {
-        default: function _default() {
-          return getLocaleFieldValue;
-        }
-      },
-      prefixClass: {
-        default: 'mx'
-      }
-    },
-    props: {
-      getCellClasses: {
-        type: Function,
-        default: function _default() {
-          return [];
-        }
-      }
-    },
-    computed: {
-      months: function months() {
-        var monthsLocale = this.t('months') || this.t('formatLocale.monthsShort');
-        var months = monthsLocale.map(function (text, month) {
-          return {
-            text: text,
-            month: month
-          };
-        });
-        return chunk(months, 3);
-      }
-    },
-    methods: {
-      handleClick: function handleClick(evt) {
-        var target = evt.target;
-
-        if (target.tagName === 'DIV') {
-          target = target.parentNode;
-        }
-
-        var month = target.getAttribute('data-month');
-
-        if (month) {
-          this.$emit('select', parseInt(month, 10));
-        }
-      }
-    }
-  };
-
-  /* script */
-  var __vue_script__$1 = script$1;
-  /* template */
-
-  var __vue_render__$3 = function __vue_render__() {
-    var _vm = this;
-
-    var _h = _vm.$createElement;
-
-    var _c = _vm._self._c || _h;
-
-    return _c('table', {
-      class: _vm.prefixClass + "-table " + _vm.prefixClass + "-table-month",
-      on: {
-        "click": _vm.handleClick
-      }
-    }, _vm._l(_vm.months, function (row, i) {
-      return _c('tr', {
-        key: i
-      }, _vm._l(row, function (cell, j) {
-        return _c('td', {
-          key: j,
-          staticClass: "cell",
-          class: _vm.getCellClasses(cell.month),
-          attrs: {
-            "data-month": cell.month
-          }
-        }, [_c('div', [_vm._v(_vm._s(cell.text))])]);
-      }), 0);
-    }), 0);
-  };
-
-  var __vue_staticRenderFns__$3 = [];
-  /* style */
-
-  var __vue_inject_styles__$3 = undefined;
-  /* scoped */
-
-  var __vue_scope_id__$3 = undefined;
-  /* module identifier */
-
-  var __vue_module_identifier__$3 = undefined;
-  /* functional template */
-
-  var __vue_is_functional_template__$3 = false;
-  /* style inject */
-
-  /* style inject SSR */
-
-  /* style inject shadow dom */
-
-  var TableMonth = normalizeComponent({
-    render: __vue_render__$3,
-    staticRenderFns: __vue_staticRenderFns__$3
-  }, __vue_inject_styles__$3, __vue_script__$1, __vue_scope_id__$3, __vue_is_functional_template__$3, __vue_module_identifier__$3, false, undefined, undefined, undefined);
-
-  //
-  var script$2 = {
-    name: 'TableYear',
-    inject: {
-      prefixClass: {
-        default: 'mx'
-      }
-    },
-    props: {
-      decade: Number,
-      getCellClasses: {
-        type: Function,
-        default: function _default() {
-          return [];
-        }
-      }
-    },
-    computed: {
-      years: function years() {
-        var firstYear = this.decade;
-        var years = [];
-
-        for (var i = 0; i < 10; i++) {
-          years.push(firstYear + i);
-        }
-
-        return chunk(years, 2);
-      }
-    },
-    methods: {
-      handleClick: function handleClick(evt) {
-        var target = evt.target;
-
-        if (target.tagName === 'DIV') {
-          target = target.parentNode;
-        }
-
-        var year = target.getAttribute('data-year');
-
-        if (year) {
-          this.$emit('select', parseInt(year, 10));
-        }
-      }
-    }
-  };
-
-  /* script */
-  var __vue_script__$2 = script$2;
-  /* template */
-
-  var __vue_render__$4 = function __vue_render__() {
-    var _vm = this;
-
-    var _h = _vm.$createElement;
-
-    var _c = _vm._self._c || _h;
-
-    return _c('table', {
-      class: _vm.prefixClass + "-table " + _vm.prefixClass + "-table-year",
-      on: {
-        "click": _vm.handleClick
-      }
-    }, _vm._l(_vm.years, function (row, i) {
-      return _c('tr', {
-        key: i
-      }, _vm._l(row, function (cell, j) {
+      }, [_vm._v("\n            " + _vm._s(_vm.getWeekNumber(row[0])) + "\n          ")]) : _vm._e(), _vm._v(" "), _vm._l(row, function (cell, j) {
         return _c('td', {
           key: j,
           staticClass: "cell",
           class: _vm.getCellClasses(cell),
           attrs: {
-            "data-year": cell
+            "data-date": cell.getTime(),
+            "title": _vm.getCellTitle(cell)
           }
-        }, [_c('div', [_vm._v(_vm._s(cell))])]);
-      }), 0);
-    }), 0);
+        }, [_c('div', [_vm._v(_vm._s(cell.getDate()))])]);
+      })], 2);
+    }), 0)])])]);
   };
 
   var __vue_staticRenderFns__$4 = [];
@@ -17424,55 +17026,351 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
 
   /* style inject shadow dom */
 
-  var TableYear = normalizeComponent({
+  var __vue_component__$4 = normalizeComponent({
     render: __vue_render__$4,
     staticRenderFns: __vue_staticRenderFns__$4
   }, __vue_inject_styles__$4, __vue_script__$2, __vue_scope_id__$4, __vue_is_functional_template__$4, __vue_module_identifier__$4, false, undefined, undefined, undefined);
 
-  var emitter = {
+  //
+  var script$3 = {
+    name: 'TableMonth',
+    components: {
+      IconButton: __vue_component__$3
+    },
+    inject: {
+      getLocale: {
+        default: function _default() {
+          return getLocale;
+        }
+      },
+      prefixClass: {
+        default: 'mx'
+      }
+    },
+    props: {
+      calendar: {
+        type: Date,
+        default: function _default() {
+          return new Date();
+        }
+      },
+      getCellClasses: {
+        type: Function,
+        default: function _default() {
+          return [];
+        }
+      }
+    },
+    computed: {
+      calendarYear: function calendarYear() {
+        return this.calendar.getFullYear();
+      },
+      months: function months() {
+        var locale = this.getLocale();
+        var monthsLocale = locale.months || locale.formatLocale.monthsShort;
+        var months = monthsLocale.map(function (text, month) {
+          return {
+            text: text,
+            month: month
+          };
+        });
+        return chunk(months, 3);
+      }
+    },
     methods: {
-      dispatch: function dispatch(componentName) {
-        var parent = this.$parent || this.$root;
-        var name = parent.$options.name;
+      getNextCalendar: function getNextCalendar(diffYear) {
+        var year = this.calendar.getFullYear();
+        var month = this.calendar.getMonth();
+        return createDate(year + diffYear, month);
+      },
+      handleIconDoubleLeftClick: function handleIconDoubleLeftClick() {
+        this.$emit('changecalendar', this.getNextCalendar(-1), 'last-year');
+      },
+      handleIconDoubleRightClick: function handleIconDoubleRightClick() {
+        this.$emit('changecalendar', this.getNextCalendar(1), 'next-year');
+      },
+      handlePanelChange: function handlePanelChange() {
+        this.$emit('changepanel', 'year');
+      },
+      handleClick: function handleClick(evt) {
+        var target = evt.target;
 
-        while (parent && (!name || name !== componentName)) {
-          parent = parent.$parent;
-
-          if (parent) {
-            name = parent.$options.name;
-          }
+        if (target.tagName === 'DIV') {
+          target = target.parentNode;
         }
 
-        if (parent) {
-          var _parent;
+        var month = target.getAttribute('data-month');
 
-          for (var _len = arguments.length, params = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-            params[_key - 1] = arguments[_key];
-          }
-
-          (_parent = parent).$emit.apply(_parent, params);
+        if (month) {
+          this.$emit('select', parseInt(month, 10));
         }
       }
     }
   };
 
-  //
-  var script$3 = {
-    name: 'CalendarPanel',
-    components: {
-      TableDate: TableDate,
-      TableMonth: TableMonth,
-      TableYear: TableYear
-    },
-    mixins: [emitter],
-    inject: {
-      t: {
-        default: function _default() {
-          return getLocaleFieldValue;
-        }
+  /* script */
+  var __vue_script__$3 = script$3;
+  /* template */
+
+  var __vue_render__$5 = function __vue_render__() {
+    var _vm = this;
+
+    var _h = _vm.$createElement;
+
+    var _c = _vm._self._c || _h;
+
+    return _c('div', {
+      class: _vm.prefixClass + "-calendar " + _vm.prefixClass + "-calendar-panel-month"
+    }, [_c('div', {
+      class: _vm.prefixClass + "-calendar-header"
+    }, [_c('icon-button', {
+      attrs: {
+        "type": "double-left"
       },
+      on: {
+        "click": _vm.handleIconDoubleLeftClick
+      }
+    }), _vm._v(" "), _c('icon-button', {
+      attrs: {
+        "type": "double-right"
+      },
+      on: {
+        "click": _vm.handleIconDoubleRightClick
+      }
+    }), _vm._v(" "), _c('span', {
+      class: _vm.prefixClass + "-calendar-header-label"
+    }, [_c('button', {
+      class: _vm.prefixClass + "-btn " + _vm.prefixClass + "-btn-text",
+      attrs: {
+        "type": "button"
+      },
+      on: {
+        "click": _vm.handlePanelChange
+      }
+    }, [_vm._v("\n        " + _vm._s(_vm.calendarYear) + "\n      ")])])], 1), _vm._v(" "), _c('div', {
+      class: _vm.prefixClass + "-calendar-content"
+    }, [_c('table', {
+      class: _vm.prefixClass + "-table " + _vm.prefixClass + "-table-month",
+      on: {
+        "click": _vm.handleClick
+      }
+    }, _vm._l(_vm.months, function (row, i) {
+      return _c('tr', {
+        key: i
+      }, _vm._l(row, function (cell, j) {
+        return _c('td', {
+          key: j,
+          staticClass: "cell",
+          class: _vm.getCellClasses(cell.month),
+          attrs: {
+            "data-month": cell.month
+          }
+        }, [_c('div', [_vm._v(_vm._s(cell.text))])]);
+      }), 0);
+    }), 0)])]);
+  };
+
+  var __vue_staticRenderFns__$5 = [];
+  /* style */
+
+  var __vue_inject_styles__$5 = undefined;
+  /* scoped */
+
+  var __vue_scope_id__$5 = undefined;
+  /* module identifier */
+
+  var __vue_module_identifier__$5 = undefined;
+  /* functional template */
+
+  var __vue_is_functional_template__$5 = false;
+  /* style inject */
+
+  /* style inject SSR */
+
+  /* style inject shadow dom */
+
+  var __vue_component__$5 = normalizeComponent({
+    render: __vue_render__$5,
+    staticRenderFns: __vue_staticRenderFns__$5
+  }, __vue_inject_styles__$5, __vue_script__$3, __vue_scope_id__$5, __vue_is_functional_template__$5, __vue_module_identifier__$5, false, undefined, undefined, undefined);
+
+  //
+  var script$4 = {
+    name: 'TableYear',
+    components: {
+      IconButton: __vue_component__$3
+    },
+    inject: {
       prefixClass: {
         default: 'mx'
+      }
+    },
+    props: {
+      calendar: {
+        type: Date,
+        default: function _default() {
+          return new Date();
+        }
+      },
+      getCellClasses: {
+        type: Function,
+        default: function _default() {
+          return [];
+        }
+      },
+      getYearPanel: {
+        type: Function
+      }
+    },
+    computed: {
+      years: function years() {
+        var calendar = new Date(this.calendar);
+
+        if (typeof this.getYearPanel === 'function') {
+          return this.getYearPanel(calendar);
+        }
+
+        return this.getYears(calendar);
+      },
+      firstYear: function firstYear() {
+        return this.years[0][0];
+      },
+      lastYear: function lastYear() {
+        var last = function last(arr) {
+          return arr[arr.length - 1];
+        };
+
+        return last(last(this.years));
+      }
+    },
+    methods: {
+      getYears: function getYears(calendar) {
+        var firstYear = Math.floor(calendar.getFullYear() / 10) * 10;
+        var years = [];
+
+        for (var i = 0; i < 10; i++) {
+          years.push(firstYear + i);
+        }
+
+        return chunk(years, 2);
+      },
+      getNextCalendar: function getNextCalendar(diffYear) {
+        var year = this.calendar.getFullYear();
+        var month = this.calendar.getMonth();
+        return createDate(year + diffYear, month);
+      },
+      handleIconDoubleLeftClick: function handleIconDoubleLeftClick() {
+        this.$emit('changecalendar', this.getNextCalendar(-10), 'last-decade');
+      },
+      handleIconDoubleRightClick: function handleIconDoubleRightClick() {
+        this.$emit('changecalendar', this.getNextCalendar(10), 'next-decade');
+      },
+      handleClick: function handleClick(evt) {
+        var target = evt.target;
+
+        if (target.tagName === 'DIV') {
+          target = target.parentNode;
+        }
+
+        var year = target.getAttribute('data-year');
+
+        if (year) {
+          this.$emit('select', parseInt(year, 10));
+        }
+      }
+    }
+  };
+
+  /* script */
+  var __vue_script__$4 = script$4;
+  /* template */
+
+  var __vue_render__$6 = function __vue_render__() {
+    var _vm = this;
+
+    var _h = _vm.$createElement;
+
+    var _c = _vm._self._c || _h;
+
+    return _c('div', {
+      class: _vm.prefixClass + "-calendar " + _vm.prefixClass + "-calendar-panel-year"
+    }, [_c('div', {
+      class: _vm.prefixClass + "-calendar-header"
+    }, [_c('icon-button', {
+      attrs: {
+        "type": "double-left"
+      },
+      on: {
+        "click": _vm.handleIconDoubleLeftClick
+      }
+    }), _vm._v(" "), _c('icon-button', {
+      attrs: {
+        "type": "double-right"
+      },
+      on: {
+        "click": _vm.handleIconDoubleRightClick
+      }
+    }), _vm._v(" "), _c('span', {
+      class: _vm.prefixClass + "-calendar-header-label"
+    }, [_c('span', [_vm._v(_vm._s(_vm.firstYear))]), _vm._v(" "), _c('span', {
+      class: _vm.prefixClass + "-calendar-decade-separator"
+    }), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.lastYear))])])], 1), _vm._v(" "), _c('div', {
+      class: _vm.prefixClass + "-calendar-content"
+    }, [_c('table', {
+      class: _vm.prefixClass + "-table " + _vm.prefixClass + "-table-year",
+      on: {
+        "click": _vm.handleClick
+      }
+    }, _vm._l(_vm.years, function (row, i) {
+      return _c('tr', {
+        key: i
+      }, _vm._l(row, function (cell, j) {
+        return _c('td', {
+          key: j,
+          staticClass: "cell",
+          class: _vm.getCellClasses(cell),
+          attrs: {
+            "data-year": cell
+          }
+        }, [_c('div', [_vm._v(_vm._s(cell))])]);
+      }), 0);
+    }), 0)])]);
+  };
+
+  var __vue_staticRenderFns__$6 = [];
+  /* style */
+
+  var __vue_inject_styles__$6 = undefined;
+  /* scoped */
+
+  var __vue_scope_id__$6 = undefined;
+  /* module identifier */
+
+  var __vue_module_identifier__$6 = undefined;
+  /* functional template */
+
+  var __vue_is_functional_template__$6 = false;
+  /* style inject */
+
+  /* style inject SSR */
+
+  /* style inject shadow dom */
+
+  var __vue_component__$6 = normalizeComponent({
+    render: __vue_render__$6,
+    staticRenderFns: __vue_staticRenderFns__$6
+  }, __vue_inject_styles__$6, __vue_script__$4, __vue_scope_id__$6, __vue_is_functional_template__$6, __vue_module_identifier__$6, false, undefined, undefined, undefined);
+
+  var CalendarPanel = {
+    name: 'CalendarPanel',
+    inject: {
+      prefixClass: {
+        default: 'mx'
+      },
+      dispatchDatePicker: {
+        default: function _default() {
+          return function () {};
+        }
       }
     },
     props: {
@@ -17507,6 +17405,9 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
         type: Boolean,
         default: undefined
       },
+      getYearPanel: {
+        type: Function
+      },
       titleFormat: {
         type: String,
         default: 'YYYY-MM-DD'
@@ -17524,7 +17425,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
       var panel = index !== -1 ? panels[index] : 'date';
       return {
         panel: panel,
-        innerCalendar: null
+        innerCalendar: new Date()
       };
     },
     computed: {
@@ -17545,29 +17446,6 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
       },
       calendarMonth: function calendarMonth() {
         return this.innerCalendar.getMonth();
-      },
-      calendarDecade: function calendarDecade() {
-        return Math.floor(this.calendarYear / 10) * 10;
-      },
-      showIconDoubleArrow: function showIconDoubleArrow() {
-        return this.panel === 'date' || this.panel === 'month' || this.panel === 'year';
-      },
-      showIconArrow: function showIconArrow() {
-        return this.panel === 'date';
-      },
-      dateHeader: function dateHeader() {
-        var monthBeforeYear = this.t('monthBeforeYear');
-        var yearFormat = this.t('yearFormat');
-        var monthFormat = this.t('monthFormat') || 'MMM';
-        var yearLabel = {
-          panel: 'year',
-          label: this.formatDate(this.innerCalendar, yearFormat)
-        };
-        var monthLabel = {
-          panel: 'month',
-          label: this.formatDate(this.innerCalendar, monthFormat)
-        };
-        return monthBeforeYear ? [monthLabel, yearLabel] : [yearLabel, monthLabel];
       }
     },
     watch: {
@@ -17583,11 +17461,6 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
       }
     },
     methods: {
-      formatDate: function formatDate(date, fmt) {
-        return format(date, fmt, {
-          locale: this.t('formatLocale')
-        });
-      },
       initCalendar: function initCalendar() {
         var calendarDate = this.calendar;
 
@@ -17596,7 +17469,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
           calendarDate = getValidDate(length > 0 ? this.innerValue[length - 1] : this.defaultValue);
         }
 
-        this.innerCalendar = calendarDate;
+        this.innerCalendar = startOfMonth(calendarDate);
       },
       isDisabled: function isDisabled(date) {
         return this.disabledDate(new Date(date), this.innerValue);
@@ -17605,45 +17478,32 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
         if (!this.isDisabled(date)) {
           this.$emit('select', date, type, this.innerValue); // someone need get the first selected date to set range value. (#429)
 
-          this.dispatch('DatePicker', 'pick', date, type);
+          this.dispatchDatePicker('pick', date, type);
         }
       },
-      updateCalendar: function updateCalendar(date, type) {
-        var oldValue = new Date(this.innerCalendar);
-        this.innerCalendar = date;
-        this.$emit('update:calendar', date);
-        this.dispatch('DatePicker', 'calendar-change', date, oldValue, type);
+      handleCalendarChange: function handleCalendarChange(calendar, type) {
+        var oldCalendar = new Date(this.innerCalendar);
+        this.innerCalendar = calendar;
+        this.$emit('update:calendar', calendar);
+        this.dispatchDatePicker('calendar-change', calendar, oldCalendar, type);
       },
       handelPanelChange: function handelPanelChange(panel) {
+        var oldPanel = this.panel;
         this.panel = panel;
-      },
-      handleIconLeftClick: function handleIconLeftClick() {
-        var nextCalendar = subMonths(this.innerCalendar, 1);
-        this.updateCalendar(nextCalendar, 'last-month');
-      },
-      handleIconRightClick: function handleIconRightClick() {
-        var nextCalendar = addMonths(this.innerCalendar, 1);
-        this.updateCalendar(nextCalendar, 'next-month');
-      },
-      handleIconDoubleLeftClick: function handleIconDoubleLeftClick() {
-        var nextCalendar = subYears(this.innerCalendar, this.panel === 'year' ? 10 : 1);
-        this.updateCalendar(nextCalendar, this.panel === 'year' ? 'last-decade' : 'last-year');
-      },
-      handleIconDoubleRightClick: function handleIconDoubleRightClick() {
-        var nextCalendar = addYears(this.innerCalendar, this.panel === 'year' ? 10 : 1);
-        this.updateCalendar(nextCalendar, this.panel === 'year' ? 'next-decade' : 'next-year');
+        this.dispatchDatePicker('panel-change', panel, oldPanel);
       },
       handleSelectYear: function handleSelectYear(year) {
         if (this.type === 'year') {
-          var date = this.getCellDate(year, 'year');
+          var date = this.getYearCellDate(year);
           this.emitDate(date, 'year');
         } else {
-          var nextCalendar = setYear(this.innerCalendar, year);
-          this.updateCalendar(nextCalendar, 'year');
+          this.handleCalendarChange(createDate(year, this.calendarMonth), 'year');
           this.handelPanelChange('month');
 
           if (this.partialUpdate && this.innerValue.length === 1) {
-            var _date = setYear(this.innerValue[0], year);
+            var _date = new Date(this.innerValue[0]);
+
+            _date.setFullYear(year);
 
             this.emitDate(_date, 'year');
           }
@@ -17651,37 +17511,31 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
       },
       handleSelectMonth: function handleSelectMonth(month) {
         if (this.type === 'month') {
-          var date = this.getCellDate(month, 'month');
+          var date = this.getMonthCellDate(month);
           this.emitDate(date, 'month');
         } else {
-          var nextCalendar = setMonth(this.innerCalendar, month);
-          this.updateCalendar(nextCalendar, 'month');
+          this.handleCalendarChange(createDate(this.calendarYear, month), 'month');
           this.handelPanelChange('date');
 
           if (this.partialUpdate && this.innerValue.length === 1) {
-            var _date2 = setMonth(setYear(this.innerValue[0], this.calendarYear), month);
+            var _date2 = new Date(this.innerValue[0]);
 
-            this.emitDate(_date2, 'month');
+            _date2.setFullYear(this.calendarYear);
+
+            this.emitDate(setMonth(_date2, month), 'month');
           }
         }
       },
-      handleSelectDate: function handleSelectDate(day) {
-        var date = this.getCellDate(day, 'date');
+      handleSelectDate: function handleSelectDate(date) {
         this.emitDate(date, this.type === 'week' ? 'week' : 'date');
       },
-      getCellDate: function getCellDate(value, type) {
-        if (type === 'year') {
-          return createDate(value, 0);
-        }
-
-        if (type === 'month') {
-          return createDate(this.calendarYear, value);
-        }
-
-        return createDate(this.calendarYear, this.calendarMonth, value);
+      getMonthCellDate: function getMonthCellDate(month) {
+        return createDate(this.calendarYear, month);
       },
-      getDateClasses: function getDateClasses(day) {
-        var cellDate = this.getCellDate(day, 'date');
+      getYearCellDate: function getYearCellDate(year) {
+        return createDate(year, 0);
+      },
+      getDateClasses: function getDateClasses(cellDate) {
         var notCurrentMonth = cellDate.getMonth() !== this.calendarMonth;
         var classes = [];
 
@@ -17707,7 +17561,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
         }
 
         var classes = [];
-        var cellDate = this.getCellDate(month, 'month');
+        var cellDate = this.getMonthCellDate(month);
         classes.push(this.getStateClass(cellDate));
         return classes.concat(this.getClasses(cellDate, this.innerValue, classes.join(' ')));
       },
@@ -17717,7 +17571,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
         }
 
         var classes = [];
-        var cellDate = this.getCellDate(year, 'year');
+        var cellDate = this.getYearCellDate(year);
         classes.push(this.getStateClass(cellDate));
         return classes.concat(this.getClasses(cellDate, this.innerValue, classes.join(' ')));
       },
@@ -17736,198 +17590,65 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
       },
       getWeekState: function getWeekState(row) {
         if (this.type !== 'week') return '';
-        var start = this.getCellDate(row[0].day, 'date').getTime();
-        var end = this.getCellDate(row[6].day, 'date').getTime();
+        var start = row[0].getTime();
+        var end = row[6].getTime();
         var active = this.innerValue.some(function (v) {
           var time = v.getTime();
           return time >= start && time <= end;
         });
         return active ? "".concat(this.prefixClass, "-active-week") : '';
       }
+    },
+    render: function render() {
+      var h = arguments[0];
+      var panel = this.panel,
+          innerCalendar = this.innerCalendar;
+
+      if (panel === 'year') {
+        return h(__vue_component__$6, {
+          "attrs": {
+            "calendar": innerCalendar,
+            "getCellClasses": this.getYearClasses,
+            "getYearPanel": this.getYearPanel
+          },
+          "on": {
+            "select": this.handleSelectYear,
+            "changecalendar": this.handleCalendarChange
+          }
+        });
+      }
+
+      if (panel === 'month') {
+        return h(__vue_component__$5, {
+          "attrs": {
+            "calendar": innerCalendar,
+            "getCellClasses": this.getMonthClasses
+          },
+          "on": {
+            "select": this.handleSelectMonth,
+            "changepanel": this.handelPanelChange,
+            "changecalendar": this.handleCalendarChange
+          }
+        });
+      }
+
+      return h(__vue_component__$4, {
+        "class": _defineProperty({}, "".concat(this.prefixClass, "-calendar-week-mode"), this.type === 'week'),
+        "attrs": {
+          "calendar": innerCalendar,
+          "getCellClasses": this.getDateClasses,
+          "getRowClasses": this.getWeekState,
+          "titleFormat": this.titleFormat,
+          "showWeekNumber": typeof showWeekNumber === 'boolean' ? this.showWeekNumber : this.type === 'week'
+        },
+        "on": {
+          "select": this.handleSelectDate,
+          "changepanel": this.handelPanelChange,
+          "changecalendar": this.handleCalendarChange
+        }
+      });
     }
   };
-
-  /* script */
-  var __vue_script__$3 = script$3;
-  /* template */
-
-  var __vue_render__$5 = function __vue_render__() {
-    var _obj;
-
-    var _vm = this;
-
-    var _h = _vm.$createElement;
-
-    var _c = _vm._self._c || _h;
-
-    return _c('div', {
-      class: [_vm.prefixClass + "-calendar", _vm.prefixClass + "-calendar-panel-" + _vm.panel, (_obj = {}, _obj[_vm.prefixClass + "-calendar-week-mode"] = _vm.type === 'week', _obj)]
-    }, [_c('div', {
-      class: _vm.prefixClass + "-calendar-header"
-    }, [_c('button', {
-      directives: [{
-        name: "show",
-        rawName: "v-show",
-        value: _vm.showIconDoubleArrow,
-        expression: "showIconDoubleArrow"
-      }],
-      class: _vm.prefixClass + "-btn " + _vm.prefixClass + "-btn-text " + _vm.prefixClass + "-btn-icon-double-left",
-      attrs: {
-        "type": "button"
-      },
-      on: {
-        "click": _vm.handleIconDoubleLeftClick
-      }
-    }, [_c('i', {
-      class: _vm.prefixClass + "-icon-double-left"
-    })]), _vm._v(" "), _c('button', {
-      directives: [{
-        name: "show",
-        rawName: "v-show",
-        value: _vm.showIconArrow,
-        expression: "showIconArrow"
-      }],
-      class: _vm.prefixClass + "-btn " + _vm.prefixClass + "-btn-text " + _vm.prefixClass + "-btn-icon-left",
-      attrs: {
-        "type": "button"
-      },
-      on: {
-        "click": _vm.handleIconLeftClick
-      }
-    }, [_c('i', {
-      class: _vm.prefixClass + "-icon-left"
-    })]), _vm._v(" "), _c('button', {
-      directives: [{
-        name: "show",
-        rawName: "v-show",
-        value: _vm.showIconDoubleArrow,
-        expression: "showIconDoubleArrow"
-      }],
-      class: _vm.prefixClass + "-btn " + _vm.prefixClass + "-btn-text " + _vm.prefixClass + "-btn-icon-double-right",
-      attrs: {
-        "type": "button"
-      },
-      on: {
-        "click": _vm.handleIconDoubleRightClick
-      }
-    }, [_c('i', {
-      class: _vm.prefixClass + "-icon-double-right"
-    })]), _vm._v(" "), _c('button', {
-      directives: [{
-        name: "show",
-        rawName: "v-show",
-        value: _vm.showIconArrow,
-        expression: "showIconArrow"
-      }],
-      class: _vm.prefixClass + "-btn " + _vm.prefixClass + "-btn-text " + _vm.prefixClass + "-btn-icon-right",
-      attrs: {
-        "type": "button"
-      },
-      on: {
-        "click": _vm.handleIconRightClick
-      }
-    }, [_c('i', {
-      class: _vm.prefixClass + "-icon-right"
-    })]), _vm._v(" "), _c('span', {
-      class: _vm.prefixClass + "-calendar-header-label"
-    }, [_vm.panel === 'year' ? [_c('span', [_vm._v(_vm._s(_vm.calendarDecade))]), _vm._v(" "), _c('span', {
-      class: _vm.prefixClass + "-calendar-decade-separator"
-    }), _vm._v(" "), _c('span', [_vm._v(_vm._s(_vm.calendarDecade + 9))])] : _vm.panel === 'month' ? _c('button', {
-      class: _vm.prefixClass + "-btn " + _vm.prefixClass + "-btn-text",
-      attrs: {
-        "type": "button"
-      },
-      on: {
-        "click": function click($event) {
-          return _vm.handelPanelChange('year');
-        }
-      }
-    }, [_vm._v("\n        " + _vm._s(_vm.calendarYear) + "\n      ")]) : _vm.panel === 'date' ? _vm._l(_vm.dateHeader, function (item) {
-      return _c('button', {
-        key: item.panel,
-        class: _vm.prefixClass + "-btn " + _vm.prefixClass + "-btn-text " + _vm.prefixClass + "-btn-current-" + item.panel,
-        attrs: {
-          "type": "button"
-        },
-        on: {
-          "click": function click($event) {
-            return _vm.handelPanelChange(item.panel);
-          }
-        }
-      }, [_vm._v("\n          " + _vm._s(item.label) + "\n        ")]);
-    }) : _vm._e()], 2)]), _vm._v(" "), _c('div', {
-      class: _vm.prefixClass + "-calendar-content"
-    }, [_c('table-year', {
-      directives: [{
-        name: "show",
-        rawName: "v-show",
-        value: _vm.panel === 'year',
-        expression: "panel === 'year'"
-      }],
-      attrs: {
-        "decade": _vm.calendarDecade,
-        "get-cell-classes": _vm.getYearClasses
-      },
-      on: {
-        "select": _vm.handleSelectYear
-      }
-    }), _vm._v(" "), _vm.type !== 'year' ? _c('table-month', {
-      directives: [{
-        name: "show",
-        rawName: "v-show",
-        value: _vm.panel === 'month',
-        expression: "panel === 'month'"
-      }],
-      attrs: {
-        "get-cell-classes": _vm.getMonthClasses
-      },
-      on: {
-        "select": _vm.handleSelectMonth
-      }
-    }) : _vm._e(), _vm._v(" "), _vm.type !== 'year' && _vm.type !== 'month' ? _c('table-date', {
-      directives: [{
-        name: "show",
-        rawName: "v-show",
-        value: _vm.panel === 'date',
-        expression: "panel === 'date'"
-      }],
-      attrs: {
-        "calendar-year": _vm.calendarYear,
-        "calendar-month": _vm.calendarMonth,
-        "title-format": _vm.titleFormat,
-        "show-week-number": typeof _vm.showWeekNumber === 'boolean' ? _vm.showWeekNumber : _vm.type === 'week',
-        "get-cell-classes": _vm.getDateClasses,
-        "get-row-classes": _vm.getWeekState
-      },
-      on: {
-        "select": _vm.handleSelectDate
-      }
-    }) : _vm._e()], 1)]);
-  };
-
-  var __vue_staticRenderFns__$5 = [];
-  /* style */
-
-  var __vue_inject_styles__$5 = undefined;
-  /* scoped */
-
-  var __vue_scope_id__$5 = undefined;
-  /* module identifier */
-
-  var __vue_module_identifier__$5 = undefined;
-  /* functional template */
-
-  var __vue_is_functional_template__$5 = false;
-  /* style inject */
-
-  /* style inject SSR */
-
-  /* style inject shadow dom */
-
-  var CalendarPanel = normalizeComponent({
-    render: __vue_render__$5,
-    staticRenderFns: __vue_staticRenderFns__$5
-  }, __vue_inject_styles__$5, __vue_script__$3, __vue_scope_id__$5, __vue_is_functional_template__$5, __vue_module_identifier__$5, false, undefined, undefined, undefined);
 
   var CalendarRange = {
     name: 'CalendarRange',
@@ -17973,10 +17694,10 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
           var _this = this;
 
           this.innerValue = isValidRangeDate(this.value) ? this.value : [new Date(NaN), new Date(NaN)];
-          this.calendars = this.innerValue.map(function (v, i) {
-            return getValidDate(v, _this.defaultValues[i]);
+          var calendars = this.innerValue.map(function (v, i) {
+            return startOfMonth(getValidDate(v, _this.defaultValues[i]));
           });
-          this.validateCalendars(1);
+          this.updateCalendars(calendars);
         }
       }
     },
@@ -18002,30 +17723,31 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
         this.$emit('select', dates, type);
       },
       updateStartCalendar: function updateStartCalendar(value) {
-        this.calendars.splice(0, 1, value);
-        this.validateCalendars(1);
+        this.updateCalendars([value, this.calendars[1]], 1);
       },
       updateEndCalendar: function updateEndCalendar(value) {
-        this.calendars.splice(1, 1, value);
-        this.validateCalendars(0);
+        this.updateCalendars([this.calendars[0], value], 0);
       },
-      validateCalendars: function validateCalendars(index) {
-        var gap = this.getCalendarGap();
+      updateCalendars: function updateCalendars(calendars) {
+        var adjustIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
+        var gap = this.getCalendarGap(calendars);
 
         if (gap) {
-          var calendar = this.calendars[index];
-
-          if (index === 0) {
-            calendar = subMonths(calendar, gap);
-          } else {
-            calendar = addMonths(calendar, gap);
-          }
-
-          this.calendars.splice(index, 1, calendar);
+          var calendar = new Date(calendars[adjustIndex]);
+          calendar.setMonth(calendar.getMonth() + (adjustIndex === 0 ? -gap : gap));
+          calendars[adjustIndex] = calendar;
         }
+
+        this.calendars = calendars;
       },
-      getCalendarGap: function getCalendarGap() {
-        var diff = differenceInCalendarMonths(this.calendars[1], this.calendars[0]);
+      getCalendarGap: function getCalendarGap(calendars) {
+        var _calendars = _slicedToArray(calendars, 2),
+            calendarLeft = _calendars[0],
+            calendarRight = _calendars[1];
+
+        var yearDiff = calendarRight.getFullYear() - calendarLeft.getFullYear();
+        var monthDiff = calendarRight.getMonth() - calendarLeft.getMonth();
+        var diff = yearDiff * 12 + monthDiff;
         var min = this.calendarMinDiff;
         var max = this.calendarMaxDiff;
 
@@ -18099,7 +17821,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
   }
 
   //
-  var script$4 = {
+  var script$5 = {
     inject: {
       prefixClass: {
         default: 'mx'
@@ -18162,10 +17884,10 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
   };
 
   /* script */
-  var __vue_script__$4 = script$4;
+  var __vue_script__$5 = script$5;
   /* template */
 
-  var __vue_render__$6 = function __vue_render__() {
+  var __vue_render__$7 = function __vue_render__() {
     var _vm = this;
 
     var _h = _vm.$createElement;
@@ -18202,29 +17924,29 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     })])]);
   };
 
-  var __vue_staticRenderFns__$6 = [];
+  var __vue_staticRenderFns__$7 = [];
   /* style */
 
-  var __vue_inject_styles__$6 = undefined;
+  var __vue_inject_styles__$7 = undefined;
   /* scoped */
 
-  var __vue_scope_id__$6 = undefined;
+  var __vue_scope_id__$7 = undefined;
   /* module identifier */
 
-  var __vue_module_identifier__$6 = undefined;
+  var __vue_module_identifier__$7 = undefined;
   /* functional template */
 
-  var __vue_is_functional_template__$6 = false;
+  var __vue_is_functional_template__$7 = false;
   /* style inject */
 
   /* style inject SSR */
 
   /* style inject shadow dom */
 
-  var ScrollbarVertical = normalizeComponent({
-    render: __vue_render__$6,
-    staticRenderFns: __vue_staticRenderFns__$6
-  }, __vue_inject_styles__$6, __vue_script__$4, __vue_scope_id__$6, __vue_is_functional_template__$6, __vue_module_identifier__$6, false, undefined, undefined, undefined);
+  var __vue_component__$7 = normalizeComponent({
+    render: __vue_render__$7,
+    staticRenderFns: __vue_staticRenderFns__$7
+  }, __vue_inject_styles__$7, __vue_script__$5, __vue_scope_id__$7, __vue_is_functional_template__$7, __vue_module_identifier__$7, false, undefined, undefined, undefined);
 
   //
 
@@ -18279,10 +18001,10 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     });
   };
 
-  var script$5 = {
+  var script$6 = {
     name: 'ListColumns',
     components: {
-      ScrollbarVertical: ScrollbarVertical
+      ScrollbarVertical: __vue_component__$7
     },
     inject: {
       prefixClass: {
@@ -18457,10 +18179,10 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
   };
 
   /* script */
-  var __vue_script__$5 = script$5;
+  var __vue_script__$6 = script$6;
   /* template */
 
-  var __vue_render__$7 = function __vue_render__() {
+  var __vue_render__$8 = function __vue_render__() {
     var _vm = this;
 
     var _h = _vm.$createElement;
@@ -18494,29 +18216,29 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     }), 1);
   };
 
-  var __vue_staticRenderFns__$7 = [];
+  var __vue_staticRenderFns__$8 = [];
   /* style */
 
-  var __vue_inject_styles__$7 = undefined;
+  var __vue_inject_styles__$8 = undefined;
   /* scoped */
 
-  var __vue_scope_id__$7 = undefined;
+  var __vue_scope_id__$8 = undefined;
   /* module identifier */
 
-  var __vue_module_identifier__$7 = undefined;
+  var __vue_module_identifier__$8 = undefined;
   /* functional template */
 
-  var __vue_is_functional_template__$7 = false;
+  var __vue_is_functional_template__$8 = false;
   /* style inject */
 
   /* style inject SSR */
 
   /* style inject shadow dom */
 
-  var ListColumns = normalizeComponent({
-    render: __vue_render__$7,
-    staticRenderFns: __vue_staticRenderFns__$7
-  }, __vue_inject_styles__$7, __vue_script__$5, __vue_scope_id__$7, __vue_is_functional_template__$7, __vue_module_identifier__$7, false, undefined, undefined, undefined);
+  var __vue_component__$8 = normalizeComponent({
+    render: __vue_render__$8,
+    staticRenderFns: __vue_staticRenderFns__$8
+  }, __vue_inject_styles__$8, __vue_script__$6, __vue_scope_id__$8, __vue_is_functional_template__$8, __vue_module_identifier__$8, false, undefined, undefined, undefined);
 
   //
 
@@ -18542,15 +18264,15 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     }
   };
 
-  var script$6 = {
+  var script$7 = {
     name: 'ListOptions',
     components: {
-      ScrollbarVertical: ScrollbarVertical
+      ScrollbarVertical: __vue_component__$7
     },
     inject: {
-      t: {
+      getLocale: {
         default: function _default() {
-          return getLocaleFieldValue;
+          return getLocale;
         }
       },
       prefixClass: {
@@ -18617,7 +18339,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     methods: {
       formatDate: function formatDate(date, fmt) {
         return format(date, fmt, {
-          locale: this.t('formatLocale')
+          locale: this.getLocale().formatLocale
         });
       },
       scrollToSelected: function scrollToSelected() {
@@ -18635,10 +18357,10 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
   };
 
   /* script */
-  var __vue_script__$6 = script$6;
+  var __vue_script__$7 = script$7;
   /* template */
 
-  var __vue_render__$8 = function __vue_render__() {
+  var __vue_render__$9 = function __vue_render__() {
     var _vm = this;
 
     var _h = _vm.$createElement;
@@ -18658,41 +18380,41 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     }), 0);
   };
 
-  var __vue_staticRenderFns__$8 = [];
+  var __vue_staticRenderFns__$9 = [];
   /* style */
 
-  var __vue_inject_styles__$8 = undefined;
+  var __vue_inject_styles__$9 = undefined;
   /* scoped */
 
-  var __vue_scope_id__$8 = undefined;
+  var __vue_scope_id__$9 = undefined;
   /* module identifier */
 
-  var __vue_module_identifier__$8 = undefined;
+  var __vue_module_identifier__$9 = undefined;
   /* functional template */
 
-  var __vue_is_functional_template__$8 = false;
+  var __vue_is_functional_template__$9 = false;
   /* style inject */
 
   /* style inject SSR */
 
   /* style inject shadow dom */
 
-  var ListOptions = normalizeComponent({
-    render: __vue_render__$8,
-    staticRenderFns: __vue_staticRenderFns__$8
-  }, __vue_inject_styles__$8, __vue_script__$6, __vue_scope_id__$8, __vue_is_functional_template__$8, __vue_module_identifier__$8, false, undefined, undefined, undefined);
+  var __vue_component__$9 = normalizeComponent({
+    render: __vue_render__$9,
+    staticRenderFns: __vue_staticRenderFns__$9
+  }, __vue_inject_styles__$9, __vue_script__$7, __vue_scope_id__$9, __vue_is_functional_template__$9, __vue_module_identifier__$9, false, undefined, undefined, undefined);
 
   //
-  var script$7 = {
+  var script$8 = {
     name: 'TimePanel',
     components: {
-      ListColumns: ListColumns,
-      ListOptions: ListOptions
+      ListColumns: __vue_component__$8,
+      ListOptions: __vue_component__$9
     },
     inject: {
-      t: {
+      getLocale: {
         default: function _default() {
-          return getLocaleFieldValue;
+          return getLocale;
         }
       },
       prefixClass: {
@@ -18799,7 +18521,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     methods: {
       formatDate: function formatDate(date, fmt) {
         return format(date, fmt, {
-          locale: this.t('formatLocale')
+          locale: this.getLocale().formatLocale
         });
       },
       isDisabled: function isDisabled(date) {
@@ -18813,7 +18535,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
         }
       },
       handleClickTitle: function handleClickTitle() {
-        this.$emit('title-click');
+        this.$emit('clicktitle');
       },
       getClasses: function getClasses(value) {
         var cellDate = new Date(value);
@@ -18832,10 +18554,10 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
   };
 
   /* script */
-  var __vue_script__$7 = script$7;
+  var __vue_script__$8 = script$8;
   /* template */
 
-  var __vue_render__$9 = function __vue_render__() {
+  var __vue_render__$a = function __vue_render__() {
     var _vm = this;
 
     var _h = _vm.$createElement;
@@ -18884,29 +18606,29 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     }, 'list-columns', _vm.ShowHourMinuteSecondAMPM, false))], 1)]);
   };
 
-  var __vue_staticRenderFns__$9 = [];
+  var __vue_staticRenderFns__$a = [];
   /* style */
 
-  var __vue_inject_styles__$9 = undefined;
+  var __vue_inject_styles__$a = undefined;
   /* scoped */
 
-  var __vue_scope_id__$9 = undefined;
+  var __vue_scope_id__$a = undefined;
   /* module identifier */
 
-  var __vue_module_identifier__$9 = undefined;
+  var __vue_module_identifier__$a = undefined;
   /* functional template */
 
-  var __vue_is_functional_template__$9 = false;
+  var __vue_is_functional_template__$a = false;
   /* style inject */
 
   /* style inject SSR */
 
   /* style inject shadow dom */
 
-  var TimePanel = normalizeComponent({
-    render: __vue_render__$9,
-    staticRenderFns: __vue_staticRenderFns__$9
-  }, __vue_inject_styles__$9, __vue_script__$7, __vue_scope_id__$9, __vue_is_functional_template__$9, __vue_module_identifier__$9, false, undefined, undefined, undefined);
+  var __vue_component__$a = normalizeComponent({
+    render: __vue_render__$a,
+    staticRenderFns: __vue_staticRenderFns__$a
+  }, __vue_inject_styles__$a, __vue_script__$8, __vue_scope_id__$a, __vue_is_functional_template__$a, __vue_module_identifier__$a, false, undefined, undefined, undefined);
 
   var TimeRange = {
     name: 'TimeRange',
@@ -18915,7 +18637,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
         default: 'mx'
       }
     },
-    props: _objectSpread2({}, TimePanel.props),
+    props: _objectSpread2({}, __vue_component__$a.props),
     data: function data() {
       return {
         startValue: new Date(NaN),
@@ -18977,7 +18699,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
       var prefixClass = this.prefixClass;
       return h("div", {
         "class": "".concat(prefixClass, "-range-wrapper")
-      }, [h(TimePanel, {
+      }, [h(__vue_component__$a, {
         "props": _objectSpread2({}, _objectSpread2({}, this.$props, {
           value: this.startValue,
           defaultValue: defaultValues[0],
@@ -18986,7 +18708,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
         "on": _objectSpread2({}, _objectSpread2({}, this.$listeners, {
           select: this.handleSelectStart
         }))
-      }), h(TimePanel, {
+      }), h(__vue_component__$a, {
         "props": _objectSpread2({}, _objectSpread2({}, this.$props, {
           value: this.endValue,
           defaultValue: defaultValues[1],
@@ -18999,52 +18721,6 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     }
   };
 
-  function _extends$1() {
-    return _extends$1 = Object.assign || function (a) {
-      for (var b, c = 1; c < arguments.length; c++) {
-        for (var d in b = arguments[c], b) {
-          Object.prototype.hasOwnProperty.call(b, d) && (a[d] = b[d]);
-        }
-      }
-
-      return a;
-    }, _extends$1.apply(this, arguments);
-  }
-
-  var normalMerge = ["attrs", "props", "domProps"],
-      toArrayMerge = ["class", "style", "directives"],
-      functionalMerge = ["on", "nativeOn"],
-      mergeJsxProps = function mergeJsxProps(a) {
-    return a.reduce(function (c, a) {
-      for (var b in a) {
-        if (!c[b]) c[b] = a[b];else if (-1 !== normalMerge.indexOf(b)) c[b] = _extends$1({}, c[b], a[b]);else if (-1 !== toArrayMerge.indexOf(b)) {
-          var d = c[b] instanceof Array ? c[b] : [c[b]],
-              e = a[b] instanceof Array ? a[b] : [a[b]];
-          c[b] = d.concat(e);
-        } else if (-1 !== functionalMerge.indexOf(b)) {
-          for (var f in a[b]) {
-            if (c[b][f]) {
-              var g = c[b][f] instanceof Array ? c[b][f] : [c[b][f]],
-                  h = a[b][f] instanceof Array ? a[b][f] : [a[b][f]];
-              c[b][f] = g.concat(h);
-            } else c[b][f] = a[b][f];
-          }
-        } else if ("hook" == b) for (var i in a[b]) {
-          c[b][i] = c[b][i] ? mergeFn(c[b][i], a[b][i]) : a[b][i];
-        } else c[b] = a[b];
-      }
-
-      return c;
-    }, {});
-  },
-      mergeFn = function mergeFn(a, b) {
-    return function () {
-      a && a.apply(this, arguments), b && b.apply(this, arguments);
-    };
-  };
-
-  var helper = mergeJsxProps;
-
   var DatetimePanel = {
     name: 'DatetimePanel',
     inject: {
@@ -19052,7 +18728,8 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
         default: 'mx'
       }
     },
-    props: _objectSpread2({}, CalendarPanel.props, {}, TimePanel.props, {
+    emits: ['select', 'update:show-time-panel'],
+    props: _objectSpread2({}, CalendarPanel.props, {}, __vue_component__$a.props, {
       showTimePanel: {
         type: Boolean,
         default: undefined
@@ -19072,6 +18749,9 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     watch: {
       value: function value(val) {
         this.currentValue = val;
+      },
+      defaultTimeVisible: function defaultTimeVisible(val) {
+        this.$emit('update:show-time-panel', val);
       }
     },
     methods: {
@@ -19108,7 +18788,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     render: function render() {
       var h = arguments[0];
       var calendarProps = {
-        props: _objectSpread2({}, pick(this, Object.keys(CalendarPanel.props)), {
+        props: _objectSpread2({}, pick(this.$props, Object.keys(CalendarPanel.props)), {
           type: 'date',
           value: this.currentValue
         }),
@@ -19117,17 +18797,17 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
         }
       };
       var timeProps = {
-        props: _objectSpread2({}, pick(this, Object.keys(TimePanel.props)), {
+        props: _objectSpread2({}, pick(this.$props, Object.keys(__vue_component__$a.props)), {
           showTimeHeader: true,
           value: this.currentValue
         }),
         on: {
           select: this.emitDate,
-          'title-click': this.closeTimePanel
+          clicktitle: this.closeTimePanel
         }
       };
       var prefixClass = this.prefixClass;
-      return h("div", [h(CalendarPanel, helper([{}, calendarProps])), this.timeVisible && h(TimePanel, helper([{
+      return h("div", [h(CalendarPanel, helper([{}, calendarProps])), this.timeVisible && h(__vue_component__$a, helper([{
         "class": "".concat(prefixClass, "-calendar-time")
       }, timeProps]))]);
     }
@@ -19140,6 +18820,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
         default: 'mx'
       }
     },
+    emits: ['select', 'update:show-time-panel'],
     props: _objectSpread2({}, CalendarRange.props, {}, TimeRange.props, {
       showTimePanel: {
         type: Boolean,
@@ -19160,6 +18841,9 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     watch: {
       value: function value(val) {
         this.currentValue = val;
+      },
+      defaultTimeVisible: function defaultTimeVisible(val) {
+        this.$emit('update:show-time-panel', val);
       }
     },
     methods: {
@@ -19206,7 +18890,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     render: function render() {
       var h = arguments[0];
       var calendarProps = {
-        props: _objectSpread2({}, pick(this, Object.keys(CalendarRange.props)), {
+        props: _objectSpread2({}, pick(this.$props, Object.keys(CalendarRange.props)), {
           type: 'date',
           value: this.currentValue
         }),
@@ -19215,13 +18899,13 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
         }
       };
       var timeProps = {
-        props: _objectSpread2({}, pick(this, Object.keys(TimeRange.props)), {
+        props: _objectSpread2({}, pick(this.$props, Object.keys(TimeRange.props)), {
           value: this.currentValue,
           showTimeHeader: true
         }),
         on: {
           select: this.emitDate,
-          'title-click': this.closeTimePanel
+          clicktitle: this.closeTimePanel
         }
       };
       var prefixClass = this.prefixClass;
@@ -19233,7 +18917,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
 
   var componentMap = {
     default: CalendarPanel,
-    time: TimePanel,
+    time: __vue_component__$a,
     datetime: DatetimePanel
   };
   var componentRangeMap = {
@@ -19241,18 +18925,19 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
     time: TimeRange,
     datetime: DatetimeRange
   };
-  var script$8 = {
+  var DatePicker = {
     name: 'DatePicker',
-    components: {
-      IconCalendar: IconCalendar,
-      IconClose: IconClose,
-      Popup: Popup
-    },
     provide: function provide() {
+      var _this = this;
+
       return {
-        t: this.getLocaleFieldValue,
+        // make locale reactive
+        getLocale: function getLocale() {
+          return _this.locale;
+        },
         getWeek: this.getWeek,
-        prefixClass: this.prefixClass
+        prefixClass: this.prefixClass,
+        dispatchDatePicker: this.$emit.bind(this)
       };
     },
     props: _objectSpread2({}, DatetimePanel.props, {
@@ -19268,18 +18953,10 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
         default: 'date'
       },
       format: {
-        type: [String, Object],
-        default: function _default() {
-          var map = {
-            date: 'YYYY-MM-DD',
-            datetime: 'YYYY-MM-DD HH:mm:ss',
-            year: 'YYYY',
-            month: 'YYYY-MM',
-            time: 'HH:mm:ss',
-            week: 'w'
-          };
-          return map[this.type] || map.date;
-        }
+        type: String
+      },
+      formatter: {
+        type: Object
       },
       range: {
         type: Boolean,
@@ -19290,10 +18967,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
         default: false
       },
       rangeSeparator: {
-        type: String,
-        default: function _default() {
-          return this.multiple ? ',' : ' ~ ';
-        }
+        type: String
       },
       lang: {
         type: [String, Object]
@@ -19318,11 +18992,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
         type: String,
         default: 'mx'
       },
-      inputClass: {
-        default: function _default() {
-          return "".concat(this.prefixClass, "-input");
-        }
-      },
+      inputClass: {},
       inputAttr: {
         type: Object,
         default: function _default() {
@@ -19380,19 +19050,22 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
       };
     },
     computed: {
-      currentComponent: function currentComponent() {
-        var map = this.range ? componentRangeMap : componentMap;
-        return map[this.type] || map.default;
-      },
-      currentComponentProps: function currentComponentProps() {
-        var props = _objectSpread2({}, pick(this, Object.keys(this.currentComponent.props)), {
-          value: this.currentValue
-        });
-
-        return props;
-      },
       popupVisible: function popupVisible() {
         return !this.disabled && (typeof this.open === 'boolean' ? this.open : this.defaultOpen);
+      },
+      innerRangeSeparator: function innerRangeSeparator() {
+        return this.rangeSeparator || (this.multiple ? ',' : ' ~ ');
+      },
+      innerFormat: function innerFormat() {
+        var map = {
+          date: 'YYYY-MM-DD',
+          datetime: 'YYYY-MM-DD HH:mm:ss',
+          year: 'YYYY',
+          month: 'YYYY-MM',
+          time: 'HH:mm:ss',
+          week: 'w'
+        };
+        return this.format || map[this.type] || map.date;
       },
       innerValue: function innerValue() {
         var value = this.value;
@@ -19407,10 +19080,10 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
           return value.map(this.value2date);
         }
 
-        return this.value2date(this.value);
+        return this.value2date(value);
       },
       text: function text() {
-        var _this = this;
+        var _this2 = this;
 
         if (this.userInput !== null) {
           return this.userInput;
@@ -19424,15 +19097,13 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
           return '';
         }
 
-        var fmt = this.format;
-
         if (Array.isArray(this.innerValue)) {
           return this.innerValue.map(function (v) {
-            return _this.formatDate(v, fmt);
-          }).join(this.rangeSeparator);
+            return _this2.formatDate(v);
+          }).join(this.innerRangeSeparator);
         }
 
-        return this.formatDate(this.innerValue, fmt);
+        return this.formatDate(this.innerValue);
       },
       showClearIcon: function showClearIcon() {
         return !this.disabled && this.clearable && this.text;
@@ -19457,6 +19128,11 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
         }
       }
     },
+    created: function created() {
+      if (_typeof(this.format) === 'object') {
+        console.warn("[vue2-datepicker]: The prop `format` don't support Object any more. You can use the new prop `formatter` to replace it");
+      }
+    },
     methods: {
       handleClickOutSide: function handleClickOutSide(evt) {
         var target = evt.target;
@@ -19465,16 +19141,21 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
           this.closePopup();
         }
       },
+      getFormatter: function getFormatter(key) {
+        return isObject(this.formatter) && this.formatter[key] || isObject(this.format) && this.format[key];
+      },
       getWeek: function getWeek$1(date, options) {
-        if (isObject(this.format) && typeof this.format.getWeek === 'function') {
-          return this.format.getWeek(date, options);
+        if (typeof this.getFormatter('getWeek') === 'function') {
+          return this.getFormatter('getWeek')(date, options);
         }
 
         return getWeek(date, options);
       },
       parseDate: function parseDate(value, fmt) {
-        if (isObject(this.format) && typeof this.format.parse === 'function') {
-          return this.format.parse(value, fmt);
+        fmt = fmt || this.innerFormat;
+
+        if (typeof this.getFormatter('parse') === 'function') {
+          return this.getFormatter('parse')(value, fmt);
         }
 
         var backupDate = new Date();
@@ -19484,8 +19165,10 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
         });
       },
       formatDate: function formatDate(date, fmt) {
-        if (isObject(this.format) && typeof this.format.stringify === 'function') {
-          return this.format.stringify(date, fmt);
+        fmt = fmt || this.innerFormat;
+
+        if (typeof this.getFormatter('stringify') === 'function') {
+          return this.getFormatter('stringify')(date, fmt);
         }
 
         return format(date, fmt, {
@@ -19502,7 +19185,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
             return typeof value === 'number' ? new Date(value) : new Date(NaN);
 
           case 'format':
-            return typeof value === 'string' ? this.parseDate(value, this.format) : new Date(NaN);
+            return typeof value === 'string' ? this.parseDate(value) : new Date(NaN);
 
           default:
             return typeof value === 'string' ? this.parseDate(value, this.valueType) : new Date(NaN);
@@ -19520,7 +19203,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
             return date.getTime();
 
           case 'format':
-            return this.formatDate(date, this.format);
+            return this.formatDate(date);
 
           default:
             return this.formatDate(date, this.valueType);
@@ -19596,7 +19279,8 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
           this.emitValue(val, this.validMultipleType ? "multiple-".concat(type) : type);
         }
       },
-      handleClear: function handleClear() {
+      handleClear: function handleClear(evt) {
+        evt.stopPropagation();
         this.emitValue(this.range ? [null, null] : null);
         this.$emit('clear');
       },
@@ -19604,7 +19288,10 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
         var value = this.emitValue(this.currentValue);
         this.$emit('confirm', value);
       },
-      handleSelectShortcut: function handleSelectShortcut(item) {
+      handleSelectShortcut: function handleSelectShortcut(evt) {
+        var index = evt.currentTarget.getAttribute('data-index');
+        var item = this.shortcuts[parseInt(index, 10)];
+
         if (isObject(item) && typeof item.onClick === 'function') {
           var date = item.onClick(this);
 
@@ -19637,7 +19324,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
         }
       },
       handleInputChange: function handleInputChange() {
-        var _this2 = this;
+        var _this3 = this;
 
         if (!this.editable || this.userInput === null) return;
         var text = this.userInput.trim();
@@ -19651,23 +19338,23 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
         var date;
 
         if (this.validMultipleType) {
-          date = text.split(this.rangeSeparator).map(function (v) {
-            return _this2.parseDate(v.trim(), _this2.format);
+          date = text.split(this.innerRangeSeparator).map(function (v) {
+            return _this3.parseDate(v.trim());
           });
         } else if (this.range) {
-          var arr = text.split(this.rangeSeparator);
+          var arr = text.split(this.innerRangeSeparator);
 
           if (arr.length !== 2) {
             // Maybe the separator during the day is the same as the separator for the date
             // eg: 2019-10-09-2020-01-02
-            arr = text.split(this.rangeSeparator.trim());
+            arr = text.split(this.innerRangeSeparator.trim());
           }
 
           date = arr.map(function (v) {
-            return _this2.parseDate(v.trim(), _this2.format);
+            return _this3.parseDate(v.trim());
           });
         } else {
-          date = this.parseDate(text, this.format);
+          date = this.parseDate(text);
         }
 
         if (this.isValidValueAndNotDisabled(date)) {
@@ -19700,163 +19387,171 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
       hasSlot: function hasSlot(name) {
         return !!(this.$slots[name] || this.$scopedSlots[name]);
       },
-      getLocaleFieldValue: function getLocaleFieldValue$1(path) {
-        return getLocaleFieldValue(path, this.locale);
+      renderSlot: function renderSlot(name, fallback, props) {
+        var slotFn = this.$scopedSlots[name];
+
+        if (slotFn) {
+          return slotFn(props) || fallback;
+        }
+
+        return this.$slots[name] || fallback;
+      },
+      renderInput: function renderInput() {
+        var h = this.$createElement;
+        var prefixClass = this.prefixClass;
+
+        var props = _objectSpread2({
+          name: 'date',
+          type: 'text',
+          autocomplete: 'off',
+          value: this.text,
+          class: this.inputClass || "".concat(this.prefixClass, "-input"),
+          readonly: !this.editable,
+          disabled: this.disabled,
+          placeholder: this.placeholder
+        }, this.inputAttr);
+
+        var value = props.value,
+            attrs = _objectWithoutProperties(props, ["value"]);
+
+        var events = {
+          keydown: this.handleInputKeydown,
+          focus: this.handleInputFocus,
+          blur: this.handleInputBlur,
+          input: this.handleInputInput,
+          change: this.handleInputChange
+        };
+        var input = this.renderSlot('input', h("input", {
+          "domProps": {
+            "value": value
+          },
+          "attrs": _objectSpread2({}, attrs),
+          "on": _objectSpread2({}, events),
+          "ref": "input"
+        }), {
+          props: props,
+          events: events
+        });
+        return h("div", {
+          "class": "".concat(prefixClass, "-input-wrapper"),
+          "on": {
+            "mousedown": this.openPopup
+          }
+        }, [input, this.showClearIcon ? h("i", {
+          "class": "".concat(prefixClass, "-icon-clear"),
+          "on": {
+            "mousedown": this.handleClear
+          }
+        }, [this.renderSlot('icon-clear', h(__vue_component__$2))]) : null, h("i", {
+          "class": "".concat(prefixClass, "-icon-calendar")
+        }, [this.renderSlot('icon-calendar', h(__vue_component__$1))])]);
+      },
+      renderContent: function renderContent() {
+        var h = this.$createElement;
+        var map = this.range ? componentRangeMap : componentMap;
+        var Component = map[this.type] || map.default;
+
+        var props = _objectSpread2({}, pick(this.$props, Object.keys(Component.props)), {
+          value: this.currentValue
+        });
+
+        var on = _objectSpread2({}, pick(this.$listeners, Component.emits || []), {
+          select: this.handleSelectDate
+        });
+
+        var content = h(Component, helper([{}, {
+          props: props,
+          on: on,
+          ref: 'picker'
+        }]));
+        return h("div", {
+          "class": "".concat(this.prefixClass, "-datepicker-body")
+        }, [this.renderSlot('content', content, {
+          value: this.currentValue,
+          emit: this.handleSelectDate
+        })]);
+      },
+      renderSidebar: function renderSidebar() {
+        var _this4 = this;
+
+        var h = this.$createElement;
+        var prefixClass = this.prefixClass;
+        return h("div", {
+          "class": "".concat(prefixClass, "-datepicker-sidebar")
+        }, [this.renderSlot('sidebar', null, {
+          value: this.currentValue,
+          emit: this.handleSelectDate
+        }), this.shortcuts.map(function (v, i) {
+          return h("button", {
+            "key": i,
+            "attrs": {
+              "data-index": i,
+              "type": "button"
+            },
+            "class": "".concat(prefixClass, "-btn ").concat(prefixClass, "-btn-text ").concat(prefixClass, "-btn-shortcut"),
+            "on": {
+              "click": _this4.handleSelectShortcut
+            }
+          }, [v.text]);
+        })]);
+      },
+      renderHeader: function renderHeader() {
+        var h = this.$createElement;
+        return h("div", {
+          "class": "".concat(this.prefixClass, "-datepicker-header")
+        }, [this.renderSlot('header', null, {
+          value: this.currentValue,
+          emit: this.handleSelectDate
+        })]);
+      },
+      renderFooter: function renderFooter() {
+        var h = this.$createElement;
+        var prefixClass = this.prefixClass;
+        return h("div", {
+          "class": "".concat(prefixClass, "-datepicker-footer")
+        }, [this.renderSlot('footer', null, {
+          value: this.currentValue,
+          emit: this.handleSelectDate
+        }), this.confirm ? h("button", {
+          "attrs": {
+            "type": "button"
+          },
+          "class": "".concat(prefixClass, "-btn ").concat(prefixClass, "-datepicker-btn-confirm"),
+          "on": {
+            "click": this.handleConfirmDate
+          }
+        }, [this.confirmText]) : null]);
       }
+    },
+    render: function render() {
+      var _class;
+
+      var h = arguments[0];
+      var prefixClass = this.prefixClass,
+          inline = this.inline,
+          disabled = this.disabled;
+      var sidedar = this.hasSlot('sidebar') || this.shortcuts.length ? this.renderSidebar() : null;
+      var content = h("div", {
+        "class": "".concat(prefixClass, "-datepicker-content")
+      }, [this.hasSlot('header') ? this.renderHeader() : null, this.renderContent(), this.hasSlot('footer') || this.confirm ? this.renderFooter() : null]);
+      return h("div", {
+        "class": (_class = {}, _defineProperty(_class, "".concat(prefixClass, "-datepicker"), true), _defineProperty(_class, "".concat(prefixClass, "-datepicker-range"), this.range), _defineProperty(_class, "".concat(prefixClass, "-datepicker-inline"), inline), _defineProperty(_class, "disabled", disabled), _class)
+      }, [!inline ? this.renderInput() : null, !inline ? h(__vue_component__, {
+        "ref": "popup",
+        "class": this.popupClass,
+        "style": this.popupStyle,
+        "attrs": {
+          "visible": this.popupVisible,
+          "appendToBody": this.appendToBody
+        },
+        "on": {
+          "clickoutside": this.handleClickOutSide
+        }
+      }, [sidedar, content]) : h("div", {
+        "class": "".concat(prefixClass, "-datepicker-main")
+      }, [sidedar, content])]);
     }
   };
-
-  var __vue_script__$8 = script$8;
-  /* template */
-
-  var __vue_render__$a = function __vue_render__() {
-    var _obj;
-
-    var _vm = this;
-
-    var _h = _vm.$createElement;
-
-    var _c = _vm._self._c || _h;
-
-    return _c('div', {
-      class: (_obj = {}, _obj[_vm.prefixClass + "-datepicker"] = true, _obj[_vm.prefixClass + "-datepicker-range"] = _vm.range, _obj[_vm.prefixClass + "-datepicker-inline"] = _vm.inline, _obj.disabled = _vm.disabled, _obj)
-    }, [!_vm.inline ? _c('div', {
-      class: _vm.prefixClass + "-input-wrapper",
-      on: {
-        "mousedown": _vm.openPopup
-      }
-    }, [_vm._t("input", [_c('input', _vm._g(_vm._b({
-      ref: "input"
-    }, 'input', _extends({}, {
-      name: 'date',
-      type: 'text',
-      autocomplete: 'off',
-      value: _vm.text,
-      class: _vm.inputClass,
-      readonly: !_vm.editable,
-      disabled: _vm.disabled,
-      placeholder: _vm.placeholder
-    }, _vm.inputAttr), false), {
-      keydown: _vm.handleInputKeydown,
-      focus: _vm.handleInputFocus,
-      blur: _vm.handleInputBlur,
-      input: _vm.handleInputInput,
-      change: _vm.handleInputChange
-    }))], {
-      "props": _extends({}, {
-        name: 'date',
-        type: 'text',
-        autocomplete: 'off',
-        value: _vm.text,
-        class: _vm.inputClass,
-        readonly: !_vm.editable,
-        disabled: _vm.disabled,
-        placeholder: _vm.placeholder
-      }, _vm.inputAttr),
-      "events": {
-        keydown: _vm.handleInputKeydown,
-        focus: _vm.handleInputFocus,
-        blur: _vm.handleInputBlur,
-        input: _vm.handleInputInput,
-        change: _vm.handleInputChange
-      }
-    }), _vm._v(" "), _vm.showClearIcon ? _c('i', {
-      class: _vm.prefixClass + "-icon-clear",
-      on: {
-        "mousedown": function mousedown($event) {
-          $event.stopPropagation();
-          return _vm.handleClear($event);
-        }
-      }
-    }, [_vm._t("icon-clear", [_c('icon-close')])], 2) : _vm._e(), _vm._v(" "), _c('i', {
-      class: _vm.prefixClass + "-icon-calendar"
-    }, [_vm._t("icon-calendar", [_c('icon-calendar')])], 2)], 2) : _vm._e(), _vm._v(" "), _c('Popup', {
-      ref: "popup",
-      class: _vm.popupClass,
-      style: _vm.popupStyle,
-      attrs: {
-        "inline": _vm.inline,
-        "visible": _vm.popupVisible,
-        "append-to-body": _vm.appendToBody
-      },
-      on: {
-        "clickoutside": _vm.handleClickOutSide
-      }
-    }, [_vm.hasSlot('sidebar') || _vm.shortcuts.length ? _c('div', {
-      class: _vm.prefixClass + "-datepicker-sidebar"
-    }, [_vm._t("sidebar", null, {
-      "value": _vm.currentValue,
-      "emit": _vm.emitValue
-    }), _vm._v(" "), _vm._l(_vm.shortcuts, function (v, i) {
-      return _c('button', {
-        key: i,
-        class: _vm.prefixClass + "-btn " + _vm.prefixClass + "-btn-text " + _vm.prefixClass + "-btn-shortcut",
-        attrs: {
-          "type": "button"
-        },
-        on: {
-          "click": function click($event) {
-            return _vm.handleSelectShortcut(v);
-          }
-        }
-      }, [_vm._v("\n        " + _vm._s(v.text) + "\n      ")]);
-    })], 2) : _vm._e(), _vm._v(" "), _c('div', {
-      class: _vm.prefixClass + "-datepicker-content"
-    }, [_vm.hasSlot('header') ? _c('div', {
-      class: _vm.prefixClass + "-datepicker-header"
-    }, [_vm._t("header", null, {
-      "value": _vm.currentValue,
-      "emit": _vm.emitValue
-    })], 2) : _vm._e(), _vm._v(" "), _c('div', {
-      class: _vm.prefixClass + "-datepicker-body"
-    }, [_vm._t("content", [_c(_vm.currentComponent, _vm._b({
-      ref: "picker",
-      tag: "component",
-      on: {
-        "select": _vm.handleSelectDate
-      }
-    }, 'component', _vm.currentComponentProps, false))], {
-      "value": _vm.currentValue,
-      "emit": _vm.emitValue
-    })], 2), _vm._v(" "), _vm.hasSlot('footer') || _vm.confirm ? _c('div', {
-      class: _vm.prefixClass + "-datepicker-footer"
-    }, [_vm._t("footer", null, {
-      "value": _vm.currentValue,
-      "emit": _vm.emitValue
-    }), _vm._v(" "), _vm.confirm ? _c('button', {
-      class: _vm.prefixClass + "-btn " + _vm.prefixClass + "-datepicker-btn-confirm",
-      attrs: {
-        "type": "button"
-      },
-      on: {
-        "click": _vm.handleConfirmDate
-      }
-    }, [_vm._v("\n          " + _vm._s(_vm.confirmText) + "\n        ")]) : _vm._e()], 2) : _vm._e()])])], 1);
-  };
-
-  var __vue_staticRenderFns__$a = [];
-  /* style */
-
-  var __vue_inject_styles__$a = undefined;
-  /* scoped */
-
-  var __vue_scope_id__$a = undefined;
-  /* module identifier */
-
-  var __vue_module_identifier__$a = undefined;
-  /* functional template */
-
-  var __vue_is_functional_template__$a = false;
-  /* style inject */
-
-  /* style inject SSR */
-
-  /* style inject shadow dom */
-
-  var DatePicker = normalizeComponent({
-    render: __vue_render__$a,
-    staticRenderFns: __vue_staticRenderFns__$a
-  }, __vue_inject_styles__$a, __vue_script__$8, __vue_scope_id__$a, __vue_is_functional_template__$a, __vue_module_identifier__$a, false, undefined, undefined, undefined);
 
   DatePicker.locale = locale$1;
 
@@ -19871,7 +19566,7 @@ var vue2Datepicker = createCommonjsModule(function (module, exports) {
   _extends(DatePicker, {
     CalendarPanel: CalendarPanel,
     CalendarRange: CalendarRange,
-    TimePanel: TimePanel,
+    TimePanel: __vue_component__$a,
     TimeRange: TimeRange,
     DatetimePanel: DatetimePanel,
     DatetimeRange: DatetimeRange
@@ -21807,7 +21502,7 @@ const app = new Vue({
       if (!helics.includes(this.helicopter))
         this.helicopter = helics[0];
       if (v && fixedDuration) {
-        fixedDuration.innerText = this.trips.find(({ id }) => id === v).duration + ' хв';
+        fixedDuration.innerText = this.trips.find(({ id }) => id === v).duration;
       }
     },
     passengers (v) {
@@ -21817,7 +21512,7 @@ const app = new Vue({
       if (!helics.includes(this.helicopter))
         this.helicopter = helics[0];
       if (v && fixedPassengers) {
-        fixedPassengers.innerText = `${v} ПАСАЖИРИ + ПІЛОТ`;
+        fixedPassengers.innerText = `${v}`;
       }
     },
     helicopter: {
@@ -21834,7 +21529,7 @@ const app = new Vue({
             fixedHelitour.innerText = helicopter.name;
           }
           if (fixedPrice) {
-            fixedPrice.innerText = Math.round(this.price / helicopter.passengers) + 'грн';
+            fixedPrice.innerText = Math.round(this.price / helicopter.passengers);
           }
         }
       }
