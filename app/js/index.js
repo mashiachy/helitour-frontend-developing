@@ -27,9 +27,9 @@ document.querySelectorAll('.js__open-modal-document').forEach(control => {
             'data-popup-jpg'
         )
       );
-    const img = document.querySelector('.modal-document img')
-    img.setAttribute('alt', target.getAttribute('data-popup-alt'));
-    img.style.transform = 'scale(1)'
+    const t = document.querySelector('.modal-document')
+    t.querySelector('img').setAttribute('alt', target.getAttribute('data-popup-alt'));
+    t.style.transform = 'scale(1)'
     s = 1
     openModal('.modal-document');
     e.stopPropagation();
@@ -39,9 +39,8 @@ document.querySelectorAll('.js__open-modal-document').forEach(control => {
 document.querySelector('.js__near-modal-document').addEventListener('click', (e) => {
   if (s < 1.5) {
     s += step
-    const img = document.querySelector('.modal-document img')
-    console.log(img)
-    img.style.transform = `scale(${s})`
+    const t = document.querySelector('.modal-document')
+    t.style.transform = `scale(${s})`
   }
   e.stopPropagation()
 })
@@ -49,8 +48,8 @@ document.querySelector('.js__near-modal-document').addEventListener('click', (e)
 document.querySelector('.js__far-modal-document').addEventListener('click', (e) => {
   if (s > 1) {
     s -= step
-    const img = document.querySelector('.modal-document img')
-    img.style.transform = `scale(${s})`
+    const t = document.querySelector('.modal-document')
+    t.style.transform = `scale(${s})`
   }
   e.stopPropagation()
 })
