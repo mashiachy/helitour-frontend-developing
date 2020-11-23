@@ -86,7 +86,7 @@ const app = new Vue({
       if (!helics.includes(this.helicopter))
         this.helicopter = helics[0]
       if (v && fixedDuration) {
-        fixedDuration.innerText = this.trips.find(({ id }) => id === v).duration + ' хв'
+        fixedDuration.innerText = this.trips.find(({ id }) => id === v).duration
       }
     },
     passengers (v) {
@@ -96,7 +96,7 @@ const app = new Vue({
       if (!helics.includes(this.helicopter))
         this.helicopter = helics[0]
       if (v && fixedPassengers) {
-        fixedPassengers.innerText = `${v} ПАСАЖИРИ + ПІЛОТ`
+        fixedPassengers.innerText = `${v}`
       }
     },
     helicopter: {
@@ -113,7 +113,7 @@ const app = new Vue({
             fixedHelitour.innerText = helicopter.name
           }
           if (fixedPrice) {
-            fixedPrice.innerText = Math.round(this.price / helicopter.passengers) + 'грн'
+            fixedPrice.innerText = Math.round(this.price / helicopter.passengers)
           }
         }
       }
