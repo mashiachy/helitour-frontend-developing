@@ -1870,76 +1870,17 @@ const closeModal = (modalSelector) => {
   })
 };
 
-const loadMap = () => {
-  const mapApiKey = 'AIzaSyBUevELRNQrstYsf6nlw74wsrukteZiguc';
-  return new Promise((resolve, reject) => {
-    const script = document.createElement('script');
-    const callback = () => {
-      script.removeEventListener('load', callback);
-      resolve(script);
-    };
-    script.addEventListener('load', callback);
-    script.src = `https://maps.googleapis.com/maps/api/js?key=${mapApiKey}`;
-    script.async = true;
-    document.head.appendChild(script);
-  });
-};
-
-const initBaseMap = (container) => {
-  return loadMap().then(() => {
-    return new Promise((resolve, reject) => {
-      const containerElement = document.querySelector(container);
-      if (!containerElement) reject();
-      let lat, lng;
-      const latMeta = document.querySelector('meta[name="mapLat"]');
-      if (latMeta)
-        lat = Number.parseFloat(latMeta.getAttribute('content'));
-      else
-        lat = 50.4578396;
-      const lngMeta = document.querySelector('meta[name="mapLng"]');
-      if (lngMeta)
-        lng = Number.parseFloat(lngMeta.getAttribute('content'));
-      else
-        lng = 30.5683109;
-      const map = new google.maps.Map(containerElement, {
-        center: { lat, lng },
-        zoom: 14,
-        disableDefaultUI: true,
-        clickableIcons: false,
-        styles: [
-          {
-            featureType: 'poi',
-            stylers: [
-              { visibility: 'off' }
-            ]
-          },
-          {
-            featureType: 'poi.park',
-            stylers: [
-              { visibility: 'on' }
-            ]
-          },
-          {
-            featureType: 'transit',
-            stylers: [
-              { visibility: 'off' }
-            ]
-          }
-        ]
-      });
-      resolve(map);
-    })
-  });
-};
+// import { map } from 'lodash';
 
 webp();
 headerPopup();
 vhFix();
-initBaseMap('#js__map').then(map => {
+/*initBaseMap('#js__map').then(map => {
   const infowindow = new google.maps.InfoWindow();
   const marker = new google.maps.Marker({
     map,
     position: {lat: 50.4578396, lng: 30.5683109},
+    title: 'какой-то заголовок'
   });
   google.maps.event.addListener(marker, "click", function () {
     infowindow.setContent(
@@ -1951,7 +1892,7 @@ initBaseMap('#js__map').then(map => {
     );
     infowindow.open(map, this);
   });
-});
+})*/
 
 initModal('.modal-reserve');
 initModal('.modal-thanks');
@@ -1961,3 +1902,8 @@ document.querySelectorAll('.js__open-modal-reserve').forEach(el =>
     e.stopPropagation();
   })
 );
+
+const iframe = document.querySelector('#js__map iframe');
+iframe.addEventListener('load', () => {
+  iframe.contentWindow.querySelector('body').innerHtml += '<style>.place-card{display:none!important;}</style>';
+});
