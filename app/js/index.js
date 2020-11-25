@@ -110,6 +110,9 @@ const bookingForm = new Vue({
     isTablet: () => window.innerWidth < 1280
   },
   methods: {
+    alert(msg) {
+      alert(msg)
+    },
     clickSelect (target, e) {
       target.classList.toggle('select-input_active');
       e.stopPropagation();

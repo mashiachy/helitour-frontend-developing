@@ -107,7 +107,7 @@ html(lang="us")
                 v-for='helicopterItem in helicopters'
                 :key='helicopterItem.id'
                 :class='{ \'select-cards__item_active\': helicopter === helicopterItem.id, \'disabled\': !filteredHelicopters.includes(helicopterItem) }'
-                @click='helicopter = helicopterItem.id'
+                @click='!filteredHelicopters.includes(helicopterItem) ? alert(\'Пожалуйста, выберете другую экскурсию\') : helicopter = helicopterItem.id'
               ).item
                 +e.SPAN(
                   v-html='helicopterItem.icon'

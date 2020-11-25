@@ -39,7 +39,7 @@ html(lang="us")
                   :class='{ \'select-input__dropdown-item_current\': tripItem.id === trip }'
                   @click='trip = tripItem.id'
                 ).dropdown-item {{ tripItem.name }}
-          +e.form-item_select
+          //+e.form-item_select
             +e.LABEL(for='passengers-select').item-label Кількість пасажирів
             +b.DIV(
               :class='{ \'select-input_disable\': !passengers }'
@@ -70,7 +70,7 @@ html(lang="us")
                 v-for='helicopterItem in helicopters'
                 :key='helicopterItem.id'
                 :class='{ \'select-cards__item_active\': helicopter === helicopterItem.id, \'disabled\': !filteredHelicopters.includes(helicopterItem) }'
-                @click='helicopter = helicopterItem.id'
+                @click='!filteredHelicopters.includes(helicopterItem) ? alert(\'Данный вертолёт недоступен для этой экскурсии. Пожалуйста, выберите другую экскурсию\') : helicopter = helicopterItem.id'
               ).item
                 +e.SPAN(
                   v-html='helicopterItem.icon'
@@ -126,8 +126,8 @@ html(lang="us")
             +e.personal-wrapper
               +e.personal-wrapper-item
                 +b.INPUT(type='text' placeholder='Ваше ім’я' v-model='name' :class="{ \'unvalid\': validate && !name}").text-input
-                +b.INPUT(type='text' placeholder='Ваше фамилия' v-model='lastName' :class="{ \'unvalid\': validate && !lastName}").text-input
-                +b.MASKED-INPUT(type='text' placeholder='Ваш телефон' mask='\\+\\1 (111) 1111-11' v-model='telephone' :class="{ \'unvalid\': validate && !telephone}").text-input
+                +b.INPUT(v-show='present' type='text' placeholder='Ваше фамилия' v-model='lastName' :class="{ \'unvalid\': validate && !lastName}").text-input
+                +b.INPUT(type='text' placeholder='Ваш телефон' v-model='telephone' :class="{ \'unvalid\': validate && !telephone}").text-input
                 +b.INPUT(type='text' placeholder='Ваша почта' v-model='email').text-input
                 +b.DIV(
                   :class='{ \'select-input_disable\': !delivery, \'unvalid\': validate && !delivery && present }'
@@ -155,6 +155,7 @@ html(lang="us")
                     id='city-select'
                     v-model='city'
                   )
+                  loading(:active.sync='loaderCityVisible' :height='40' :width='40').loader
                   //- +e.SPAN.value-block {{ city ? cityName : 'Выберете город доставки' }}
                   +e.INPUT(placeholder='Выберете город доставки' type='text' v-model='citySearch' style='width:100%;border:0;outline:none;').value-block
                   +e.dropdown
@@ -173,6 +174,7 @@ html(lang="us")
                     id='warehouse-select'
                     v-model='warehouse'
                   )
+                  loading(:active.sync='loaderWarehouseVisible' :height='40' :width='40').loader
                   //- +e.SPAN.value-block {{ warehouse ? warehouseName : 'Выберете отделение доставки' }}
                   +e.INPUT(placeholder='Выберете отделение доставки' type='text' v-model='warehouseSearch' style='width:100%;border:0;outline:none;').value-block
                   +e.dropdown
@@ -185,6 +187,7 @@ html(lang="us")
               +e.personal-wrapper-item
                 +b.TEXTAREA(placeholder='Коментар' v-model='message').text-input
           +e.form-item_buttons
+            +e.item-label Выберите способ оплаты
             +e.buttons-container
               +b.SPAN.checkbox_flat
                 +e.INPUT(type='checkbox' id='offer-checkbox' v-model='offerAccept')

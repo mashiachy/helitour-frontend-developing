@@ -62,6 +62,13 @@ initBaseMap('#js__map')
       })
     });
 
+    map.addListener('zoom_changed', () => {
+      if (map.getZoom() <= 8)
+        tripMarkers.forEach(m => m.setMap(null))
+      if (map.getZoom >8)
+        tripMarkers.forEach(m => m.setMap(map))
+    })
+
     if (tripData.zoom) {
       map.setZoom(tripData.zoom)
     }

@@ -17,6 +17,7 @@ html(lang="us")
     +header('_mb')
     +b.MAIN.contacts-page
       +e.SECTION.item_map#js__map
+        iframe(src='https://www.google.com/maps/embed/v1/place?key=AIzaSyBUevELRNQrstYsf6nlw74wsrukteZiguc&q=Helitour+Kiev&zoom=14' width='100%' height='100%' frameborder='0' style='border:0')
       +b.SECTION.contacts-page-content.contacts-page__item_content.content.content__inner
         h1 Контакти
         +e.content
@@ -48,6 +49,7 @@ html(lang="us")
             +e.A(href='#').content-item_button.button Як проїхати
             +e.A(href='#').content-item_button.button_flat.js__open-modal-reserve Задати запитання
     +footer
+    .place-card
     +b.modal
       +b.modal-reserve
         +e.FORM.content(data-modal-body)

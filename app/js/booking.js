@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import Fuse from 'fuse.js';
 import VueCurrencyFilter from 'vue-currency-filter';
-import MaskedInput from 'vue-masked-input';
+// import MaskedInput from 'vue-masked-input';
+import Loading from 'vue-loading-overlay'
 import DatePicker from 'vue2-datepicker';
 import axios from 'axios';
 import { webp, headerPopup, vhFix, selectItemInit } from './base';
@@ -26,14 +27,16 @@ const fixedPrice = document.getElementById('fixed-price')
 const app = new Vue({
   el: '#app',
   components: {
-    DatePicker, MaskedInput
+    DatePicker, Loading, // MaskedInput
   },
   data () {
     const date = new Date();
     return {
+      loaderCityVisible: false,
+      loaderWarehouseVisible: false,
       validate: false,
       trip: null,
-      passengers: null,
+      // passengers: null,
       helicopter: null,
       trips: [],
       helicopters: [],
@@ -75,13 +78,13 @@ const app = new Vue({
   },
   watch: {
     trip (v) {
-      const maxP = Math.max.apply(null, this.helicopters.filter(({ id }) =>
+      /* const maxP = Math.max.apply(null, this.helicopters.filter(({ id }) =>
         this.trips.find(trip => trip.id === v).helicopters.includes(id)
       ).map(({ passengers }) => passengers));
       if (this.passengers > maxP)
-        this.passengers = 1
+        this.passengers = 1 */
       const helics = this.helicopters.filter( ({ id, passengers }) =>
-        this.trips.find(trip => trip.id === v).helicopters.includes(id) && this.passengers <= passengers
+        this.trips.find(trip => trip.id === v).helicopters.includes(id) // && this.passengers <= passengers
       ).map(({ id }) => id)
       if (!helics.includes(this.helicopter))
         this.helicopter = helics[0]
@@ -89,7 +92,12 @@ const app = new Vue({
         fixedDuration.innerText = this.trips.find(({ id }) => id === v).duration + ' хв'
       }
     },
-    passengers (v) {
+    telephone (v) {
+      if (typeof v !== 'string') return
+      const d = v.match(/[a-zA-Zа-яА-я0-9]+/g)
+      if (v !== d) this.telephone = d
+    },
+    /* passengers (v) {
       const helics = this.helicopters.filter( ({ id, passengers }) =>
         this.tripInfo.helicopters.includes(id) && v <= passengers
       ).map(({ id }) => id);
@@ -98,7 +106,7 @@ const app = new Vue({
       if (v && fixedPassengers) {
         fixedPassengers.innerText = `${v} ПАСАЖИРИ + ПІЛОТ`
       }
-    },
+    }, */
     helicopter: {
       immediate: true,
       handler: function (v) {
@@ -114,6 +122,9 @@ const app = new Vue({
           }
           if (fixedPrice) {
             fixedPrice.innerText = Math.round(this.price / helicopter.passengers) + 'грн'
+          }
+          if (v && fixedPassengers) {
+            fixedPassengers.innerText = `${helicopter.passengers} ПАСАЖИРИ + ПІЛОТ`
           }
         }
       }
@@ -131,6 +142,8 @@ const app = new Vue({
     city (v) {
       this.warehouse = null;
       if (v) {
+        this.loaderWarehouseVisible = true
+        this.warehouses = []
         axios.post('/api/delivery/warehouse.json', { id: this.city }).then( ({ data: warehouses }) => {
         // axios.get('/warehouse.json').then( ({ data: warehouses }) => {
           // this.warehouses = warehouses.map(({ id: strId, text: name }, i) => ({ strId, name, id: i+1 }));
@@ -140,6 +153,7 @@ const app = new Vue({
             threshold: 0.7,
           });
           this.filteredWarehouses = [...this.warehouses];
+          this.loaderWarehouseVisible = false
         } )
       } else {
         this.warehouses = null;
@@ -154,10 +168,12 @@ const app = new Vue({
         this.city = null;
       }
       if (v) {
+        this.loaderCityVisible = true
         axios.post('/api/delivery/city.json', { id: v }).then( ({ data: cities }) => {
         // axios.get('/city.json').then( ({ data: cities}) => {
           this.cities = cities;
-          console.log(cities)
+          this.loaderCityVisible = false
+          // console.log(cities)
         })
       } else {
         this.cities = null;
@@ -181,8 +197,8 @@ const app = new Vue({
   },
   computed: {
     isFormReady () {
-      return this.trip && this.passengers && this.helicopter && (!this.present && this.date && this.time || this.present) && 
-        this.name && this.lastName && this.telephone && this.offerAccept &&
+      return this.trip && true /*this.passengers*/ && this.helicopter && (!this.present && this.date && this.time || this.present) && 
+        this.name && (this.present && this.lastName || !this.present) && this.telephone && this.offerAccept &&
         (!this.present || (this.present && this.delivery && (this.delivery === 1 || this.delivery === 2 && this.city && this.warehouse)));
     },
     tripInfo () {
@@ -190,10 +206,10 @@ const app = new Vue({
     },
     filteredHelicopters () {
       return this.helicopters.filter( ({ id, passengers }) =>
-        this.tripInfo.helicopters.includes(id) && this.passengers <= passengers
+        this.tripInfo.helicopters.includes(id) // && this.passengers <= passengers
       )
     },
-    passengersMax () {
+    /* passengersMax () {
       return this.trip ? [
         ...Array(1 + Math.max(
           ...this.filteredHelicopters.map( ({ passengers }) =>
@@ -201,7 +217,7 @@ const app = new Vue({
           )
         )).keys()
       ].slice(1) : [];
-    },
+    }, */
     deliveryName () {
       if (!this.deliveries) return null
       const d = this.deliveries.find(d => d.id === this.delivery)
@@ -223,6 +239,9 @@ const app = new Vue({
     }
   },
   methods: {
+    alert(msg) {
+      alert(msg)
+    },
     cityClick (id) {
       this.city = id;
       this.citySearch = this.cityName;
@@ -242,7 +261,7 @@ const app = new Vue({
       console.log(isOnlinePayment)
       const data = JSON.stringify({
         tripId: this.trip,
-        passengers: this.passengers,
+        //passengers: this.passengers,
         helicopterId: this.helicopter,
         date: this.date,
         time: this.time,
@@ -306,7 +325,7 @@ const app = new Vue({
     this.deliveries = [...data.deliveryMethods];
     const tripMeta = document.querySelector('meta[name="tripId"]');
     const helicopterMeta = document.querySelector('meta[name="helicopterId"]');
-    this.passengers = 1;
+    //this.passengers = 1;
     if (tripMeta)
       this.trip = Number.parseInt(tripMeta.getAttribute('content'));
     else
