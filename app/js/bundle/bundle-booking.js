@@ -20929,7 +20929,7 @@ const app = new Vue({
       if (!helics.includes(this.helicopter))
         this.helicopter = helics[0];
       if (v && fixedDuration) {
-        fixedDuration.innerText = this.trips.find(({ id }) => id === v).duration + ' хв';
+        fixedDuration.innerText = `${this.trips.find(({ id }) => id === v).duration}`;
       }
     },
     telephone (v) {
@@ -20961,7 +20961,7 @@ const app = new Vue({
             fixedHelitour.innerText = helicopter.name;
           }
           if (fixedPrice) {
-            fixedPrice.innerText = Math.round(this.price / helicopter.passengers) + 'грн';
+            fixedPrice.innerText = `${this.price} грн`;
           }
           if (v && fixedPassengers) {
             fixedPassengers.innerText = `${helicopter.passengers} ПАСАЖИРИ + ПІЛОТ`;
@@ -21174,6 +21174,17 @@ const app = new Vue({
       this.helicopter = Number.parseInt(helicopterMeta.getAttribute('content'));
     else
       this.helicopter = this.trips.find(({ id }) => id === this.trip).helicopters[0];
+    const date = new Date();
+    const dateMeta = document.querySelector('meta[name="dateForm"]');
+    const timeMeta = document.querySelector('meta[name="timeForm"]');
+    if (dateMeta)
+      this.date = dateMeta.getAttribute('content');
+    else
+      this.date = `${('0'+date.getDate()).slice(-2)}.${('0'+(date.getMonth()+1)).slice(-2)}.${date.getFullYear()}`;
+    if (timeMeta)
+      this.time = timeMeta.getAttribute('content');
+    else
+      this.time = '12:00';
   },
 });
 

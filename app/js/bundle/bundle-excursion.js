@@ -13545,18 +13545,28 @@ initBaseMap('#js__map')
       });
     });
 
+    // Jnly for testing when json not existing
+    /* tripMarkers.push({
+      marker: new google.maps.Marker({
+        ...MAP_MARKER_CONFIG(),
+        map,
+        position: map.getCenter()
+      })
+    }); */
+
     map.addListener('zoom_changed', () => {
-      if (map.getZoom() <= 8)
-        tripMarkers.forEach(m => m.setMap(null));
-      if (map.getZoom >8)
-        tripMarkers.forEach(m => m.setMap(map));
+      console.log('zoom: ', map.getZoom());
+      if (map.getZoom() < 11)
+        tripMarkers.forEach(m => m.marker.setMap(null));
+      if (map.getZoom() >= 11)
+        tripMarkers.forEach(m => m.marker.setMap(map));
     });
 
-    if (tripData.zoom) {
+    if (tirpData && tripData.zoom) {
       map.setZoom(tripData.zoom);
     }
 
-    if (tripData.center) {
+    if (tripData && tripData.center) {
       map.setCenter({lat: tripData.center.lat, lng: tripData.center.lng});
     }
 
