@@ -20961,10 +20961,10 @@ const app = new Vue({
             fixedHelitour.innerText = helicopter.name;
           }
           if (fixedPrice) {
-            fixedPrice.innerText = `${this.price} грн`;
+            fixedPrice.innerText = `${this.price}`;
           }
           if (v && fixedPassengers) {
-            fixedPassengers.innerText = `${helicopter.passengers} ПАСАЖИРИ + ПІЛОТ`;
+            fixedPassengers.innerText = `${helicopter.text}`;
           }
         }
       }
