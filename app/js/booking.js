@@ -120,13 +120,15 @@ const app = new Vue({
           if (fixedHelitour) {
             fixedHelitour.innerText = helicopter.name
           }
-          if (fixedPrice) {
-            fixedPrice.innerText = `${this.price}`
-          }
-          if (v && fixedPassengers) {
+          if (fixedPassengers) {
             fixedPassengers.innerText = `${helicopter.text}`
           }
         }
+      }
+    },
+    price (v) {
+      if (fixedPrice) {
+        fixedPrice.innerText = `${v}`
       }
     },
     delivery () {
@@ -234,6 +236,7 @@ const app = new Vue({
       return w ? w.text : null;
     },
     price () {
+      if (!this.tripInfo) return
       const t = this.tripInfo
       return t.prices[t.helicopters.indexOf(this.helicopter)]
     }
