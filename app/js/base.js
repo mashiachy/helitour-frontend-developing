@@ -500,7 +500,7 @@ export const MAP_POLYGON_CONFIG = {
   clickable: false
 }
 
-export const MAP_MARKER_CONFIG = () => ({
+export const MAP_MARKER_CONFIG = (scale=10) => ({
   draggable: false,
   clickable: false,
   icon: {
@@ -509,13 +509,14 @@ export const MAP_MARKER_CONFIG = () => ({
     fillOpacity: 1,
     anchor: new google.maps.Point(0,0),
     strokeWeight: 0,
-    scale: 10
+    scale
   }
 })
 
 export const INIT_MARKERS_ANIMATION = (map) => {
   google.maps.Marker.prototype.animateInterval = null;
   google.maps.Marker.prototype.i = 1;
+  google.maps.Marker.prototype.j = 0;
   google.maps.Marker.prototype.startAnimation = function() {
     this.setDefaultScale()
     this.animateInterval = setInterval(this.animateHandler.bind(this), 5)
@@ -527,14 +528,16 @@ export const INIT_MARKERS_ANIMATION = (map) => {
   }
   google.maps.Marker.prototype.animateHandler = function() {
     const s = this.getIcon();
+    this.j += this.i;
     s.scale = s.scale + this.i * 0.1
     this.setIcon(s)
     const f = Math.floor(s.scale)
-    if (f === 20) this.i = -1
-    if (f === 10) this.i = 1
+    if (this.j >= 100) this.i = -1
+    if (this.j <= 0) this.i = 1
   }
   google.maps.Marker.prototype.setDefaultScale = function() {
     this.i = 1
+    this.j = 0
     const s = this.getIcon()
     s.scale = 10
     this.setIcon(s)

@@ -33,11 +33,11 @@ initBaseMap('#js__map')
 
     // Draw markers
     const tripMarkers = [];
-    markers.forEach(({ id, latLng, name }) => {
+    markers.forEach(({ id, latLng, name, size }) => {
       tripMarkers.push({
         id,
         marker: new google.maps.Marker({
-          ...MAP_MARKER_CONFIG(),
+          ...MAP_MARKER_CONFIG(size ? size : 10),
           map,
           position: latLng
         })
