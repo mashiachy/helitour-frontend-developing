@@ -128,11 +128,11 @@ html(lang="us")
             +e.personal-wrapper
               +e.personal-wrapper-item
                 +b.INPUT(type='text' placeholder='Ваше ім’я' v-model='name' :class="{ \'unvalid\': validate && !name}").text-input
-                +b.INPUT(v-show='present' type='text' placeholder='Ваше фамилия' v-model='lastName' :class="{ \'unvalid\': validate && !lastName}").text-input
+                +b.INPUT(v-show='present' type='text' placeholder='Ваше фамилия' v-model='lastName' :class="{ \'unvalid\': validate && present && !lastName}").text-input
                 +b.INPUT(type='text' placeholder='Ваш телефон' v-model='telephone' :class="{ \'unvalid\': validate && !telephone}").text-input
                 +b.INPUT(type='text' placeholder='Ваша почта' v-model='email').text-input
                 +b.DIV(
-                  :class='{ \'select-input_disable\': !delivery, \'unvalid\': validate && !delivery && present }'
+                  :class='{ \'select-input_disable\': !delivery, \'unvalid\': validate && present && !delivery && present }'
                   v-show='present'
                 ).select-input_boxed
                   input(
@@ -149,7 +149,7 @@ html(lang="us")
                       @click='delivery = deliveryItem.id'
                     ).dropdown-item {{ deliveryItem.name }}
                 +b.DIV(
-                  :class='{ \'select-input_disable\': !city, \'unvalid\': validate && !city }'
+                  :class='{ \'select-input_disable\': !city, \'unvalid\': validate && present && delivery === 2 && !city }'
                   v-show='delivery === 2'
                 ).select-input_boxed
                   input(
@@ -168,7 +168,7 @@ html(lang="us")
                       @click='cityClick(cityItem.id)'
                     ).dropdown-item {{ cityItem.text }}
                 +b.DIV(
-                  :class='{ \'select-input_disable\': !warehouse, \'unvalid\': validate && !warehouse }'
+                  :class='{ \'select-input_disable\': !warehouse, \'unvalid\': validate && present && delivery === 2 && !warehouse }'
                   v-show='warehouses'
                 ).select-input_boxed
                   input(

@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Fuse from 'fuse.js';
 import VueCurrencyFilter from 'vue-currency-filter';
+import VueScrollTo from 'vue-scrollto';
 // import MaskedInput from 'vue-masked-input';
 import Loading from 'vue-loading-overlay'
 import DatePicker from 'vue2-datepicker';
@@ -18,6 +19,24 @@ Vue.use(VueCurrencyFilter, {
   fractionCount: 2,
   fractionSeparator: '.',
 });
+let offset = -132
+if (window.innerWidth >= 576)
+  offset = -222
+if (window.innerWidth >= 1280)
+  offset = -220
+Vue.use(VueScrollTo, {
+  container: 'body',
+  duration: 500,
+  easing: 'ease',
+  offset,
+  force: true,
+  cancelable: true,
+  onStart: false,
+  onDone: false,
+  onCancel: false,
+  x: false,
+  y: true
+})
 
 const fixedHelitour = document.getElementById('fixed-helitour')
 const fixedPassengers = document.getElementById('fixed-passengers')
@@ -255,6 +274,11 @@ const app = new Vue({
     },
     checkFields () {
       this.validate = true
+      setTimeout(() => {
+        let unv = document.querySelectorAll('.unvalid')
+        if (unv.length)
+          this.$scrollTo(unv[0])
+      }, 10) 
     },
     sendForm (isOnlinePayment, isFormUnready) {
       if (isFormUnready) {
