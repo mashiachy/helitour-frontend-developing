@@ -84,8 +84,9 @@
     background-image: var(--img_webp)
   .no-webp &__img_var
     background-image: var(--img_jpg)
-  &:hover &__img
-    transform: translate(-50%, -50%) scale(1.25)
+  @media screen and (min-width: 1025px)
+    &:hover &__img
+      transform: translate(-50%, -50%) scale(1.25)
 
   &_article
     &:before
