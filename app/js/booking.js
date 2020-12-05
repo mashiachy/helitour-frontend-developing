@@ -113,8 +113,8 @@ const app = new Vue({
     },
     telephone (v) {
       if (typeof v !== 'string') return
-      const d = v.match(/[a-zA-Zа-яА-я0-9]+/g)
-      if (v !== d) this.telephone = d
+      const d = v.match(/[0-9]+/g)
+      if (v !== d) this.telephone = d[0]
     },
     /* passengers (v) {
       const helics = this.helicopters.filter( ({ id, passengers }) =>
