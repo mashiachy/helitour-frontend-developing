@@ -21,8 +21,8 @@ html(lang="us")
               .swiper-slide(data-back-webp="img/slide1.webp" data-back-jpg="img/slide1.jpg")
               .swiper-slide
                 .desktop(style='width:100%;height:100%' data-youtube-player="OXuIqaeg0SI")#youtube-player
-                .tablet(style='width:100%;height:100%;display:flex;align-items:center;justify-content:center;' data-back-webp="img/slide1.webp" data-back-jpg="img/slide1.jpg").js__open-modal-video
-                  a(style='display:block;width:fit-content;height:fit-content;')
+                .tablet(style='width:100%;height:100%;display:flex;align-items:center;justify-content:center;' data-back-webp="img/slide1.webp" data-back-jpg="img/slide1.jpg")
+                  a(data-youtube-player="m0nnxzt3dHA" style='display:block;width:fit-content;height:fit-content;').js__open-modal-video
                     img(src='img/youtube.png' style='height:50px;display:block;')
               .swiper-slide(data-back-webp="img/slide3.webp" data-back-jpg="img/slide3.jpg")
               .swiper-slide(data-back-webp="img/slide1.webp" data-back-jpg="img/slide1.jpg")
@@ -67,4 +67,4 @@ html(lang="us")
     +footer
     +b.modal
       +b.modal-video
-        +e.content(data-modal-body data-youtube-player="m0nnxzt3dHA")#youtube-modal-player
+        +e.content(data-modal-body)#youtube-modal-player
