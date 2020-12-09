@@ -79,7 +79,7 @@ initBaseMap('#js__map')
         tripMarkers.forEach(m => m.marker.setMap(map))
     })
 
-    if (tirpData && tripData.zoom) {
+    if (tripData && tripData.zoom) {
       map.setZoom(tripData.zoom)
     }
 
