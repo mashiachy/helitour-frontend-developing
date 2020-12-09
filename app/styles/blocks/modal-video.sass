@@ -1,0 +1,32 @@
+@import '../mixins'
+
+.modal-video
+  display: none
+  &.active
+    display: block
+  &.before-enter, &.after-leave
+    opacity: 0
+  &.enter
+    animation: .25s ease-out modalOpacity 1
+  &.leave
+    animation: .25s ease-out modalOpacity 1 reverse
+  max-width: calc(100% - 30px)
+  max-height: calc(100% - 30px)
+  width: 100%
+  height: 100%
+  position: relative
+  &:after
+    position: absolute
+    content: ''
+    cursor: pointer
+    top: 20px
+    right: 20px
+    width: 11px
+    height: 11px
+    background-image: url('../img/close-white.svg')
+    @include sm-phone
+      top: 10px
+      right: 10px
+  &__content
+    width: 100%
+    height: 100%

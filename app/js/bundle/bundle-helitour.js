@@ -13312,6 +13312,72 @@ const toggleBodyScrollable = () => {
   document.documentElement.classList.toggle('noscroll');
 };
 
+const initModal = (modalSelector, closeCallback) => {
+  document.querySelectorAll(modalSelector).forEach(modal => {
+    const modalBody = modal.querySelector('[data-modal-body]');
+    if (modalBody)
+      modalBody.addEventListener('click', e => e.stopPropagation());
+  });
+  window.addEventListener('click', () => {
+    closeModal(modalSelector).then(() => { if (closeCallback) closeCallback(); });
+  });
+};
+
+const openThanksHandler = () => {
+  closeModal('.modal-reserve').then(() => openModal('.modal-thanks'));
+};
+
+const openModal = (modalSelector) => {
+  return new Promise((resolve, _) => {
+    document.documentElement.classList.add('noscroll');
+    const modalW = document.querySelector('.modal');
+    if (modalW)
+      modalW.classList.add('active');
+    document.querySelectorAll(modalSelector).forEach(modal => {
+      modal.classList.add('active', 'before-enter');
+      modal.classList.add('enter');
+      const handler = ({ target }) => {
+        target.classList.remove('before-enter');
+        target.classList.remove('enter');
+        modal.removeEventListener('animationend', handler);
+        resolve();
+      };
+      modal.addEventListener('animationend', handler);
+      const openThanksButton = modal.querySelector('.js__open-thanks');
+      if (openThanksButton) {
+        openThanksButton.addEventListener('click', openThanksHandler);
+      }
+    });
+  })
+};
+
+const closeModal = (modalSelector) => {
+  return new Promise((resolve, _) => {
+    document.documentElement.classList.remove('noscroll');
+    document.querySelectorAll(modalSelector).forEach(modal => {
+      if (!modal.classList.contains('active'))
+        return;
+      modal.classList.add('leave');
+      const handler = ({ target }) => {
+        target.classList.add('after-leave');
+        target.classList.remove('leave');
+        target.classList.remove('active');
+        target.classList.remove('after-leave');
+        const newModal = document.querySelector('.modal');
+        if (newModal)
+          newModal.classList.remove('active');
+        modal.removeEventListener('animationend', handler);
+        resolve();
+      };
+      modal.addEventListener('animationend', handler);
+      const openThanksButton = modal.querySelector('.js__open-thanks');
+      if (openThanksButton) {
+        openThanksButton.removeEventListener('click', openThanksHandler);
+      }
+    });
+  })
+};
+
 webp();
 headerPopup();
 vhFix();
@@ -13321,6 +13387,7 @@ Swiper.use(swiper_cjs_5);
 Swiper.use(swiper_cjs_6);
 
 let player;
+let modalPlayer;
 
 const initSlider = () => {
   const swiperWrapper = document.querySelector('.thumb-slider .swiper-container .swiper-wrapper');
@@ -13363,7 +13430,8 @@ excursionsSlider();
 instagramSlider();
 
 const playerId = 'youtube-player';
-if (document.getElementById(playerId)) {
+const modalPlayerId = 'youtube-modal-player';
+if (document.querySelectorAll('[data-youtube-player]').length) {
   const script = document.createElement('script');
   script.src = 'https://www.youtube.com/iframe_api';
   script.async = true;
@@ -13374,9 +13442,28 @@ if (document.getElementById(playerId)) {
         width: '100%',
         videoId: document.getElementById(playerId).getAttribute('data-youtube-player'),
       });
+      modalPlayer = new YT.Player(modalPlayerId, {
+        height: '100%',
+        width: '100%',
+        videoId: document.getElementById(modalPlayerId).getAttribute('data-youtube-player'),
+      });
     };
     script.removeEventListener('load', handle);
   };
   script.addEventListener('load', handle);
   document.head.appendChild(script);
 }
+
+initModal('.modal-video', () => {
+  const state = modalPlayer.getPlayerState();
+  if (state === 1 || state === 3 || state === 5) {
+    modalPlayer.pauseVideo();
+  }
+});
+document.querySelectorAll('.js__open-modal-video').forEach(el =>
+  el.addEventListener('click', e => {
+    e.preventDefault();
+    openModal('.modal-video');
+    e.stopPropagation();
+  })
+);

@@ -361,14 +361,14 @@ const toggleBodyScrollable = () => {
   document.documentElement.classList.toggle('noscroll');
 };
 
-export const initModal = (modalSelector) => {
+export const initModal = (modalSelector, closeCallback) => {
   document.querySelectorAll(modalSelector).forEach(modal => {
     const modalBody = modal.querySelector('[data-modal-body]')
     if (modalBody)
       modalBody.addEventListener('click', e => e.stopPropagation());
   });
   window.addEventListener('click', () => {
-    closeModal(modalSelector);
+    closeModal(modalSelector).then(() => { if (closeCallback) closeCallback() })
   });
 };
 

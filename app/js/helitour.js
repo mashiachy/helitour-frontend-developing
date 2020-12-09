@@ -1,5 +1,5 @@
 import Swiper, { Thumbs, Navigation, Pagination } from 'swiper';
-import { instagramSlider, excursionsSlider, webp, headerPopup, vhFix } from './base';
+import { initModal, openModal, instagramSlider, excursionsSlider, webp, headerPopup, vhFix } from './base';
 
 webp();
 headerPopup();
@@ -10,6 +10,7 @@ Swiper.use(Navigation);
 Swiper.use(Pagination);
 
 let player
+let modalPlayer
 
 const initSlider = () => {
   const swiperWrapper = document.querySelector('.thumb-slider .swiper-container .swiper-wrapper');
@@ -52,7 +53,8 @@ excursionsSlider();
 instagramSlider();
 
 const playerId = 'youtube-player';
-if (document.getElementById(playerId)) {
+const modalPlayerId = 'youtube-modal-player';
+if (document.querySelectorAll('[data-youtube-player]').length) {
   const script = document.createElement('script');
   script.src = 'https://www.youtube.com/iframe_api';
   script.async = true;
@@ -63,9 +65,28 @@ if (document.getElementById(playerId)) {
         width: '100%',
         videoId: document.getElementById(playerId).getAttribute('data-youtube-player'),
       });
+      modalPlayer = new YT.Player(modalPlayerId, {
+        height: '100%',
+        width: '100%',
+        videoId: document.getElementById(modalPlayerId).getAttribute('data-youtube-player'),
+      });
     };
     script.removeEventListener('load', handle);
   };
   script.addEventListener('load', handle)
   document.head.appendChild(script);
 }
+
+initModal('.modal-video', () => {
+  const state = modalPlayer.getPlayerState();
+  if (state === 1 || state === 3 || state === 5) {
+    modalPlayer.pauseVideo();
+  }
+})
+document.querySelectorAll('.js__open-modal-video').forEach(el =>
+  el.addEventListener('click', e => {
+    e.preventDefault();
+    openModal('.modal-video');
+    e.stopPropagation();
+  })
+);
