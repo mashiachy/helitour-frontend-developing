@@ -19,7 +19,11 @@ html(lang="us")
           .swiper-container.main-slider
             .swiper-wrapper
               .swiper-slide(data-back-webp="img/slide1.webp" data-back-jpg="img/slide1.jpg")
-              .swiper-slide(data-youtube-player="OXuIqaeg0SI")#youtube-player
+              .swiper-slide
+                .desktop(style='width:100%;height:100%' data-youtube-player="OXuIqaeg0SI")#youtube-player
+                .tablet(style='width:100%;height:100%;display:flex;align-items:center;justify-content:center;' data-back-webp="img/slide1.webp" data-back-jpg="img/slide1.jpg")
+                  a(href='https://www.youtube.com/watch?v=fCjw_2jB71I' target='_blank' style='display:block;width:fit-content;height:fit-content;')
+                    img(src='img/youtube.png' style='height:200px')
               .swiper-slide(data-back-webp="img/slide3.webp" data-back-jpg="img/slide3.jpg")
               .swiper-slide(data-back-webp="img/slide1.webp" data-back-jpg="img/slide1.jpg")
               .swiper-slide(data-back-webp="img/slide2.webp" data-back-jpg="img/slide2.jpg")

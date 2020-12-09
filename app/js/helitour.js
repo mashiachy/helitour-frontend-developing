@@ -39,7 +39,7 @@ const initSlider = () => {
     },
   });
   helicopterSlider.on('slideChange', () => {
-    if (player) {
+    if (player && window.innerWidth >= 1280) {
       const state = player.getPlayerState();
       if (state === 1 || state === 3 || state === 5) {
         player.pauseVideo();
