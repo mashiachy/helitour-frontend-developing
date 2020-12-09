@@ -8,7 +8,7 @@ html(lang="us")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     meta(name="robots" content="noindex, nofollow")
     title Helitour | excursions
-    link(href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet")
+    //- link(href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet")
     link(href="css/excursions.css" rel="stylesheet")
     script(defer src="js/excursions.js")
   body
@@ -25,6 +25,7 @@ html(lang="us")
               +e.SPAN(data-after='хв').info_w-icon 18
               +e.footer
                 a(href="#") дОКЛАДНШЕ
+                +e.SPAN(data-after='грн').price 5 680
           +b.DIV(key='1').base-card_excursion
             +e.img(data-back-webp='img/exc2.webp' data-back-jpg='img/exc2.jpg')
             +e.content
@@ -32,6 +33,7 @@ html(lang="us")
               +e.SPAN(data-after='хв').info_w-icon 18
               +e.footer
                 a(href="#") дОКЛАДНШЕ
+                +e.SPAN(data-after='грн').price 5 680
           +b.DIV(key='2').base-card_excursion
             +e.img(data-back-webp='img/exc3.webp' data-back-jpg='img/exc3.jpg')
             +e.content
@@ -39,6 +41,7 @@ html(lang="us")
               +e.SPAN(data-after='хв').info_w-icon 18
               +e.footer
                 a(href="#") дОКЛАДНШЕ
+                +e.SPAN(data-after='грн').price 5 680
           +b.DIV(key='3').base-card_excursion
             +e.img(data-back-webp='img/exc4.webp' data-back-jpg='img/exc4.jpg')
             +e.content
@@ -46,6 +49,7 @@ html(lang="us")
               +e.SPAN(data-after='хв').info_w-icon 18
               +e.footer
                 a(href="#") дОКЛАДНШЕ
+                +e.SPAN(data-after='грн').price 5 680
           +b.DIV(key='4').base-card_excursion
             +e.img(data-back-webp='img/exc1.webp' data-back-jpg='img/exc1.jpg')
             +e.content
@@ -53,6 +57,7 @@ html(lang="us")
               +e.SPAN(data-after='хв').info_w-icon 18
               +e.footer
                 a(href="#") дОКЛАДНШЕ
+                +e.SPAN(data-after='грн').price 5 680
           +b.DIV(key='5').base-card_excursion
             +e.img(data-back-webp='img/exc2.webp' data-back-jpg='img/exc2.jpg')
             +e.content
@@ -60,6 +65,7 @@ html(lang="us")
               +e.SPAN(data-after='хв').info_w-icon 18
               +e.footer
                 a(href="#") дОКЛАДНШЕ
+                +e.SPAN(data-after='грн').price 5 680
           +b.DIV(key='6').base-card_excursion
             +e.img(data-back-webp='img/exc3.webp' data-back-jpg='img/exc3.jpg')
             +e.content
@@ -67,6 +73,7 @@ html(lang="us")
               +e.SPAN(data-after='хв').info_w-icon 18
               +e.footer
                 a(href="#") дОКЛАДНШЕ
+                +e.SPAN(data-after='грн').price 5 680
           +b.DIV(key='7').base-card_excursion
             +e.img(data-back-webp='img/exc4.webp' data-back-jpg='img/exc4.jpg')
             +e.content
@@ -74,6 +81,7 @@ html(lang="us")
               +e.SPAN(data-after='хв').info_w-icon 18
               +e.footer
                 a(href="#") дОКЛАДНШЕ
+                +e.SPAN(data-after='грн').price 5 680
           +b.DIV(key='8').base-card_excursion
             +e.img(data-back-webp='img/exc1.webp' data-back-jpg='img/exc1.jpg')
             +e.content
@@ -81,6 +89,7 @@ html(lang="us")
               +e.SPAN(data-after='хв').info_w-icon 18
               +e.footer
                 a(href="#") дОКЛАДНШЕ
+                +e.SPAN(data-after='грн').price 5 680
           +b.DIV(
             v-for='card in newCards'
             :key='card.title'
@@ -91,6 +100,7 @@ html(lang="us")
               +e.SPAN(data-after='хв').info_w-icon {{ card.info }}
               +e.footer
                 a(:href='card.linkHref') {{ card.linkText }}
+                +e.SPAN(data-after='грн').price 5 680
         +b.SPAN(v-if='!endedCards' @click='clickMore').button Більше
       +excursions-certificate
       +b.SECTION.centered-text.content.content__inner
