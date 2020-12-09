@@ -517,7 +517,9 @@ export const INIT_MARKERS_ANIMATION = (map) => {
   google.maps.Marker.prototype.animateInterval = null;
   google.maps.Marker.prototype.i = 1;
   google.maps.Marker.prototype.j = 0;
+  google.maps.Marker.prototype.s = 0;
   google.maps.Marker.prototype.startAnimation = function() {
+    this.s = this.getIcon().scale
     this.setDefaultScale()
     this.animateInterval = setInterval(this.animateHandler.bind(this), 5)
   }
@@ -539,7 +541,7 @@ export const INIT_MARKERS_ANIMATION = (map) => {
     this.i = 1
     this.j = 0
     const s = this.getIcon()
-    s.scale = 10
+    s.scale = this.s
     this.setIcon(s)
   }
 }
