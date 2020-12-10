@@ -13,8 +13,17 @@
   max-width: calc(100% - 30px)
   max-height: calc(100% - 30px)
   width: 100%
-  height: 100%
+  @media (orientation: landscape)
+    height: 100%
   position: relative
+  &:before
+    content: ''
+    display: block
+    width: 100%
+    opacity: 0
+    padding-top: 75%
+    @media (orientation: landscape)
+      padding-top: 0
   &:after
     position: absolute
     content: ''
@@ -25,5 +34,8 @@
     height: 11px
     background-image: url('../img/close-white.svg')
   &__content
+    position: absolute
+    top: 0
+    left: 0
     width: 100%
     height: 100%
