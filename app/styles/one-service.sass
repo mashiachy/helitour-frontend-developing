@@ -176,7 +176,9 @@
     flex-direction: column
   &__header
     flex-basis: 430px
-    margin-right: 100px
+    flex-grow: 1
+    &:not(:last-child)
+      margin-right: 100px
     @include tablet
       flex-basis: 245px
     @include sm-tablet
