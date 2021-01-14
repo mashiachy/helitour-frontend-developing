@@ -92,7 +92,9 @@ const app = new Vue({
       warehouseSearch: null,
       warehouseFuse: null,
       filteredWarehouses: null,
-      warehouses: null
+      warehouses: null,
+      button1Loader: false,
+      button2Loader: false
     };
   },
   watch: {
@@ -304,8 +306,16 @@ const app = new Vue({
         isOnlinePayment: isOnlinePayment,
         partnerId: this.$refs.partnerId.value
       })
+      if (isOnlinePayment)
+        button1Loader = true
+      else
+        button2Loader = true
       axios.post('/api/booking.json', data)
         .then(({ data }) => {
+          if (isOnlinePayment)
+            button1Loader = true
+          else
+            button2Loader = true
           if (data.success) {
             window.location = data.location
           } else {

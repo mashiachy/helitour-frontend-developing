@@ -195,8 +195,12 @@ html(lang="us")
                 +e.INPUT(type='checkbox' id='offer-checkbox' v-model='offerAccept')
                 +e.LABEL(for='offer-checkbox' :class="{ \'unvalid\': validate && !offerAccept}").label='Погоджуюсь з '
                   a.base-link(href='#') офертою
-              +b.BUTTON(@click.prevent="sendForm(true, !isFormReady)").button Оплатити онлайн
-              +b.BUTTON(@click.prevent="sendForm(false, !isFormReady || (present && delivery !== 1))").button_flat Готівкою
+              +b.BUTTON(@click.prevent="sendForm(true, !isFormReady)" disabled='button1Loader').button 
+                span(v-show='!button1Loader') Оплатити онлайн
+                loading(v-show='button1Loader' :active.sync='buttonsLoader' :height='40' :width='40')
+              +b.BUTTON(@click.prevent="sendForm(false, !isFormReady || (present && delivery !== 1))" disabled='button2Loader').button_flat
+                span(v-show='!button2Loader') Готівкою
+                loading(v-show='button2Loader' :active.sync='button2Loader' :height='40' :width='40')
       +b.SECTION.col-text.content.content__inner
         +e.text
           p За відгуками багатьох, така розвага повністю виправдовує свою ціну і коштує досить недорого. Вартість вертолітного туру доступна людині із середнім рівнем доходу і залежить від тривалості подорожі. У компанії «Helitour» ви також можете недорого придбати сертифікат в подарунок. Такий презент стане прекрасним сюрпризом для близької вам людини.
