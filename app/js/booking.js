@@ -288,7 +288,7 @@ const app = new Vue({
         return
       }
       console.log(isOnlinePayment)
-      if (isOnlinePayment && button1Loader || !isOnlinePayment && button2Loader)
+      if (isOnlinePayment && this.button1Loader || !isOnlinePayment && this.button2Loader)
         return
       const data = JSON.stringify({
         tripId: this.trip,
@@ -309,15 +309,15 @@ const app = new Vue({
         partnerId: this.$refs.partnerId.value
       })
       if (isOnlinePayment)
-        button1Loader = true
+        this.button1Loader = true
       else
-        button2Loader = true
+        this.button2Loader = true
       axios.post('/api/booking.json', data)
         .then(({ data }) => {
           if (isOnlinePayment)
-            button1Loader = false
+            this.button1Loader = false
           else
-            button2Loader = false
+            this.button2Loader = false
           if (data.success) {
             window.location = data.location
           } else {
