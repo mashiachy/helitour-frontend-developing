@@ -197,7 +197,7 @@ html(lang="us")
                   a.base-link(href='#') офертою
               +b.BUTTON(@click.prevent="sendForm(true, !isFormReady)" :disabled='button1Loader').button 
                 span(v-show='!button1Loader') Оплатити онлайн
-                loading(v-show='button1Loader' :active.sync='buttonsLoader' :height='40' :width='40')
+                loading(v-show='button1Loader' :active.sync='button1Loader' :height='40' :width='40')
               +b.BUTTON(@click.prevent="sendForm(false, !isFormReady || (present && delivery !== 1))" :disabled='button2Loader').button_flat
                 span(v-show='!button2Loader') Готівкою
                 loading(v-show='button2Loader' :active.sync='button2Loader' :height='40' :width='40')
