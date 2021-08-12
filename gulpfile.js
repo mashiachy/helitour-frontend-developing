@@ -63,7 +63,7 @@ gulp.task('sass',  () => {
     .pipe(browserSync.stream());
 });
 
-gulp.task('js-bundle', shell.task(`node_modules\\.bin\\rollup app\\js\\${name}.js --file app\\js\\bundle\\bundle-${name}.js -c`));
+gulp.task('js-bundle', shell.task(`rollup app/js/${name}.js --file app/js/bundle/bundle-${name}.js -c`));
 
 gulp.task('js', gulp.series('js-bundle', () => {
   return gulp.src(`app/js/bundle/bundle-${name}.js`)

@@ -100,6 +100,7 @@ const app = new Vue({
   watch: {
     present (v) {
       if (!v) this.delivery = null;
+      else this.delivery = 1;
     },
     trip (v) {
       /* const maxP = Math.max.apply(null, this.helicopters.filter(({ id }) =>

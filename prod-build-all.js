@@ -9,7 +9,7 @@ const runPageBuild = (pages, i) => {
   if (i === pages.length) return;
   const page = pages[i];
   console.log(`[BUILD] ${page} PAGE build run\n`);
-  const proc = spawn('gulp.cmd', ['build', '--name', page, '--production']);
+  const proc = spawn('gulp', ['build', '--name', page, '--production']);
   proc.stderr.on('data', data => {
     console.log('[ERROR]');
     console.log(`${data}`);
