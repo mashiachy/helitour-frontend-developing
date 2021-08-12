@@ -98,6 +98,9 @@ const app = new Vue({
     };
   },
   watch: {
+    present (v) {
+      if (!v) this.delivery = null;
+    },
     trip (v) {
       /* const maxP = Math.max.apply(null, this.helicopters.filter(({ id }) =>
         this.trips.find(trip => trip.id === v).helicopters.includes(id)
@@ -222,7 +225,7 @@ const app = new Vue({
     isFormReady () {
       return this.trip && true /*this.passengers*/ && this.helicopter && (!this.present && this.date && this.time || this.present) && 
         this.name && (this.present && this.lastName || !this.present) && this.telephone && this.offerAccept &&
-        (!this.present || (this.present && this.delivery && (this.delivery === 1 || this.delivery === 2 && this.city && this.warehouse)));
+        (!this.present || (this.present && this.delivery && (this.delivery === 1 || this.delivery === 2 && !!this.city && !!this.warehouse)));
     },
     tripInfo () {
       return this.trips.find(trip => trip.id === this.trip);
