@@ -120,6 +120,7 @@ const app = new Vue({
     telephone (v) {
       if (typeof v !== 'string') return
       const d = v.match(/[0-9]+/g)
+      if (!d) return;
       if (v !== d) this.telephone = d[0]
     },
     /* passengers (v) {
@@ -200,7 +201,6 @@ const app = new Vue({
         // axios.get('/city.json').then( ({ data: cities}) => {
           this.cities = cities;
           this.loaderCityVisible = false
-          // console.log(cities)
         })
       } else {
         this.cities = null;
@@ -291,7 +291,6 @@ const app = new Vue({
         this.checkFields()
         return
       }
-      console.log(isOnlinePayment)
       if (isOnlinePayment && this.button1Loader || !isOnlinePayment && this.button2Loader)
         return
       const data = JSON.stringify({
@@ -323,6 +322,23 @@ const app = new Vue({
           else
             this.button2Loader = false
           if (data.success) {
+            if (typeof dataLayer !== 'undefined' && typeof dataLayer.push == 'function') {
+              dataLayer.push({
+                'currencyCode': 'UAH',
+                'event':'reservation-success',
+                'transactionId': data.id, // Уникальный номер заказа в системе 
+                'transactionAffiliation': 'helitour.com.ua',
+                'transactionTotal': this.price, // Общая сумма бронирования
+                'transactionProducts': [{
+                  'sku': this.tripInfo.sku[this.helicopter], // Идентификатор маршрута
+                  'name': this.tripInfo.name, // Название маршрута
+                  'category': this.helicopters.find(({ id }) => id === this.helicopter).name, // Название вертолета
+                  'price': this.price, // Стоимость
+                  'quantity': '1' // Количество
+                  }]
+              })
+            }
+
             window.location = data.location
           } else {
             alert(data.message)
@@ -344,7 +360,6 @@ const app = new Vue({
     disableTime (date) {
       const dateP = this.date
       let timesForDate = this.disabledDates.find(({ date:dateT }) => dateP === dateT )
-      console.log(timesForDate)
       if (timesForDate) { 
         timesForDate = timesForDate.time
       } else {
