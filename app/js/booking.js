@@ -322,7 +322,7 @@ const app = new Vue({
           else
             this.button2Loader = false
           if (data.success) {
-            if (typeof dataLayer !== 'undefined' && typeof dataLayer.push == 'function') {
+            if (typeof dataLayer !== 'undefined' && typeof dataLayer.push === 'function') {
               dataLayer.push({
                 'currencyCode': 'UAH',
                 'event':'reservation-success',
