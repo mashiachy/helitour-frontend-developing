@@ -98,6 +98,10 @@ const app = new Vue({
     };
   },
   watch: {
+    present (v) {
+      if (!v) this.delivery = null;
+      else this.delivery = 1;
+    },
     trip (v) {
       /* const maxP = Math.max.apply(null, this.helicopters.filter(({ id }) =>
         this.trips.find(trip => trip.id === v).helicopters.includes(id)
@@ -116,6 +120,7 @@ const app = new Vue({
     telephone (v) {
       if (typeof v !== 'string') return
       const d = v.match(/[0-9]+/g)
+      if (!d) return;
       if (v !== d) this.telephone = d[0]
     },
     /* passengers (v) {
@@ -196,7 +201,6 @@ const app = new Vue({
         // axios.get('/city.json').then( ({ data: cities}) => {
           this.cities = cities;
           this.loaderCityVisible = false
-          // console.log(cities)
         })
       } else {
         this.cities = null;
@@ -222,7 +226,7 @@ const app = new Vue({
     isFormReady () {
       return this.trip && true /*this.passengers*/ && this.helicopter && (!this.present && this.date && this.time || this.present) && 
         this.name && (this.present && this.lastName || !this.present) && this.telephone && this.offerAccept &&
-        (!this.present || (this.present && this.delivery && (this.delivery === 1 || this.delivery === 2 && this.city && this.warehouse)));
+        (!this.present || (this.present && this.delivery && (this.delivery === 1 || this.delivery === 2 && !!this.city && !!this.warehouse)));
     },
     tripInfo () {
       return this.trips.find(trip => trip.id === this.trip);
@@ -287,7 +291,6 @@ const app = new Vue({
         this.checkFields()
         return
       }
-      console.log(isOnlinePayment)
       if (isOnlinePayment && this.button1Loader || !isOnlinePayment && this.button2Loader)
         return
       const data = JSON.stringify({
@@ -319,6 +322,23 @@ const app = new Vue({
           else
             this.button2Loader = false
           if (data.success) {
+            if (typeof dataLayer !== 'undefined' && typeof dataLayer.push === 'function') {
+              dataLayer.push({
+                'currencyCode': 'UAH',
+                'event':'reservation-success',
+                'transactionId': data.id, // Уникальный номер заказа в системе 
+                'transactionAffiliation': 'helitour.com.ua',
+                'transactionTotal': this.price, // Общая сумма бронирования
+                'transactionProducts': [{
+                  'sku': this.tripInfo.sku[this.helicopter], // Идентификатор маршрута
+                  'name': this.tripInfo.name, // Название маршрута
+                  'category': this.helicopters.find(({ id }) => id === this.helicopter).name, // Название вертолета
+                  'price': this.price, // Стоимость
+                  'quantity': '1' // Количество
+                  }]
+              })
+            }
+
             window.location = data.location
           } else {
             alert(data.message)
@@ -340,7 +360,6 @@ const app = new Vue({
     disableTime (date) {
       const dateP = this.date
       let timesForDate = this.disabledDates.find(({ date:dateT }) => dateP === dateT )
-      console.log(timesForDate)
       if (timesForDate) { 
         timesForDate = timesForDate.time
       } else {
